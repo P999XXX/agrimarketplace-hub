@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 
 interface AuthCardProps {
-  title: string;
+  title: ReactNode;
   subtitle: string;
   children: ReactNode;
 }
@@ -11,6 +11,14 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
     <div className="min-h-screen bg-primary relative overflow-hidden">
       <div className="container py-16">
+        {/* Logo text top left */}
+        <div className="absolute top-8 left-8">
+          <span className="text-2xl">
+            <span className="text-white font-[700]">cropio</span>
+            <span className="text-secondary font-[700]">.app</span>
+          </span>
+        </div>
+
         <div className="flex flex-col lg:flex-row justify-center items-center gap-16">
           {/* Left side with static content */}
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
