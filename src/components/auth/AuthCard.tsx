@@ -68,11 +68,11 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   }, [retryCount, toast]);
 
   return (
-    <div className="min-h-screen flex items-center">
+    <div className="min-h-screen flex">
       {/* Left side with generated image and text */}
       <div className="hidden lg:flex lg:w-1/2 relative">
         {isLoading ? (
-          <div className="w-full h-full bg-gradient-to-br from-brand-400 to-brand-600 animate-pulse" />
+          <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600 animate-pulse" />
         ) : backgroundImage ? (
           <img
             src={backgroundImage}
@@ -80,7 +80,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             className="object-cover w-full h-full"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-brand-400 to-brand-600" />
+          <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600" />
         )}
         <div className="absolute inset-0 bg-black/10" />
         <div className="absolute left-12 top-1/2 -translate-y-1/2">
