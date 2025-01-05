@@ -7,14 +7,18 @@ interface SignUpButtonProps {
 
 export const SignUpButton = ({ isLoading }: SignUpButtonProps) => {
   return (
-    <Button disabled={isLoading} type="submit" className="w-full">
+    <Button 
+      disabled={isLoading} 
+      type="submit" 
+      className="w-full bg-brand-500 hover:bg-brand-600 text-white py-6"
+    >
       {isLoading ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Please wait...
         </>
       ) : (
-        "Sign up"
+        "Create Account"
       )}
     </Button>
   );
