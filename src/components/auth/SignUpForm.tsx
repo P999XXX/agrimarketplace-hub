@@ -63,9 +63,10 @@ export const SignUpForm = () => {
 
       if (signUpError) {
         if (signUpError.message.includes('over_email_send_rate_limit')) {
+          const waitTime = signUpError.message.match(/\d+/)?.[0] || "few";
           toast({
-            title: "Please wait",
-            description: "For security purposes, please wait a moment before trying again.",
+            title: "Bitte warten",
+            description: `Aus Sicherheitsgründen müssen Sie ${waitTime} Sekunden warten, bevor Sie es erneut versuchen können.`,
             variant: "destructive",
           });
           return;
