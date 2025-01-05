@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AuthCardProps {
   title: string;
@@ -8,16 +9,36 @@ interface AuthCardProps {
 }
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const generateImage = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('generate-signup-image');
+        if (error) throw error;
+        setBackgroundImage(data.image);
+      } catch (error) {
+        console.error('Failed to generate background image:', error);
+      }
+    };
+
+    generateImage();
+  }, []);
+
   return (
     <div className="min-h-screen flex">
-      {/* Left side with image and text */}
+      {/* Left side with generated image and text */}
       <div className="hidden lg:flex lg:w-1/2 relative">
-        <img
-          src="/lovable-uploads/1bcd0dca-35f6-48ac-9ec8-503b45ac1fe7.png"
-          alt="Green leaves background"
-          className="object-cover w-full"
-        />
-        <div className="absolute inset-0 bg-black/10" /> {/* Subtle overlay */}
+        {backgroundImage ? (
+          <img
+            src={backgroundImage}
+            alt="Nature background"
+            className="object-cover w-full"
+          />
+        ) : (
+          <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600" />
+        )}
+        <div className="absolute inset-0 bg-black/10" />
         <div className="absolute left-12 top-1/2 -translate-y-1/2">
           <h1 className="text-white text-[8rem] font-bold leading-none tracking-tighter">
             SIGN
