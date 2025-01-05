@@ -75,6 +75,7 @@ export const SignUpForm = () => {
         navigate("/dashboard");
       }
     } catch (error: any) {
+      console.error('Sign Up Error:', error);
       toast({
         title: "Error",
         description: error.message || "An error occurred during sign up",
@@ -90,13 +91,21 @@ export const SignUpForm = () => {
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
-            prompt: 'select_account',
             access_type: 'offline',
+            prompt: 'consent',
           },
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Google Sign Up Error:', error);
+        throw error;
+      }
+
+      toast({
+        title: "Redirecting",
+        description: "Please wait while we redirect you to Google",
+      });
     } catch (error: any) {
       console.error('Google Sign Up Error:', error);
       toast({
