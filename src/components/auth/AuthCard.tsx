@@ -15,7 +15,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           {/* Left side with static content */}
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
             <div className="lg:pe-12 mb-8">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-semibold mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6">
                 Connecting farmers
                 <br />
                 with <span className="text-secondary">buyers</span>
@@ -33,7 +33,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h6 className="text-white text-xl font-semibold mb-1">24/7</h6>
+                  <h6 className="text-white text-xl font-bold mb-1">24/7</h6>
                   <p className="text-white/70">Market access</p>
                 </div>
               </div>
@@ -45,7 +45,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h6 className="text-white text-xl font-semibold mb-1">100+</h6>
+                  <h6 className="text-white text-xl font-bold mb-1">100+</h6>
                   <p className="text-white/70">Active traders</p>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
               <Card className="p-8 bg-white shadow-xl border-0">
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <h2 className="text-3xl font-semibold tracking-tight text-gray-900">{title}</h2>
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
                     <p className="text-sm text-gray-600">{subtitle}</p>
                   </div>
                   {children}
