@@ -10,7 +10,7 @@ export const LeftContent = () => {
           with <span className="text-secondary">buyers</span>
         </h1>
         <p className="text-lg text-white/70 mb-8 max-w-md">
-          Built for agricultural businesses, <span className="text-white font-[700]">cropio</span><span className="text-secondary font-[700]">.app</span> helps you connect with buyers and sellers of agricultural raw materials in a fraction of the time.
+          Built for agricultural businesses, cropio.app helps you connect with buyers and sellers of agricultural raw materials in a fraction of the time.
         </p>
       </div>
       <Stats />
