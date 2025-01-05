@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 interface SignUpButtonProps {
   isLoading: boolean;
@@ -6,13 +7,15 @@ interface SignUpButtonProps {
 
 export const SignUpButton = ({ isLoading }: SignUpButtonProps) => {
   return (
-    <Button 
-      type="submit" 
-      className="w-full bg-brand-500 hover:bg-brand-600"
-      disabled={isLoading}
-      aria-disabled={isLoading}
-    >
-      {isLoading ? "Signing up..." : "Sign Up"}
+    <Button disabled={isLoading} type="submit" className="w-full">
+      {isLoading ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please wait...
+        </>
+      ) : (
+        "Sign up"
+      )}
     </Button>
   );
 };
