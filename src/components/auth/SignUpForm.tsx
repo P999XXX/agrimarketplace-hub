@@ -90,6 +90,10 @@ export const SignUpForm = () => {
         provider: 'google',
         options: {
           redirectTo: 'https://cropio.app/dashboard',
+          queryParams: {
+            prompt: 'select_account',
+            access_type: 'offline'
+          }
         },
       });
 
