@@ -12,7 +12,7 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
@@ -88,6 +88,11 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         fadeIn: "fadeIn 0.5s ease-out forwards",
+      },
+      spacing: {
+        '4': '0.75rem',  // Reduziert von 1rem
+        '6': '1rem',     // Reduziert von 1.5rem
+        '8': '1.5rem',   // Reduziert von 2rem
       },
     },
   },
