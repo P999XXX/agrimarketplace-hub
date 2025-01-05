@@ -12,14 +12,12 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [retryCount, setRetryCount] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
     const generateImage = async () => {
       try {
         setIsLoading(true);
-        console.log('Calling generate-signup-image function...');
         const { data, error } = await supabase.functions.invoke('generate-signup-image', {
           method: 'POST',
           body: {}
@@ -34,25 +32,9 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           throw new Error('No image data received');
         }
         
-        console.log('Image received successfully');
         setBackgroundImage(data.image);
       } catch (error: any) {
         console.error('Failed to generate background image:', error);
-        
-        if (error.message?.includes('Max requests') && retryCount < 3) {
-          const retryDelay = (retryCount + 1) * 10000;
-          toast({
-            title: "Generating image",
-            description: `Please wait ${retryDelay/1000} seconds for retry...`,
-          });
-          
-          setTimeout(() => {
-            setRetryCount(prev => prev + 1);
-          }, retryDelay);
-          
-          return;
-        }
-        
         toast({
           title: "Error",
           description: "Failed to generate background image. Using fallback.",
@@ -64,7 +46,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
     };
 
     generateImage();
-  }, [retryCount, toast]);
+  }, [toast]);
 
   return (
     <div className="min-h-screen flex">
