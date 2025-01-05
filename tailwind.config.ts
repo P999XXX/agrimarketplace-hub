@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Albert Sans', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -28,12 +28,12 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#377dff",
+          DEFAULT: "#008060",
           foreground: "hsl(var(--primary-foreground))",
-          dark: "#221F26",
+          dark: "#008060",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "rgb(241,185,128)",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
@@ -57,46 +57,17 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          50: "#eef5ff",
-          100: "#e0eeff",
-          200: "#c7e0ff",
-          300: "#a3caff",
-          400: "#78acff",
-          500: "#377dff",
-          600: "#1a5fff",
-          700: "#0045eb",
-          800: "#0037bd",
-          900: "#00318f",
+          50: "#e6f2ef",
+          100: "#cce6df",
+          200: "#99ccbf",
+          300: "#66b39f",
+          400: "#33997f",
+          500: "#008060",
+          600: "#00664d",
+          700: "#004d3a",
+          800: "#003326",
+          900: "#001a13",
         },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        fadeIn: "fadeIn 0.5s ease-out forwards",
-      },
-      spacing: {
-        '4': '0.75rem',
-        '6': '1rem',
-        '8': '1.5rem',
       },
     },
   },
