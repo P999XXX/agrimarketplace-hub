@@ -18,6 +18,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -90,9 +93,9 @@ export default {
         fadeIn: "fadeIn 0.5s ease-out forwards",
       },
       spacing: {
-        '4': '0.75rem',  // Reduziert von 1rem
-        '6': '1rem',     // Reduziert von 1.5rem
-        '8': '1.5rem',   // Reduziert von 2rem
+        '4': '0.75rem',
+        '6': '1rem',
+        '8': '1.5rem',
       },
     },
   },
