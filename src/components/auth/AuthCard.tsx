@@ -14,7 +14,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
     <div className="min-h-screen bg-primary relative overflow-hidden">
       <div className="container mx-auto px-4 pt-4">
         {/* Logo text aligned with content */}
-        <div className="mb-[20px] lg:mb-0">
+        <div className="mb-[20px] md:mb-16 lg:mb-0">
           <Logo />
         </div>
 
