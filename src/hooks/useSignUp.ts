@@ -58,9 +58,6 @@ export const useSignUp = () => {
   };
 
   const createCompany = async (userId: string) => {
-    // Warten für 1 Sekunde, um sicherzustellen, dass die Session initialisiert ist
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
     const { error: companyError } = await supabase
       .from('companies')
       .insert({
@@ -85,8 +82,9 @@ export const useSignUp = () => {
 
     try {
       setIsLoading(true);
-      
-      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+
+      // 1. Sign up the user
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -111,25 +109,37 @@ export const useSignUp = () => {
         throw signUpError;
       }
 
-      if (!authData.user) {
+      if (!signUpData.user) {
         throw new Error("No user data returned after signup");
       }
 
-      // Warten auf die Session und mehrere Versuche, falls nötig
-      let sessionData;
-      for (let i = 0; i < 3; i++) {
-        sessionData = await supabase.auth.getSession();
-        if (sessionData?.data?.session) break;
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-      
-      if (sessionData?.data?.session) {
-        await createCompany(authData.user.id);
-        navigate("/thank-you");
-      } else {
-        throw new Error("No session available after signup");
-      }
-      
+      // 2. Set up a listener for auth state changes
+      const authListener = supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          try {
+            // 3. Create company after successful sign in
+            await createCompany(session.user.id);
+            // 4. Navigate to thank you page
+            navigate("/thank-you");
+          } catch (error: any) {
+            console.error('Company Creation Error:', error);
+            toast({
+              title: "Error",
+              description: error.message || "Could not create company",
+              variant: "destructive",
+            });
+          }
+          // 5. Clean up listener
+          authListener.data.subscription.unsubscribe();
+        }
+      });
+
+      // Show success message
+      toast({
+        title: "Success",
+        description: "Account created successfully",
+      });
+
     } catch (error: any) {
       console.error('Sign Up Error:', error);
       toast({
