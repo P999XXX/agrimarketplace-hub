@@ -58,6 +58,9 @@ export const useSignUp = () => {
   };
 
   const createCompany = async (userId: string) => {
+    // Warten für 1 Sekunde, um sicherzustellen, dass die Session initialisiert ist
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     const { error: companyError } = await supabase
       .from('companies')
       .insert({
@@ -112,14 +115,16 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      // Warten auf die Session, um sicherzustellen, dass der Benutzer eingeloggt ist
-      const { data: sessionData } = await supabase.auth.getSession();
+      // Warten auf die Session und mehrere Versuche, falls nötig
+      let sessionData;
+      for (let i = 0; i < 3; i++) {
+        sessionData = await supabase.auth.getSession();
+        if (sessionData?.data?.session) break;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
       
-      if (sessionData?.session) {
-        // Jetzt erst erstellen wir die Firma
+      if (sessionData?.data?.session) {
         await createCompany(authData.user.id);
-        
-        // Weiterleitung zur Thank-You-Seite
         navigate("/thank-you");
       } else {
         throw new Error("No session available after signup");
