@@ -68,6 +68,26 @@ export const useSignUp = () => {
     if (companyError) throw companyError;
   };
 
+  const sendWelcomeEmail = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('send-welcome-email', {
+        body: {
+          to: formData.email,
+          firstName: formData.firstName,
+          companyName: formData.companyName,
+        },
+      });
+
+      if (error) {
+        console.error('Error sending welcome email:', error);
+      } else {
+        console.log('Welcome email sent successfully:', data);
+      }
+    } catch (error) {
+      console.error('Error invoking send-welcome-email function:', error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -119,17 +139,19 @@ export const useSignUp = () => {
           try {
             // 3. Create company after successful sign in
             await createCompany(session.user.id);
-            // 4. Navigate to thank you page
+            // 4. Send welcome email
+            await sendWelcomeEmail();
+            // 5. Navigate to thank you page
             navigate("/thank-you");
           } catch (error: any) {
-            console.error('Company Creation Error:', error);
+            console.error('Error during post-signup process:', error);
             toast({
               title: "Error",
-              description: error.message || "Could not create company",
+              description: error.message || "An error occurred during sign up",
               variant: "destructive",
             });
           }
-          // 5. Clean up listener
+          // 6. Clean up listener
           authListener.data.subscription.unsubscribe();
         }
       });
