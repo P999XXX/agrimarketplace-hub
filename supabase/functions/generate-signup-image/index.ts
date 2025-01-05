@@ -23,10 +23,9 @@ serve(async (req) => {
     
     const image = await hf.textToImage({
       inputs: "A distant view of an Indian farmer working in lush green agricultural fields during golden hour. Wide landscape shot showing vast farmland with crops. Professional composition, warm lighting, agricultural business theme.",
-      model: "stabilityai/stable-diffusion-xl-base-1.0",
+      model: "black-forest-labs/FLUX.1-schnell", // Schnelleres Modell
       parameters: {
-        num_inference_steps: 30,
-        guidance_scale: 7.5
+        num_inference_steps: 20, // Reduzierte Schritte für schnellere Generierung
       }
     })
 
@@ -44,10 +43,13 @@ serve(async (req) => {
   } catch (error) {
     console.error('Image generation error:', error)
     
+    const isRateLimit = error.message?.includes('Max requests')
+    
     return new Response(
       JSON.stringify({ 
         error: 'Failed to generate image',
-        details: error.message
+        details: error.message,
+        isRateLimit: isRateLimit
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

@@ -12,6 +12,7 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -33,20 +34,35 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         }
         
         setBackgroundImage(data.image);
+        setRetryCount(0); // Reset retry count on success
       } catch (error: any) {
         console.error('Failed to generate background image:', error);
-        toast({
-          title: "Error",
-          description: "Failed to generate background image. Using fallback.",
-          variant: "destructive",
-        });
+        const response = JSON.parse(error.message || '{}');
+        
+        if (response.isRateLimit && retryCount < 2) {
+          const retryDelay = Math.pow(2, retryCount) * 5000; // Exponential backoff
+          toast({
+            title: "Bitte warten",
+            description: `Bild wird in ${retryDelay/1000} Sekunden neu generiert...`,
+          });
+          
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+          }, retryDelay);
+        } else {
+          toast({
+            title: "Hinweis",
+            description: "Fallback-Hintergrund wird verwendet.",
+            variant: "destructive",
+          });
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     generateImage();
-  }, [toast]);
+  }, [retryCount, toast]);
 
   return (
     <div className="min-h-screen flex">
