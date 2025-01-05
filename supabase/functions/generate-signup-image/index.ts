@@ -7,6 +7,7 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
@@ -32,13 +33,24 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({ image: `data:image/png;base64,${base64}` }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: { 
+          ...corsHeaders, 
+          'Content-Type': 'application/json',
+        } 
+      }
     )
   } catch (error) {
     console.error('Error:', error)
     return new Response(
       JSON.stringify({ error: 'Failed to generate image', details: error.message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
+      { 
+        headers: { 
+          ...corsHeaders, 
+          'Content-Type': 'application/json'
+        }, 
+        status: 500 
+      }
     )
   }
 })

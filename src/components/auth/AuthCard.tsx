@@ -18,7 +18,10 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
       try {
         setIsLoading(true);
         console.log('Calling generate-signup-image function...');
-        const { data, error } = await supabase.functions.invoke('generate-signup-image');
+        const { data, error } = await supabase.functions.invoke('generate-signup-image', {
+          method: 'POST',
+          body: {} // Leerer Body, aber wichtig für den POST-Request
+        });
         
         if (error) {
           console.error('Function error:', error);
