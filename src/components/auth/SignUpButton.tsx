@@ -10,6 +10,7 @@ export const SignUpButton = ({ isLoading }: SignUpButtonProps) => {
       type="submit" 
       className="w-full bg-brand-500 hover:bg-brand-600"
       disabled={isLoading}
+      aria-disabled={isLoading}
     >
       {isLoading ? "Signing up..." : "Sign Up"}
     </Button>
