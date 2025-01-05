@@ -69,15 +69,6 @@ export default {
           900: "#001a13",
         },
       },
-      fontSize: {
-        // Anpassung der Standardschriftgrößen für Überschriften
-        'h1': ['2.5rem', { lineHeight: '1.2', fontWeight: '700' }],
-        'h2': ['2rem', { lineHeight: '1.2', fontWeight: '700' }],
-        'h3': ['1.75rem', { lineHeight: '1.2', fontWeight: '700' }],
-        'h4': ['1.5rem', { lineHeight: '1.2', fontWeight: '700' }],
-        'h5': ['1.25rem', { lineHeight: '1.2', fontWeight: '700' }],
-        'h6': ['1rem', { lineHeight: '1.2', fontWeight: '700' }],
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],
