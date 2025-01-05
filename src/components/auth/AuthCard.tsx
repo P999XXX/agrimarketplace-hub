@@ -12,8 +12,8 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
     <div className="min-h-screen bg-primary relative overflow-hidden">
       <div className="container py-16">
-        {/* Logo text top left */}
-        <div className="absolute top-8 left-8">
+        {/* Logo text aligned with container */}
+        <div className="container absolute top-8">
           <span className="text-[1.65rem]">
             <span className="text-white font-[700]">cropio</span>
             <span className="text-secondary font-[700]">.app</span>
