@@ -57,6 +57,17 @@ export const useSignUp = () => {
     }));
   };
 
+  const createCompany = async (userId: string) => {
+    const { error: companyError } = await supabase
+      .from('companies')
+      .insert({
+        name: formData.companyName,
+        created_by: userId,
+      });
+
+    if (companyError) throw companyError;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -101,17 +112,18 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      const { error: companyError } = await supabase
-        .from('companies')
-        .insert({
-          name: formData.companyName,
-          created_by: authData.user.id,
-        });
-
-      if (companyError) throw companyError;
-
-      // Redirect to thank you page instead of dashboard
-      navigate("/thank-you");
+      // Warten auf die Session, um sicherzustellen, dass der Benutzer eingeloggt ist
+      const { data: sessionData } = await supabase.auth.getSession();
+      
+      if (sessionData?.session) {
+        // Jetzt erst erstellen wir die Firma
+        await createCompany(authData.user.id);
+        
+        // Weiterleitung zur Thank-You-Seite
+        navigate("/thank-you");
+      } else {
+        throw new Error("No session available after signup");
+      }
       
     } catch (error: any) {
       console.error('Sign Up Error:', error);
