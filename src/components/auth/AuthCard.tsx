@@ -24,7 +24,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
 
           {/* Right side with form */}
           <div className="w-full lg:w-[45%]">
-            <div className="lg:px-12 2xl:px-12 xl:px-0">
+            <div className="lg:px-0 2xl:px-12">
               <Card className="p-8 bg-white shadow-xl border-0">
                 <div className="space-y-6">
                   <div className="space-y-2">
