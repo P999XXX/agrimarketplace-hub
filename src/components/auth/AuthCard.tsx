@@ -39,9 +39,8 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
       } catch (error: any) {
         console.error('Failed to generate background image:', error);
         
-        // Check if we should retry due to rate limiting
         if (error.message?.includes('Max requests') && retryCount < 3) {
-          const retryDelay = (retryCount + 1) * 10000; // Increase delay with each retry
+          const retryDelay = (retryCount + 1) * 10000;
           toast({
             title: "Generating image",
             description: `Please wait ${retryDelay/1000} seconds for retry...`,
@@ -83,7 +82,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600" />
         )}
         <div className="absolute inset-0 bg-black/10" />
-        <div className="absolute left-12 top-1/2 -translate-y-1/2">
+        <div className="absolute inset-0 flex items-center justify-start px-12">
           <h1 className="text-white text-[8rem] font-bold leading-none tracking-tighter">
             SIGN
             <br />
