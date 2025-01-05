@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { PasswordInput } from "./PasswordInput";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthCard } from "./AuthCard";
@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 export const SignUpForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   
   const [formData, setFormData] = useState({
     companyName: "",
@@ -45,6 +46,7 @@ export const SignUpForm = () => {
     }
 
     try {
+      setIsLoading(true);
       const { data: authData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -56,7 +58,17 @@ export const SignUpForm = () => {
         },
       });
 
-      if (signUpError) throw signUpError;
+      if (signUpError) {
+        if (signUpError.message.includes('over_email_send_rate_limit')) {
+          toast({
+            title: "Please wait",
+            description: "For security purposes, please wait a moment before trying again.",
+            variant: "destructive",
+          });
+          return;
+        }
+        throw signUpError;
+      }
 
       if (authData.user) {
         const { error: companyError } = await supabase
@@ -82,6 +94,8 @@ export const SignUpForm = () => {
         description: error.message || "An error occurred during sign up",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,8 +137,12 @@ export const SignUpForm = () => {
           placeholder="Confirm your password"
         />
 
-        <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
-          Sign Up
+        <Button 
+          type="submit" 
+          className="w-full bg-brand-500 hover:bg-brand-600"
+          disabled={isLoading}
+        >
+          {isLoading ? "Signing up..." : "Sign Up"}
         </Button>
 
         <AuthDivider />
