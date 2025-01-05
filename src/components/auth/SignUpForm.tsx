@@ -91,7 +91,8 @@ export const SignUpForm = () => {
           redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
             prompt: 'select_account',
-            access_type: 'offline'
+            access_type: 'offline',
+            hd: 'cropio.app'
           }
         },
       });
@@ -112,16 +113,16 @@ export const SignUpForm = () => {
 
   return (
     <AuthCard 
-      title="Create Account" 
-      subtitle="Enter your information to get started"
+      title="Bei Cropio registrieren" 
+      subtitle="Geben Sie Ihre Informationen ein, um loszulegen"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="companyName">Company Name</Label>
+          <Label htmlFor="companyName">Firmenname</Label>
           <Input
             id="companyName"
             name="companyName"
-            placeholder="Your company name"
+            placeholder="Ihr Firmenname"
             required
             value={formData.companyName}
             onChange={handleChange}
@@ -135,12 +136,12 @@ export const SignUpForm = () => {
         />
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">E-Mail</Label>
           <Input
             id="email"
             name="email"
             type="email"
-            placeholder="your@email.com"
+            placeholder="ihre@email.com"
             required
             value={formData.email}
             onChange={handleChange}
@@ -149,22 +150,22 @@ export const SignUpForm = () => {
 
         <PasswordInput
           id="password"
-          label="Password"
+          label="Passwort"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Enter your password"
+          placeholder="Geben Sie Ihr Passwort ein"
         />
 
         <PasswordInput
           id="confirmPassword"
-          label="Confirm Password"
+          label="Passwort bestätigen"
           value={formData.confirmPassword}
           onChange={handleChange}
-          placeholder="Confirm your password"
+          placeholder="Bestätigen Sie Ihr Passwort"
         />
 
         <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
-          Sign Up
+          Registrieren
         </Button>
 
         <div className="relative my-4">
@@ -173,7 +174,7 @@ export const SignUpForm = () => {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-white px-2 text-muted-foreground">
-              Or continue with
+              Oder fortfahren mit
             </span>
           </div>
         </div>
