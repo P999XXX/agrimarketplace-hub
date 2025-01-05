@@ -20,6 +20,12 @@ export const PasswordInput = ({
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  // Passwort-Validierungen
+  const hasMinLength = value.length >= 8;
+  const hasUpperCase = /[A-Z]/.test(value);
+  const hasLowerCase = /[a-z]/.test(value);
+  const hasNumber = /\d/.test(value);
+
   return (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
@@ -45,6 +51,24 @@ export const PasswordInput = ({
           )}
         </button>
       </div>
+      
+      {/* Passwort-Anforderungen */}
+      {id === "password" && value && (
+        <div className="space-y-1 text-sm">
+          <p className={`${hasMinLength ? 'text-green-600' : 'text-red-600'}`}>
+            • Mindestens 8 Zeichen
+          </p>
+          <p className={`${hasUpperCase ? 'text-green-600' : 'text-red-600'}`}>
+            • Mindestens ein Großbuchstabe
+          </p>
+          <p className={`${hasLowerCase ? 'text-green-600' : 'text-red-600'}`}>
+            • Mindestens ein Kleinbuchstabe
+          </p>
+          <p className={`${hasNumber ? 'text-green-600' : 'text-red-600'}`}>
+            • Mindestens eine Zahl
+          </p>
+        </div>
+      )}
     </div>
   );
 };
