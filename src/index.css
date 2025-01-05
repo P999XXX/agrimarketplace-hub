@@ -44,7 +44,7 @@
     @apply bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-[800];
+    @apply font-[700];
   }
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
