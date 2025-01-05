@@ -6,11 +6,16 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
 
-const generateImageWithRetry = async (hf: HfInference, retries = 2): Promise<Uint8Array> => {
   try {
-    console.log('Attempting to generate image...')
+    const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
+    console.log('Starting image generation...')
+
     const image = await hf.textToImage({
       inputs: "A distant view of an Indian farmer working in lush green agricultural fields during golden hour. Wide landscape shot showing vast farmland with crops. Professional composition, warm lighting, agricultural business theme.",
       model: "stabilityai/stable-diffusion-xl-base-1.0",
@@ -20,29 +25,9 @@ const generateImageWithRetry = async (hf: HfInference, retries = 2): Promise<Uin
         guidance_scale: 7.5,
       }
     })
+
     console.log('Image generated successfully')
-    return new Uint8Array(await image.arrayBuffer())
-  } catch (error) {
-    if (error.message?.includes('Max requests') && retries > 0) {
-      console.log(`Rate limit hit, waiting 10 seconds... (${retries} retries left)`)
-      await sleep(10000) // Wait 10 seconds before retrying
-      return generateImageWithRetry(hf, retries - 1)
-    }
-    throw error
-  }
-}
-
-serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
-  }
-
-  try {
-    const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
-    console.log('Starting image generation with retry mechanism...')
-
-    const imageData = await generateImageWithRetry(hf)
+    const imageData = new Uint8Array(await image.arrayBuffer())
     const base64 = btoa(String.fromCharCode(...imageData))
 
     return new Response(
@@ -56,11 +41,15 @@ serve(async (req) => {
     )
   } catch (error) {
     console.error('Error:', error)
+    
+    const errorMessage = error.message || 'Unknown error'
+    const shouldRetry = errorMessage.includes('Max requests')
+    
     return new Response(
       JSON.stringify({ 
         error: 'Failed to generate image', 
-        details: error.message,
-        shouldRetry: error.message?.includes('Max requests')
+        details: errorMessage,
+        shouldRetry
       }),
       { 
         headers: { 
