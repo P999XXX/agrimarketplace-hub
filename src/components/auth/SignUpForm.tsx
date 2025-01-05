@@ -89,18 +89,11 @@ export const SignUpForm = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'https://cropio.app/auth/callback',
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
+          redirectTo: 'https://cropio.app/dashboard',
         },
       });
 
-      if (error) {
-        console.error('Google Sign Up Error:', error);
-        throw error;
-      }
+      if (error) throw error;
 
       toast({
         title: "Redirecting",
