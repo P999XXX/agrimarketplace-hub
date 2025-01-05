@@ -6,16 +6,11 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
-  }
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+const generateImageWithRetry = async (hf: HfInference, retries = 2): Promise<Uint8Array> => {
   try {
-    const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
-    console.log('Starting image generation...')
-
+    console.log('Attempting to generate image...')
     const image = await hf.textToImage({
       inputs: "A cheerful farmer standing in a golden wheat field at sunset, with agricultural commodities like grains and crops in focus. Professional, clean composition, warm lighting, agricultural business theme.",
       model: "stabilityai/stable-diffusion-xl-base-1.0",
@@ -25,11 +20,30 @@ serve(async (req) => {
         guidance_scale: 7.5,
       }
     })
-
     console.log('Image generated successfully')
+    return new Uint8Array(await image.arrayBuffer())
+  } catch (error) {
+    if (error.message?.includes('Max requests') && retries > 0) {
+      console.log(`Rate limit hit, waiting 10 seconds... (${retries} retries left)`)
+      await sleep(10000) // Wait 10 seconds before retrying
+      return generateImageWithRetry(hf, retries - 1)
+    }
+    throw error
+  }
+}
 
-    const arrayBuffer = await image.arrayBuffer()
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
+
+  try {
+    const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
+    console.log('Starting image generation with retry mechanism...')
+
+    const imageData = await generateImageWithRetry(hf)
+    const base64 = btoa(String.fromCharCode(...imageData))
 
     return new Response(
       JSON.stringify({ image: `data:image/png;base64,${base64}` }),
@@ -43,7 +57,11 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error:', error)
     return new Response(
-      JSON.stringify({ error: 'Failed to generate image', details: error.message }),
+      JSON.stringify({ 
+        error: 'Failed to generate image', 
+        details: error.message,
+        shouldRetry: error.message?.includes('Max requests')
+      }),
       { 
         headers: { 
           ...corsHeaders, 

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { ReactNode, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface AuthCardProps {
   title: string;
@@ -11,7 +12,8 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const { toast } = useToast();
 
   useEffect(() => {
     const generateImage = async () => {
@@ -20,7 +22,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         console.log('Calling generate-signup-image function...');
         const { data, error } = await supabase.functions.invoke('generate-signup-image', {
           method: 'POST',
-          body: {} // Leerer Body, aber wichtig für den POST-Request
+          body: {}
         });
         
         if (error) {
@@ -34,16 +36,36 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         
         console.log('Image received successfully');
         setBackgroundImage(data.image);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to generate background image:', error);
-        setError(error instanceof Error ? error.message : 'Failed to generate image');
+        
+        // Check if we should retry due to rate limiting
+        if (error.message?.includes('Max requests') && retryCount < 3) {
+          const retryDelay = (retryCount + 1) * 10000; // Increase delay with each retry
+          toast({
+            title: "Generating image",
+            description: `Please wait ${retryDelay/1000} seconds for retry...`,
+          });
+          
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+          }, retryDelay);
+          
+          return;
+        }
+        
+        toast({
+          title: "Error",
+          description: "Failed to generate background image. Using fallback.",
+          variant: "destructive",
+        });
       } finally {
         setIsLoading(false);
       }
     };
 
     generateImage();
-  }, []);
+  }, [retryCount, toast]);
 
   return (
     <div className="min-h-screen flex">
