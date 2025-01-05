@@ -13,7 +13,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
       <Card className="w-full max-w-md p-8 backdrop-blur-sm bg-white/95 shadow-lg animate-fadeIn">
         <div className="space-y-8">
           <div className="space-y-2 text-center">
-            <h1 className="text-2xl font-medium tracking-tight text-gray-900">{title}</h1>
+            <h1 className="text-2xl font-medium tracking-tight text-gray-900 font-[500]">{title}</h1>
             <p className="text-sm text-muted-foreground font-light">{subtitle}</p>
           </div>
           {children}
