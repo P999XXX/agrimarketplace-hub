@@ -12,7 +12,24 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 relative overflow-hidden">
-      <div className="container mx-auto px-4 pt-4">
+      {/* Background Shapes */}
+      <div className="absolute top-0 right-0 opacity-10 -z-10">
+        <svg width="500" height="500" viewBox="0 0 500 500" fill="none">
+          <circle cx="250" cy="250" r="250" fill="currentColor" className="text-white" />
+        </svg>
+      </div>
+      <div className="absolute bottom-0 right-0 opacity-10 -z-10">
+        <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+          <path d="M100 0L200 100L100 200L0 100L100 0Z" fill="currentColor" className="text-white" />
+        </svg>
+      </div>
+      <div className="absolute bottom-0 left-0 opacity-10 -z-10">
+        <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
+          <rect width="300" height="300" rx="150" fill="currentColor" className="text-white" />
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 pt-4 relative">
         {/* Logo text aligned with content */}
         <div className="mb-[20px] md:mb-16 lg:mb-0">
           <Logo />
@@ -37,23 +54,6 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Background Shapes */}
-      <div className="absolute top-0 right-0 opacity-10">
-        <svg width="500" height="500" viewBox="0 0 500 500" fill="none">
-          <circle cx="250" cy="250" r="250" fill="currentColor" className="text-white" />
-        </svg>
-      </div>
-      <div className="absolute bottom-0 right-0 opacity-10">
-        <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
-          <path d="M100 0L200 100L100 200L0 100L100 0Z" fill="currentColor" className="text-white" />
-        </svg>
-      </div>
-      <div className="absolute bottom-0 left-0 opacity-10">
-        <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
-          <rect width="300" height="300" rx="150" fill="currentColor" className="text-white" />
-        </svg>
       </div>
     </div>
   );
