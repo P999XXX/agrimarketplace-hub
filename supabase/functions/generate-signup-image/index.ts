@@ -17,10 +17,10 @@ serve(async (req) => {
     console.log('Starting image generation...')
 
     const image = await hf.textToImage({
-      inputs: "A minimalist, abstract nature background with green leaves and natural elements, perfect for a signup page. Soft lighting, professional look, clean design.",
+      inputs: "A cheerful farmer standing in a golden wheat field at sunset, with agricultural commodities like grains and crops in focus. Professional, clean composition, warm lighting, agricultural business theme.",
       model: "stabilityai/stable-diffusion-xl-base-1.0",
       parameters: {
-        negative_prompt: "text, words, letters, signs, logos, watermarks",
+        negative_prompt: "text, words, letters, signs, logos, watermarks, dark, gloomy, cartoon style",
         num_inference_steps: 30,
         guidance_scale: 7.5,
       }
