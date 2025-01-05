@@ -54,45 +54,45 @@ export const PasswordInput = ({
       
       {/* Password requirements */}
       {id === "password" && value && (
-        <div className="grid grid-cols-2 gap-2 text-xs mt-2">
-          <div className="flex items-center gap-1">
+        <div className="flex flex-wrap gap-3 text-[10px] mt-1.5">
+          <div className="flex items-center gap-0.5">
             {hasMinLength ? (
-              <Check className="h-3 w-3 text-green-600" />
+              <Check className="h-2.5 w-2.5 text-green-600" />
             ) : (
-              <X className="h-3 w-3 text-red-600" />
+              <X className="h-2.5 w-2.5 text-red-600" />
             )}
             <span className={hasMinLength ? "text-green-600" : "text-red-600"}>
-              8+ characters
+              8+
             </span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             {hasUpperCase ? (
-              <Check className="h-3 w-3 text-green-600" />
+              <Check className="h-2.5 w-2.5 text-green-600" />
             ) : (
-              <X className="h-3 w-3 text-red-600" />
+              <X className="h-2.5 w-2.5 text-red-600" />
             )}
             <span className={hasUpperCase ? "text-green-600" : "text-red-600"}>
-              Uppercase letter
+              ABC
             </span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             {hasLowerCase ? (
-              <Check className="h-3 w-3 text-green-600" />
+              <Check className="h-2.5 w-2.5 text-green-600" />
             ) : (
-              <X className="h-3 w-3 text-red-600" />
+              <X className="h-2.5 w-2.5 text-red-600" />
             )}
             <span className={hasLowerCase ? "text-green-600" : "text-red-600"}>
-              Lowercase letter
+              abc
             </span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             {hasNumber ? (
-              <Check className="h-3 w-3 text-green-600" />
+              <Check className="h-2.5 w-2.5 text-green-600" />
             ) : (
-              <X className="h-3 w-3 text-red-600" />
+              <X className="h-2.5 w-2.5 text-red-600" />
             )}
             <span className={hasNumber ? "text-green-600" : "text-red-600"}>
-              Number
+              123
             </span>
           </div>
         </div>
