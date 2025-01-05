@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Check, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -20,7 +20,7 @@ export const PasswordInput = ({
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  // Passwort-Validierungen
+  // Password validations
   const hasMinLength = value.length >= 8;
   const hasUpperCase = /[A-Z]/.test(value);
   const hasLowerCase = /[a-z]/.test(value);
@@ -52,21 +52,49 @@ export const PasswordInput = ({
         </button>
       </div>
       
-      {/* Passwort-Anforderungen */}
+      {/* Password requirements */}
       {id === "password" && value && (
-        <div className="space-y-1 text-sm">
-          <p className={`${hasMinLength ? 'text-green-600' : 'text-red-600'}`}>
-            • Mindestens 8 Zeichen
-          </p>
-          <p className={`${hasUpperCase ? 'text-green-600' : 'text-red-600'}`}>
-            • Mindestens ein Großbuchstabe
-          </p>
-          <p className={`${hasLowerCase ? 'text-green-600' : 'text-red-600'}`}>
-            • Mindestens ein Kleinbuchstabe
-          </p>
-          <p className={`${hasNumber ? 'text-green-600' : 'text-red-600'}`}>
-            • Mindestens eine Zahl
-          </p>
+        <div className="grid grid-cols-2 gap-2 text-xs mt-2">
+          <div className="flex items-center gap-1">
+            {hasMinLength ? (
+              <Check className="h-3 w-3 text-green-600" />
+            ) : (
+              <X className="h-3 w-3 text-red-600" />
+            )}
+            <span className={hasMinLength ? "text-green-600" : "text-red-600"}>
+              8+ characters
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            {hasUpperCase ? (
+              <Check className="h-3 w-3 text-green-600" />
+            ) : (
+              <X className="h-3 w-3 text-red-600" />
+            )}
+            <span className={hasUpperCase ? "text-green-600" : "text-red-600"}>
+              Uppercase letter
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            {hasLowerCase ? (
+              <Check className="h-3 w-3 text-green-600" />
+            ) : (
+              <X className="h-3 w-3 text-red-600" />
+            )}
+            <span className={hasLowerCase ? "text-green-600" : "text-red-600"}>
+              Lowercase letter
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            {hasNumber ? (
+              <Check className="h-3 w-3 text-green-600" />
+            ) : (
+              <X className="h-3 w-3 text-red-600" />
+            )}
+            <span className={hasNumber ? "text-green-600" : "text-red-600"}>
+              Number
+            </span>
+          </div>
         </div>
       )}
     </div>
