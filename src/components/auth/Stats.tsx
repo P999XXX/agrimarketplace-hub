@@ -8,8 +8,8 @@ export const Stats = () => {
           <UserCheck className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">100%</h6>
-          <p className="text-white/70">Verified Suppliers</p>
+          <h6 className="text-white text-xl font-bold mb-1">10,000+</h6>
+          <p className="text-white/70">Active Traders</p>
         </div>
       </div>
 
@@ -18,8 +18,8 @@ export const Stats = () => {
           <Globe2 className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">B2B</h6>
-          <p className="text-white/70">Online Trading</p>
+          <h6 className="text-white text-xl font-bold mb-1">24/7</h6>
+          <p className="text-white/70">Global Trading</p>
         </div>
       </div>
 
@@ -28,8 +28,8 @@ export const Stats = () => {
           <ShieldCheck className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">100%</h6>
-          <p className="text-white/70">Secure Trading</p>
+          <h6 className="text-white text-xl font-bold mb-1">€2M+</h6>
+          <p className="text-white/70">Daily Volume</p>
         </div>
       </div>
     </div>
