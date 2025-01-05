@@ -13,9 +13,19 @@ serve(async (req) => {
   }
 
   try {
-    const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
     console.log('Starting image generation...')
+    
+    // Check if HuggingFace token is set
+    const hfToken = Deno.env.get('HUGGING_FACE_ACCESS_TOKEN')
+    if (!hfToken) {
+      console.error('HuggingFace token not found')
+      throw new Error('HuggingFace configuration missing')
+    }
 
+    const hf = new HfInference(hfToken)
+    
+    console.log('Initializing image generation with HuggingFace...')
+    
     const image = await hf.textToImage({
       inputs: "A distant view of an Indian farmer working in lush green agricultural fields during golden hour. Wide landscape shot showing vast farmland with crops. Professional composition, warm lighting, agricultural business theme.",
       model: "black-forest-labs/FLUX.1-schnell",
@@ -35,16 +45,13 @@ serve(async (req) => {
       }
     )
   } catch (error) {
-    console.error('Error:', error)
-    
-    const errorMessage = error.message || 'Unknown error'
-    const shouldRetry = errorMessage.includes('Max requests')
+    console.error('Error during image generation:', error)
     
     return new Response(
       JSON.stringify({ 
         error: 'Failed to generate image', 
-        details: errorMessage,
-        shouldRetry
+        details: error.message,
+        shouldRetry: false
       }),
       { 
         headers: { 
