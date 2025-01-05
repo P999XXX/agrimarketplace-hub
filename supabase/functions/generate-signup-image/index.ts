@@ -12,7 +12,7 @@ const generateImageWithRetry = async (hf: HfInference, retries = 2): Promise<Uin
   try {
     console.log('Attempting to generate image...')
     const image = await hf.textToImage({
-      inputs: "A cheerful farmer standing in a golden wheat field at sunset, with agricultural commodities like grains and crops in focus. Professional, clean composition, warm lighting, agricultural business theme.",
+      inputs: "An Indian farmer working in a lush green agricultural field, surrounded by vibrant crops and traditional farming methods. Professional photography style, warm sunlight, agricultural business theme.",
       model: "stabilityai/stable-diffusion-xl-base-1.0",
       parameters: {
         negative_prompt: "text, words, letters, signs, logos, watermarks, dark, gloomy, cartoon style",
