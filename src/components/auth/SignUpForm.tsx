@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { PasswordInput } from "./PasswordInput";
 import { GoogleSignInButton } from "./GoogleSignInButton";
+import { AuthCard } from "./AuthCard";
+import { NameFields } from "./NameFields";
 import { supabase } from "@/integrations/supabase/client";
 
 export const SignUpForm = () => {
@@ -102,103 +103,75 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-brand-50 to-brand-100">
-      <Card className="w-full max-w-md p-8 backdrop-blur-sm bg-white/90 animate-fadeIn">
-        <div className="space-y-6">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold tracking-tight">Create Account</h1>
-            <p className="text-sm text-muted-foreground">
-              Enter your information to get started
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name</Label>
-              <Input
-                id="companyName"
-                name="companyName"
-                placeholder="Your company name"
-                required
-                value={formData.companyName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  placeholder="First name"
-                  required
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Last name"
-                  required
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your@email.com"
-                required
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <PasswordInput
-              id="password"
-              label="Password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-            />
-
-            <PasswordInput
-              id="confirmPassword"
-              label="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-            />
-
-            <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
-              Sign Up
-            </Button>
-
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-muted-foreground">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <GoogleSignInButton onClick={handleGoogleSignUp} />
-          </form>
+    <AuthCard 
+      title="Create Account" 
+      subtitle="Enter your information to get started"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="companyName">Company Name</Label>
+          <Input
+            id="companyName"
+            name="companyName"
+            placeholder="Your company name"
+            required
+            value={formData.companyName}
+            onChange={handleChange}
+          />
         </div>
-      </Card>
-    </div>
+
+        <NameFields
+          firstName={formData.firstName}
+          lastName={formData.lastName}
+          onChange={handleChange}
+        />
+
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="your@email.com"
+            required
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <PasswordInput
+          id="password"
+          label="Password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+        />
+
+        <PasswordInput
+          id="confirmPassword"
+          label="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          placeholder="Confirm your password"
+        />
+
+        <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
+          Sign Up
+        </Button>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <GoogleSignInButton onClick={handleGoogleSignUp} />
+      </form>
+    </AuthCard>
   );
 };
