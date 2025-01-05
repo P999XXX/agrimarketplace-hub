@@ -20,8 +20,8 @@ export const SignUpForm = () => {
 
   return (
     <AuthCard 
-      title={<>Join <span className="text-primary">cropio</span><span className="text-secondary">.app</span></>}
-      subtitle="Hundreds of agricultural businesses are already using CROPIO to trade their products."
+      title="Register for Free"
+      subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <CompanyField
