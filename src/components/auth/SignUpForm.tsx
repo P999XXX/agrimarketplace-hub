@@ -85,35 +85,6 @@ export const SignUpForm = () => {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: 'https://cropio.app/dashboard',
-          queryParams: {
-            prompt: 'select_account',
-            access_type: 'offline'
-          }
-        },
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Redirecting",
-        description: "Please wait while we redirect you to Google",
-      });
-    } catch (error: any) {
-      console.error('Google Sign Up Error:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Could not sign in with Google",
-        variant: "destructive",
-      });
-    }
-  };
-
   return (
     <AuthCard 
       title="Sign up for Cropio" 
@@ -158,7 +129,7 @@ export const SignUpForm = () => {
 
         <AuthDivider />
 
-        <GoogleSignInButton onClick={handleGoogleSignUp} />
+        <GoogleSignInButton />
       </form>
     </AuthCard>
   );
