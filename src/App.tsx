@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
+import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
 import { useEffect, useState } from "react";
 import { supabase } from "./integrations/supabase/client";
@@ -52,6 +53,16 @@ const App = () => {
                   <Navigate to="/dashboard" replace />
                 ) : (
                   <SignUp />
+                )
+              }
+            />
+            <Route
+              path="/thank-you"
+              element={
+                isAuthenticated ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <ThankYou />
                 )
               }
             />

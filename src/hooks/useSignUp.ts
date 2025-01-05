@@ -101,14 +101,6 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      const {
-        data: { session },
-        error: sessionError,
-      } = await supabase.auth.getSession();
-
-      if (sessionError) throw sessionError;
-      if (!session) throw new Error("No session available");
-
       const { error: companyError } = await supabase
         .from('companies')
         .insert({
@@ -118,12 +110,9 @@ export const useSignUp = () => {
 
       if (companyError) throw companyError;
 
-      toast({
-        title: "Success",
-        description: "Account created successfully! Please check your email to verify your account.",
-      });
+      // Redirect to thank you page instead of dashboard
+      navigate("/thank-you");
       
-      navigate("/dashboard");
     } catch (error: any) {
       console.error('Sign Up Error:', error);
       toast({
