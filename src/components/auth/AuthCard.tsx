@@ -82,38 +82,22 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             </div>
           </div>
         </div>
-
       </div>
 
-      {/* Background Illustrations */}
+      {/* Background Shapes */}
       <div className="absolute top-0 right-0 opacity-10">
-        {/* Minimalistic Banana Leaf */}
-        <svg width="400" height="400" viewBox="0 0 400 400" fill="none">
-          <path d="M200 50C300 50 350 150 350 250C350 350 300 380 200 380" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                fill="none" 
-                className="text-white" />
+        <svg width="500" height="500" viewBox="0 0 500 500" fill="none">
+          <circle cx="250" cy="250" r="250" fill="currentColor" className="text-white" />
         </svg>
       </div>
       <div className="absolute bottom-0 right-0 opacity-10">
-        {/* Minimalistic Coffee Bean */}
-        <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
-          <path d="M150 100C200 100 220 150 220 200S200 250 150 250C100 250 80 200 80 150" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                fill="none" 
-                className="text-white" />
+        <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+          <path d="M100 0L200 100L100 200L0 100L100 0Z" fill="currentColor" className="text-white" />
         </svg>
       </div>
       <div className="absolute bottom-0 left-0 opacity-10">
-        {/* Minimalistic Nut */}
-        <svg width="250" height="250" viewBox="0 0 250 250" fill="none">
-          <path d="M125 75C175 75 200 100 200 150C200 200 175 225 125 225C75 225 50 200 50 150C50 100 75 75 125 75" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                fill="none" 
-                className="text-white" />
+        <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
+          <rect width="300" height="300" rx="150" fill="currentColor" className="text-white" />
         </svg>
       </div>
     </div>
