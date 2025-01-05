@@ -52,6 +52,13 @@ export const PasswordInput = ({
         </button>
       </div>
       
+      {/* Password description */}
+      {id === "password" && (
+        <p className="text-xs text-muted-foreground mt-1">
+          Password must be at least 8 characters and include uppercase, lowercase, and numbers.
+        </p>
+      )}
+      
       {/* Password requirements */}
       {id === "password" && value && (
         <div className="flex flex-wrap gap-3 text-[10px] mt-1.5">
