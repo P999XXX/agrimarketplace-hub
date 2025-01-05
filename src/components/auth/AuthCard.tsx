@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
-import { DollarSign, Users, BadgeCheck } from "lucide-react";
+import { Logo } from "./Logo";
+import { LeftContent } from "./LeftContent";
 
 interface AuthCardProps {
   title: ReactNode;
@@ -11,61 +12,15 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
     <div className="min-h-screen bg-primary relative overflow-hidden">
-      <div className="container py-16">
-        {/* Logo text aligned with container */}
-        <div className="container absolute top-8">
-          <span className="text-[1.65rem]">
-            <span className="text-white font-[700]">cropio</span>
-            <span className="text-secondary font-[700]">.app</span>
-          </span>
+      <div className="container mx-auto px-4 py-16">
+        {/* Logo text aligned with content */}
+        <div className="mb-12">
+          <Logo />
         </div>
 
         <div className="flex flex-col lg:flex-row justify-center items-center gap-16">
           {/* Left side with static content */}
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <div className="lg:pe-12 mb-8">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6">
-                Connecting farmers
-                <br />
-                with <span className="text-secondary">buyers</span>
-              </h1>
-              <p className="text-lg text-white/70 mb-8 max-w-md">
-                Built for agricultural businesses, <span className="text-white font-[700]">cropio</span><span className="text-secondary font-[700]">.app</span> helps you connect with buyers and sellers of agricultural raw materials in a fraction of the time.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 text-white">
-                  <DollarSign className="w-10 h-10" />
-                </div>
-                <div className="ml-4">
-                  <h6 className="text-white text-xl font-bold mb-1">24/7</h6>
-                  <p className="text-white/70">Market access</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="flex-shrink-0 text-white">
-                  <Users className="w-10 h-10" />
-                </div>
-                <div className="ml-4">
-                  <h6 className="text-white text-xl font-bold mb-1">100+</h6>
-                  <p className="text-white/70">Active traders</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="flex-shrink-0 text-white">
-                  <BadgeCheck className="w-10 h-10" />
-                </div>
-                <div className="ml-4">
-                  <h6 className="text-white text-xl font-bold mb-1">100%</h6>
-                  <p className="text-white/70">Verified traders</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LeftContent />
 
           {/* Right side with form */}
           <div className="w-full lg:w-1/2">
