@@ -14,7 +14,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
       <div className="container py-16">
         {/* Logo text top left */}
         <div className="absolute top-8 left-8">
-          <span className="text-[1.5rem]">
+          <span className="text-[1.65rem]">
             <span className="text-white font-[700]">cropio</span>
             <span className="text-secondary font-[700]">.app</span>
           </span>
