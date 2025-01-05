@@ -64,10 +64,4 @@
   .card-shadow {
     @apply shadow-xl border-0;
   }
-  .text-secondary {
-    @apply text-secondary;
-  }
-  .bg-primary {
-    @apply bg-primary;
-  }
 }
