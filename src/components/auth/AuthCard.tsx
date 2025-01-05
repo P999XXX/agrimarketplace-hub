@@ -11,7 +11,7 @@ interface AuthCardProps {
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
-    <div className="min-h-screen bg-primary relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 relative overflow-hidden">
       <div className="container mx-auto px-4 pt-4">
         {/* Logo text aligned with content */}
         <div className="mb-[20px] md:mb-16 lg:mb-0">
