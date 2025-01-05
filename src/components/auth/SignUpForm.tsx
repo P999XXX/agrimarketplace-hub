@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { PasswordInput } from "./PasswordInput";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthCard } from "./AuthCard";
 import { NameFields } from "./NameFields";
+import { EmailField } from "./EmailField";
+import { CompanyField } from "./CompanyField";
+import { AuthDivider } from "./AuthDivider";
 import { supabase } from "@/integrations/supabase/client";
 
 export const SignUpForm = () => {
@@ -119,17 +120,10 @@ export const SignUpForm = () => {
       subtitle="Enter your information to get started"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="companyName">Company Name</Label>
-          <Input
-            id="companyName"
-            name="companyName"
-            placeholder="Your company name"
-            required
-            value={formData.companyName}
-            onChange={handleChange}
-          />
-        </div>
+        <CompanyField
+          companyName={formData.companyName}
+          onChange={handleChange}
+        />
 
         <NameFields
           firstName={formData.firstName}
@@ -137,18 +131,10 @@ export const SignUpForm = () => {
           onChange={handleChange}
         />
 
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="your@email.com"
-            required
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
+        <EmailField
+          email={formData.email}
+          onChange={handleChange}
+        />
 
         <PasswordInput
           id="password"
@@ -170,16 +156,7 @@ export const SignUpForm = () => {
           Sign Up
         </Button>
 
-        <div className="relative my-4">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-muted-foreground">
-              Or continue with
-            </span>
-          </div>
-        </div>
+        <AuthDivider />
 
         <GoogleSignInButton onClick={handleGoogleSignUp} />
       </form>
