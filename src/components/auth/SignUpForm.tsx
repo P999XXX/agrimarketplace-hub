@@ -89,6 +89,10 @@ export const SignUpForm = () => {
         provider: 'google',
         options: {
           redirectTo: 'https://cfzafchqpdxmqawjffyr.supabase.co/auth/v1/callback',
+          queryParams: {
+            prompt: 'select_account',
+            access_type: 'offline'
+          }
         },
       });
 
