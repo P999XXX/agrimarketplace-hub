@@ -18,12 +18,7 @@ serve(async (req) => {
 
     const image = await hf.textToImage({
       inputs: "A distant view of an Indian farmer working in lush green agricultural fields during golden hour. Wide landscape shot showing vast farmland with crops. Professional composition, warm lighting, agricultural business theme.",
-      model: "stabilityai/stable-diffusion-xl-base-1.0",
-      parameters: {
-        negative_prompt: "close up, selfie, portrait, text, words, letters, signs, logos, watermarks, dark, gloomy, cartoon style",
-        num_inference_steps: 30,
-        guidance_scale: 7.5,
-      }
+      model: "black-forest-labs/FLUX.1-schnell",
     })
 
     console.log('Image generated successfully')
