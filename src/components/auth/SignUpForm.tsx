@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { PasswordInput } from "./PasswordInput";
 import { GoogleSignInButton } from "./GoogleSignInButton";
@@ -9,6 +8,8 @@ import { NameFields } from "./NameFields";
 import { EmailField } from "./EmailField";
 import { CompanyField } from "./CompanyField";
 import { AuthDivider } from "./AuthDivider";
+import { SignUpButton } from "./SignUpButton";
+import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
 import { supabase } from "@/integrations/supabase/client";
 
 export const SignUpForm = () => {
@@ -129,21 +130,12 @@ export const SignUpForm = () => {
           placeholder="Enter your password"
         />
 
-        <PasswordInput
-          id="confirmPassword"
-          label="Confirm Password"
-          value={formData.confirmPassword}
+        <ConfirmPasswordInput
+          confirmPassword={formData.confirmPassword}
           onChange={handleChange}
-          placeholder="Confirm your password"
         />
 
-        <Button 
-          type="submit" 
-          className="w-full bg-brand-500 hover:bg-brand-600"
-          disabled={isLoading}
-        >
-          {isLoading ? "Signing up..." : "Sign Up"}
-        </Button>
+        <SignUpButton isLoading={isLoading} />
 
         <AuthDivider />
 
