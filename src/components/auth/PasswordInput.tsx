@@ -27,7 +27,7 @@ export const PasswordInput = ({
   const hasNumber = /\d/.test(value);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <Label htmlFor={id}>{label}</Label>
       <div className="relative">
         <Input

@@ -8,7 +8,7 @@ interface CompanyFieldProps {
 
 export const CompanyField = ({ companyName, onChange }: CompanyFieldProps) => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <Label htmlFor="companyName">Company Name</Label>
       <Input
         id="companyName"

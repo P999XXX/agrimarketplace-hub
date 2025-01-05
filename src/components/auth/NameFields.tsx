@@ -10,7 +10,7 @@ interface NameFieldsProps {
 export const NameFields = ({ firstName, lastName, onChange }: NameFieldsProps) => {
   return (
     <div className="grid grid-cols-2 gap-4">
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="firstName">First Name</Label>
         <Input
           id="firstName"
@@ -22,7 +22,7 @@ export const NameFields = ({ firstName, lastName, onChange }: NameFieldsProps) =
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="lastName">Last Name</Label>
         <Input
           id="lastName"

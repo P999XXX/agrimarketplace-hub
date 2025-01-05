@@ -8,7 +8,7 @@ interface EmailFieldProps {
 
 export const EmailField = ({ email, onChange }: EmailFieldProps) => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <Label htmlFor="email">Email</Label>
       <Input
         id="email"
