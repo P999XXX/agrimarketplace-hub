@@ -82,22 +82,48 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             </div>
           </div>
         </div>
+
       </div>
 
-      {/* Background Shapes */}
+      {/* Background Illustrations */}
       <div className="absolute top-0 right-0 opacity-10">
+        {/* Minimalistic Banana Leaf */}
         <svg width="500" height="500" viewBox="0 0 500 500" fill="none">
-          <circle cx="250" cy="250" r="250" fill="currentColor" className="text-white" />
+          <path d="M250 100C250 100 400 200 400 350C400 400 350 450 300 450C250 450 200 400 200 350C200 300 250 250 300 250" 
+                stroke="currentColor" 
+                strokeWidth="20" 
+                fill="none" 
+                className="text-white" />
         </svg>
       </div>
       <div className="absolute bottom-0 right-0 opacity-10">
+        {/* Minimalistic Coffee Bean */}
         <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
-          <path d="M100 0L200 100L100 200L0 100L100 0Z" fill="currentColor" className="text-white" />
+          <path d="M100 50C140 50 160 90 160 120C160 150 140 170 100 170C60 170 40 150 40 120C40 90 60 50 100 50Z" 
+                stroke="currentColor" 
+                strokeWidth="10" 
+                fill="none" 
+                className="text-white" />
+          <path d="M100 70C120 70 140 90 140 120" 
+                stroke="currentColor" 
+                strokeWidth="10" 
+                fill="none" 
+                className="text-white" />
         </svg>
       </div>
       <div className="absolute bottom-0 left-0 opacity-10">
+        {/* Minimalistic Nut */}
         <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
-          <rect width="300" height="300" rx="150" fill="currentColor" className="text-white" />
+          <path d="M150 100C200 100 230 130 230 180C230 230 200 260 150 260C100 260 70 230 70 180C70 130 100 100 150 100Z" 
+                stroke="currentColor" 
+                strokeWidth="15" 
+                fill="none" 
+                className="text-white" />
+          <path d="M150 140L150 220M120 160L180 200M180 160L120 200" 
+                stroke="currentColor" 
+                strokeWidth="15" 
+                fill="none" 
+                className="text-white" />
         </svg>
       </div>
     </div>
