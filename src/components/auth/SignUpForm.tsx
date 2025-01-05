@@ -88,7 +88,7 @@ export const SignUpForm = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'https://cfzafchqpdxmqawjffyr.supabase.co/auth/v1/callback',
+          redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
             prompt: 'select_account',
             access_type: 'offline'
