@@ -35,7 +35,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           <Logo />
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-16">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:gap-0">
           {/* Left side with static content */}
           <LeftContent />
 
