@@ -113,16 +113,16 @@ export const SignUpForm = () => {
 
   return (
     <AuthCard 
-      title="Bei Cropio registrieren" 
-      subtitle="Geben Sie Ihre Informationen ein, um loszulegen"
+      title="Sign up for Cropio" 
+      subtitle="Enter your information to get started"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="companyName">Firmenname</Label>
+          <Label htmlFor="companyName">Company Name</Label>
           <Input
             id="companyName"
             name="companyName"
-            placeholder="Ihr Firmenname"
+            placeholder="Your company name"
             required
             value={formData.companyName}
             onChange={handleChange}
@@ -136,12 +136,12 @@ export const SignUpForm = () => {
         />
 
         <div className="space-y-2">
-          <Label htmlFor="email">E-Mail</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             name="email"
             type="email"
-            placeholder="ihre@email.com"
+            placeholder="your@email.com"
             required
             value={formData.email}
             onChange={handleChange}
@@ -150,22 +150,22 @@ export const SignUpForm = () => {
 
         <PasswordInput
           id="password"
-          label="Passwort"
+          label="Password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Geben Sie Ihr Passwort ein"
+          placeholder="Enter your password"
         />
 
         <PasswordInput
           id="confirmPassword"
-          label="Passwort bestätigen"
+          label="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
-          placeholder="Bestätigen Sie Ihr Passwort"
+          placeholder="Confirm your password"
         />
 
         <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
-          Registrieren
+          Sign Up
         </Button>
 
         <div className="relative my-4">
@@ -174,7 +174,7 @@ export const SignUpForm = () => {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-white px-2 text-muted-foreground">
-              Oder fortfahren mit
+              Or continue with
             </span>
           </div>
         </div>
