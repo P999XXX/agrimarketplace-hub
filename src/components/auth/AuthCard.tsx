@@ -10,15 +10,32 @@ interface AuthCardProps {
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const generateImage = async () => {
       try {
+        setIsLoading(true);
+        console.log('Calling generate-signup-image function...');
         const { data, error } = await supabase.functions.invoke('generate-signup-image');
-        if (error) throw error;
+        
+        if (error) {
+          console.error('Function error:', error);
+          throw error;
+        }
+        
+        if (!data?.image) {
+          throw new Error('No image data received');
+        }
+        
+        console.log('Image received successfully');
         setBackgroundImage(data.image);
       } catch (error) {
         console.error('Failed to generate background image:', error);
+        setError(error instanceof Error ? error.message : 'Failed to generate image');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -29,11 +46,13 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
     <div className="min-h-screen flex">
       {/* Left side with generated image and text */}
       <div className="hidden lg:flex lg:w-1/2 relative">
-        {backgroundImage ? (
+        {isLoading ? (
+          <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600 animate-pulse" />
+        ) : backgroundImage ? (
           <img
             src={backgroundImage}
             alt="Nature background"
-            className="object-cover w-full"
+            className="object-cover w-full h-full"
           />
         ) : (
           <div className="w-full bg-gradient-to-br from-brand-400 to-brand-600" />

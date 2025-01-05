@@ -13,14 +13,22 @@ serve(async (req) => {
 
   try {
     const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
+    console.log('Starting image generation...')
 
     const image = await hf.textToImage({
       inputs: "A minimalist, abstract nature background with green leaves and natural elements, perfect for a signup page. Soft lighting, professional look, clean design.",
-      model: 'black-forest-labs/FLUX.1-schnell',
+      model: "stabilityai/stable-diffusion-xl-base-1.0",
+      parameters: {
+        negative_prompt: "text, words, letters, signs, logos, watermarks",
+        num_inference_steps: 30,
+        guidance_scale: 7.5,
+      }
     })
 
+    console.log('Image generated successfully')
+
     const arrayBuffer = await image.arrayBuffer()
-    const base64 = btoa(String.fromCharArray(...new Uint8Array(arrayBuffer)))
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
 
     return new Response(
       JSON.stringify({ image: `data:image/png;base64,${base64}` }),
