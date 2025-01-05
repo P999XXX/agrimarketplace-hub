@@ -18,7 +18,7 @@ export const SignUpButton = ({ isLoading }: SignUpButtonProps) => {
           Please wait...
         </>
       ) : (
-        "Create Account"
+        "Start your free 30-day trial"
       )}
     </Button>
   );

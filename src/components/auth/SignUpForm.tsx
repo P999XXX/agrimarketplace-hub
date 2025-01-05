@@ -20,8 +20,8 @@ export const SignUpForm = () => {
 
   return (
     <AuthCard 
-      title="Sign up for free" 
-      subtitle="Enter your information to get started"
+      title="Join CROPIO" 
+      subtitle="Hundreds of agricultural businesses are already using CROPIO to trade their products."
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <CompanyField
