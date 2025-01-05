@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
-import { DollarSign, Users } from "lucide-react";
+import { DollarSign, Users, BadgeCheck } from "lucide-react";
 
 interface AuthCardProps {
   title: ReactNode;
@@ -34,7 +34,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-3 gap-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 text-white">
                   <DollarSign className="w-10 h-10" />
@@ -52,6 +52,16 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                 <div className="ml-4">
                   <h6 className="text-white text-xl font-bold mb-1">100+</h6>
                   <p className="text-white/70">Active traders</p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <div className="flex-shrink-0 text-white">
+                  <BadgeCheck className="w-10 h-10" />
+                </div>
+                <div className="ml-4">
+                  <h6 className="text-white text-xl font-bold mb-1">100%</h6>
+                  <p className="text-white/70">Verified traders</p>
                 </div>
               </div>
             </div>
