@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
+import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import { useEffect, useState } from "react";
 import { supabase } from "./integrations/supabase/client";
@@ -24,7 +25,7 @@ const App = () => {
   }, []);
 
   if (isAuthenticated === null) {
-    return null; // oder eine Lade-Animation
+    return null;
   }
 
   return (
@@ -41,6 +42,16 @@ const App = () => {
                   <Navigate to="/dashboard" replace />
                 ) : (
                   <Index />
+                )
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                isAuthenticated ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <SignUp />
                 )
               }
             />
