@@ -48,6 +48,8 @@ export const SignUpForm = () => {
 
     try {
       setIsLoading(true);
+      
+      // 1. Erst den Benutzer registrieren
       const { data: authData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -71,23 +73,35 @@ export const SignUpForm = () => {
         throw signUpError;
       }
 
-      if (authData.user) {
-        const { error: companyError } = await supabase
-          .from('companies')
-          .insert({
-            name: formData.companyName,
-            created_by: authData.user.id,
-          });
-
-        if (companyError) throw companyError;
-
-        toast({
-          title: "Success",
-          description: "Account created successfully! Please check your email to verify your account.",
-        });
-        
-        navigate("/dashboard");
+      if (!authData.user) {
+        throw new Error("No user data returned after signup");
       }
+
+      // 2. Warten auf die Session, um sicherzustellen, dass der Benutzer authentifiziert ist
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError) throw sessionError;
+      if (!session) throw new Error("No session available");
+
+      // 3. Jetzt das Unternehmen erstellen
+      const { error: companyError } = await supabase
+        .from('companies')
+        .insert({
+          name: formData.companyName,
+          created_by: authData.user.id,
+        });
+
+      if (companyError) throw companyError;
+
+      toast({
+        title: "Success",
+        description: "Account created successfully! Please check your email to verify your account.",
+      });
+      
+      navigate("/dashboard");
     } catch (error: any) {
       console.error('Sign Up Error:', error);
       toast({
