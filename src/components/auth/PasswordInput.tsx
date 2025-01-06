@@ -54,12 +54,12 @@ export const PasswordInput = ({
       
       {/* Password description */}
       {id === "password" && (
-        <p className="text-base text-muted-foreground mt-2">
+        <p className="text-[0.85rem] leading-4 text-muted-foreground mt-2">
           Password must be at least 8 characters and include uppercase, lowercase, and numbers.
         </p>
       )}
       
-      {/* Password requirements as chips - only show failed validations */}
+      {/* Password requirements as chips */}
       {id === "password" && value && (
         <div className="flex flex-wrap gap-1.5 mt-2">
           {!hasMinLength && (
