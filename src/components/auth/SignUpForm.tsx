@@ -42,6 +42,11 @@ export const SignUpForm = () => {
     }
   };
 
+  const handleRoleChange = (value: string) => {
+    handleChange({ target: { name: 'userType', value } } as any);
+    handleNext(); // Automatisch zum nächsten Schritt nach Rollenauswahl
+  };
+
   const canProceedToNextStep = () => {
     switch (currentStep) {
       case 1:
@@ -62,16 +67,8 @@ export const SignUpForm = () => {
           <div className="space-y-6">
             <RoleSelection
               selectedRole={formData.userType}
-              onRoleChange={(value) => handleChange({ target: { name: 'userType', value } } as any)}
+              onRoleChange={handleRoleChange}
             />
-            <Button
-              type="submit"
-              className="w-full py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
-              disabled={!canProceedToNextStep()}
-            >
-              Next
-              <ChevronRight className="w-4 h-4 ml-2" />
-            </Button>
             <AuthDivider />
             <GoogleSignInButton />
           </div>
