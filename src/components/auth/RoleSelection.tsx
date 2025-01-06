@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthDivider } from "./AuthDivider";
-import { User, Users } from "lucide-react";
 
 interface RoleSelectionProps {
   selectedRole: string;
@@ -22,7 +21,11 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             }`}
             onClick={() => onRoleChange("supplier")}
           >
-            <Users size={96} strokeWidth={1.5} className="text-gray-700" />
+            <img 
+              src="/lovable-uploads/41cb0215-9cd9-4afa-82b8-64482d35a703.png" 
+              alt="Supplier Icon" 
+              className="w-24 h-24 object-contain"
+            />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Supplier</div>
               <div className="text-base text-center text-gray-500">
@@ -39,7 +42,11 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             }`}
             onClick={() => onRoleChange("buyer")}
           >
-            <User size={96} strokeWidth={1.5} className="text-gray-700" />
+            <img 
+              src="/lovable-uploads/f45a7e35-0200-423a-a9d1-3342a197efe2.png" 
+              alt="Buyer Icon" 
+              className="w-24 h-24 object-contain"
+            />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Buyer</div>
               <div className="text-base text-center text-gray-500">
