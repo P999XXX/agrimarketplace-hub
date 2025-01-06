@@ -17,23 +17,7 @@ export const useSignUp = () => {
   const { createCompany, sendWelcomeEmail } = useSupabaseSignUp();
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
-    
-    if (!emailRegex.test(email)) {
-      return false;
-    }
-
-    const [localPart, domain] = email.split('@');
-    const [domainName, tld] = domain.split('.');
-
-    if (localPart.length < 3) return false;
-    if (domainName.length < 3) return false;
-    if (tld.length < 3) return false;
-    
-    if (/[^a-zA-Z0-9]/.test(domainName)) return false;
-    if (/[^a-zA-Z]/.test(tld)) return false;
-
-    return true;
+    return email.includes('@');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,7 +26,7 @@ export const useSignUp = () => {
     if (!validateEmail(formData.email)) {
       toast({
         title: "Ungültige E-Mail",
-        description: "Bitte geben Sie eine gültige E-Mail-Adresse ein (z.B. name@example.com)",
+        description: "Bitte geben Sie eine E-Mail-Adresse mit @ ein",
         variant: "destructive",
       });
       return;

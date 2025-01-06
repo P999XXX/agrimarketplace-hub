@@ -11,33 +11,13 @@ export const EmailField = ({ email, onChange }: EmailFieldProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const validateEmail = (email: string) => {
-    // Basis E-Mail Format überprüfen
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
-    
-    if (!emailRegex.test(email)) {
-      return false;
-    }
-
-    // E-Mail-Teile extrahieren
-    const [localPart, domain] = email.split('@');
-    const [domainName, tld] = domain.split('.');
-
-    // Überprüfe Mindestlängen und zusätzliche Regeln
-    if (localPart.length < 3) return false;
-    if (domainName.length < 3) return false;
-    if (tld.length < 3) return false;
-    
-    // Überprüfe auf ungültige Zeichenfolgen
-    if (/[^a-zA-Z0-9]/.test(domainName)) return false;
-    if (/[^a-zA-Z]/.test(tld)) return false;
-
-    return true;
+    return email.includes('@');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
     if (newEmail && !validateEmail(newEmail)) {
-      setError("Bitte geben Sie eine gültige E-Mail-Adresse ein (z.B. name@example.com)");
+      setError("Bitte geben Sie eine E-Mail-Adresse mit @ ein");
     } else {
       setError(null);
     }
