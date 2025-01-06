@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface SignUpFormData {
   companyName: string;
@@ -13,6 +14,7 @@ interface SignUpFormData {
 
 export const useSignUp = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [waitTime, setWaitTime] = useState<number | null>(null);
@@ -137,6 +139,7 @@ export const useSignUp = () => {
             await createCompany(session.user.id);
             await sendWelcomeEmail();
             setIsSuccess(true);
+            navigate('/thank-you');
           } catch (error: any) {
             console.error('Error during post-signup process:', error);
             toast({
