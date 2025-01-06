@@ -48,7 +48,9 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                     <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
                     <p className="text-base md:text-lg text-gray-600">{subtitle}</p>
                   </div>
-                  {children}
+                  <div className="min-h-[400px]">
+                    {children}
+                  </div>
                 </div>
               </Card>
             </div>
