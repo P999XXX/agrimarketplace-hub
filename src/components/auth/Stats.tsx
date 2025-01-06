@@ -1,4 +1,4 @@
-import { UserCheck, Globe2, ShieldCheck } from "lucide-react";
+import { UserCheck, ShieldCheck, Leaf } from "lucide-react";
 
 export const Stats = () => {
   return (
@@ -8,18 +8,8 @@ export const Stats = () => {
           <UserCheck className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">10,000+</h6>
-          <p className="text-white/70">Active Traders</p>
-        </div>
-      </div>
-
-      <div className="flex items-start">
-        <div className="flex-shrink-0 text-white">
-          <Globe2 className="w-10 h-10 stroke-[1.5]" />
-        </div>
-        <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">24/7</h6>
-          <p className="text-white/70">Global Trading</p>
+          <h6 className="text-white text-xl font-bold mb-1">Verified</h6>
+          <p className="text-white/70">Trusted Users</p>
         </div>
       </div>
 
@@ -28,8 +18,18 @@ export const Stats = () => {
           <ShieldCheck className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">€2M+</h6>
-          <p className="text-white/70">Daily Volume</p>
+          <h6 className="text-white text-xl font-bold mb-1">Secure</h6>
+          <p className="text-white/70">B2B Trading</p>
+        </div>
+      </div>
+
+      <div className="flex items-start">
+        <div className="flex-shrink-0 text-white">
+          <Leaf className="w-10 h-10 stroke-[1.5]" />
+        </div>
+        <div className="ml-4">
+          <h6 className="text-white text-xl font-bold mb-1">Sustainable</h6>
+          <p className="text-white/70">Organic Products</p>
         </div>
       </div>
     </div>
