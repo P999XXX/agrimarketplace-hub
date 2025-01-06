@@ -11,15 +11,26 @@ export const EmailField = ({ email, onChange }: EmailFieldProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const validateEmail = (email: string) => {
-    // Erweiterte E-Mail-Validierung
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
+    // Strengere E-Mail-Validierung
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    if (!emailRegex.test(email)) {
+      return false;
+    }
+
+    // Überprüfe Mindestlängen
+    const [localPart, domain] = email.split('@');
+    if (localPart.length < 2 || domain.length < 4) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
     if (newEmail && !validateEmail(newEmail)) {
-      setError("Please enter a valid email address");
+      setError("Please enter a valid email address (e.g., name@example.com)");
     } else {
       setError(null);
     }
@@ -33,7 +44,7 @@ export const EmailField = ({ email, onChange }: EmailFieldProps) => {
         id="email"
         name="email"
         type="email"
-        placeholder="your@email.com"
+        placeholder="your@example.com"
         required
         value={email}
         onChange={handleChange}

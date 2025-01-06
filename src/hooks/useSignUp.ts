@@ -17,8 +17,18 @@ export const useSignUp = () => {
   const { createCompany, sendWelcomeEmail } = useSupabaseSignUp();
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    if (!emailRegex.test(email)) {
+      return false;
+    }
+
+    const [localPart, domain] = email.split('@');
+    if (localPart.length < 2 || domain.length < 4) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,8 +36,8 @@ export const useSignUp = () => {
     
     if (!validateEmail(formData.email)) {
       toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address",
+        title: "Ungültige E-Mail",
+        description: "Bitte geben Sie eine gültige E-Mail-Adresse ein (z.B. name@example.com)",
         variant: "destructive",
       });
       return;
