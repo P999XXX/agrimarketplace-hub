@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthDivider } from "./AuthDivider";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export const SignUpForm = () => {
   const {
@@ -30,7 +29,6 @@ export const SignUpForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const isMobile = useIsMobile();
 
   const handleNext = () => {
     if (currentStep < 3) {
@@ -46,7 +44,7 @@ export const SignUpForm = () => {
 
   const handleRoleChange = (value: string) => {
     handleChange({ target: { name: 'userType', value } } as any);
-    handleNext();
+    handleNext(); // Automatisch zum nächsten Schritt nach Rollenauswahl
   };
 
   const canProceedToNextStep = () => {
@@ -80,7 +78,7 @@ export const SignUpForm = () => {
       case 1:
         return (
           <div className="space-y-6">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
             <RoleSelection
               selectedRole={formData.userType}
               onRoleChange={handleRoleChange}
@@ -92,7 +90,7 @@ export const SignUpForm = () => {
       case 2:
         return (
           <div className="space-y-4">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
             <CompanyField
               companyName={formData.companyName}
               onChange={handleChange}
@@ -107,7 +105,7 @@ export const SignUpForm = () => {
       case 3:
         return (
           <div className="space-y-4">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
             <EmailField
               email={formData.email}
               onChange={handleChange}
@@ -164,7 +162,7 @@ export const SignUpForm = () => {
                   type="button"
                   variant="outline"
                   onClick={handleBack}
-                  className={`w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem] ${isMobile ? 'bg-white/10 hover:bg-white/20 text-white border-white/20' : ''}`}
+                  className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back

@@ -2,18 +2,14 @@ import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { SignUpHeader } from "./SignUpHeader";
 
 interface AuthCardProps {
-  title: string;
+  title: ReactNode;
   subtitle: string;
   children: ReactNode;
 }
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
-  const isMobile = useIsMobile();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden">
       {/* Background Shapes */}
@@ -48,27 +44,19 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
 
           {/* Right side with form */}
           <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">
-            {isMobile ? (
-              <div className="w-full">
-                <SignUpHeader title={title} subtitle={subtitle} />
+            <Card className="w-full bg-white shadow-xl border-0">
+              <div className="p-6 md:p-8">
+                <div className="mb-6">
+                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
+                </div>
+                
                 <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
                   <div className="px-2">
                     {children}
                   </div>
                 </div>
               </div>
-            ) : (
-              <Card className="w-full bg-white shadow-xl border-0">
-                <div className="p-6 md:p-8">
-                  <SignUpHeader title={title} subtitle={subtitle} />
-                  <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
-                    <div className="px-2">
-                      {children}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            )}
+            </Card>
           </div>
         </div>
       </div>
