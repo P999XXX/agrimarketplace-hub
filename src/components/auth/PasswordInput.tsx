@@ -54,7 +54,7 @@ export const PasswordInput = ({
       
       {/* Password description */}
       {id === "password" && (
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-base text-muted-foreground mt-2">
           Password must be at least 8 characters and include uppercase, lowercase, and numbers.
         </p>
       )}
@@ -63,28 +63,28 @@ export const PasswordInput = ({
       {id === "password" && value && (
         <div className="flex flex-wrap gap-1.5 mt-2">
           {!hasMinLength && (
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-sm bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
               <span>8+ Characters</span>
             </div>
           )}
           
           {!hasUpperCase && (
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-sm bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
               <span>Uppercase</span>
             </div>
           )}
           
           {!hasLowerCase && (
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-sm bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
               <span>Lowercase</span>
             </div>
           )}
           
           {!hasNumber && (
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-sm bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
               <span>Number</span>
             </div>
