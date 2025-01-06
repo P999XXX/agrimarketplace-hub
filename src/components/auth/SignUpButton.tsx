@@ -10,7 +10,7 @@ export const SignUpButton = ({ isLoading }: SignUpButtonProps) => {
     <Button 
       disabled={isLoading} 
       type="submit" 
-      className="w-full bg-primary hover:bg-primary/90 text-white py-6"
+      className="w-full bg-primary hover:bg-primary/90 text-white py-6 lg:mt-0 mt-4"
     >
       {isLoading ? (
         <>
