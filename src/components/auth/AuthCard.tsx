@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { SignUpHeader } from "./SignUpHeader";
 
 interface AuthCardProps {
   title: ReactNode;
@@ -49,10 +50,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">
             {isMobile ? (
               <div className="w-full">
-                <div className="mb-6">
-                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white">{title}</h2>
-                </div>
-                
+                <SignUpHeader title={title} subtitle={subtitle} />
                 <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
                   <div className="px-2">
                     {children}
@@ -62,10 +60,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             ) : (
               <Card className="w-full bg-white shadow-xl border-0">
                 <div className="p-6 md:p-8">
-                  <div className="mb-6">
-                    <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
-                  </div>
-                  
+                  <SignUpHeader title={title} subtitle={subtitle} />
                   <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
                     <div className="px-2">
                       {children}
