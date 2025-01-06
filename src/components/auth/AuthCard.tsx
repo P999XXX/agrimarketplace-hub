@@ -29,7 +29,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-2 md:px-4 pt-4 pb-8 md:pb-12 lg:pb-0 relative z-10">
+      <div className="container mx-auto px-2 md:px-4 pt-4 pb-8 md:pb-12 lg:pb-12 relative z-10">
         {/* Logo text aligned with content */}
         <div className="mb-[20px] md:mb-16 lg:mb-[10px]">
           <Logo />
