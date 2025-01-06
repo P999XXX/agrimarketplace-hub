@@ -41,7 +41,7 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
   return (
     <Button
       type="button"
-      className="w-full bg-[#4285F4] hover:bg-[#4285F4]/90 text-white py-6"
+      className="w-full bg-[#F1F1F1] hover:bg-[#E4E4E4] text-black py-6"
       onClick={handleGoogleSignIn}
     >
       <div className="bg-white rounded-full p-1 mr-2">
