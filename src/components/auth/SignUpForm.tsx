@@ -46,7 +46,7 @@ export const SignUpForm = () => {
 
   const handleRoleChange = (value: string) => {
     handleChange({ target: { name: 'userType', value } } as any);
-    handleNext(); // Automatisch zum nächsten Schritt nach Rollenauswahl
+    handleNext();
   };
 
   const canProceedToNextStep = () => {
