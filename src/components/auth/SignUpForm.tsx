@@ -20,30 +20,34 @@ export const SignUpForm = () => {
     handleSubmit,
   } = useSignUp();
 
-  if (isSuccess) {
-    return (
-      <AuthCard 
-        title="Registration Successful!"
-        subtitle="Please check your email to verify your account."
-      >
-        <div className="flex flex-col items-center justify-center space-y-4 py-8">
-          <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-            <Check className="h-6 w-6 text-green-600" />
-          </div>
-          <div className="text-center space-y-2">
-            <p className="text-gray-600">
-              We've sent you an email with a verification link. Please click on it to complete your registration.
-            </p>
-            <p className="text-sm text-gray-500">
-              You can close this window now.
-            </p>
-          </div>
+  // Separate component for success state
+  const SuccessCard = () => (
+    <AuthCard 
+      title="Thank you for registering!"
+      subtitle="Please check your email to verify your account."
+    >
+      <div className="flex flex-col items-center justify-center space-y-6 py-8">
+        <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
+          <Check className="h-8 w-8 text-green-600" />
         </div>
-      </AuthCard>
-    );
-  }
+        <div className="text-center space-y-3">
+          <h3 className="text-xl font-semibold text-gray-900">
+            Registration Successful
+          </h3>
+          <p className="text-gray-600 max-w-md">
+            We've sent you an email with a verification link. 
+            Please click on it to complete your registration.
+          </p>
+          <p className="text-sm text-gray-500">
+            You can close this window now.
+          </p>
+        </div>
+      </div>
+    </AuthCard>
+  );
 
-  return (
+  // Separate component for registration form
+  const RegistrationForm = () => (
     <AuthCard 
       title="Register for Free"
       subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
@@ -86,4 +90,7 @@ export const SignUpForm = () => {
       </form>
     </AuthCard>
   );
+
+  // Render based on registration status
+  return isSuccess ? <SuccessCard /> : <RegistrationForm />;
 };
