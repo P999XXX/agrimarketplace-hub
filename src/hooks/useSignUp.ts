@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -13,9 +12,9 @@ interface SignUpFormData {
 }
 
 export const useSignUp = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [waitTime, setWaitTime] = useState<number | null>(null);
   
   const [formData, setFormData] = useState<SignUpFormData>({
@@ -103,7 +102,6 @@ export const useSignUp = () => {
     try {
       setIsLoading(true);
 
-      // 1. Sign up the user
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -133,16 +131,12 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      // 2. Set up a listener for auth state changes
       const authListener = supabase.auth.onAuthStateChange(async (event, session) => {
         if (event === 'SIGNED_IN' && session) {
           try {
-            // 3. Create company after successful sign in
             await createCompany(session.user.id);
-            // 4. Send welcome email
             await sendWelcomeEmail();
-            // 5. Navigate to thank you page
-            navigate("/thank-you");
+            setIsSuccess(true);
           } catch (error: any) {
             console.error('Error during post-signup process:', error);
             toast({
@@ -151,12 +145,10 @@ export const useSignUp = () => {
               variant: "destructive",
             });
           }
-          // 6. Clean up listener
           authListener.data.subscription.unsubscribe();
         }
       });
 
-      // Show success message
       toast({
         title: "Success",
         description: "Account created successfully",
@@ -177,6 +169,7 @@ export const useSignUp = () => {
   return {
     formData,
     isLoading,
+    isSuccess,
     waitTime,
     handleChange,
     handleSubmit,
