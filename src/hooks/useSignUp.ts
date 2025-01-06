@@ -17,16 +17,21 @@ export const useSignUp = () => {
   const { createCompany, sendWelcomeEmail } = useSupabaseSignUp();
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
     
     if (!emailRegex.test(email)) {
       return false;
     }
 
     const [localPart, domain] = email.split('@');
-    if (localPart.length < 2 || domain.length < 4) {
-      return false;
-    }
+    const [domainName, tld] = domain.split('.');
+
+    if (localPart.length < 3) return false;
+    if (domainName.length < 3) return false;
+    if (tld.length < 3) return false;
+    
+    if (/[^a-zA-Z0-9]/.test(domainName)) return false;
+    if (/[^a-zA-Z]/.test(tld)) return false;
 
     return true;
   };
