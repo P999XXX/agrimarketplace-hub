@@ -46,7 +46,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                   <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
                 </div>
                 
-                <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
+                <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto p-0.5">
                   {children}
                 </div>
               </div>
