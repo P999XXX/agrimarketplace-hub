@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
 import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
+import AIDevelopment from "./pages/AIDevelopment";
 import { useEffect, useState } from "react";
 import { supabase } from "./integrations/supabase/client";
 
@@ -75,6 +76,10 @@ const App = () => {
                   <Navigate to="/" replace />
                 )
               }
+            />
+            <Route
+              path="/ai-development"
+              element={<AIDevelopment />}
             />
           </Routes>
         </BrowserRouter>
