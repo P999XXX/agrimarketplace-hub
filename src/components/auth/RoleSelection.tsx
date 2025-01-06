@@ -22,7 +22,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             }`}
             onClick={() => onRoleChange("supplier")}
           >
-            <Users size={96} strokeWidth={1.5} />
+            <Users size={96} strokeWidth={1.5} className="text-gray-700" />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Supplier</div>
               <div className="text-base text-center text-gray-500">
@@ -39,7 +39,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             }`}
             onClick={() => onRoleChange("buyer")}
           >
-            <User size={96} strokeWidth={1.5} />
+            <User size={96} strokeWidth={1.5} className="text-gray-700" />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Buyer</div>
               <div className="text-base text-center text-gray-500">
