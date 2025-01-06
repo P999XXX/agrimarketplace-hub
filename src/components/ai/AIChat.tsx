@@ -26,11 +26,11 @@ export const AIChat = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="prompt" className="text-sm font-medium text-gray-700">
-            Frage zur B2B-Plattform
+            Question about the B2B Platform
           </label>
           <Textarea
             id="prompt"
-            placeholder="z.B.: Welche Features wären für Agrarhändler besonders wichtig?"
+            placeholder="e.g.: What features would be most important for agricultural traders?"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="min-h-[100px]"
@@ -45,16 +45,16 @@ export const AIChat = () => {
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Generiere Antwort...
+              Generating response...
             </>
           ) : (
-            "Frage senden"
+            "Send Question"
           )}
         </Button>
 
         {response && (
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Antwort:</h3>
+            <h3 className="text-sm font-medium text-gray-700 mb-2">Response:</h3>
             <p className="text-gray-600 whitespace-pre-wrap">{response}</p>
           </div>
         )}
