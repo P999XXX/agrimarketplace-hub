@@ -21,6 +21,7 @@ export const PasswordInput = ({
   onValidationChange,
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isAutocompletePossible, setIsAutocompletePossible] = useState(false);
 
   // Password validations
   const hasMinLength = value.length >= 8;
@@ -48,6 +49,8 @@ export const PasswordInput = ({
           required
           value={value}
           onChange={onChange}
+          autoComplete={isAutocompletePossible ? (id === "password" ? "new-password" : "current-password") : "off"}
+          onFocus={() => setIsAutocompletePossible(true)}
         />
         <button
           type="button"
