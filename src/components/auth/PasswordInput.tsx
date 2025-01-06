@@ -59,48 +59,51 @@ export const PasswordInput = ({
         </p>
       )}
       
-      {/* Password requirements */}
+      {/* Password requirements as chips */}
       {id === "password" && value && (
-        <div className="flex flex-wrap gap-3 text-[10px] mt-1.5">
-          <div className="flex items-center gap-0.5">
+        <div className="flex flex-wrap gap-2 mt-2">
+          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+            hasMinLength ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
             {hasMinLength ? (
-              <Check className="h-2.5 w-2.5 text-green-600" />
+              <Check className="h-3 w-3" />
             ) : (
-              <X className="h-2.5 w-2.5 text-red-600" />
+              <X className="h-3 w-3" />
             )}
-            <span className={hasMinLength ? "text-green-600" : "text-red-600"}>
-              8+
-            </span>
+            <span>8+ Zeichen</span>
           </div>
-          <div className="flex items-center gap-0.5">
+          
+          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+            hasUpperCase ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
             {hasUpperCase ? (
-              <Check className="h-2.5 w-2.5 text-green-600" />
+              <Check className="h-3 w-3" />
             ) : (
-              <X className="h-2.5 w-2.5 text-red-600" />
+              <X className="h-3 w-3" />
             )}
-            <span className={hasUpperCase ? "text-green-600" : "text-red-600"}>
-              ABC
-            </span>
+            <span>Großbuchstabe</span>
           </div>
-          <div className="flex items-center gap-0.5">
+          
+          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+            hasLowerCase ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
             {hasLowerCase ? (
-              <Check className="h-2.5 w-2.5 text-green-600" />
+              <Check className="h-3 w-3" />
             ) : (
-              <X className="h-2.5 w-2.5 text-red-600" />
+              <X className="h-3 w-3" />
             )}
-            <span className={hasLowerCase ? "text-green-600" : "text-red-600"}>
-              abc
-            </span>
+            <span>Kleinbuchstabe</span>
           </div>
-          <div className="flex items-center gap-0.5">
+          
+          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+            hasNumber ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
             {hasNumber ? (
-              <Check className="h-2.5 w-2.5 text-green-600" />
+              <Check className="h-3 w-3" />
             ) : (
-              <X className="h-2.5 w-2.5 text-red-600" />
+              <X className="h-3 w-3" />
             )}
-            <span className={hasNumber ? "text-green-600" : "text-red-600"}>
-              123
-            </span>
+            <span>Zahl</span>
           </div>
         </div>
       )}
