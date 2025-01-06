@@ -30,7 +30,7 @@ serve(async (req) => {
         messages: [
           {
             role: 'system',
-            content: 'Du bist ein hilfreicher Assistent für die Entwicklung einer B2B-Plattform für den Agrarhandel. Deine Aufgabe ist es, Vorschläge für Funktionen, Design und Benutzerfreundlichkeit zu machen. Fokussiere dich auf die Bedürfnisse von Händlern im Agrarbereich.'
+            content: 'You are a helpful assistant for developing a B2B platform for agricultural trading. Your task is to make suggestions for features, design, and usability. Focus on the needs of traders in the agricultural sector.'
           },
           { role: 'user', content: prompt }
         ],
