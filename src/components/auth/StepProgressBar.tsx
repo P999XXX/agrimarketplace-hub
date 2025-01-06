@@ -6,7 +6,7 @@ const StepProgressBar = ({ currentStep }: { currentStep: number }) => {
           key={step}
           className="flex-1 h-1.5 rounded-full transition-all duration-300"
           style={{
-            background: step <= currentStep ? '#008060' : '#E5E7EB',
+            background: step <= currentStep ? '#F97316' : '#E5E7EB',
           }}
         />
       ))}
