@@ -66,7 +66,7 @@ export const SignUpForm = () => {
             />
             <Button
               type="submit"
-              className="w-full"
+              className="w-full py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
               disabled={!canProceedToNextStep()}
             >
               Next
@@ -149,7 +149,7 @@ export const SignUpForm = () => {
                   type="button"
                   variant="outline"
                   onClick={handleBack}
-                  className="w-[120px]"
+                  className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back
@@ -158,7 +158,7 @@ export const SignUpForm = () => {
                 {currentStep < 3 ? (
                   <Button
                     type="submit"
-                    className="w-[120px]"
+                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
                     disabled={!canProceedToNextStep()}
                   >
                     Next

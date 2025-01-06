@@ -11,7 +11,7 @@ export const SignUpButton = ({ isLoading, disabled }: SignUpButtonProps) => {
     <Button 
       disabled={isLoading || disabled} 
       type="submit" 
-      className="w-[120px] ml-auto"
+      className="w-[120px] ml-auto py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
     >
       {isLoading ? (
         <>
