@@ -20,7 +20,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             type="button"
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 ${
-              isMobile ? 'bg-white/5 hover:bg-white/10 text-white border-white/10' : ''
+              isMobile ? 'bg-white/5 hover:bg-white/10 text-white border-white/10 hover:text-white' : 'hover:text-black'
             } ${
               selectedRole === "supplier" ? `${isMobile ? 'border-2 border-orange-500' : 'border-2 border-primary'}` : ""
             }`}
@@ -40,7 +40,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             type="button"
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 ${
-              isMobile ? 'bg-white/5 hover:bg-white/10 text-white border-white/10' : ''
+              isMobile ? 'bg-white/5 hover:bg-white/10 text-white border-white/10 hover:text-white' : 'hover:text-black'
             } ${
               selectedRole === "buyer" ? `${isMobile ? 'border-2 border-orange-500' : 'border-2 border-primary'}` : ""
             }`}
