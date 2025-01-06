@@ -50,9 +50,6 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
           </Button>
         </div>
       </div>
-
-      <GoogleSignInButton />
-      <AuthDivider />
     </div>
   );
 };

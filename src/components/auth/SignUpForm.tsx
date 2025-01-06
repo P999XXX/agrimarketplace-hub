@@ -13,6 +13,8 @@ import { TermsAndPrivacy } from "./TermsAndPrivacy";
 import StepProgressBar from "./StepProgressBar";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { GoogleSignInButton } from "./GoogleSignInButton";
+import { AuthDivider } from "./AuthDivider";
 
 export const SignUpForm = () => {
   const {
@@ -57,10 +59,22 @@ export const SignUpForm = () => {
     switch (currentStep) {
       case 1:
         return (
-          <RoleSelection
-            selectedRole={formData.userType}
-            onRoleChange={(value) => handleChange({ target: { name: 'userType', value } } as any)}
-          />
+          <div className="space-y-6">
+            <RoleSelection
+              selectedRole={formData.userType}
+              onRoleChange={(value) => handleChange({ target: { name: 'userType', value } } as any)}
+            />
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={!canProceedToNextStep()}
+            >
+              Next
+              <ChevronRight className="w-4 h-4 ml-2" />
+            </Button>
+            <AuthDivider />
+            <GoogleSignInButton />
+          </div>
         );
       case 2:
         return (
@@ -129,8 +143,8 @@ export const SignUpForm = () => {
           }} className="space-y-6">
             {renderStepContent()}
 
-            <div className="flex justify-between mt-8">
-              {currentStep > 1 && (
+            {currentStep > 1 && (
+              <div className="flex justify-between mt-8">
                 <Button
                   type="button"
                   variant="outline"
@@ -140,24 +154,24 @@ export const SignUpForm = () => {
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back
                 </Button>
-              )}
-              
-              {currentStep < 3 ? (
-                <Button
-                  type="submit"
-                  className="w-[120px] ml-auto"
-                  disabled={!canProceedToNextStep()}
-                >
-                  Next
-                  <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-              ) : (
-                <SignUpButton 
-                  isLoading={isLoading || waitTime !== null} 
-                  disabled={!canProceedToNextStep()}
-                />
-              )}
-            </div>
+                
+                {currentStep < 3 ? (
+                  <Button
+                    type="submit"
+                    className="w-[120px]"
+                    disabled={!canProceedToNextStep()}
+                  >
+                    Next
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <SignUpButton 
+                    isLoading={isLoading || waitTime !== null} 
+                    disabled={!canProceedToNextStep()}
+                  />
+                )}
+              </div>
+            )}
           </form>
         </div>
       </AuthCard>
