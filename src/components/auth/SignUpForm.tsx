@@ -8,7 +8,8 @@ import { AuthDivider } from "./AuthDivider";
 import { SignUpButton } from "./SignUpButton";
 import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
 import { PasswordInput } from "./PasswordInput";
-import { Check } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { CheckCircle } from "lucide-react";
 
 export const SignUpForm = () => {
   const {
@@ -21,29 +22,28 @@ export const SignUpForm = () => {
   } = useSignUp();
 
   return (
-    <AuthCard 
-      title={isSuccess ? "Registration Successful!" : "Register for Free"}
-      subtitle={
-        isSuccess 
-          ? "Please check your email to verify your account."
-          : "Hundreds of agricultural businesses are already using cropio.app to trade their products."
-      }
-    >
-      {isSuccess ? (
-        <div className="flex flex-col items-center justify-center space-y-4 py-8">
-          <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-            <Check className="h-6 w-6 text-green-600" />
+    <>
+      <Dialog open={isSuccess}>
+        <DialogContent className="sm:max-w-md">
+          <div className="flex flex-col items-center justify-center space-y-4 py-8">
+            <CheckCircle className="h-16 w-16 text-green-500" />
+            <div className="text-center space-y-2">
+              <h3 className="font-semibold text-2xl">Thank You!</h3>
+              <p className="text-gray-600">
+                Your registration was successful. Please check your email to verify your account.
+              </p>
+              <p className="text-sm text-gray-500">
+                You can close this window now.
+              </p>
+            </div>
           </div>
-          <div className="text-center space-y-2">
-            <p className="text-gray-600">
-              We've sent you an email with a verification link. Please click on it to complete your registration.
-            </p>
-            <p className="text-sm text-gray-500">
-              You can close this window now.
-            </p>
-          </div>
-        </div>
-      ) : (
+        </DialogContent>
+      </Dialog>
+
+      <AuthCard 
+        title="Register for Free"
+        subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
+      >
         <form onSubmit={handleSubmit} className="space-y-4">
           <CompanyField
             companyName={formData.companyName}
@@ -80,7 +80,7 @@ export const SignUpForm = () => {
 
           <GoogleSignInButton />
         </form>
-      )}
-    </AuthCard>
+      </AuthCard>
+    </>
   );
 };
