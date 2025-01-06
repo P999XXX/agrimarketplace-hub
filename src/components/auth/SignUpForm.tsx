@@ -75,12 +75,28 @@ export const SignUpForm = () => {
     }
   };
 
+  const getStepDescription = () => {
+    switch (currentStep) {
+      case 1:
+        return "Choose your role to help us personalize your experience";
+      case 2:
+        return "Tell us a bit about yourself and your company";
+      case 3:
+        return "Set up your login credentials to secure your account";
+      default:
+        return "";
+    }
+  };
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
         return (
           <div className="space-y-6">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <div className="space-y-2">
+              <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-2`}>{getStepTitle()}</h3>
+              {isMobile && <p className="text-white/80 text-sm">{getStepDescription()}</p>}
+            </div>
             <RoleSelection
               selectedRole={formData.userType}
               onRoleChange={handleRoleChange}
@@ -92,7 +108,10 @@ export const SignUpForm = () => {
       case 2:
         return (
           <div className="space-y-4">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <div className="space-y-2">
+              <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-2`}>{getStepTitle()}</h3>
+              {isMobile && <p className="text-white/80 text-sm">{getStepDescription()}</p>}
+            </div>
             <CompanyField
               companyName={formData.companyName}
               onChange={handleChange}
@@ -107,7 +126,10 @@ export const SignUpForm = () => {
       case 3:
         return (
           <div className="space-y-4">
-            <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-6`}>{getStepTitle()}</h3>
+            <div className="space-y-2">
+              <h3 className={`text-xl font-semibold ${isMobile ? 'text-white' : 'text-gray-900'} mb-2`}>{getStepTitle()}</h3>
+              {isMobile && <p className="text-white/80 text-sm">{getStepDescription()}</p>}
+            </div>
             <EmailField
               email={formData.email}
               onChange={handleChange}
