@@ -1,7 +1,13 @@
 import { SignUpForm } from "@/components/auth/SignUpForm";
+import { AIChat } from "@/components/ai/AIChat";
 
-const SignUp = () => {
-  return <SignUpForm />;
-};
-
-export default SignUp;
+export default function SignUp() {
+  return (
+    <div className="min-h-screen">
+      <SignUpForm />
+      <div className="py-8">
+        <AIChat />
+      </div>
+    </div>
+  );
+}
