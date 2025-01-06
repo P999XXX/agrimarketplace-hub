@@ -28,9 +28,6 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Supplier</div>
-              <div className="text-base text-center text-gray-500">
-                I want to sell agricultural products
-              </div>
             </div>
           </Button>
 
@@ -49,9 +46,6 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Buyer</div>
-              <div className="text-base text-center text-gray-500">
-                I want to buy agricultural products
-              </div>
             </div>
           </Button>
         </div>
