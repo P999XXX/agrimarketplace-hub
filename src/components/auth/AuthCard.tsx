@@ -34,16 +34,17 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         <Logo />
         
         {/* Main content */}
-        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start justify-start gap-16 lg:gap-8 mt-8">
+        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-8">
           {/* Left side with static content */}
           <LeftContent />
 
           {/* Right side with form */}
-          <div className="w-full lg:w-[45%] xl:w-[40%] relative z-10">
+          <div className="w-full lg:w-[45%] xl:w-[40%]">
             <Card className="w-full bg-white shadow-xl border-0">
               <div className="p-6 md:p-8">
                 <div className="mb-6">
                   <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
+                  <p className="text-base md:text-lg text-gray-600 mt-2">{subtitle}</p>
                 </div>
                 
                 <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
