@@ -38,7 +38,7 @@ export default function ThankYou() {
             <p className="text-white/90 text-xl">Your registration was successful</p>
 
             <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white/10 mx-auto">
-              <Mail className="w-10 h-10 text-secondary" />
+              <Mail className="w-10 h-10 text-[#F97316]" />
             </div>
 
             <div className="space-y-4">
@@ -57,7 +57,7 @@ export default function ThankYou() {
                 className="bg-white/10 hover:bg-white/20 text-white border-white/20"
               >
                 <Link to="/" className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-secondary" />
+                  <Mail className="w-5 h-5 text-[#F97316]" />
                   Back to Homepage
                 </Link>
               </Button>
