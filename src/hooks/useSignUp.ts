@@ -51,12 +51,12 @@ export const useSignUp = () => {
           data: {
             first_name: formData.firstName,
             last_name: formData.lastName,
+            user_type: formData.userType,
           },
         },
       });
 
       if (signUpError) {
-        // Überprüfe auf Rate-Limit-Fehler
         if (signUpError.message.includes('over_email_send_rate_limit')) {
           const seconds = parseInt(signUpError.message.match(/\d+/)?.[0] || "60", 10);
           setWaitTime(seconds);

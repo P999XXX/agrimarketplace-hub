@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export interface SignUpFormData {
+  userType: string;
   companyName: string;
   firstName: string;
   lastName: string;
@@ -11,6 +12,7 @@ export interface SignUpFormData {
 
 export const useSignUpForm = () => {
   const [formData, setFormData] = useState<SignUpFormData>({
+    userType: "",
     companyName: "",
     firstName: "",
     lastName: "",
