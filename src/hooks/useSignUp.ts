@@ -1,93 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-
-interface SignUpFormData {
-  companyName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { supabase } from "@/integrations/supabase/client";
+import { useSignUpForm } from "./useSignUpForm";
+import { useWaitTime } from "./useWaitTime";
+import { useSupabaseSignUp } from "./useSupabaseSignUp";
 
 export const useSignUp = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [waitTime, setWaitTime] = useState<number | null>(null);
   
-  const [formData, setFormData] = useState<SignUpFormData>({
-    companyName: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  useEffect(() => {
-    if (waitTime !== null && waitTime > 0) {
-      const timer = setTimeout(() => {
-        setWaitTime(waitTime - 1);
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    } else if (waitTime === 0) {
-      setWaitTime(null);
-    }
-  }, [waitTime]);
-
-  useEffect(() => {
-    if (waitTime !== null) {
-      toast({
-        title: "Bitte warten",
-        description: `Noch ${waitTime} Sekunden bis zum nächsten Versuch...`,
-        variant: "destructive",
-      });
-    }
-  }, [waitTime, toast]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const createCompany = async (userId: string) => {
-    const { error: companyError } = await supabase
-      .from('companies')
-      .insert({
-        name: formData.companyName,
-        created_by: userId,
-      });
-
-    if (companyError) throw companyError;
-  };
-
-  const sendWelcomeEmail = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('send-welcome-email', {
-        body: {
-          to: formData.email,
-          firstName: formData.firstName,
-          companyName: formData.companyName,
-        },
-      });
-
-      if (error) {
-        console.error('Error sending welcome email:', error);
-      } else {
-        console.log('Welcome email sent successfully:', data);
-      }
-    } catch (error) {
-      console.error('Error invoking send-welcome-email function:', error);
-    }
-  };
+  const { formData, handleChange } = useSignUpForm();
+  const { waitTime, setWaitTime } = useWaitTime();
+  const { createCompany, sendWelcomeEmail } = useSupabaseSignUp();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,11 +60,9 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      // Erstelle das Unternehmen und sende die E-Mail
-      await createCompany(signUpData.user.id);
-      await sendWelcomeEmail();
+      await createCompany(signUpData.user.id, formData.companyName);
+      await sendWelcomeEmail(formData.email, formData.firstName, formData.companyName);
       
-      // Setze isSuccess und navigiere zur Thank-You-Seite
       setIsSuccess(true);
       navigate('/thank-you');
 
