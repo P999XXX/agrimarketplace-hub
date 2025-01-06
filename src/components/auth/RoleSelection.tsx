@@ -17,12 +17,12 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
           <Button
             type="button"
             variant="outline"
-            className={`w-full p-8 h-auto flex flex-col items-center justify-center space-y-4 ${
+            className={`w-full p-8 h-auto flex flex-col items-center justify-center space-y-4 min-h-[300px] ${
               selectedRole === "supplier" ? "border-2 border-primary" : ""
             }`}
             onClick={() => onRoleChange("supplier")}
           >
-            <Users size={96} strokeWidth={1.5} />
+            <Users size={128} strokeWidth={1} />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Supplier</div>
               <div className="text-base text-center text-gray-500">
@@ -34,12 +34,12 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
           <Button
             type="button"
             variant="outline"
-            className={`w-full p-8 h-auto flex flex-col items-center justify-center space-y-4 ${
+            className={`w-full p-8 h-auto flex flex-col items-center justify-center space-y-4 min-h-[300px] ${
               selectedRole === "buyer" ? "border-2 border-primary" : ""
             }`}
             onClick={() => onRoleChange("buyer")}
           >
-            <User size={96} strokeWidth={1.5} />
+            <User size={128} strokeWidth={1} />
             <div className="space-y-2">
               <div className="text-xl font-semibold">Buyer</div>
               <div className="text-base text-center text-gray-500">
