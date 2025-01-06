@@ -65,28 +65,28 @@ export const PasswordInput = ({
           {!hasMinLength && (
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
-              <span>8+ Zeichen</span>
+              <span>8+ Characters</span>
             </div>
           )}
           
           {!hasUpperCase && (
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
-              <span>Großbuchstabe</span>
+              <span>Uppercase</span>
             </div>
           )}
           
           {!hasLowerCase && (
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
-              <span>Kleinbuchstabe</span>
+              <span>Lowercase</span>
             </div>
           )}
           
           {!hasNumber && (
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
               <X className="h-2.5 w-2.5" />
-              <span>Zahl</span>
+              <span>Number</span>
             </div>
           )}
         </div>
