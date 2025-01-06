@@ -9,7 +9,7 @@ interface NameFieldsProps {
 
 export const NameFields = ({ firstName, lastName, onChange }: NameFieldsProps) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="space-y-1">
         <Label htmlFor="firstName">First Name</Label>
         <Input
