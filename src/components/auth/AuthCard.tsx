@@ -34,7 +34,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         <Logo />
         
         {/* Main content */}
-        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-8">
+        <div className="flex flex-col lg:flex-row items-start justify-start gap-16 lg:gap-8 mt-8">
           {/* Left side with static content */}
           <LeftContent />
 
@@ -47,7 +47,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
                   <p className="text-base md:text-lg text-gray-600 mt-2">{subtitle}</p>
                 </div>
                 
-                <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto">
+                <div className="overflow-y-auto">
                   {children}
                 </div>
               </div>
