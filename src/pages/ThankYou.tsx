@@ -1,5 +1,7 @@
 import { Logo } from "@/components/auth/Logo";
 import { CheckCircle, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function ThankYou() {
   return (
@@ -36,7 +38,7 @@ export default function ThankYou() {
             <p className="text-white/90 text-xl">Your registration was successful</p>
 
             <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white/10 mx-auto">
-              <Mail className="w-10 h-10 text-white" />
+              <Mail className="w-10 h-10 text-secondary" />
             </div>
 
             <div className="space-y-4">
@@ -46,6 +48,19 @@ export default function ThankYou() {
               <p className="text-white/60">
                 Don't forget to check your spam folder if you can't find the email.
               </p>
+            </div>
+
+            <div className="pt-4">
+              <Button
+                asChild
+                variant="outline"
+                className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+              >
+                <Link to="/" className="flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-secondary" />
+                  Back to Homepage
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
