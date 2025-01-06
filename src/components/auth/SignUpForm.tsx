@@ -10,6 +10,7 @@ import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
 import { PasswordInput } from "./PasswordInput";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { CheckCircle } from "lucide-react";
+import { useState } from "react";
 
 export const SignUpForm = () => {
   const {
@@ -20,6 +21,8 @@ export const SignUpForm = () => {
     handleChange,
     handleSubmit,
   } = useSignUp();
+
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   return (
     <>
@@ -73,12 +76,15 @@ export const SignUpForm = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
+              onValidationChange={setIsPasswordValid}
             />
 
-            <ConfirmPasswordInput
-              confirmPassword={formData.confirmPassword}
-              onChange={handleChange}
-            />
+            {isPasswordValid && (
+              <ConfirmPasswordInput
+                confirmPassword={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            )}
 
             <SignUpButton isLoading={isLoading || waitTime !== null} />
 

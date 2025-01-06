@@ -9,6 +9,7 @@ interface PasswordInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  onValidationChange?: (isValid: boolean) => void;
 }
 
 export const PasswordInput = ({
@@ -17,6 +18,7 @@ export const PasswordInput = ({
   value,
   onChange,
   placeholder,
+  onValidationChange,
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,6 +27,14 @@ export const PasswordInput = ({
   const hasUpperCase = /[A-Z]/.test(value);
   const hasLowerCase = /[a-z]/.test(value);
   const hasNumber = /\d/.test(value);
+
+  // Check if all password requirements are met
+  const isPasswordValid = hasMinLength && hasUpperCase && hasLowerCase && hasNumber;
+
+  // Notify parent component about validation status changes
+  if (onValidationChange && id === "password") {
+    onValidationChange(isPasswordValid);
+  }
 
   return (
     <div className="space-y-1">
