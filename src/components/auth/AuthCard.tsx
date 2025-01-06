@@ -6,7 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { SignUpHeader } from "./SignUpHeader";
 
 interface AuthCardProps {
-  title: ReactNode;
+  title: string;
   subtitle: string;
   children: ReactNode;
 }
