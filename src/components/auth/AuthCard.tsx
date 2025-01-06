@@ -29,26 +29,26 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-2 md:px-4 pt-4 pb-8 md:pb-12 lg:pb-12 relative z-10">
+      <div className="container h-screen mx-auto px-2 md:px-4 flex flex-col">
         {/* Logo text aligned with content */}
-        <div className="mb-[20px] md:mb-16 lg:mb-[10px]">
+        <div className="pt-4">
           <Logo />
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:gap-0">
+        <div className="flex-1 flex flex-col lg:flex-row justify-center items-center gap-16 lg:gap-0 py-8">
           {/* Left side with static content */}
           <LeftContent />
 
           {/* Right side with form */}
           <div className="w-full lg:w-[45%]">
-            <div className="lg:px-0 2xl:px-12">
-              <Card className="p-6 md:p-8 lg:p-8 bg-white shadow-xl border-0 min-h-[600px] flex flex-col">
-                <div className="space-y-6 flex-1">
+            <div className="lg:px-0 2xl:px-12 h-full">
+              <Card className="p-6 md:p-8 lg:p-8 bg-white shadow-xl border-0 h-[600px] flex flex-col">
+                <div className="space-y-6">
                   <div className="space-y-2">
                     <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-gray-900">{title}</h2>
                     <p className="text-base md:text-lg text-gray-600">{subtitle}</p>
                   </div>
-                  <div className="min-h-[400px]">
+                  <div className="overflow-y-auto flex-1">
                     {children}
                   </div>
                 </div>
