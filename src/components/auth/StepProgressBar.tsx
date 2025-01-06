@@ -4,9 +4,9 @@ const StepProgressBar = ({ currentStep }: { currentStep: number }) => {
       {[1, 2, 3].map((step) => (
         <div
           key={step}
-          className="flex-1 h-2 rounded-full transition-all duration-300"
+          className="flex-1 h-1.5 rounded-full transition-all duration-300"
           style={{
-            background: step <= currentStep ? 'var(--primary)' : '#E5E7EB',
+            background: step <= currentStep ? '#008060' : '#E5E7EB',
           }}
         />
       ))}
