@@ -44,42 +44,50 @@ export const SignUpForm = () => {
         title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <CompanyField
-            companyName={formData.companyName}
-            onChange={handleChange}
-          />
+        <div className="space-y-4">
+          <div className="md:hidden">
+            <GoogleSignInButton />
+            <AuthDivider />
+          </div>
 
-          <NameFields
-            firstName={formData.firstName}
-            lastName={formData.lastName}
-            onChange={handleChange}
-          />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <CompanyField
+              companyName={formData.companyName}
+              onChange={handleChange}
+            />
 
-          <EmailField
-            email={formData.email}
-            onChange={handleChange}
-          />
+            <NameFields
+              firstName={formData.firstName}
+              lastName={formData.lastName}
+              onChange={handleChange}
+            />
 
-          <PasswordInput
-            id="password"
-            label="Password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-          />
+            <EmailField
+              email={formData.email}
+              onChange={handleChange}
+            />
 
-          <ConfirmPasswordInput
-            confirmPassword={formData.confirmPassword}
-            onChange={handleChange}
-          />
+            <PasswordInput
+              id="password"
+              label="Password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+            />
 
-          <SignUpButton isLoading={isLoading || waitTime !== null} />
+            <ConfirmPasswordInput
+              confirmPassword={formData.confirmPassword}
+              onChange={handleChange}
+            />
 
-          <AuthDivider />
+            <SignUpButton isLoading={isLoading || waitTime !== null} />
 
-          <GoogleSignInButton />
-        </form>
+            <div className="hidden md:block">
+              <AuthDivider />
+              <GoogleSignInButton />
+            </div>
+          </form>
+        </div>
       </AuthCard>
     </>
   );
