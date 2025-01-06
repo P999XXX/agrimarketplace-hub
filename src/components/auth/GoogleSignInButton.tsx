@@ -42,7 +42,7 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
     <Button
       type="button"
       variant="outline"
-      className="w-full bg-white border-gray-200 text-gray-700 py-6 hover:bg-gray-50 [&_svg]:!w-8 [&_svg]:!h-8"
+      className="w-full bg-white border-gray-200 text-gray-700 py-6 hover:bg-gray-50 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
       onClick={handleGoogleSignIn}
     >
       <svg
