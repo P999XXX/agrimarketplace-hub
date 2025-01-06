@@ -46,7 +46,7 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
       onClick={handleGoogleSignIn}
     >
       <svg
-        className="mr-2 h-4 w-4"
+        className="mr-2 h-5 w-5"
         aria-hidden="true"
         focusable="false"
         data-prefix="fab"
