@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff, Check, X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -59,52 +59,36 @@ export const PasswordInput = ({
         </p>
       )}
       
-      {/* Password requirements as chips */}
+      {/* Password requirements as chips - only show failed validations */}
       {id === "password" && value && (
-        <div className="flex flex-wrap gap-2 mt-2">
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
-            hasMinLength ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {hasMinLength ? (
-              <Check className="h-3 w-3" />
-            ) : (
-              <X className="h-3 w-3" />
-            )}
-            <span>8+ Zeichen</span>
-          </div>
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {!hasMinLength && (
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+              <X className="h-2.5 w-2.5" />
+              <span>8+ Zeichen</span>
+            </div>
+          )}
           
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
-            hasUpperCase ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {hasUpperCase ? (
-              <Check className="h-3 w-3" />
-            ) : (
-              <X className="h-3 w-3" />
-            )}
-            <span>Großbuchstabe</span>
-          </div>
+          {!hasUpperCase && (
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+              <X className="h-2.5 w-2.5" />
+              <span>Großbuchstabe</span>
+            </div>
+          )}
           
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
-            hasLowerCase ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {hasLowerCase ? (
-              <Check className="h-3 w-3" />
-            ) : (
-              <X className="h-3 w-3" />
-            )}
-            <span>Kleinbuchstabe</span>
-          </div>
+          {!hasLowerCase && (
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+              <X className="h-2.5 w-2.5" />
+              <span>Kleinbuchstabe</span>
+            </div>
+          )}
           
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
-            hasNumber ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {hasNumber ? (
-              <Check className="h-3 w-3" />
-            ) : (
-              <X className="h-3 w-3" />
-            )}
-            <span>Zahl</span>
-          </div>
+          {!hasNumber && (
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-red-100 text-red-700">
+              <X className="h-2.5 w-2.5" />
+              <span>Zahl</span>
+            </div>
+          )}
         </div>
       )}
     </div>
