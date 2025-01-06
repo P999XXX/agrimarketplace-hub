@@ -115,7 +115,7 @@ export const useSignUp = () => {
 
       if (signUpError) {
         if (signUpError.message.includes('over_email_send_rate_limit')) {
-          const seconds = parseInt(signUpError.message.match(/\d+/)?.[0] || "0", 10);
+          const seconds = parseInt(signUpError.message.match(/\d+/)?.[0] || "60", 10);
           setWaitTime(seconds);
           toast({
             title: "Bitte warten",
