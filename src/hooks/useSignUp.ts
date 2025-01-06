@@ -133,24 +133,13 @@ export const useSignUp = () => {
         throw new Error("No user data returned after signup");
       }
 
-      const authListener = supabase.auth.onAuthStateChange(async (event, session) => {
-        if (event === 'SIGNED_IN' && session) {
-          try {
-            await createCompany(session.user.id);
-            await sendWelcomeEmail();
-            setIsSuccess(true);
-            navigate('/thank-you');
-          } catch (error: any) {
-            console.error('Error during post-signup process:', error);
-            toast({
-              title: "Error",
-              description: error.message || "An error occurred during sign up",
-              variant: "destructive",
-            });
-          }
-          authListener.data.subscription.unsubscribe();
-        }
-      });
+      // Erstelle das Unternehmen und sende die E-Mail
+      await createCompany(signUpData.user.id);
+      await sendWelcomeEmail();
+      
+      // Setze isSuccess und navigiere zur Thank-You-Seite
+      setIsSuccess(true);
+      navigate('/thank-you');
 
       toast({
         title: "Success",
