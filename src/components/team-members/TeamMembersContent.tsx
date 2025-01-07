@@ -35,16 +35,16 @@ export const TeamMembersContent = () => {
 
       <div className="bg-white rounded-lg shadow p-4 mb-6">
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-          <div className="relative flex-1">
+          <div className="relative flex-1 w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
               placeholder="Search team members..."
-              className="pl-10"
+              className="pl-10 h-10 w-full"
             />
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <Select>
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px] h-10">
                 <Filter className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Filter by role" />
               </SelectTrigger>
@@ -55,7 +55,7 @@ export const TeamMembersContent = () => {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px] h-10">
                 <SortAsc className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
@@ -65,7 +65,7 @@ export const TeamMembersContent = () => {
                 <SelectItem value="role">Role</SelectItem>
               </SelectContent>
             </Select>
-            <div className="flex border rounded-md">
+            <div className="flex border rounded-md h-10">
               <Button
                 variant={viewMode === 'table' ? 'default' : 'ghost'}
                 size="icon"
