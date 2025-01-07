@@ -59,7 +59,10 @@ const CustomSidebarTrigger = () => {
   const { state } = useSidebar();
   return (
     <button 
-      onClick={() => state === "expanded" ? document.querySelector('[data-sidebar="trigger"]')?.click() : document.querySelector('[data-sidebar="trigger"]')?.click()} 
+      onClick={() => {
+        const trigger = document.querySelector('[data-sidebar="trigger"]') as HTMLElement;
+        if (trigger) trigger.click();
+      }} 
       className="flex items-center justify-center w-8 h-8 text-white rounded-md focus:outline-none"
     >
       {state === "expanded" ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
