@@ -47,7 +47,7 @@ const DashboardMenu = () => {
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton asChild tooltip={item.title}>
             <a href={item.href} className="flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-4 py-3 rounded-md transition-colors">
-              <item.icon className="h-5 w-5" />
+              <item.icon className="w-5 h-5" />
               <span className="text-[15px] font-medium">{item.title}</span>
             </a>
           </SidebarMenuButton>
@@ -68,9 +68,9 @@ const CustomSidebarTrigger = () => {
       className="flex items-center justify-center w-8 h-8 text-white rounded-md hover:bg-white/10 transition-colors focus:outline-none"
     >
       {state === "expanded" ? (
-        <PanelLeftClose className="h-5 w-5" />
+        <PanelLeftClose className="w-5 h-5" />
       ) : (
-        <PanelLeftOpen className="h-5 w-5" />
+        <PanelLeftOpen className="w-5 h-5" />
       )}
     </button>
   );
@@ -81,7 +81,7 @@ const MobileNav = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
-          <PanelLeftOpen className="h-5 w-5 text-white" />
+          <PanelLeftOpen className="w-5 h-5 text-white" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
