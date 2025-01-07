@@ -31,6 +31,7 @@ export const TeamMembersTable = () => {
             <TableHead className="whitespace-nowrap">Status</TableHead>
             <TableHead className="whitespace-nowrap">Invited by</TableHead>
             <TableHead className="whitespace-nowrap">Joined</TableHead>
+            <TableHead className="whitespace-nowrap">Last Login</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -47,6 +48,7 @@ export const TeamMembersTable = () => {
             </TableCell>
             <TableCell className="whitespace-nowrap">Sarah Smith</TableCell>
             <TableCell className="whitespace-nowrap">Jan 15, 2024</TableCell>
+            <TableCell className="whitespace-nowrap">Mar 20, 2024</TableCell>
           </TableRow>
         </TableBody>
       </Table>
