@@ -1,79 +1,17 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
 
-interface TeamMember {
-  id: string;
-  email: string;
-  role: string;
-  status: string;
-  created_at: string;
-  invited_by: string;
-  inviter: {
-    first_name: string | null;
-    last_name: string | null;
-  } | null;
-}
-
-export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: { 
+interface TeamMembersTableProps {
   searchQuery: string;
   roleFilter: string;
   sortBy: string;
-}) => {
-  const { data: teamMembers = [], isLoading } = useQuery({
-    queryKey: ['team-members', searchQuery, roleFilter, sortBy],
-    queryFn: async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+}
 
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('company_id')
-        .eq('id', user.id)
-        .maybeSingle();
-
-      if (!profile?.company_id) return [];
-
-      let query = supabase
-        .from('invitations')
-        .select(`
-          id,
-          email,
-          role,
-          status,
-          created_at,
-          invited_by,
-          inviter:profiles!invited_by(first_name, last_name)
-        `)
-        .eq('company_id', profile.company_id);
-
-      if (searchQuery) {
-        query = query.ilike('email', `%${searchQuery}%`);
-      }
-
-      if (roleFilter && roleFilter !== 'all') {
-        query = query.eq('role', roleFilter);
-      }
-
-      if (sortBy) {
-        const [field, direction] = sortBy.split('-');
-        query = query.order(field, { ascending: direction === 'asc' });
-      } else {
-        query = query.order('created_at', { ascending: false });
-      }
-
-      const { data, error } = await query;
-      if (error) throw error;
-
-      return (data as any[]).map(member => ({
-        ...member,
-        inviter: member.inviter?.[0] || null
-      })) as TeamMember[];
-    },
-  });
+export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: TeamMembersTableProps) => {
+  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   const getRoleBadgeClass = () => {
     return "bg-gray-100 text-gray-700 hover:bg-gray-200";
