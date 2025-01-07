@@ -66,14 +66,13 @@ export const InviteMemberForm = () => {
         },
       });
 
-      // Schließe das Sheet
       closeButtonRef.current?.click();
 
-      // Zeige den Toast nach einer kurzen Verzögerung
       setTimeout(() => {
         toast({
           title: "Invitation sent",
           description: "Team member has been invited successfully.",
+          className: "border-green-500 bg-green-50 dark:bg-green-950/50",
         });
       }, 100);
 
@@ -85,6 +84,7 @@ export const InviteMemberForm = () => {
         title: "Error",
         description: "Failed to send invitation. Please try again.",
         variant: "destructive",
+        className: "border-red-500 bg-red-50 dark:bg-red-950/50",
       });
     } finally {
       setIsLoading(false);
