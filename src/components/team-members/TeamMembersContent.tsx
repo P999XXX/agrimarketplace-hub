@@ -10,14 +10,15 @@ import { InviteMemberForm } from "./InviteMemberForm";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
-    <div className="container py-8">
+    <div className={`container py-8 transition-all duration-200 ${isSheetOpen ? 'blur-sm' : ''}`}>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">
           Team Members
         </h1>
-        <Sheet>
+        <Sheet onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
