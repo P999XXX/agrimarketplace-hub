@@ -28,13 +28,23 @@ export const InviteMemberForm = () => {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('company_id')
+        .select('company_id, first_name, last_name')
         .eq('id', user.id)
         .single();
 
       if (!profile?.company_id) throw new Error("No company found");
 
-      const { error } = await supabase
+      // Get company name
+      const { data: company } = await supabase
+        .from('companies')
+        .select('name')
+        .eq('id', profile.company_id)
+        .single();
+
+      if (!company) throw new Error("Company not found");
+
+      // Insert invitation
+      const { data: invitation, error } = await supabase
         .from('invitations')
         .insert({
           name,
@@ -43,9 +53,23 @@ export const InviteMemberForm = () => {
           message,
           company_id: profile.company_id,
           invited_by: user.id,
-        });
+        })
+        .select()
+        .single();
 
       if (error) throw error;
+
+      // Send invitation email
+      const inviterName = `${profile.first_name} ${profile.last_name}`.trim();
+      await supabase.functions.invoke('send-invitation-email', {
+        body: {
+          to: email,
+          inviterName,
+          companyName: company.name,
+          role,
+          message,
+        },
+      });
 
       toast({
         title: "Invitation sent",
