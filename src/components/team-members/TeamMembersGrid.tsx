@@ -50,9 +50,10 @@ export const TeamMembersGrid = ({ searchQuery, roleFilter, sortBy }: TeamMembers
           <CardContent className="p-6">
             <div className="flex items-start space-x-4">
               <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
-                {member.email.charAt(0).toUpperCase()}
+                {member.name ? member.name.charAt(0).toUpperCase() : member.email.charAt(0).toUpperCase()}
               </div>
               <div className="flex-1">
+                <div className="font-medium">{member.name || '-'}</div>
                 <EmailCell email={member.email} />
                 <div className="mt-2 space-y-1.5">
                   <Badge className={getRoleBadgeClass()}>{member.role}</Badge>

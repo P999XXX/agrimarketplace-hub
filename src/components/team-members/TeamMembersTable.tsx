@@ -41,6 +41,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: TeamMember
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead className="whitespace-nowrap">Name</TableHead>
             <TableHead className="whitespace-nowrap">Email</TableHead>
             <TableHead className="whitespace-nowrap">Role</TableHead>
             <TableHead className="whitespace-nowrap">Status</TableHead>
@@ -58,6 +59,9 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: TeamMember
                   : ''
               }`}
             >
+              <TableCell className="whitespace-nowrap">
+                {member.name || '-'}
+              </TableCell>
               <TableCell className="whitespace-nowrap">
                 <EmailCell email={member.email} />
               </TableCell>

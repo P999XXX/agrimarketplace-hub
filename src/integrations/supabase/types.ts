@@ -41,6 +41,7 @@ export type Database = {
           id: string
           invited_by: string
           message: string | null
+          name: string | null
           role: string
           status: string | null
         }
@@ -51,6 +52,7 @@ export type Database = {
           id?: string
           invited_by: string
           message?: string | null
+          name?: string | null
           role: string
           status?: string | null
         }
@@ -61,6 +63,7 @@ export type Database = {
           id?: string
           invited_by?: string
           message?: string | null
+          name?: string | null
           role?: string
           status?: string | null
         }

@@ -11,6 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const InviteMemberForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
@@ -36,6 +37,7 @@ export const InviteMemberForm = () => {
       const { error } = await supabase
         .from('invitations')
         .insert({
+          name,
           email,
           role,
           message,
@@ -70,6 +72,19 @@ export const InviteMemberForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+      <div className="space-y-1">
+        <Label htmlFor="name" className="text-foreground">Name</Label>
+        <Input
+          id="name"
+          type="text"
+          placeholder="John Doe"
+          required
+          className="h-12"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+
       <div className="space-y-1">
         <Label htmlFor="email" className="text-foreground">Email address</Label>
         <Input
