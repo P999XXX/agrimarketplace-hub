@@ -112,6 +112,8 @@ export const TeamMembersContent = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Invited by</TableHead>
+                <TableHead>Joined</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -124,6 +126,8 @@ export const TeamMembersContent = () => {
                 <TableCell>
                   <Badge className={getStatusBadgeClass('active')}>Active</Badge>
                 </TableCell>
+                <TableCell>Sarah Smith</TableCell>
+                <TableCell>Jan 15, 2024</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -143,6 +147,10 @@ export const TeamMembersContent = () => {
                     <Badge className={getRoleBadgeClass()}>Admin</Badge>
                     <div className="block">
                       <Badge className={getStatusBadgeClass('active')}>Active</Badge>
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      <p>Invited by: Sarah Smith</p>
+                      <p>Joined: Jan 15, 2024</p>
                     </div>
                   </div>
                 </div>
