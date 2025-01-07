@@ -143,7 +143,7 @@ export const SignUpForm = () => {
         title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
-        <div className="min-h-full flex flex-col">
+        <div className="min-h-[calc(100vh-16rem)] md:min-h-0 flex flex-col">
           <div className="mb-6 animate-fade">
             <StepProgressBar currentStep={currentStep} />
           </div>
@@ -157,15 +157,15 @@ export const SignUpForm = () => {
                 handleNext();
               }
             }} 
-            className="flex flex-col flex-grow"
+            className="flex flex-col flex-grow relative"
           >
-            <div className="flex-grow overflow-y-auto">
+            <div className="md:h-auto max-md:flex-grow max-md:overflow-y-auto max-md:min-h-0">
               {renderStepContent()}
             </div>
 
             {currentStep > 1 && (
-              <div className="mt-8 sticky bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none p-4 md:p-0 animate-fade">
-                <div className="flex justify-between">
+              <div className="mt-8 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:bg-white/5 max-md:backdrop-blur-sm max-md:p-4 animate-fade">
+                <div className="flex justify-between max-w-[calc(100vw-2rem)] mx-auto">
                   <Button
                     type="button"
                     variant="outline"
