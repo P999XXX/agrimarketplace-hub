@@ -15,7 +15,7 @@ export const MobileNav = () => {
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
         <div className="flex h-full flex-col">
-          <div className="h-16 flex items-center justify-between border-b p-4 bg-brand-700">
+          <div className="h-16 flex items-center justify-between border-b p-4 bg-white">
             <Logo />
           </div>
           <SidebarContent>
