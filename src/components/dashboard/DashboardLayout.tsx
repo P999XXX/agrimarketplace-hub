@@ -80,7 +80,7 @@ const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent">
+        <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit">
           <Menu className="h-[25px] w-[25px] text-white" />
         </Button>
       </SheetTrigger>
