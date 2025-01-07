@@ -29,6 +29,11 @@ export const TeamMembersTable = ({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const teamMembers = allTeamMembers.slice(startIndex, startIndex + itemsPerPage);
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const getRoleBadgeClass = () => {
     return "bg-gray-100 text-gray-700 hover:bg-gray-200";
   };
@@ -105,7 +110,7 @@ export const TeamMembersTable = ({
           <PaginationContent>
             <PaginationItem>
               <PaginationLink
-                onClick={() => currentPage !== 1 && setCurrentPage(1)}
+                onClick={() => currentPage !== 1 && handlePageChange(1)}
                 className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
@@ -115,7 +120,7 @@ export const TeamMembersTable = ({
             {currentPage > 1 && (
               <PaginationItem>
                 <PaginationPrevious 
-                  onClick={() => setCurrentPage(currentPage - 1)}
+                  onClick={() => handlePageChange(currentPage - 1)}
                   className="gap-1 px-2.5"
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -132,7 +137,7 @@ export const TeamMembersTable = ({
                 return (
                   <PaginationItem key={page}>
                     <PaginationLink
-                      onClick={() => setCurrentPage(page)}
+                      onClick={() => handlePageChange(page)}
                       isActive={page === currentPage}
                     >
                       {page}
@@ -155,7 +160,7 @@ export const TeamMembersTable = ({
             {currentPage < totalPages && (
               <PaginationItem>
                 <PaginationNext 
-                  onClick={() => setCurrentPage(currentPage + 1)}
+                  onClick={() => handlePageChange(currentPage + 1)}
                   className="gap-1 px-2.5"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -165,7 +170,7 @@ export const TeamMembersTable = ({
 
             <PaginationItem>
               <PaginationLink
-                onClick={() => currentPage !== totalPages && setCurrentPage(totalPages)}
+                onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
                 className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
