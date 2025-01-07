@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthDivider } from "./AuthDivider";
+import { AlreadyRegistered } from "./AlreadyRegistered";
 
 export const SignUpForm = () => {
   const {
@@ -85,6 +86,7 @@ export const SignUpForm = () => {
             />
             <AuthDivider />
             <GoogleSignInButton />
+            <AlreadyRegistered />
           </div>
         );
       case 2:
