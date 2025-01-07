@@ -7,17 +7,17 @@ export const DashboardBreadcrumb = () => {
   
   return (
     <Breadcrumb className="ml-6 hidden md:block">
-      <BreadcrumbList className="text-white/90 text-sm">
+      <BreadcrumbList className="text-gray-500 text-sm">
         <BreadcrumbItem>
-          <BreadcrumbLink href="/dashboard" className="text-white hover:text-white/80 font-medium">
+          <BreadcrumbLink href="/dashboard" className="text-gray-500 hover:text-gray-700 font-medium">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
         {path.length > 1 && (
           <>
-            <BreadcrumbSeparator className="text-white/60" />
+            <BreadcrumbSeparator className="text-gray-400" />
             <BreadcrumbItem>
-              <BreadcrumbPage className="capitalize text-white/90 font-medium">
+              <BreadcrumbPage className="capitalize text-gray-500 font-medium">
                 {path[1].replace('-', ' ')}
               </BreadcrumbPage>
             </BreadcrumbItem>
