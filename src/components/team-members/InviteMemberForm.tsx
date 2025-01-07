@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { SheetClose } from "@/components/ui/sheet";
 
 export const InviteMemberForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,9 +67,16 @@ export const InviteMemberForm = () => {
         />
       </div>
 
-      <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? "Sending invitation..." : "Send invitation"}
-      </Button>
+      <div className="space-y-3">
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Sending invitation..." : "Send invitation"}
+        </Button>
+        <SheetClose asChild>
+          <Button type="button" variant="outline" className="w-full">
+            Cancel
+          </Button>
+        </SheetClose>
+      </div>
     </form>
   );
 };
