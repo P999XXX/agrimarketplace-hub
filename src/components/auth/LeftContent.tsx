@@ -2,7 +2,7 @@ import { Stats } from "./Stats";
 import { useState, useEffect } from "react";
 
 export const LeftContent = () => {
-  const words = ["buyers", "importers", "manufacturers", "bakeries", "retail"];
+  const words = ["buyers", "importers", "manufacturers", "bakeries", "retail", "confectioneries", "wholesalers", "distributors", "online shops", "packagers"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   useEffect(() => {
