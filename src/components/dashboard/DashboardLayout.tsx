@@ -92,6 +92,16 @@ const HeaderLogo = () => {
   return <Logo />;
 };
 
+const SidebarLogo = () => {
+  const { state } = useSidebar();
+  
+  if (state === "collapsed") {
+    return null;
+  }
+  
+  return <Logo />;
+};
+
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const isMobile = useIsMobile();
 
@@ -102,7 +112,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
           <SidebarHeader className="h-16 flex items-center justify-between border-b px-4 bg-brand-700">
             <div className="flex items-center gap-2 w-full">
-              <Logo />
+              <SidebarLogo />
               <div className="flex-1" />
               <SidebarTrigger className="text-white hover:text-white/80" />
             </div>
