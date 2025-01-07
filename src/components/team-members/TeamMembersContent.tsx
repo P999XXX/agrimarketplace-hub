@@ -42,7 +42,7 @@ export const TeamMembersContent = () => {
 
   return (
     <div className="container pt-4 pb-8 md:pb-8">
-      <div className="pb-24 md:pb-0">
+      <div className="pb-16 md:pb-0">
         <TeamMembersHeader />
         <TeamMembersFilters 
           viewMode={viewMode} 
