@@ -6,9 +6,24 @@ import { Button } from "@/components/ui/button";
 interface TeamMembersFiltersProps {
   viewMode: 'table' | 'grid';
   setViewMode: (mode: 'table' | 'grid') => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  roleFilter: string;
+  setRoleFilter: (role: string) => void;
+  sortBy: string;
+  setSortBy: (sort: string) => void;
 }
 
-export const TeamMembersFilters = ({ viewMode, setViewMode }: TeamMembersFiltersProps) => {
+export const TeamMembersFilters = ({ 
+  viewMode, 
+  setViewMode,
+  searchQuery,
+  setSearchQuery,
+  roleFilter,
+  setRoleFilter,
+  sortBy,
+  setSortBy
+}: TeamMembersFiltersProps) => {
   return (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
@@ -17,29 +32,35 @@ export const TeamMembersFilters = ({ viewMode, setViewMode }: TeamMembersFilters
           <Input
             placeholder="Search team members..."
             className="pl-10 h-10 w-full"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
-          <Select>
+          <Select value={roleFilter} onValueChange={setRoleFilter}>
             <SelectTrigger className="w-full sm:w-[180px] h-10">
               <Filter className="h-4 w-4 mr-2" />
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="">All roles</SelectItem>
               <SelectItem value="admin">Admin</SelectItem>
               <SelectItem value="member">Member</SelectItem>
               <SelectItem value="viewer">Viewer</SelectItem>
             </SelectContent>
           </Select>
-          <Select>
+          <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full sm:w-[180px] h-10">
               <SortAsc className="h-4 w-4 mr-2" />
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="name">Name</SelectItem>
-              <SelectItem value="email">Email</SelectItem>
-              <SelectItem value="role">Role</SelectItem>
+              <SelectItem value="created_at-desc">Newest first</SelectItem>
+              <SelectItem value="created_at-asc">Oldest first</SelectItem>
+              <SelectItem value="email-asc">Email A-Z</SelectItem>
+              <SelectItem value="email-desc">Email Z-A</SelectItem>
+              <SelectItem value="role-asc">Role A-Z</SelectItem>
+              <SelectItem value="role-desc">Role Z-A</SelectItem>
             </SelectContent>
           </Select>
           <div className="flex border rounded-md h-10">

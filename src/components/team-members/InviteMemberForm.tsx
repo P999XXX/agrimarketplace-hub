@@ -4,24 +4,60 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { SheetClose } from "@/components/ui/sheet";
+import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const InviteMemberForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const [message, setMessage] = useState("");
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
-      // TODO: Implement invitation logic
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .eq('id', user.id)
+        .single();
+
+      if (!profile?.company_id) throw new Error("No company found");
+
+      const { error } = await supabase
+        .from('invitations')
+        .insert({
+          email,
+          role,
+          message,
+          company_id: profile.company_id,
+          invited_by: user.id,
+        });
+
+      if (error) throw error;
+
       toast({
         title: "Invitation sent",
         description: "Team member has been invited successfully.",
       });
+
+      queryClient.invalidateQueries({ queryKey: ['team-members'] });
+      
+      // Close the sheet
+      const closeButton = document.querySelector('[data-sheet-close]') as HTMLButtonElement;
+      if (closeButton) closeButton.click();
+
     } catch (error) {
+      console.error('Error sending invitation:', error);
       toast({
         title: "Error",
         description: "Failed to send invitation. Please try again.",
@@ -42,12 +78,14 @@ export const InviteMemberForm = () => {
           placeholder="colleague@company.com"
           required
           className="h-12"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div className="space-y-1">
         <Label htmlFor="role" className="text-foreground">Role</Label>
-        <Select required>
+        <Select required value={role} onValueChange={setRole}>
           <SelectTrigger className="h-12">
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
@@ -65,6 +103,8 @@ export const InviteMemberForm = () => {
           id="message"
           placeholder="Write a personal message..."
           className="min-h-[120px] resize-none"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
       </div>
 
