@@ -143,51 +143,55 @@ export const SignUpForm = () => {
         title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
-        <div className="space-y-6">
-          <div className="animate-fade">
-            <StepProgressBar currentStep={currentStep} />
-          </div>
-          
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            if (currentStep === 3) {
-              handleSubmit(e);
-            } else {
-              handleNext();
-            }
-          }} className="space-y-6">
-            {renderStepContent()}
-
-            {currentStep > 1 && (
-              <div className="flex justify-between mt-8 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none animate-fade">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handleBack}
-                  className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
-                >
-                  <ChevronLeft className="w-4 h-4 mr-2" />
-                  Back
-                </Button>
-                
-                {currentStep < 3 ? (
-                  <Button
-                    type="submit"
-                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
-                    disabled={!canProceedToNextStep()}
-                  >
-                    Next
-                    <ChevronRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <SignUpButton 
-                    isLoading={isLoading || waitTime !== null} 
-                    disabled={!canProceedToNextStep()}
-                  />
-                )}
+        <div className="flex flex-col h-full">
+          <div className="flex-grow">
+            <div className="animate-fade mb-6">
+              <StepProgressBar currentStep={currentStep} />
+            </div>
+            
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (currentStep === 3) {
+                handleSubmit(e);
+              } else {
+                handleNext();
+              }
+            }} className="flex flex-col h-full">
+              <div className="flex-grow">
+                {renderStepContent()}
               </div>
-            )}
-          </form>
+
+              {currentStep > 1 && (
+                <div className="flex justify-between mt-8 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none animate-fade sticky bottom-0 left-0 right-0 p-4 md:p-0">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleBack}
+                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
+                  >
+                    <ChevronLeft className="w-4 h-4 mr-2" />
+                    Back
+                  </Button>
+                  
+                  {currentStep < 3 ? (
+                    <Button
+                      type="submit"
+                      className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
+                      disabled={!canProceedToNextStep()}
+                    >
+                      Next
+                      <ChevronRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  ) : (
+                    <SignUpButton 
+                      isLoading={isLoading || waitTime !== null} 
+                      disabled={!canProceedToNextStep()}
+                    />
+                  )}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </AuthCard>
     </>
