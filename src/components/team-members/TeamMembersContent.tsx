@@ -6,11 +6,8 @@ import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersGrid } from "./TeamMembersGrid";
-import { TeamMembersPagination } from "./TeamMembersPagination";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Plus } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useTeamMembers } from "@/hooks/useTeamMembers";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -19,7 +16,6 @@ export const TeamMembersContent = () => {
   const [sortBy, setSortBy] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
-  const { data: allTeamMembers = [] } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   useEffect(() => {
     setViewMode(isMobile ? 'grid' : 'table');
@@ -45,8 +41,8 @@ export const TeamMembersContent = () => {
   );
 
   return (
-    <div className="container h-[calc(100vh-4rem)] flex flex-col lg:py-4">
-      <div className="flex-none">
+    <div className="container pt-4 pb-8 md:pb-8">
+      <div className="pb-16 md:pb-0">
         <TeamMembersHeader />
         <TeamMembersFilters 
           viewMode={viewMode} 
@@ -58,42 +54,25 @@ export const TeamMembersContent = () => {
           sortBy={sortBy}
           setSortBy={setSortBy}
         />
-      </div>
-      
-      <div className="flex-1 min-h-0 flex flex-col">
-        <ScrollArea className="h-full lg:px-1 flex-1">
-          <div className="h-full pb-14 lg:pb-0">
-            {viewMode === 'table' ? (
-              <TeamMembersTable 
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                sortBy={sortBy}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                itemsPerPage={10}
-              />
-            ) : (
-              <TeamMembersGrid 
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                sortBy={sortBy}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                itemsPerPage={9}
-              />
-            )}
-          </div>
-        </ScrollArea>
-        <div className="hidden lg:block flex-none border-t bg-white py-4">
-          {allTeamMembers.length > (viewMode === 'table' ? 10 : 9) && (
-            <TeamMembersPagination 
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalItems={allTeamMembers.length}
-              itemsPerPage={viewMode === 'table' ? 10 : 9}
-            />
-          )}
-        </div>
+        {viewMode === 'table' ? (
+          <TeamMembersTable 
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={10}
+          />
+        ) : (
+          <TeamMembersGrid 
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={9}
+          />
+        )}
       </div>
       {isMobile && <MobileInviteButton />}
     </div>
