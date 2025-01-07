@@ -1,4 +1,4 @@
-import { PanelLeftOpen } from "lucide-react";
+import { PanelLeftOpen, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/auth/Logo";
@@ -17,6 +17,7 @@ export const MobileNav = () => {
         <div className="flex h-full flex-col">
           <div className="h-16 flex items-center justify-between border-b p-4 bg-white">
             <Logo />
+            <X size={20} className="text-gray-500" />
           </div>
           <SidebarContent>
             <SidebarGroup>
