@@ -33,7 +33,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         </svg>
       </div>
 
-      <div className="container mx-auto min-h-screen px-6 py-4 relative z-1 animate-fade overflow-x-hidden">
+      <div className="container mx-auto min-h-screen px-6 py-4 relative z-1 animate-fade">
         {/* Logo */}
         <Logo />
         
@@ -45,12 +45,12 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
           {/* Right side with form */}
           <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
-              <div className="p-0 md:p-8 overflow-x-hidden">
+              <div className="p-0 md:p-8">
                 <div className="mb-6">
                   <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">{title}</h2>
                 </div>
                 
-                <div className="max-h-[calc(100vh-theme(space.48))] overflow-y-auto overflow-x-hidden">
+                <div className="max-h-[calc(100vh-theme(space.48))]">
                   <div className="px-0 md:px-2">
                     {children}
                   </div>

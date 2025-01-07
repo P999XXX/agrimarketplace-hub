@@ -143,7 +143,7 @@ export const SignUpForm = () => {
         title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
-        <div className="space-y-6 overflow-x-hidden">
+        <div className="space-y-6">
           <div className="animate-fade">
             <StepProgressBar currentStep={currentStep} />
           </div>
@@ -155,7 +155,7 @@ export const SignUpForm = () => {
             } else {
               handleNext();
             }
-          }} className="space-y-6 pb-24 md:pb-0">
+          }} className="space-y-6">
             {renderStepContent()}
 
             {currentStep > 1 && (
