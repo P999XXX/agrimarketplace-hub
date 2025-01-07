@@ -7,6 +7,8 @@ interface EmailCellProps {
 }
 
 export const EmailCell = ({ email }: EmailCellProps) => {
+  const handleEmailClick = () => window.open(`mailto:${email}`);
+
   return (
     <div className="flex items-center gap-2">
       <TooltipProvider>
@@ -16,7 +18,7 @@ export const EmailCell = ({ email }: EmailCellProps) => {
               variant="ghost" 
               size="icon" 
               className="h-4 w-4 hover:bg-gray-100"
-              onClick={() => window.open(`mailto:${email}`)}
+              onClick={handleEmailClick}
             >
               <Mail className="h-4 w-4 text-gray-500" />
             </Button>
@@ -26,7 +28,12 @@ export const EmailCell = ({ email }: EmailCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      {email}
+      <span 
+        className="cursor-pointer hover:text-blue-600 hover:underline"
+        onClick={handleEmailClick}
+      >
+        {email}
+      </span>
     </div>
   );
 };
