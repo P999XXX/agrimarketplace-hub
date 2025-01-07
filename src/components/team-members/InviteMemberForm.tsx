@@ -71,15 +71,17 @@ export const InviteMemberForm = () => {
         },
       });
 
-      // Close the sheet first
+      // Automatically close the sheet
       const closeButton = document.querySelector('[data-sheet-close]') as HTMLButtonElement;
       if (closeButton) closeButton.click();
 
-      // Then show the success toast
-      toast({
-        title: "Invitation sent",
-        description: "Team member has been invited successfully.",
-      });
+      // Show success toast after sheet is closed
+      setTimeout(() => {
+        toast({
+          title: "Invitation sent",
+          description: "Team member has been invited successfully.",
+        });
+      }, 100);
 
       queryClient.invalidateQueries({ queryKey: ['team-members'] });
 
