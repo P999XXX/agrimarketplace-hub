@@ -46,7 +46,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
           status,
           created_at,
           invited_by,
-          inviter:profiles(first_name, last_name)
+          inviter:profiles!invited_by(first_name, last_name)
         `)
         .eq('company_id', profile.company_id);
 
@@ -68,10 +68,10 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
       const { data, error } = await query;
       if (error) throw error;
 
-      return (data as TeamMember[]).map(member => ({
+      return (data as any[]).map(member => ({
         ...member,
         inviter: member.inviter?.[0] || null
-      }));
+      })) as TeamMember[];
     },
   });
 
