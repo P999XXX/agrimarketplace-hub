@@ -2,14 +2,16 @@ import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
+import { SignInLeftContent } from "./SignInLeftContent";
 
 interface AuthCardProps {
   title: ReactNode;
   subtitle: string;
   children: ReactNode;
+  variant?: 'signin' | 'signup';
 }
 
-export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
+export const AuthCard = ({ title, subtitle, children, variant = 'signup' }: AuthCardProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden animate-gradient-shift bg-[length:200%_200%]">
       {/* Background Shapes */}
@@ -40,7 +42,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         {/* Main content */}
         <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
           {/* Left side with static content */}
-          <LeftContent />
+          {variant === 'signin' ? <SignInLeftContent /> : <LeftContent />}
 
           {/* Right side with form */}
           <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">

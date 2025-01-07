@@ -16,6 +16,7 @@ export const SignInForm = () => {
     <AuthCard
       title="Welcome Back"
       subtitle="Sign in to your account to continue"
+      variant="signin"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <EmailField
