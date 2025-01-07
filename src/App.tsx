@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
@@ -43,9 +44,30 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/thank-you" element={<ThankYou />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/team-members" element={<TeamMembers />} />
-            <Route path="/ai-development" element={<AIDevelopment />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/dashboard/team-members" 
+              element={
+                <ProtectedRoute>
+                  <TeamMembers />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/ai-development" 
+              element={
+                <ProtectedRoute>
+                  <AIDevelopment />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
