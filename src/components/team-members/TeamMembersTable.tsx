@@ -1,12 +1,13 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { EmailCell } from "./EmailCell";
-import { format } from "date-fns";
+import { Table, TableBody } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
+import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
+import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
+import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -67,68 +68,26 @@ export const TeamMembersTable = ({
   }
 
   if (isLoading) {
-    return (
-      <div className="space-y-3">
-        <div className="h-8 bg-gray-200 animate-pulse rounded" />
-        <div className="h-12 bg-gray-100 animate-pulse rounded" />
-        <div className="h-12 bg-gray-100 animate-pulse rounded" />
-        <div className="h-12 bg-gray-100 animate-pulse rounded" />
-      </div>
-    );
+    return <TeamMembersTableLoading />;
   }
 
   if (allTeamMembers.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-gray-500 text-lg">No team members found</p>
-        <p className="text-gray-400 text-sm mt-2">Try adjusting your filters or search criteria</p>
-      </div>
-    );
+    return <TeamMembersTableEmpty />;
   }
 
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="whitespace-nowrap">Name</TableHead>
-              <TableHead className="whitespace-nowrap">Email</TableHead>
-              <TableHead className="whitespace-nowrap">Role</TableHead>
-              <TableHead className="whitespace-nowrap">Status</TableHead>
-              <TableHead className="whitespace-nowrap">Invited by</TableHead>
-              <TableHead className="whitespace-nowrap">Invited</TableHead>
-            </TableRow>
-          </TableHeader>
+          <TeamMembersTableHeader />
           <TableBody>
             {teamMembers.map((member) => (
-              <TableRow
+              <TeamMembersTableRow
                 key={member.id}
-                className={`transition-all duration-500 ${
-                  Date.now() - new Date(member.created_at).getTime() < 3000
-                    ? 'animate-[highlight_1s_ease-in-out]'
-                    : ''
-                }`}
-              >
-                <TableCell className="whitespace-nowrap">
-                  {member.name || 'Unnamed User'}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <EmailCell email={member.email} />
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {format(new Date(member.created_at), 'MMM d, yyyy')}
-                </TableCell>
-              </TableRow>
+                member={member}
+                getRoleBadgeClass={getRoleBadgeClass}
+                getStatusBadgeClass={getStatusBadgeClass}
+              />
             ))}
           </TableBody>
         </Table>
