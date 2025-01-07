@@ -47,7 +47,7 @@ export const InviteMemberForm = () => {
       <div className="space-y-2">
         <Label htmlFor="role">Role</Label>
         <Select required>
-          <SelectTrigger>
+          <SelectTrigger className="h-10">
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
