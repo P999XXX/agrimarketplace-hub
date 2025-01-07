@@ -26,7 +26,7 @@ export const TeamMembersContent = () => {
       <Sheet>
         <SheetTrigger asChild>
           <Button className="w-full">
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="h-5 w-5 mr-2" />
             Invite Member
           </Button>
         </SheetTrigger>
