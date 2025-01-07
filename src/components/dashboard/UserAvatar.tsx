@@ -28,7 +28,7 @@ export const UserAvatar = () => {
 
   return (
     <Avatar className="h-8 w-8 bg-brand-600 hover:bg-brand-500 transition-colors cursor-pointer">
-      <AvatarFallback className="bg-brand-600 text-white text-sm hover:bg-brand-500 transition-colors">
+      <AvatarFallback className="bg-[rgb(0,128,96,0.9)] text-white text-sm hover:bg-[rgb(0,128,96,0.8)] transition-colors">
         {initials || '??'}
       </AvatarFallback>
     </Avatar>
