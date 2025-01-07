@@ -1,61 +1,43 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSignIn } from "@/hooks/useSignIn";
 import { AuthCard } from "./AuthCard";
 import { EmailField } from "./EmailField";
 import { PasswordInput } from "./PasswordInput";
-import { Button } from "@/components/ui/button";
+import { SignInButton } from "./SignInButton";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthDivider } from "./AuthDivider";
-import { Link } from "react-router-dom";
-import { useSignIn } from "@/hooks/useSignIn";
-import { LogIn, ArrowRight } from "lucide-react";
 
 export const SignInForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { handleSignIn, isLoading } = useSignIn();
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await handleSignIn(email, password);
-  };
+  const { formData, isLoading, handleChange, handleSubmit } = useSignIn();
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   return (
     <AuthCard
       title="Welcome Back"
       subtitle="Sign in to your account to continue"
     >
-      <div className="space-y-6">
-        <form onSubmit={onSubmit} className="space-y-4">
-          <EmailField
-            email={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <PasswordInput
-            id="password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-          <Button 
-            type="submit"
-            className="w-full py-6"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              "Signing in..."
-            ) : (
-              <>
-                Sign In
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </>
-            )}
-          </Button>
-        </form>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <EmailField
+          email={formData.email}
+          onChange={handleChange}
+        />
+        <PasswordInput
+          id="password"
+          label="Password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          onValidationChange={setIsPasswordValid}
+        />
+
+        <div className="pt-2">
+          <SignInButton isLoading={isLoading} disabled={!isPasswordValid} />
+        </div>
 
         <AuthDivider />
-        
-        <GoogleSignInButton isSignUp={false} />
+
+        <GoogleSignInButton />
 
         <div className="text-center mt-6">
           <Link 
@@ -63,10 +45,10 @@ export const SignInForm = () => {
             className="text-white/90 md:text-gray-600"
           >
             <span>Don't have an account? </span>
-            <span className="hover:text-primary transition-colors">Sign up here</span>
+            <span className="hover:text-primary-mobile md:hover:text-primary transition-colors">Sign up here</span>
           </Link>
         </div>
-      </div>
+      </form>
     </AuthCard>
   );
 };
