@@ -88,8 +88,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex">
-          <SidebarHeader className="border-b p-4">
+          <SidebarHeader className="flex items-center justify-between border-b p-4">
             <Logo />
+            <SidebarTrigger />
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
@@ -107,7 +108,6 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <MobileNav />
               <Logo />
             </div>
-            <SidebarTrigger className="hidden md:flex" />
           </header>
           <main className="flex-1">{children}</main>
         </div>
