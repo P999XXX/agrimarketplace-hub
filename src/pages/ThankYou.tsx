@@ -30,9 +30,9 @@ export default function ThankYou() {
         <Logo />
         
         {/* Main content */}
-        <div className="min-h-[calc(100vh-theme(space.16))] flex items-center justify-center pt-8 lg:pt-0">
+        <div className="min-h-[calc(100vh-theme(space.16))] flex items-center justify-center pt-0 md:pt-8">
           {/* Card */}
-          <div className="w-full max-w-md relative z-2">
+          <div className="w-full max-w-md relative z-2 -mt-12 md:mt-0">
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
               <div className="p-0 md:p-8">
                 <div className="space-y-8 text-center">
