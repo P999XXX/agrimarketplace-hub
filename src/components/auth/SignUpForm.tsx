@@ -1,21 +1,10 @@
 import { useState } from "react";
 import { useSignUp } from "@/hooks/useSignUp";
 import { AuthCard } from "./AuthCard";
-import { NameFields } from "./NameFields";
-import { EmailField } from "./EmailField";
-import { CompanyField } from "./CompanyField";
-import { SignUpButton } from "./SignUpButton";
-import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
-import { PasswordInput } from "./PasswordInput";
 import { SignUpSuccessDialog } from "./SignUpSuccessDialog";
-import { RoleSelection } from "./RoleSelection";
-import { TermsAndPrivacy } from "./TermsAndPrivacy";
 import StepProgressBar from "./StepProgressBar";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { GoogleSignInButton } from "./GoogleSignInButton";
-import { AuthDivider } from "./AuthDivider";
-import { AlreadyRegistered } from "./AlreadyRegistered";
+import { StepContent } from "./signup/StepContent";
+import { NavigationButtons } from "./signup/NavigationButtons";
 
 export const SignUpForm = () => {
   const {
@@ -61,82 +50,6 @@ export const SignUpForm = () => {
     }
   };
 
-  const getStepTitle = () => {
-    switch (currentStep) {
-      case 1:
-        return "Select Your Role";
-      case 2:
-        return "Tell Us About You";
-      case 3:
-        return "Create Your Account";
-      default:
-        return "";
-    }
-  };
-
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <div className="space-y-6 animate-fade">
-            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
-            <RoleSelection
-              selectedRole={formData.userType}
-              onRoleChange={handleRoleChange}
-            />
-            <AuthDivider />
-            <GoogleSignInButton />
-            <AlreadyRegistered />
-          </div>
-        );
-      case 2:
-        return (
-          <div className="space-y-4 animate-fade">
-            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
-            <CompanyField
-              companyName={formData.companyName}
-              onChange={handleChange}
-            />
-            <NameFields
-              firstName={formData.firstName}
-              lastName={formData.lastName}
-              onChange={handleChange}
-            />
-          </div>
-        );
-      case 3:
-        return (
-          <div className="space-y-4 animate-fade">
-            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
-            <EmailField
-              email={formData.email}
-              onChange={handleChange}
-            />
-            <PasswordInput
-              id="password"
-              label="Password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              onValidationChange={setIsPasswordValid}
-            />
-            {isPasswordValid && (
-              <ConfirmPasswordInput
-                confirmPassword={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            )}
-            <TermsAndPrivacy
-              accepted={termsAccepted}
-              onAcceptChange={setTermsAccepted}
-            />
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <>
       <SignUpSuccessDialog isOpen={isSuccess} />
@@ -162,39 +75,26 @@ export const SignUpForm = () => {
             className="flex flex-col flex-grow relative"
           >
             <div className="md:h-auto max-md:flex-grow max-md:overflow-y-auto max-md:min-h-0">
-              {renderStepContent()}
+              <StepContent
+                currentStep={currentStep}
+                formData={formData}
+                handleChange={handleChange}
+                handleRoleChange={handleRoleChange}
+                isPasswordValid={isPasswordValid}
+                setIsPasswordValid={setIsPasswordValid}
+                termsAccepted={termsAccepted}
+                setTermsAccepted={setTermsAccepted}
+              />
             </div>
 
             {currentStep > 1 && (
-              <div className="mt-8 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:bg-white/5 max-md:backdrop-blur-sm max-md:p-4 animate-fade">
-                <div className="flex justify-between max-w-[calc(100vw-2rem)] mx-auto">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleBack}
-                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem] md:bg-white max-md:bg-transparent"
-                  >
-                    <ChevronLeft className="w-4 h-4 mr-2" />
-                    Back
-                  </Button>
-                  
-                  {currentStep < 3 ? (
-                    <Button
-                      type="submit"
-                      className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
-                      disabled={!canProceedToNextStep()}
-                    >
-                      Next
-                      <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  ) : (
-                    <SignUpButton 
-                      isLoading={isLoading || waitTime !== null} 
-                      disabled={!canProceedToNextStep()}
-                    />
-                  )}
-                </div>
-              </div>
+              <NavigationButtons
+                currentStep={currentStep}
+                handleBack={handleBack}
+                canProceedToNextStep={canProceedToNextStep()}
+                isLoading={isLoading}
+                waitTime={waitTime}
+              />
             )}
           </form>
         </div>
