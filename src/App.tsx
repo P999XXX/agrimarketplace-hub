@@ -7,6 +7,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import ResetPassword from "./pages/ResetPassword";
 import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
 import TeamMembers from "./pages/TeamMembers";
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route 
               path="/dashboard" 

@@ -23,14 +23,24 @@ export const SignInForm = () => {
           email={formData.email}
           onChange={handleChange}
         />
-        <PasswordInput
-          id="password"
-          label="Password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter your password"
-          onValidationChange={setIsPasswordValid}
-        />
+        <div className="space-y-1">
+          <PasswordInput
+            id="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            onValidationChange={setIsPasswordValid}
+          />
+          <div className="text-right">
+            <Link 
+              to="/reset-password" 
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              Forgot password?
+            </Link>
+          </div>
+        </div>
 
         <div className="pt-2">
           <SignInButton isLoading={isLoading} disabled={!isPasswordValid} />
