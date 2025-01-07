@@ -149,7 +149,7 @@ export const SignUpForm = () => {
       <SignUpSuccessDialog isOpen={isSuccess} />
 
       <AuthCard 
-        title="Register for Free"
+        title="Sign up for free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
         <div className="min-h-[calc(100vh-16rem)] md:min-h-0 flex flex-col">
