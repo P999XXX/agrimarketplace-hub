@@ -25,6 +25,10 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { to, inviterName, companyName, role, message }: InvitationEmailRequest = await req.json();
 
+    // For testing, we'll send all emails to the verified email
+    const testEmail = "info@mier.ch";
+    console.log(`Original recipient: ${to}, sending to test email: ${testEmail} instead`);
+
     const emailHtml = `
       <h1>You've been invited to join ${companyName}</h1>
       <p>${inviterName} has invited you to join ${companyName} as a ${role}.</p>
@@ -32,6 +36,7 @@ const handler = async (req: Request): Promise<Response> => {
       <p>Click the link below to accept the invitation:</p>
       <a href="https://cropio.app/accept-invitation" style="display: inline-block; background-color: #008060; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">Accept Invitation</a>
       <p>If you didn't expect this invitation, you can safely ignore this email.</p>
+      <p><small>Original recipient would have been: ${to}</small></p>
     `;
 
     const res = await fetch("https://api.resend.com/emails", {
@@ -41,8 +46,8 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Cropio <onboarding@resend.dev>", // Using default Resend domain
-        to: to,
+        from: "Cropio <onboarding@resend.dev>",
+        to: testEmail, // Using test email instead of actual recipient
         subject: `Join ${companyName} on Cropio`,
         html: emailHtml,
       }),
