@@ -88,7 +88,7 @@ export default {
           DEFAULT: "#008060",
           foreground: "hsl(var(--primary-foreground))",
           dark: "#004d3a",
-          mobile: "#003326", // Dunklere Farbe für bessere Sichtbarkeit auf Mobile
+          mobile: "#003326",
         },
         secondary: {
           DEFAULT: "rgb(241,185,128)",
