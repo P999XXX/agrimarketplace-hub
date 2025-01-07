@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSignUpForm } from "./useSignUpForm";
 import { useWaitTime } from "./useWaitTime";
 import { useSupabaseSignUp } from "./useSupabaseSignUp";
+import { AuthError } from "@supabase/supabase-js";
 
 export const useSignUp = () => {
   const { toast } = useToast();
@@ -15,6 +16,18 @@ export const useSignUp = () => {
   const { formData, handleChange } = useSignUpForm();
   const { waitTime, setWaitTime } = useWaitTime();
   const { createCompany, sendWelcomeEmail } = useSupabaseSignUp();
+
+  const handleRateLimitError = (error: AuthError) => {
+    try {
+      const errorBody = JSON.parse(error.message);
+      const seconds = parseInt(errorBody.message.match(/\d+/)?.[0] || "60", 10);
+      setWaitTime(seconds);
+      return `Please wait ${seconds} seconds before trying again.`;
+    } catch {
+      setWaitTime(60); // Fallback wait time
+      return "Too many attempts. Please wait before trying again.";
+    }
+  };
 
   const validateEmail = (email: string) => {
     return email.includes('@');
@@ -57,19 +70,18 @@ export const useSignUp = () => {
       });
 
       if (signUpError) {
-        // Prüfen auf Rate Limiting Fehler
+        let errorMessage = signUpError.message;
+        
         if (signUpError.message.includes('over_email_send_rate_limit')) {
-          const errorBody = JSON.parse(signUpError.message);
-          const seconds = parseInt(errorBody.message.match(/\d+/)?.[0] || "60", 10);
-          setWaitTime(seconds);
-          toast({
-            title: "Bitte warten",
-            description: `Aus Sicherheitsgründen müssen Sie ${seconds} Sekunden warten, bevor Sie es erneut versuchen können.`,
-            variant: "destructive",
-          });
-          return;
+          errorMessage = handleRateLimitError(signUpError);
         }
-        throw signUpError;
+
+        toast({
+          title: "Sign Up Error",
+          description: errorMessage,
+          variant: "destructive",
+        });
+        return;
       }
 
       if (!signUpData.user) {
