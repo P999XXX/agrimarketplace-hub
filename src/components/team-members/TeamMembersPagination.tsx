@@ -22,7 +22,7 @@ export const TeamMembersPagination = ({
   };
 
   return (
-    <Pagination className="justify-center">
+    <Pagination className="justify-center rounded-lg">
       <PaginationContent>
         <PaginationItem>
           <PaginationLink
