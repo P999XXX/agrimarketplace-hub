@@ -57,8 +57,8 @@ export const DashboardMenu = () => {
                         !isMobile && state === "collapsed" ? "px-[5px]" : "px-4"
                       } py-2.5 rounded-md ${
                         isActive 
-                          ? "text-brand-900 bg-brand-50/50" 
-                          : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
+                          ? "text-gray-900 bg-gray-100" 
+                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/80"
                       }`}
                     >
                       <a href={item.href}>
