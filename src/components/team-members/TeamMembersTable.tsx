@@ -13,8 +13,8 @@ interface TeamMember {
   created_at: string;
   invited_by: string;
   inviter: {
-    first_name: string;
-    last_name: string;
+    first_name: string | null;
+    last_name: string | null;
   };
 }
 
@@ -40,7 +40,12 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
       let query = supabase
         .from('invitations')
         .select(`
-          *,
+          id,
+          email,
+          role,
+          status,
+          created_at,
+          invited_by,
           inviter:profiles!invitations_invited_by_fkey (
             first_name,
             last_name
@@ -124,7 +129,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
                 <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
               </TableCell>
               <TableCell className="whitespace-nowrap">
-                {member.inviter.first_name} {member.inviter.last_name}
+                {member.inviter.first_name || ''} {member.inviter.last_name || ''}
               </TableCell>
               <TableCell className="whitespace-nowrap">
                 {format(new Date(member.created_at), 'MMM d, yyyy')}

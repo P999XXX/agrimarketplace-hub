@@ -6,14 +6,14 @@ import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersGrid } from "./TeamMembersGrid";
-import { useMediaQuery } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useIsMobile();
 
   // Set initial view mode based on screen size
   useEffect(() => {
