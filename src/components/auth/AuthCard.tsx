@@ -15,7 +15,7 @@ interface AuthCardProps {
 export const AuthCard = ({ title, subtitle, children, variant = 'signup' }: AuthCardProps) => {
   const isMobile = useIsMobile();
   
-  const displayTitle = variant === 'signin' ? (isMobile ? "Welcome back! Sign In" : "Sign In") : title;
+  const displayTitle = variant === 'signin' ? (isMobile ? "Welcome back! Sign In" : "Sign In") : "Sign Up for Free!";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden animate-gradient-shift bg-[length:200%_200%]">
