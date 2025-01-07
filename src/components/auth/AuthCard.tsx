@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AuthCardProps {
   title: ReactNode;
@@ -11,8 +10,6 @@ interface AuthCardProps {
 }
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
-  const isMobile = useIsMobile();
-  
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden animate-gradient-shift bg-[length:200%_200%]">
       {/* Background Shapes */}
@@ -50,9 +47,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
               <div className="p-0 md:p-8">
                 <div className="mb-6">
-                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">
-                    {isMobile ? "Welcome back! Sign in" : title}
-                  </h2>
+                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">{title}</h2>
                 </div>
                 
                 <div className="max-h-[calc(100vh-theme(space.48))]">

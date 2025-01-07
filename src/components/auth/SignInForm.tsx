@@ -14,8 +14,8 @@ export const SignInForm = () => {
 
   return (
     <AuthCard
-      title="Sign In"
-      subtitle="Sign in to access your account"
+      title="Welcome Back"
+      subtitle="Sign in to your account to continue"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <EmailField
@@ -44,8 +44,8 @@ export const SignInForm = () => {
             to="/signup" 
             className="text-white/90 md:text-gray-600"
           >
-            <span>New to cropio.app? </span>
-            <span className="hover:text-primary-mobile md:hover:text-primary transition-colors">Create an account</span>
+            <span>Don't have an account? </span>
+            <span className="hover:text-primary-mobile md:hover:text-primary transition-colors">Sign up here</span>
           </Link>
         </div>
       </form>
