@@ -55,20 +55,18 @@ const DashboardMenu = () => {
               <SidebarMenuButton asChild tooltip={item.title}>
                 <a 
                   href={item.href} 
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-300 min-h-[44px] ${
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-md transition-colors min-h-[44px] ${
                     state === "collapsed" 
-                      ? "bg-primary text-white hover:bg-primary/90" 
+                      ? "text-brand-700" 
                       : isActive 
                         ? "text-brand-900 bg-brand-50/50" 
                         : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
                   }`}
                 >
-                  <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-colors duration-300 ${
-                    state === "collapsed" ? "text-white" : ""
-                  }`}>
+                  <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
                     <item.icon className="w-5 h-5" />
                   </div>
-                  <span className={`text-[15px] font-medium transition-all duration-300 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
+                  <span className={`text-[15px] font-medium transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
                     {item.title}
                   </span>
                 </a>
