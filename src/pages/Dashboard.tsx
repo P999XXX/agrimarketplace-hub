@@ -1,22 +1,11 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LayoutDashboard, Users, ChartBar, Database } from "lucide-react";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-brand-50 to-brand-100">
-      {/* Header */}
-      <header className="border-b bg-white/50 backdrop-blur-sm">
-        <div className="container py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-brand-900">Dashboard</h1>
-            <Button variant="outline">Sign out</Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <DashboardLayout>
+      <div className="container py-8">
         {/* Stats Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card className="card-shadow">
@@ -108,8 +97,8 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 };
 
