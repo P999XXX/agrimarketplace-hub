@@ -40,7 +40,7 @@ export const DashboardMenu = () => {
   return (
     <div className="space-y-2">
       <h2 className={`px-4 text-sm font-bold text-gray-400 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
-        Menu
+        Account
       </h2>
       <SidebarMenu>
         <TooltipProvider delayDuration={0}>
