@@ -1,6 +1,6 @@
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarTrigger, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
 import { Logo } from "@/components/auth/Logo";
-import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, Menu, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -63,9 +63,9 @@ const CustomSidebarTrigger = () => {
         const trigger = document.querySelector('[data-sidebar="trigger"]') as HTMLElement;
         if (trigger) trigger.click();
       }} 
-      className="flex items-center justify-center w-8 h-8 text-white rounded-md focus:outline-none"
+      className="flex items-center justify-center w-8 h-8 text-white rounded-md hover:bg-white/10 transition-colors focus:outline-none"
     >
-      {state === "expanded" ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+      <ChevronLeft className={`h-5 w-5 transition-transform duration-200 ${state === "expanded" ? "" : "rotate-180"}`} />
     </button>
   );
 };
