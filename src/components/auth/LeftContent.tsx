@@ -8,7 +8,7 @@ export const LeftContent = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -19,7 +19,10 @@ export const LeftContent = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6">
           Connecting farmers
           <br />
-          with <span className="text-secondary animate-fade-in">{words[currentWordIndex]}</span>
+          with{" "}
+          <span key={currentWordIndex} className="text-secondary inline-block animate-fade">
+            {words[currentWordIndex]}
+          </span>
         </h1>
         <p className="text-lg text-white/70 mb-8 max-w-md">
           Built for agricultural businesses, cropio.app helps you connect with buyers and sellers of agricultural raw materials in a fraction of the time.
