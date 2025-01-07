@@ -26,7 +26,7 @@ export const EmailField = ({ email, onChange }: EmailFieldProps) => {
 
   return (
     <div className="space-y-1">
-      <Label htmlFor="email">Email</Label>
+      <Label htmlFor="email" className="text-white md:text-foreground">Email</Label>
       <Input
         id="email"
         name="email"

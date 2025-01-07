@@ -15,13 +15,13 @@ export const TermsAndPrivacy = ({ accepted, onAcceptChange }: TermsAndPrivacyPro
         onCheckedChange={onAcceptChange}
         className="mt-1"
       />
-      <Label htmlFor="terms" className="text-sm text-gray-600 font-normal">
+      <Label htmlFor="terms" className="text-sm text-white/90 md:text-gray-600 font-normal">
         I agree to the{" "}
-        <a href="/terms" className="text-primary hover:underline">
+        <a href="/terms" className="text-white hover:text-white/80 md:text-primary md:hover:underline">
           Terms of Service
         </a>{" "}
         and{" "}
-        <a href="/privacy" className="text-primary hover:underline">
+        <a href="/privacy" className="text-white hover:text-white/80 md:text-primary md:hover:underline">
           Privacy Policy
         </a>
       </Label>

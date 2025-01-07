@@ -39,7 +39,7 @@ export const PasswordInput = ({
 
   return (
     <div className="space-y-1">
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} className="text-white md:text-foreground">{label}</Label>
       <div className="relative">
         <Input
           id={id}
@@ -60,7 +60,7 @@ export const PasswordInput = ({
       
       {/* Password description */}
       {id === "password" && (
-        <p className="text-[0.85rem] leading-4 text-muted-foreground mt-2">
+        <p className="text-[0.85rem] leading-4 text-white/80 md:text-muted-foreground mt-2">
           Password must be at least 8 characters and include uppercase, lowercase, and numbers.
         </p>
       )}
