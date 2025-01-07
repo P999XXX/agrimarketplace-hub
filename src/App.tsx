@@ -34,20 +34,18 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen">
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/thank-you" element={<ThankYou />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/ai-development" element={<AIDevelopment />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/ai-development" element={<AIDevelopment />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

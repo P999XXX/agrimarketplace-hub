@@ -13,21 +13,18 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string
-          deleted_at: string | null
           id: string
           name: string
         }
         Insert: {
           created_at?: string
           created_by: string
-          deleted_at?: string | null
           id?: string
           name: string
         }
         Update: {
           created_at?: string
           created_by?: string
-          deleted_at?: string | null
           id?: string
           name?: string
         }
@@ -37,7 +34,6 @@ export type Database = {
         Row: {
           company_id: string | null
           created_at: string
-          deleted_at: string | null
           first_name: string | null
           id: string
           last_name: string | null
@@ -46,7 +42,6 @@ export type Database = {
         Insert: {
           company_id?: string | null
           created_at?: string
-          deleted_at?: string | null
           first_name?: string | null
           id: string
           last_name?: string | null
@@ -55,7 +50,6 @@ export type Database = {
         Update: {
           company_id?: string | null
           created_at?: string
-          deleted_at?: string | null
           first_name?: string | null
           id?: string
           last_name?: string | null
