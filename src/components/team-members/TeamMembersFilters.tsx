@@ -24,6 +24,10 @@ export const TeamMembersFilters = ({
   sortBy,
   setSortBy
 }: TeamMembersFiltersProps) => {
+  const toggleView = () => {
+    setViewMode(viewMode === 'table' ? 'grid' : 'table');
+  };
+
   return (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
@@ -63,22 +67,18 @@ export const TeamMembersFilters = ({
               <SelectItem value="role-desc">Role Z-A</SelectItem>
             </SelectContent>
           </Select>
-          <div className="flex border rounded-md h-10">
-            <Button
-              variant={viewMode === 'table' ? 'default' : 'ghost'}
-              size="icon"
-              onClick={() => setViewMode('table')}
-            >
-              <LayoutList className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={viewMode === 'grid' ? 'default' : 'ghost'}
-              size="icon"
-              onClick={() => setViewMode('grid')}
-            >
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleView}
+            className={`h-10 ${viewMode === 'grid' ? 'bg-gray-100 hover:bg-gray-200' : 'hover:bg-gray-100'}`}
+          >
+            {viewMode === 'table' ? (
               <LayoutGrid className="h-4 w-4" />
-            </Button>
-          </div>
+            ) : (
+              <LayoutList className="h-4 w-4" />
+            )}
+          </Button>
         </div>
       </div>
     </div>
