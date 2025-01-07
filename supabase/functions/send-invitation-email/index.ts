@@ -42,7 +42,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Cropio <invitations@cropio.app>",
-        to: [to],
+        to: to, // Geändert: Senden der E-Mail-Adresse direkt, nicht als Array
         subject: `Join ${companyName} on Cropio`,
         html: emailHtml,
       }),
