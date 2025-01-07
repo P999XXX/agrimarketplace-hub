@@ -14,7 +14,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             type="button"
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
-              md:bg-white md:hover:bg-gray-50/80
+              md:bg-white md:hover:bg-gray-50/80 md:border
               bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
               ${selectedRole === "supplier" ? "md:border-primary" : ""}`}
             onClick={() => onRoleChange("supplier")}
@@ -33,7 +33,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             type="button"
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
-              md:bg-white md:hover:bg-gray-50/80
+              md:bg-white md:hover:bg-gray-50/80 md:border
               bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
               ${selectedRole === "buyer" ? "md:border-primary" : ""}`}
             onClick={() => onRoleChange("buyer")}
