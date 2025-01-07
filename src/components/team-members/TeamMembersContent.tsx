@@ -7,9 +7,27 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Users, Search, Filter, SortAsc, LayoutGrid, LayoutList, Plus } from "lucide-react";
 import { InviteMemberForm } from "./InviteMemberForm";
+import { Badge } from "@/components/ui/badge";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+
+  const getRoleBadgeClass = () => {
+    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
+  };
+
+  const getStatusBadgeClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return 'bg-green-100 text-green-700 hover:bg-green-200';
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
+      case 'inactive':
+        return 'bg-red-100 text-red-700 hover:bg-red-200';
+      default:
+        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
+    }
+  };
 
   return (
     <div className="container py-8">
@@ -94,18 +112,18 @@ export const TeamMembersContent = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Invited by</TableHead>
-                <TableHead>Joined</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
                 <TableCell>John Doe</TableCell>
                 <TableCell>john@example.com</TableCell>
-                <TableCell>Admin</TableCell>
-                <TableCell>Active</TableCell>
-                <TableCell>Sarah Smith</TableCell>
-                <TableCell>Jan 15, 2024</TableCell>
+                <TableCell>
+                  <Badge className={getRoleBadgeClass()}>Admin</Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge className={getStatusBadgeClass('active')}>Active</Badge>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -122,12 +140,9 @@ export const TeamMembersContent = () => {
                   <h3 className="font-semibold">John Doe</h3>
                   <p className="text-sm text-gray-500">john@example.com</p>
                   <div className="mt-2 space-y-1.5">
-                    <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                      Active
-                    </span>
-                    <div className="text-sm text-gray-500">
-                      <p>Invited by: Sarah Smith</p>
-                      <p>Joined: Jan 15, 2024</p>
+                    <Badge className={getRoleBadgeClass()}>Admin</Badge>
+                    <div className="block">
+                      <Badge className={getStatusBadgeClass('active')}>Active</Badge>
                     </div>
                   </div>
                 </div>
