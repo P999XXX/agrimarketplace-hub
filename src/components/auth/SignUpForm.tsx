@@ -44,7 +44,7 @@ export const SignUpForm = () => {
 
   const handleRoleChange = (value: string) => {
     handleChange({ target: { name: 'userType', value } } as any);
-    handleNext(); // Automatisch zum nächsten Schritt nach Rollenauswahl
+    handleNext();
   };
 
   const canProceedToNextStep = () => {
@@ -153,11 +153,11 @@ export const SignUpForm = () => {
             } else {
               handleNext();
             }
-          }} className="space-y-6">
+          }} className="space-y-6 pb-24 md:pb-0">
             {renderStepContent()}
 
             {currentStep > 1 && (
-              <div className="flex justify-between mt-8">
+              <div className="flex justify-between mt-8 fixed md:relative bottom-0 left-0 right-0 p-4 md:p-0 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none">
                 <Button
                   type="button"
                   variant="outline"
