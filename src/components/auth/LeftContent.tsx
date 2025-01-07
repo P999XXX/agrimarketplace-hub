@@ -26,7 +26,7 @@ export const LeftContent = () => {
             {words[currentWordIndex]}
           </span>
         </h1>
-        <p className="text-lg text-white/70 mb-8 max-w-[478px]">
+        <p className="text-lg text-white/70 mb-8 max-w-[528px]">
           Empowering agricultural businesses with AI-driven trading, cropio.app connects buyers and sellers of agricultural raw materials faster and smarter than ever before.
         </p>
       </div>
