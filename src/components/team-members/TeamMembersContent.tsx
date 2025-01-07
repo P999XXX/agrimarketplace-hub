@@ -17,7 +17,6 @@ export const TeamMembersContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
 
-  // Set initial view mode based on screen size
   useEffect(() => {
     setViewMode(isMobile ? 'grid' : 'table');
   }, [isMobile]);
