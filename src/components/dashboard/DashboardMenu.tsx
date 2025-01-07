@@ -45,7 +45,11 @@ export const DashboardMenu = () => {
           const isActive = location.pathname === item.href;
           return (
             <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton asChild tooltip={item.title}>
+              <SidebarMenuButton 
+                asChild 
+                tooltip={item.title}
+                isActive={isActive}
+              >
                 <a 
                   href={item.href} 
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-md transition-colors min-h-[44px] ${

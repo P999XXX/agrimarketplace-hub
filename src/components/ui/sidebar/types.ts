@@ -15,6 +15,8 @@ export type SidebarProviderProps = {
   defaultOpen?: boolean
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  className?: string
+  style?: React.CSSProperties
   children: React.ReactNode
 }
 
