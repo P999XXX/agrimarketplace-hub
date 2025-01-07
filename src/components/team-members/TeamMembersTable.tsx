@@ -59,9 +59,9 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="bg-white rounded-lg shadow overflow-hidden relative">
       <Table>
-        <TableHeader>
+        <TableHeader className="sticky top-0 bg-white z-10 shadow-sm">
           <TableRow>
             <TableHead className="whitespace-nowrap">Name</TableHead>
             <TableHead className="whitespace-nowrap">Email</TableHead>
