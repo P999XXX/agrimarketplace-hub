@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { format } from "date-fns";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import { TeamMembersPagination } from "./TeamMembersPagination";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -60,63 +59,50 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="whitespace-nowrap">Name</TableHead>
-              <TableHead className="whitespace-nowrap">Email</TableHead>
-              <TableHead className="whitespace-nowrap">Role</TableHead>
-              <TableHead className="whitespace-nowrap">Status</TableHead>
-              <TableHead className="whitespace-nowrap">Invited by</TableHead>
-              <TableHead className="whitespace-nowrap">Invited</TableHead>
+    <div className="bg-white rounded-lg shadow overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="whitespace-nowrap">Name</TableHead>
+            <TableHead className="whitespace-nowrap">Email</TableHead>
+            <TableHead className="whitespace-nowrap">Role</TableHead>
+            <TableHead className="whitespace-nowrap">Status</TableHead>
+            <TableHead className="whitespace-nowrap">Invited by</TableHead>
+            <TableHead className="whitespace-nowrap">Invited</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {teamMembers.map((member) => (
+            <TableRow
+              key={member.id}
+              className={`transition-all duration-500 ${
+                Date.now() - new Date(member.created_at).getTime() < 3000
+                  ? 'animate-[highlight_1s_ease-in-out]'
+                  : ''
+              }`}
+            >
+              <TableCell className="whitespace-nowrap">
+                {member.name || 'Unnamed User'}
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                <EmailCell email={member.email} />
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                {format(new Date(member.created_at), 'MMM d, yyyy')}
+              </TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {teamMembers.map((member) => (
-              <TableRow
-                key={member.id}
-                className={`transition-all duration-500 ${
-                  Date.now() - new Date(member.created_at).getTime() < 3000
-                    ? 'animate-[highlight_1s_ease-in-out]'
-                    : ''
-                }`}
-              >
-                <TableCell className="whitespace-nowrap">
-                  {member.name || 'Unnamed User'}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <EmailCell email={member.email} />
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {format(new Date(member.created_at), 'MMM d, yyyy')}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-
-      {allTeamMembers.length > itemsPerPage && (
-        <TeamMembersPagination 
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalItems={allTeamMembers.length}
-          itemsPerPage={itemsPerPage}
-        />
-      )}
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };
-
-TeamMembersTable.Pagination = TeamMembersPagination;

@@ -6,9 +6,11 @@ import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersGrid } from "./TeamMembersGrid";
+import { TeamMembersPagination } from "./TeamMembersPagination";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Plus } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -17,6 +19,7 @@ export const TeamMembersContent = () => {
   const [sortBy, setSortBy] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
+  const { data: allTeamMembers = [] } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   useEffect(() => {
     setViewMode(isMobile ? 'grid' : 'table');
@@ -82,19 +85,12 @@ export const TeamMembersContent = () => {
           </div>
         </ScrollArea>
         <div className="hidden lg:block flex-none border-t bg-white py-4">
-          {viewMode === 'table' ? (
-            <TeamMembersTable.Pagination 
+          {allTeamMembers.length > (viewMode === 'table' ? 10 : 9) && (
+            <TeamMembersPagination 
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-              totalItems={10}
-              itemsPerPage={10}
-            />
-          ) : (
-            <TeamMembersGrid.Pagination 
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalItems={9}
-              itemsPerPage={9}
+              totalItems={allTeamMembers.length}
+              itemsPerPage={viewMode === 'table' ? 10 : 9}
             />
           )}
         </div>
