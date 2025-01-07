@@ -13,6 +13,7 @@ export const TeamMembersContent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
 
   // Set initial view mode based on screen size
@@ -38,12 +39,18 @@ export const TeamMembersContent = () => {
           searchQuery={searchQuery}
           roleFilter={roleFilter}
           sortBy={sortBy}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          itemsPerPage={10}
         />
       ) : (
         <TeamMembersGrid 
           searchQuery={searchQuery}
           roleFilter={roleFilter}
           sortBy={sortBy}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          itemsPerPage={9}
         />
       )}
     </div>
