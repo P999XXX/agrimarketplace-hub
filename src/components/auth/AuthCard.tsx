@@ -33,7 +33,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         </svg>
       </div>
 
-      <div className="container mx-auto min-h-screen px-6 py-4 relative z-1 animate-fade">
+      <div className="container mx-auto min-h-screen px-6 py-4 relative z-1 animate-fade overflow-x-hidden">
         {/* Logo */}
         <Logo />
         
