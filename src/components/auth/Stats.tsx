@@ -8,8 +8,8 @@ export const Stats = () => {
           <UserCheck className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">Verified</h6>
-          <p className="text-white/70">Trusted Users</p>
+          <h6 className="text-white text-xl font-bold mb-1">Digital</h6>
+          <p className="text-white/70">AI Trade Platform</p>
         </div>
       </div>
 
