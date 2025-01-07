@@ -87,7 +87,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     <SidebarProvider defaultOpen={!isMobile}>
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
-        <Sidebar className="hidden md:flex">
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex">
           <SidebarHeader className="border-b p-4">
             <Logo />
           </SidebarHeader>
