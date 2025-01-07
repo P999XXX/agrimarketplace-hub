@@ -111,7 +111,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
-            <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center">
+            <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
               <SidebarTrigger className="text-white hover:text-white/80" />
             </div>
