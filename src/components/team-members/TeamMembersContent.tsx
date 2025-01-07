@@ -7,6 +7,7 @@ import { TeamMembersFilters } from "./TeamMembersFilters";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersGrid } from "./TeamMembersGrid";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Plus } from "lucide-react";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -21,8 +22,27 @@ export const TeamMembersContent = () => {
     setViewMode(isMobile ? 'grid' : 'table');
   }, [isMobile]);
 
+  const MobileInviteButton = () => (
+    <div className="fixed bottom-0 left-0 right-0 p-4 bg-background border-t md:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button className="w-full">
+            <Plus className="h-4 w-4 mr-2" />
+            Invite Member
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="w-full sm:w-[450px] sm:max-w-full h-full">
+          <SheetHeader>
+            <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
+          </SheetHeader>
+          <InviteMemberForm />
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+
   return (
-    <div className="container py-8">
+    <div className="container py-8 pb-24 md:pb-8">
       <TeamMembersHeader />
       <TeamMembersFilters 
         viewMode={viewMode} 
@@ -53,6 +73,7 @@ export const TeamMembersContent = () => {
           itemsPerPage={9}
         />
       )}
+      {isMobile && <MobileInviteButton />}
     </div>
   );
 };
