@@ -1,7 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { GoogleSignInButton } from "./GoogleSignInButton";
-import { AuthDivider } from "./AuthDivider";
 
 interface RoleSelectionProps {
   selectedRole: string;
@@ -19,7 +16,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
               md:bg-white md:hover:bg-gray-50/80
               bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
-              ${selectedRole === "supplier" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
+              ${selectedRole === "supplier" ? "md:border-primary" : ""}`}
             onClick={() => onRoleChange("supplier")}
           >
             <img 
@@ -38,7 +35,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
               md:bg-white md:hover:bg-gray-50/80
               bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
-              ${selectedRole === "buyer" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
+              ${selectedRole === "buyer" ? "md:border-primary" : ""}`}
             onClick={() => onRoleChange("buyer")}
           >
             <img 
