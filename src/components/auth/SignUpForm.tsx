@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { AuthDivider } from "./AuthDivider";
-import { Link } from "react-router-dom";
 
 export const SignUpForm = () => {
   const {
@@ -86,14 +85,6 @@ export const SignUpForm = () => {
             />
             <AuthDivider />
             <GoogleSignInButton />
-            <div className="text-center">
-              <p className="text-white/70 md:text-gray-500">
-                Already have an account?{" "}
-                <Link to="/" className="text-white md:text-primary hover:underline font-medium">
-                  Sign in
-                </Link>
-              </p>
-            </div>
           </div>
         );
       case 2:
@@ -149,7 +140,7 @@ export const SignUpForm = () => {
       <SignUpSuccessDialog isOpen={isSuccess} />
 
       <AuthCard 
-        title="Sign up for free"
+        title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
         <div className="min-h-[calc(100vh-16rem)] md:min-h-0 flex flex-col">

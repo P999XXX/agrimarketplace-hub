@@ -25,17 +25,7 @@ const Index = () => {
       </div>
 
       <div className="container mx-auto min-h-screen px-6 py-4 relative z-1">
-        <div className="flex justify-between items-center">
-          <Logo />
-          <div className="flex gap-4">
-            <Button asChild variant="ghost" className="text-white hover:text-white hover:bg-white/10">
-              <Link to="/signin">Sign In</Link>
-            </Button>
-            <Button asChild className="bg-white text-brand-600 hover:bg-white/90">
-              <Link to="/signup">Sign Up</Link>
-            </Button>
-          </div>
-        </div>
+        <Logo />
         
         <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
           <div className="w-full lg:w-1/2 lg:pe-12">
