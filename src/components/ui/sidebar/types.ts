@@ -15,7 +15,8 @@ export type SidebarProviderProps = {
   defaultOpen?: boolean
   open?: boolean
   onOpenChange?: (open: boolean) => void
-} & React.ComponentProps<"div">
+  children: React.ReactNode
+}
 
 export type SidebarProps = {
   side?: "left" | "right"

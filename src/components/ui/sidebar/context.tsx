@@ -1,5 +1,5 @@
 import * as React from "react"
-import { SidebarContext } from "./types"
+import { SidebarContext, SidebarProviderProps } from "./types"
 import { useIsMobile } from "@/hooks/use-mobile"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
@@ -16,8 +16,8 @@ export function useSidebar() {
   return context
 }
 
-export const SidebarProvider = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
-  ({ defaultOpen = true, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }, ref) => {
+export const SidebarProvider = React.forwardRef<HTMLDivElement, SidebarProviderProps>(
+  ({ defaultOpen = true, open: openProp, onOpenChange: setOpenProp, className, style, children }, ref) => {
     const isMobile = useIsMobile()
     const [openMobile, setOpenMobile] = React.useState(false)
     const [_open, _setOpen] = React.useState(defaultOpen)
@@ -75,7 +75,6 @@ export const SidebarProvider = React.forwardRef<HTMLDivElement, React.ComponentP
           } as React.CSSProperties}
           className="group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar"
           ref={ref}
-          {...props}
         >
           {children}
         </div>
