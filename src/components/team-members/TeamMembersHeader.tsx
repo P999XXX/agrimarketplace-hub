@@ -11,7 +11,7 @@ export const TeamMembersHeader = () => {
       </h1>
       <Sheet>
         <SheetTrigger asChild>
-          <Button>
+          <Button className="hidden md:inline-flex">
             <Plus className="h-4 w-4 mr-2" />
             Invite Member
           </Button>
