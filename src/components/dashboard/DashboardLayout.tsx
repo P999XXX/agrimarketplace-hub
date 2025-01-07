@@ -106,7 +106,7 @@ const CustomSidebarTrigger = () => {
   const { state } = useSidebar();
   
   return (
-    <SidebarTrigger className="text-white">
+    <SidebarTrigger className="text-white hover:text-white absolute bottom-4">
       {state === "expanded" ? (
         <ChevronLeft className="h-5 w-5" />
       ) : (
@@ -127,7 +127,6 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
-              <CustomSidebarTrigger />
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -137,6 +136,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
+          <CustomSidebarTrigger />
         </Sidebar>
 
         {/* Main Content */}
