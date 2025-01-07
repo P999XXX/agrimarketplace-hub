@@ -145,7 +145,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4">
+          <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4 sticky top-0 z-50 shadow-sm">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
