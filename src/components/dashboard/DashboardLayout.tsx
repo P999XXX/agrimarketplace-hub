@@ -51,7 +51,9 @@ const DashboardMenu = () => {
           <SidebarMenuItem key={item.href}>
             <SidebarMenuButton asChild tooltip={item.title}>
               <a href={item.href} className="flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-4 py-5 rounded-md transition-colors">
-                <item.icon size={20} />
+                <div className="flex items-center justify-center">
+                  <item.icon size={20} />
+                </div>
                 <span className={`text-[15px] font-medium transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>{item.title}</span>
               </a>
             </SidebarMenuButton>
