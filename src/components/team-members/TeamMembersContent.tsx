@@ -41,37 +41,39 @@ export const TeamMembersContent = () => {
   );
 
   return (
-    <div className="container pt-4 pb-8 pb-24 md:pb-8">
-      <TeamMembersHeader />
-      <TeamMembersFilters 
-        viewMode={viewMode} 
-        setViewMode={setViewMode}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        roleFilter={roleFilter}
-        setRoleFilter={setRoleFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
-      {viewMode === 'table' ? (
-        <TeamMembersTable 
+    <div className="container pt-4 pb-8 md:pb-8">
+      <div className="pb-24 md:pb-0">
+        <TeamMembersHeader />
+        <TeamMembersFilters 
+          viewMode={viewMode} 
+          setViewMode={setViewMode}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
           sortBy={sortBy}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={10}
+          setSortBy={setSortBy}
         />
-      ) : (
-        <TeamMembersGrid 
-          searchQuery={searchQuery}
-          roleFilter={roleFilter}
-          sortBy={sortBy}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={9}
-        />
-      )}
+        {viewMode === 'table' ? (
+          <TeamMembersTable 
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={10}
+          />
+        ) : (
+          <TeamMembersGrid 
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={9}
+          />
+        )}
+      </div>
       {isMobile && <MobileInviteButton />}
     </div>
   );
