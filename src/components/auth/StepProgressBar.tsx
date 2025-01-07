@@ -10,17 +10,17 @@ const StepProgressBar = ({ currentStep }: StepProgressBarProps) => {
       {[1, 2, 3].map((step) => (
         <div
           key={step}
-          className="flex-1 h-1.5 rounded-full transition-all duration-300"
-          style={{
-            background: step <= currentStep 
-              ? 'var(--primary-color, #008060)' // Desktop default
-              : '#E5E7EB',
-            ['@media (max-width: 768px)']: {
-              background: step <= currentStep 
-                ? '#004d3a' // Dunkleres Grün im Mobile View
-                : '#E5E7EB',
+          className={`
+            flex-1 h-1.5 rounded-full transition-all duration-300
+            ${step <= currentStep 
+              ? 'bg-[#008060] md:bg-[#008060]' // Desktop Farbe
+              : 'bg-[#E5E7EB]'
             }
-          }}
+            ${step <= currentStep 
+              ? 'max-md:bg-[#004d3a]' // Mobile Farbe (unter 768px)
+              : ''
+            }
+          `}
         />
       ))}
     </div>
