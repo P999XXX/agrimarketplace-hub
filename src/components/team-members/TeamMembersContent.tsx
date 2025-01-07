@@ -24,16 +24,6 @@ export const TeamMembersContent = () => {
   return (
     <div className="container py-8">
       <TeamMembersHeader />
-      <TeamMembersFilters 
-        viewMode={viewMode} 
-        setViewMode={setViewMode}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        roleFilter={roleFilter}
-        setRoleFilter={setRoleFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
       <Sheet>
         <SheetTrigger asChild>
           <Button className="md:hidden w-full mb-6">
@@ -48,6 +38,16 @@ export const TeamMembersContent = () => {
           <InviteMemberForm />
         </SheetContent>
       </Sheet>
+      <TeamMembersFilters 
+        viewMode={viewMode} 
+        setViewMode={setViewMode}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        roleFilter={roleFilter}
+        setRoleFilter={setRoleFilter}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
       {viewMode === 'table' ? (
         <TeamMembersTable 
           searchQuery={searchQuery}
