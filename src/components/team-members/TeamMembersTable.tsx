@@ -60,7 +60,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: TeamMember
               }`}
             >
               <TableCell className="whitespace-nowrap">
-                {member.name || '-'}
+                {member.name || 'Unnamed User'}
               </TableCell>
               <TableCell className="whitespace-nowrap">
                 <EmailCell email={member.email} />
