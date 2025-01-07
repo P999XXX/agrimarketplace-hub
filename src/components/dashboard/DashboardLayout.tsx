@@ -65,12 +65,12 @@ const CustomSidebarTrigger = () => {
         const trigger = document.querySelector('[data-sidebar="trigger"]') as HTMLElement;
         if (trigger) trigger.click();
       }} 
-      className="flex items-center justify-center w-8 h-8 text-white rounded-md hover:bg-white/10 transition-colors focus:outline-none"
+      className="flex items-center justify-center w-10 h-10 text-white rounded-md hover:bg-white/10 transition-colors focus:outline-none"
     >
       {state === "expanded" ? (
-        <PanelLeftClose className="h-5 w-5" />
+        <PanelLeftClose className="h-6 w-6" />
       ) : (
-        <PanelLeftOpen className="h-5 w-5" />
+        <PanelLeftOpen className="h-6 w-6" />
       )}
     </button>
   );
