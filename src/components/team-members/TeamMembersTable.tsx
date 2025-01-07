@@ -5,6 +5,8 @@ import { format } from "date-fns";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -23,7 +25,7 @@ export const TeamMembersTable = ({
   setCurrentPage,
   itemsPerPage
 }: TeamMembersTableProps) => {
-  const { data: allTeamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const { data: allTeamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -53,8 +55,26 @@ export const TeamMembersTable = ({
     }
   };
 
+  if (error) {
+    return (
+      <Alert variant="destructive" className="mb-6">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          {error instanceof Error ? error.message : 'Failed to load team members'}
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
   if (isLoading) {
-    return <div className="text-center py-4">Loading...</div>;
+    return (
+      <div className="space-y-3">
+        <div className="h-8 bg-gray-200 animate-pulse rounded" />
+        <div className="h-12 bg-gray-100 animate-pulse rounded" />
+        <div className="h-12 bg-gray-100 animate-pulse rounded" />
+        <div className="h-12 bg-gray-100 animate-pulse rounded" />
+      </div>
+    );
   }
 
   if (allTeamMembers.length === 0) {
