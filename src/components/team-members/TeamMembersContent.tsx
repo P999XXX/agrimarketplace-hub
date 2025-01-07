@@ -118,7 +118,7 @@ export const TeamMembersContent = () => {
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell>John Doe</TableCell>
+                <TableCell className="font-semibold">John Doe</TableCell>
                 <TableCell>john@example.com</TableCell>
                 <TableCell>
                   <Badge className={getRoleBadgeClass()}>Admin</Badge>
