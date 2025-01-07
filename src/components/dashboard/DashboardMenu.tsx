@@ -34,12 +34,12 @@ const menuItems = [
 ];
 
 export const DashboardMenu = () => {
-  const { state } = useSidebar();
+  const { state, isMobile } = useSidebar();
   const location = useLocation();
   
   return (
     <div className="space-y-2">
-      <h2 className={`px-4 text-lg font-semibold text-brand-700 pt-6 transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
+      <h2 className={`px-4 text-lg font-semibold text-brand-700 pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
         Menu
       </h2>
       <SidebarMenu>
@@ -54,7 +54,7 @@ export const DashboardMenu = () => {
                       asChild
                       variant="ghost"
                       className={`w-full justify-start gap-3 transition-colors min-h-[44px] ${
-                        state === "collapsed" ? "px-[5px]" : "px-4"
+                        !isMobile && state === "collapsed" ? "px-[5px]" : "px-4"
                       } py-2.5 rounded-md ${
                         isActive 
                           ? "text-brand-900 bg-brand-50/50" 
@@ -64,14 +64,14 @@ export const DashboardMenu = () => {
                       <a href={item.href}>
                         <div className="flex items-center gap-3">
                           <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-all duration-200 ${
-                            state === "collapsed" ? "w-full" : ""
+                            !isMobile && state === "collapsed" ? "w-full" : ""
                           }`}>
                             <item.icon className={`w-5 h-5 transition-all duration-200 ${
-                              state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
+                              !isMobile && state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
                             }`} />
                           </div>
                           <span className={`text-[15px] font-medium transition-all duration-200 ${
-                            state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
+                            !isMobile && state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
                           }`}>
                             {item.title}
                           </span>
@@ -79,7 +79,7 @@ export const DashboardMenu = () => {
                       </a>
                     </Button>
                   </TooltipTrigger>
-                  {state === "collapsed" && (
+                  {!isMobile && state === "collapsed" && (
                     <TooltipContent side="right">
                       {item.title}
                     </TooltipContent>
