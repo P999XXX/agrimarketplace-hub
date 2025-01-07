@@ -106,7 +106,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== 1 && setCurrentPage(1)}
-                className={`hidden sm:flex ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
               </PaginationLink>
@@ -166,7 +166,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== totalPages && setCurrentPage(totalPages)}
-                className={`hidden sm:flex ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
               </PaginationLink>
