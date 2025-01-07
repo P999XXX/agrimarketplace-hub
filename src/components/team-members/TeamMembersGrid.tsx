@@ -4,6 +4,7 @@ import { EmailCell } from "./EmailCell";
 import { format } from "date-fns";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface TeamMembersGridProps {
   searchQuery: string;
@@ -91,9 +92,24 @@ export const TeamMembersGrid = ({
       {totalPages > 1 && (
         <Pagination className="justify-center">
           <PaginationContent>
+            <PaginationItem>
+              <PaginationLink
+                onClick={() => setCurrentPage(1)}
+                className="hidden sm:flex"
+                disabled={currentPage === 1}
+              >
+                <ChevronsLeft className="h-4 w-4" />
+              </PaginationLink>
+            </PaginationItem>
+            
             {currentPage > 1 && (
               <PaginationItem>
-                <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
+                <PaginationPrevious 
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  className="gap-1 px-2.5"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </PaginationPrevious>
               </PaginationItem>
             )}
             
@@ -128,9 +144,24 @@ export const TeamMembersGrid = ({
             
             {currentPage < totalPages && (
               <PaginationItem>
-                <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
+                <PaginationNext 
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  className="gap-1 px-2.5"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </PaginationNext>
               </PaginationItem>
             )}
+
+            <PaginationItem>
+              <PaginationLink
+                onClick={() => setCurrentPage(totalPages)}
+                className="hidden sm:flex"
+                disabled={currentPage === totalPages}
+              >
+                <ChevronsRight className="h-4 w-4" />
+              </PaginationLink>
+            </PaginationItem>
           </PaginationContent>
         </Pagination>
       )}
