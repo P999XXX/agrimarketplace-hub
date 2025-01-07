@@ -1,4 +1,4 @@
-import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarTrigger, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
+import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarTrigger, SidebarGroup, SidebarGroupContent, useSidebar } from "@/components/ui/sidebar";
 import { Logo } from "@/components/auth/Logo";
 import { DashboardMenu } from "./DashboardMenu";
 import { DashboardHeader } from "./DashboardHeader";
@@ -27,8 +27,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
               <div className="flex items-center">
-                <CustomSidebarTrigger />
-                <SidebarTrigger className="hidden" />
+                <SidebarTrigger className="text-white hover:bg-brand-600/50" />
               </div>
             </div>
           </SidebarHeader>
