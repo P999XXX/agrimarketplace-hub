@@ -71,7 +71,7 @@ export const TeamMembersFilters = ({
             variant="ghost"
             size="icon"
             onClick={toggleView}
-            className={`h-10 ${viewMode === 'grid' ? 'bg-gray-100 hover:bg-gray-200' : 'hover:bg-gray-100'}`}
+            className="h-10 hover:bg-gray-100"
           >
             {viewMode === 'table' ? (
               <LayoutGrid className="h-4 w-4" />
