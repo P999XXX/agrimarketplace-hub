@@ -49,7 +49,9 @@ export const DashboardMenu = () => {
               <Button
                 asChild
                 variant="ghost"
-                className={`w-full justify-start gap-3 px-4 py-2.5 rounded-md transition-colors min-h-[44px] ${
+                className={`w-full justify-start gap-3 transition-colors min-h-[44px] ${
+                  state === "collapsed" ? "px-[5px]" : "px-4"
+                } py-2.5 rounded-md ${
                   isActive 
                     ? "text-brand-900 bg-brand-50/50" 
                     : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
