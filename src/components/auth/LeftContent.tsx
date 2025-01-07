@@ -18,6 +18,7 @@ export const LeftContent = () => {
       <div className="lg:pe-12 mb-8">
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6">
           Connecting farmers
+          & exporters
           <br />
           with{" "}
           <span key={currentWordIndex} className="text-secondary inline-block animate-fade">
