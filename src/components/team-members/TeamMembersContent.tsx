@@ -26,7 +26,7 @@ export const TeamMembersContent = () => {
           </SheetTrigger>
           <SheetContent className="w-full sm:w-[450px] sm:max-w-full h-full">
             <SheetHeader>
-              <SheetTitle>Invite Team Member</SheetTitle>
+              <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
             </SheetHeader>
             <InviteMemberForm />
           </SheetContent>
