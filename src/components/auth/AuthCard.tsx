@@ -50,7 +50,7 @@ export const AuthCard = ({ title, subtitle, children, variant = 'signup' }: Auth
           {variant === 'signin' ? <SignInLeftContent /> : <LeftContent />}
 
           {/* Right side with form */}
-          <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">
+          <div className="w-full lg:w-[45%] xl:w-[30%] relative z-2">
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
               <div className="p-0 md:p-8">
                 <div className="mb-6">
