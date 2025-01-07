@@ -43,9 +43,9 @@ const DashboardMenu = () => {
       {menuItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton asChild tooltip={item.title}>
-            <a href={item.href} className="flex items-center gap-2">
+            <a href={item.href} className="flex items-center gap-2 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-3 py-2 rounded-md transition-colors">
               <item.icon className="h-4 w-4" />
-              <span>{item.title}</span>
+              <span className="font-medium">{item.title}</span>
             </a>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -58,13 +58,13 @@ const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="md:hidden text-brand-700">
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 p-0">
-        <div className="flex h-full flex-col bg-white">
-          <div className="border-b p-4">
+      <SheetContent side="left" className="w-72 p-0 bg-white">
+        <div className="flex h-full flex-col">
+          <div className="border-b p-4 bg-brand-700">
             <Logo />
           </div>
           <SidebarContent>
@@ -87,10 +87,10 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     <SidebarProvider defaultOpen={!isMobile}>
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
-        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex">
-          <SidebarHeader className="flex items-center justify-between border-b p-4">
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
+          <SidebarHeader className="flex items-center justify-between border-b p-4 bg-brand-700">
             <Logo />
-            <SidebarTrigger />
+            <SidebarTrigger className="text-white hover:text-white/80" />
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
@@ -103,13 +103,13 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className="flex h-16 items-center justify-between border-b bg-white/50 px-4 backdrop-blur-sm">
+          <header className="flex h-16 items-center justify-between border-b bg-white px-4">
             <div className="flex items-center gap-3">
               <MobileNav />
               <Logo />
             </div>
           </header>
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 bg-gray-50">{children}</main>
         </div>
       </div>
     </SidebarProvider>
