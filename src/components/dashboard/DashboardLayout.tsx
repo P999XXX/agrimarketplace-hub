@@ -7,6 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -80,7 +81,13 @@ const DashboardMenu = () => {
 };
 
 const CustomSidebarTrigger = () => {
-  const { state } = useSidebar();
+  const { state, setOpen } = useSidebar();
+
+  // Speichern des Sidebar-Zustands im localStorage
+  useEffect(() => {
+    localStorage.setItem('sidebarState', state);
+  }, [state]);
+
   return (
     <button 
       onClick={() => {
@@ -170,8 +177,11 @@ const DashboardBreadcrumb = () => {
 };
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  // Lesen des gespeicherten Sidebar-Zustands beim ersten Laden
+  const defaultOpen = localStorage.getItem('sidebarState') === 'expanded';
+
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={defaultOpen}>
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
