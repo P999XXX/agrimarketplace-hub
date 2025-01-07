@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface Invitation {
   id: string;
   email: string;
-  name: string | null;  // Neue Eigenschaft hinzugefügt
+  name: string | null;
   role: string;
   status: string;
   created_at: string;
@@ -20,7 +20,7 @@ interface Profile {
 export interface TeamMember {
   id: string;
   email: string;
-  name: string | null;  // Neue Eigenschaft hinzugefügt
+  name: string | null;
   role: string;
   status: string;
   created_at: string;
@@ -51,7 +51,7 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
       // 3. Get invitations
       let invitationsQuery = supabase
         .from('invitations')
-        .select('id, email, role, status, created_at, invited_by')
+        .select('id, email, name, role, status, created_at, invited_by')  // name hinzugefügt
         .eq('company_id', profile.company_id);
 
       if (searchQuery) {
