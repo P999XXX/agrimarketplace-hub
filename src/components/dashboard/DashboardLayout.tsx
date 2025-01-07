@@ -4,6 +4,7 @@ import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, Menu } from 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSidebar } from "@/components/ui/sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -64,7 +65,7 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
         <div className="flex h-full flex-col">
-          <div className="border-b p-4 bg-brand-700">
+          <div className="h-16 flex items-center border-b p-4 bg-brand-700">
             <Logo />
           </div>
           <SidebarContent>
@@ -80,6 +81,17 @@ const MobileNav = () => {
   );
 };
 
+const HeaderLogo = () => {
+  const { state } = useSidebar();
+  const isMobile = useIsMobile();
+  
+  if (!isMobile && state === "expanded") {
+    return null;
+  }
+  
+  return <Logo />;
+};
+
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const isMobile = useIsMobile();
 
@@ -88,9 +100,12 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
-          <SidebarHeader className="flex items-center justify-between border-b p-4 bg-brand-700">
-            <Logo />
-            <SidebarTrigger className="text-white hover:text-white/80" />
+          <SidebarHeader className="h-16 flex items-center justify-between border-b px-4 bg-brand-700">
+            <div className="flex items-center gap-2 w-full">
+              <Logo />
+              <div className="flex-1" />
+              <SidebarTrigger className="text-white hover:text-white/80" />
+            </div>
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
@@ -103,10 +118,10 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className="flex h-16 items-center justify-between border-b bg-white px-4">
+          <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4">
             <div className="flex items-center gap-3">
               <MobileNav />
-              <Logo />
+              <HeaderLogo />
             </div>
           </header>
           <main className="flex-1 bg-gray-50">{children}</main>
