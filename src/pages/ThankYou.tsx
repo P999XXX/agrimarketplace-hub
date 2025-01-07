@@ -30,19 +30,9 @@ export default function ThankYou() {
         <Logo />
         
         {/* Main content */}
-        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
-          {/* Left side content */}
-          <div className="w-full lg:w-[55%] xl:w-[60%] space-y-8 text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Welcome to Cropio!
-            </h1>
-            <p className="text-xl md:text-2xl text-white/80">
-              Your gateway to efficient agricultural trade. Connect, trade, and grow with us.
-            </p>
-          </div>
-
-          {/* Right side with card */}
-          <div className="w-full lg:w-[45%] xl:w-[40%] relative z-2">
+        <div className="min-h-[calc(100vh-theme(space.16))] flex items-center justify-center pt-8 lg:pt-0">
+          {/* Card */}
+          <div className="w-full max-w-md relative z-2">
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
               <div className="p-0 md:p-8">
                 <div className="space-y-8 text-center">
