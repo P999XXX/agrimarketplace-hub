@@ -1,6 +1,6 @@
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarTrigger, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
 import { Logo } from "@/components/auth/Logo";
-import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, Menu } from "lucide-react";
+import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, Menu, ChevronRight, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -102,6 +102,20 @@ const SidebarLogo = () => {
   return <Logo />;
 };
 
+const CustomSidebarTrigger = () => {
+  const { state } = useSidebar();
+  
+  return (
+    <SidebarTrigger className="text-white">
+      {state === "expanded" ? (
+        <ChevronLeft className="h-5 w-5" />
+      ) : (
+        <ChevronRight className="h-5 w-5" />
+      )}
+    </SidebarTrigger>
+  );
+};
+
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const isMobile = useIsMobile();
 
@@ -113,7 +127,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
-              <SidebarTrigger className="text-white hover:text-white/80" />
+              <CustomSidebarTrigger />
             </div>
           </SidebarHeader>
           <SidebarContent>
