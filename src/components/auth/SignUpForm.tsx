@@ -77,7 +77,7 @@ export const SignUpForm = () => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade">
             <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <RoleSelection
               selectedRole={formData.userType}
@@ -89,7 +89,7 @@ export const SignUpForm = () => {
         );
       case 2:
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 animate-fade">
             <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <CompanyField
               companyName={formData.companyName}
@@ -104,7 +104,7 @@ export const SignUpForm = () => {
         );
       case 3:
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 animate-fade">
             <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <EmailField
               email={formData.email}
@@ -144,7 +144,9 @@ export const SignUpForm = () => {
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
         <div className="space-y-6">
-          <StepProgressBar currentStep={currentStep} />
+          <div className="animate-fade">
+            <StepProgressBar currentStep={currentStep} />
+          </div>
           
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -157,7 +159,7 @@ export const SignUpForm = () => {
             {renderStepContent()}
 
             {currentStep > 1 && (
-              <div className="flex justify-between mt-8 fixed md:relative bottom-0 left-0 right-0 p-4 md:p-0 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none">
+              <div className="flex justify-between mt-8 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none animate-fade">
                 <Button
                   type="button"
                   variant="outline"
