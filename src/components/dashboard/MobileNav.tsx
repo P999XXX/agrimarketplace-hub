@@ -10,7 +10,7 @@ export const MobileNav = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
-          <PanelLeftOpen size={20} className="text-white" />
+          <PanelLeftOpen size={20} className="text-gray-500" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
