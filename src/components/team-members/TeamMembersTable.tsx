@@ -1,10 +1,24 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { EmailCell } from "./EmailCell";
-import { format } from "date-fns";
+import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { EmailCell } from "./EmailCell";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -15,178 +29,140 @@ interface TeamMembersTableProps {
   itemsPerPage: number;
 }
 
-export const TeamMembersTable = ({ 
-  searchQuery, 
-  roleFilter, 
+export const TeamMembersTable = ({
+  searchQuery,
+  roleFilter,
   sortBy,
   currentPage,
   setCurrentPage,
-  itemsPerPage
+  itemsPerPage,
 }: TeamMembersTableProps) => {
-  const { data: allTeamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
-
-  const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const teamMembers = allTeamMembers.slice(startIndex, startIndex + itemsPerPage);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const getRoleBadgeClass = () => {
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active':
-      case 'accepted':
-        return 'bg-green-100 text-green-700 hover:bg-green-200';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
-      case 'declined':
-      case 'inactive':
-        return 'bg-red-100 text-red-700 hover:bg-red-200';
-      default:
-        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-    }
-  };
+  const { data: teamMembers, isLoading } = useTeamMembers();
+  const [selectedMember, setSelectedMember] = useState<string | null>(null);
 
   if (isLoading) {
-    return <div className="text-center py-4">Loading...</div>;
-  }
-
-  if (allTeamMembers.length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-gray-500 text-lg">No team members found</p>
-        <p className="text-gray-400 text-sm mt-2">Try adjusting your filters or search criteria</p>
+      <div className="space-y-3">
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
       </div>
     );
   }
 
+  const filteredMembers = teamMembers?.filter((member) => {
+    const matchesSearch =
+      member.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.email.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesRole = !roleFilter || member.role === roleFilter;
+    return matchesSearch && matchesRole;
+  });
+
+  const sortedMembers = [...(filteredMembers || [])].sort((a, b) => {
+    switch (sortBy) {
+      case "name":
+        return (a.name || "").localeCompare(b.name || "");
+      case "email":
+        return a.email.localeCompare(b.email);
+      case "role":
+        return (a.role || "").localeCompare(b.role || "");
+      case "status":
+        return (a.status || "").localeCompare(b.status || "");
+      default:
+        return 0;
+    }
+  });
+
+  const totalPages = Math.ceil((sortedMembers?.length || 0) / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentMembers = sortedMembers?.slice(startIndex, endIndex);
+
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="whitespace-nowrap">Name</TableHead>
-              <TableHead className="whitespace-nowrap">Email</TableHead>
-              <TableHead className="whitespace-nowrap">Role</TableHead>
-              <TableHead className="whitespace-nowrap">Status</TableHead>
-              <TableHead className="whitespace-nowrap">Invited by</TableHead>
-              <TableHead className="whitespace-nowrap">Invited</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {teamMembers.map((member) => (
-              <TableRow
-                key={member.id}
-                className={`transition-all duration-500 ${
-                  Date.now() - new Date(member.created_at).getTime() < 3000
-                    ? 'animate-[highlight_1s_ease-in-out]'
-                    : ''
-                }`}
-              >
-                <TableCell className="whitespace-nowrap">
-                  {member.name || 'Unnamed User'}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <EmailCell email={member.email} />
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {format(new Date(member.created_at), 'MMM d, yyyy')}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-
-      {totalPages > 1 && (
-        <Pagination className="justify-center">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => currentPage !== 1 && handlePageChange(1)}
-                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
-              >
-                <ChevronsLeft className="h-4 w-4" />
-              </PaginationLink>
-            </PaginationItem>
-            
-            {currentPage > 1 && (
-              <PaginationItem>
-                <PaginationPrevious 
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className="gap-1 px-2.5"
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="w-[50px]"></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {currentMembers?.map((member) => (
+            <TableRow key={member.id}>
+              <TableCell>{member.name}</TableCell>
+              <TableCell>
+                <EmailCell email={member.email} />
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant="outline"
+                  className="bg-brand-50/50 text-brand-700 border-0"
                 >
-                  <ChevronLeft className="h-4 w-4" />
-                </PaginationPrevious>
-              </PaginationItem>
-            )}
-            
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-              if (
-                page === 1 ||
-                page === totalPages ||
-                (page >= currentPage - 1 && page <= currentPage + 1)
-              ) {
-                return (
-                  <PaginationItem key={page}>
-                    <PaginationLink
-                      onClick={() => handlePageChange(page)}
-                      isActive={page === currentPage}
+                  {member.role}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant="outline"
+                  className={`${
+                    member.status === "pending"
+                      ? "bg-yellow-50/50 text-yellow-700"
+                      : "bg-green-50/50 text-green-700"
+                  } border-0`}
+                >
+                  {member.status}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="h-8 w-8 p-0 text-gray-500 hover:text-gray-900"
                     >
-                      {page}
-                    </PaginationLink>
-                  </PaginationItem>
-                );
-              } else if (
-                page === currentPage - 2 ||
-                page === currentPage + 2
-              ) {
-                return (
-                  <PaginationItem key={page}>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                );
-              }
-              return null;
-            })}
-            
-            {currentPage < totalPages && (
-              <PaginationItem>
-                <PaginationNext 
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  className="gap-1 px-2.5"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </PaginationNext>
-              </PaginationItem>
-            )}
-
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
-              >
-                <ChevronsRight className="h-4 w-4" />
-              </PaginationLink>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="bg-white">
+                    <DropdownMenuItem
+                      className="text-red-600 focus:text-red-600 cursor-pointer"
+                      onClick={() => setSelectedMember(member.id)}
+                    >
+                      Delete Member
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-end space-x-2 py-4 px-4 border-t">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <div className="text-sm text-gray-500">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </div>
       )}
     </div>
   );
