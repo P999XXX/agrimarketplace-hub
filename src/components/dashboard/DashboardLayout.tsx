@@ -56,9 +56,11 @@ const DashboardMenu = () => {
                 <a 
                   href={item.href} 
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-md transition-colors min-h-[44px] ${
-                    isActive 
-                      ? "text-brand-900 bg-brand-50/50" 
-                      : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
+                    state === "collapsed" 
+                      ? "text-brand-700" 
+                      : isActive 
+                        ? "text-brand-900 bg-brand-50/50" 
+                        : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
                   }`}
                 >
                   <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
