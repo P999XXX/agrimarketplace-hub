@@ -19,7 +19,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
-          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
+          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-white shadow-sm">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
               <div className="flex items-center">
@@ -38,7 +38,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4 sticky top-0 z-50 shadow-sm">
+          <header className="h-16 flex items-center justify-between border-b bg-white px-4 sticky top-0 z-50 shadow-sm">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
