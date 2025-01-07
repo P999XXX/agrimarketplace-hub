@@ -82,16 +82,14 @@ export const TeamMembersTable = ({
           </TableHeader>
           <TableBody>
             {teamMembers.map((member) => (
-
-<TableRow
-  key={member.id}
-  className={`transition-all duration-500 dark:hover:bg-dark-300/50 ${
-    Date.now() - new Date(member.created_at).getTime() < 3000
-      ? 'animate-[highlight_1s_ease-in-out]'
-      : ''
-  }`}
->
-
+              <TableRow
+                key={member.id}
+                className={`transition-all duration-500 ${
+                  Date.now() - new Date(member.created_at).getTime() < 3000
+                    ? 'animate-[highlight_1s_ease-in-out]'
+                    : ''
+                }`}
+              >
                 <TableCell className="whitespace-nowrap">
                   {member.name || 'Unnamed User'}
                 </TableCell>

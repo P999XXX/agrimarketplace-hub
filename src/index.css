@@ -25,28 +25,6 @@
     --ring: 120 100% 17%;
     --radius: 0.50rem;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 120 100% 17%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
 }
 
 @layer base {
@@ -55,40 +33,30 @@
   }
   
   /* Webkit Scrollbar Styles */
-  .dark ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     @apply w-1.5 h-1.5;
   }
 
-  .dark ::-webkit-scrollbar-track {
-    @apply bg-dark-200;
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
   }
 
-  .dark ::-webkit-scrollbar-thumb {
-    @apply bg-dark-400 rounded-full hover:bg-dark-500 transition-colors;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
   }
 
   /* Firefox Scrollbar Styles */
-  .dark * {
+  * {
     scrollbar-width: thin;
-    scrollbar-color: #454e59 #222831;
+    scrollbar-color: #D1D5DB transparent;
   }
 
   body {
     @apply bg-background text-foreground;
   }
-
-  .dark body {
-    @apply text-dark-900;
-  }
-
   h1, h2, h3, h4, h5, h6 {
     @apply font-[700];
   }
-
-  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    @apply text-white;
-  }
-
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
   }
@@ -101,21 +69,11 @@
   h4 {
     @apply text-xl md:text-2xl lg:text-3xl;
   }
-
   .btn-primary {
     @apply bg-primary hover:bg-primary/90 text-white py-6;
   }
-
-  .dark .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white;
-  }
-
   .card-shadow {
     @apply shadow-xl border-0;
-  }
-
-  .dark .card-shadow {
-    @apply shadow-2xl shadow-dark-100/10;
   }
 }
 

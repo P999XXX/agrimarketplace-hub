@@ -72,7 +72,7 @@ export const TeamMembersGrid = ({
         {teamMembers.map((member) => (
           <Card
             key={member.id}
-            className={`transition-all duration-500 dark:bg-dark-100 dark:border-dark-300 dark:hover:bg-dark-200 ${
+            className={`transition-all duration-500 ${
               Date.now() - new Date(member.created_at).getTime() < 3000
                 ? 'animate-[highlight_1s_ease-in-out]'
                 : ''
@@ -80,18 +80,18 @@ export const TeamMembersGrid = ({
           >
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-dark-300 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
                   {member.name?.charAt(0).toUpperCase() || member.email.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1">
-                  <div className="font-medium dark:text-dark-900">{member.name || 'Unnamed User'}</div>
+                  <div className="font-medium">{member.name || 'Unnamed User'}</div>
                   <EmailCell email={member.email} />
                   <div className="mt-2 space-y-1.5">
-                    <Badge className="bg-gray-100 text-gray-700 dark:bg-dark-300 dark:text-dark-800">{member.role}</Badge>
+                    <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
                     <div className="block">
                       <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-dark-600">
+                    <div className="text-sm text-gray-500">
                       <p>Invited by: {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</p>
                       <p>Invited: {format(new Date(member.created_at), 'MMM d, yyyy')}</p>
                     </div>
