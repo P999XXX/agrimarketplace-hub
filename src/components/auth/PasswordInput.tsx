@@ -59,14 +59,14 @@ export const PasswordInput = ({
       </div>
       
       {/* Password description - only show on sign up */}
-      {id === "password" && onValidationChange && (
+      {id === "password" && onValidationChange && !window.location.pathname.includes('signin') && (
         <p className="text-[0.85rem] leading-4 text-white/80 md:text-muted-foreground mt-2">
           Password must be at least 8 characters and include uppercase, lowercase, and numbers.
         </p>
       )}
       
       {/* Password requirements as chips - only show on sign up */}
-      {id === "password" && onValidationChange && <PasswordValidationChips value={value} />}
+      {id === "password" && onValidationChange && !window.location.pathname.includes('signin') && <PasswordValidationChips value={value} />}
     </div>
   );
 };
