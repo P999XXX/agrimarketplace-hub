@@ -28,7 +28,7 @@ const Index = () => {
         <Logo />
         
         <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
-          <div className="w-full lg:w-1/2 lg:pe-12">
+          <div className="w-full lg:w-1/2 md:pl-[15px] lg:pl-16">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6 animate-fade">
               Transform your 
               <br />
