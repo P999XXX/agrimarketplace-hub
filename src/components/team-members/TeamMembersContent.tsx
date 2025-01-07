@@ -14,8 +14,7 @@ export const TeamMembersContent = () => {
   return (
     <div className="container py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Users className="h-6 w-6" />
+        <h1 className="text-2xl font-bold">
           Team Members
         </h1>
         <Sheet>
