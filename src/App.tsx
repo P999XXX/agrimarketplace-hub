@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
+import TeamMembers from "./pages/TeamMembers";
 import AIDevelopment from "./pages/AIDevelopment";
 import { useEffect, useState } from "react";
 import { supabase } from "./integrations/supabase/client";
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/team-members" element={<TeamMembers />} />
             <Route path="/ai-development" element={<AIDevelopment />} />
           </Routes>
         </BrowserRouter>
