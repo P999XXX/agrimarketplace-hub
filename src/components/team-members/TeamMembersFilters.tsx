@@ -40,7 +40,7 @@ export const TeamMembersFilters = ({
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+        <div className="flex gap-2 w-full sm:w-auto">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
             <SelectTrigger className="w-full sm:w-[180px] h-10">
               <Filter className="h-4 w-4 mr-2" />
@@ -71,7 +71,7 @@ export const TeamMembersFilters = ({
             variant="outline"
             size="icon"
             onClick={toggleView}
-            className="h-10 hover:bg-gray-100 w-full sm:w-10"
+            className="h-10 hover:bg-gray-100"
           >
             {viewMode === 'table' ? (
               <LayoutGrid className="h-4 w-4" />
