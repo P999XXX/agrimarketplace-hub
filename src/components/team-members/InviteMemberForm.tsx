@@ -71,16 +71,17 @@ export const InviteMemberForm = () => {
         },
       });
 
+      // Close the sheet first
+      const closeButton = document.querySelector('[data-sheet-close]') as HTMLButtonElement;
+      if (closeButton) closeButton.click();
+
+      // Then show the success toast
       toast({
         title: "Invitation sent",
         description: "Team member has been invited successfully.",
       });
 
       queryClient.invalidateQueries({ queryKey: ['team-members'] });
-      
-      // Close the sheet
-      const closeButton = document.querySelector('[data-sheet-close]') as HTMLButtonElement;
-      if (closeButton) closeButton.click();
 
     } catch (error) {
       console.error('Error sending invitation:', error);
