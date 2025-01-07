@@ -10,14 +10,14 @@ export const MobileNav = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
-          <PanelLeftOpen size={20} className="text-gray-500" />
+          <PanelLeftOpen className="w-5 h-5 text-gray-500" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
         <div className="flex h-full flex-col">
           <div className="h-16 flex items-center justify-between border-b p-4 bg-white">
             <Logo />
-            <PanelLeftClose size={20} className="text-gray-500" />
+            <PanelLeftClose className="w-5 h-5 text-gray-500" />
           </div>
           <SidebarContent>
             <SidebarGroup>
