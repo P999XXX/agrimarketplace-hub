@@ -3,8 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { format } from "date-fns";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { TeamMembersPagination } from "./TeamMembersPagination";
 
 interface TeamMembersGridProps {
   searchQuery: string;
@@ -14,100 +13,6 @@ interface TeamMembersGridProps {
   setCurrentPage: (page: number) => void;
   itemsPerPage: number;
 }
-
-const Pagination = ({ 
-  currentPage, 
-  setCurrentPage, 
-  totalItems, 
-  itemsPerPage 
-}: { 
-  currentPage: number;
-  setCurrentPage: (page: number) => void;
-  totalItems: number;
-  itemsPerPage: number;
-}) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return (
-    <Pagination className="justify-center">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationLink
-            onClick={() => currentPage !== 1 && handlePageChange(1)}
-            className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
-          >
-            <ChevronsLeft className="h-4 w-4" />
-          </PaginationLink>
-        </PaginationItem>
-        
-        {currentPage > 1 && (
-          <PaginationItem>
-            <PaginationPrevious 
-              onClick={() => handlePageChange(currentPage - 1)}
-              className="gap-1 px-2.5"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </PaginationPrevious>
-          </PaginationItem>
-        )}
-        
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-          if (
-            page === 1 ||
-            page === totalPages ||
-            (page >= currentPage - 1 && page <= currentPage + 1)
-          ) {
-            return (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  onClick={() => handlePageChange(page)}
-                  isActive={page === currentPage}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            );
-          } else if (
-            page === currentPage - 2 ||
-            page === currentPage + 2
-          ) {
-            return (
-              <PaginationItem key={page}>
-                <PaginationEllipsis />
-              </PaginationItem>
-            );
-          }
-          return null;
-        })}
-        
-        {currentPage < totalPages && (
-          <PaginationItem>
-            <PaginationNext 
-              onClick={() => handlePageChange(currentPage + 1)}
-              className="gap-1 px-2.5"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </PaginationNext>
-          </PaginationItem>
-        )}
-
-        <PaginationItem>
-          <PaginationLink
-            onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-            className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
-          >
-            <ChevronsRight className="h-4 w-4" />
-          </PaginationLink>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-  );
-};
 
 export const TeamMembersGrid = ({ 
   searchQuery, 
@@ -119,14 +24,8 @@ export const TeamMembersGrid = ({
 }: TeamMembersGridProps) => {
   const { data: allTeamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
-  const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const teamMembers = allTeamMembers.slice(startIndex, startIndex + itemsPerPage);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const getRoleBadgeClass = () => {
     return "bg-gray-100 text-gray-700 hover:bg-gray-200";
@@ -197,8 +96,8 @@ export const TeamMembersGrid = ({
         ))}
       </div>
       
-      {totalPages > 1 && (
-        <Pagination 
+      {allTeamMembers.length > itemsPerPage && (
+        <TeamMembersPagination 
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalItems={allTeamMembers.length}
@@ -209,4 +108,4 @@ export const TeamMembersGrid = ({
   );
 };
 
-TeamMembersGrid.Pagination = Pagination;
+TeamMembersGrid.Pagination = TeamMembersPagination;
