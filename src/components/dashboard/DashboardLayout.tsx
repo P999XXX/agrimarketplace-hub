@@ -58,9 +58,12 @@ const DashboardMenu = () => {
 const CustomSidebarTrigger = () => {
   const { state } = useSidebar();
   return (
-    <SidebarTrigger className="text-white">
+    <button 
+      onClick={() => state === "expanded" ? document.querySelector('[data-sidebar="trigger"]')?.click() : document.querySelector('[data-sidebar="trigger"]')?.click()} 
+      className="flex items-center justify-center w-8 h-8 text-white rounded-md focus:outline-none"
+    >
       {state === "expanded" ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-    </SidebarTrigger>
+    </button>
   );
 };
 
@@ -122,7 +125,10 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
-              <CustomSidebarTrigger />
+              <div className="flex items-center">
+                <CustomSidebarTrigger />
+                <SidebarTrigger className="hidden" />
+              </div>
             </div>
           </SidebarHeader>
           <SidebarContent>
