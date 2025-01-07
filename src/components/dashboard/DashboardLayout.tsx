@@ -42,8 +42,8 @@ const menuItems = [
 
 const DashboardMenu = () => {
   return (
-    <div className="space-y-6">
-      <h2 className="px-4 text-lg font-semibold text-brand-700">Account</h2>
+    <div className="space-y-4">
+      <h2 className="px-4 text-lg font-semibold text-brand-700 pt-6">Account</h2>
       <SidebarMenu>
         {menuItems.map((item) => (
           <SidebarMenuItem key={item.href}>
