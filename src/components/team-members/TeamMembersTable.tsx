@@ -25,28 +25,28 @@ export const TeamMembersTable = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Invited by</TableHead>
-            <TableHead>Joined</TableHead>
+            <TableHead className="whitespace-nowrap">Name</TableHead>
+            <TableHead className="whitespace-nowrap">Email</TableHead>
+            <TableHead className="whitespace-nowrap">Role</TableHead>
+            <TableHead className="whitespace-nowrap">Status</TableHead>
+            <TableHead className="whitespace-nowrap">Invited by</TableHead>
+            <TableHead className="whitespace-nowrap">Joined</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="font-semibold">John Doe</TableCell>
-            <TableCell>
+            <TableCell className="whitespace-nowrap font-semibold">John Doe</TableCell>
+            <TableCell className="whitespace-nowrap">
               <EmailCell email="john@example.com" />
             </TableCell>
-            <TableCell>
+            <TableCell className="whitespace-nowrap">
               <Badge className={getRoleBadgeClass()}>Admin</Badge>
             </TableCell>
-            <TableCell>
+            <TableCell className="whitespace-nowrap">
               <Badge className={getStatusBadgeClass('active')}>Active</Badge>
             </TableCell>
-            <TableCell>Sarah Smith</TableCell>
-            <TableCell>Jan 15, 2024</TableCell>
+            <TableCell className="whitespace-nowrap">Sarah Smith</TableCell>
+            <TableCell className="whitespace-nowrap">Jan 15, 2024</TableCell>
           </TableRow>
         </TableBody>
       </Table>
