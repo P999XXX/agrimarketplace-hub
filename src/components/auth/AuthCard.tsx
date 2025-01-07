@@ -51,7 +51,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
               <div className="p-0 md:p-8">
                 <div className="mb-6">
                   <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">
-                    {isMobile ? "Welcome back! Sign in." : title}
+                    {isMobile ? "Welcome back! Sign in" : title}
                   </h2>
                 </div>
                 
