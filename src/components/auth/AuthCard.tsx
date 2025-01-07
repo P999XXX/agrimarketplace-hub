@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
 import { SignInLeftContent } from "./SignInLeftContent";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AuthCardProps {
   title: ReactNode;
@@ -12,6 +13,10 @@ interface AuthCardProps {
 }
 
 export const AuthCard = ({ title, subtitle, children, variant = 'signup' }: AuthCardProps) => {
+  const isMobile = useIsMobile();
+  
+  const displayTitle = variant === 'signin' ? (isMobile ? "Welcome back! Sign In" : "Sign in") : title;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden animate-gradient-shift bg-[length:200%_200%]">
       {/* Background Shapes */}
@@ -49,7 +54,7 @@ export const AuthCard = ({ title, subtitle, children, variant = 'signup' }: Auth
             <Card className="w-full bg-transparent md:bg-white shadow-none md:shadow-xl border-0">
               <div className="p-0 md:p-8">
                 <div className="mb-6">
-                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">{title}</h2>
+                  <h2 className="text-[1.6rem] md:text-3xl font-bold tracking-tight text-white md:text-gray-900">{displayTitle}</h2>
                 </div>
                 
                 <div className="max-h-[calc(100vh-theme(space.48))]">
