@@ -94,6 +94,8 @@ export const TeamMembersContent = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Invited by</TableHead>
+                <TableHead>Joined</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -102,6 +104,8 @@ export const TeamMembersContent = () => {
                 <TableCell>john@example.com</TableCell>
                 <TableCell>Admin</TableCell>
                 <TableCell>Active</TableCell>
+                <TableCell>Sarah Smith</TableCell>
+                <TableCell>Jan 15, 2024</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -110,17 +114,21 @@ export const TeamMembersContent = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Card>
             <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
                   JD
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold">John Doe</h3>
                   <p className="text-sm text-gray-500">john@example.com</p>
-                  <div className="mt-2">
+                  <div className="mt-2 space-y-1.5">
                     <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                       Active
                     </span>
+                    <div className="text-sm text-gray-500">
+                      <p>Invited by: Sarah Smith</p>
+                      <p>Joined: Jan 15, 2024</p>
+                    </div>
                   </div>
                 </div>
               </div>
