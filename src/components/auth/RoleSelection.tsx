@@ -18,7 +18,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
               md:bg-white md:hover:bg-gray-50/80
-              bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/[0.15] hover:border-white/40 transition-colors
+              bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
               ${selectedRole === "supplier" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
             onClick={() => onRoleChange("supplier")}
           >
@@ -37,7 +37,7 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
             variant="outline"
             className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
               md:bg-white md:hover:bg-gray-50/80
-              bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/[0.15] hover:border-white/40 transition-colors
+              bg-white/10 backdrop-blur-sm border-white/20 max-md:hover:bg-white/[0.15] max-md:hover:border-white/40 transition-colors
               ${selectedRole === "buyer" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
             onClick={() => onRoleChange("buyer")}
           >
