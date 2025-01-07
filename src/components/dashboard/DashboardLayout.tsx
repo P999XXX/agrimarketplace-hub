@@ -15,9 +15,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full overflow-x-hidden">
         {/* Desktop Sidebar */}
-        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r fixed h-full">
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
@@ -36,7 +36,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </Sidebar>
 
         {/* Main Content */}
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col md:ml-[var(--sidebar-width)] transition-[margin] duration-200 ease-in-out">
           <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4 sticky top-0 z-50 shadow-sm">
             <div className="flex items-center gap-3">
               <MobileNav />
