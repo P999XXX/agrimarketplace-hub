@@ -6,6 +6,8 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       <div className="container py-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard Overview</h1>
+        
         {/* Stats Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card className="card-shadow">
