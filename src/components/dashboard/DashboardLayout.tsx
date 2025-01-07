@@ -5,6 +5,7 @@ import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
 import { HeaderLogo } from "./HeaderLogo";
 import { SidebarLogo } from "./SidebarLogo";
 import { MobileNav } from "./MobileNav";
+import { UserAvatar } from "./UserAvatar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -43,6 +44,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <HeaderLogo />
               <DashboardBreadcrumb />
             </div>
+            <UserAvatar />
           </header>
           <main className="flex-1 bg-gray-50">{children}</main>
         </div>
