@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface Invitation {
   id: string;
   email: string;
+  name: string | null;  // Neue Eigenschaft hinzugefügt
   role: string;
   status: string;
   created_at: string;
@@ -19,6 +20,7 @@ interface Profile {
 export interface TeamMember {
   id: string;
   email: string;
+  name: string | null;  // Neue Eigenschaft hinzugefügt
   role: string;
   status: string;
   created_at: string;
