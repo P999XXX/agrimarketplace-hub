@@ -41,6 +41,8 @@ const menuItems = [
 ];
 
 const DashboardMenu = () => {
+  const { state } = useSidebar();
+  
   return (
     <div className="space-y-2">
       <h2 className="px-4 text-lg font-semibold text-brand-700 pt-6">Account</h2>
@@ -50,7 +52,7 @@ const DashboardMenu = () => {
             <SidebarMenuButton asChild tooltip={item.title}>
               <a href={item.href} className="flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-4 py-5 rounded-md transition-colors">
                 <item.icon size={20} />
-                <span className="text-[15px] font-medium">{item.title}</span>
+                <span className={`text-[15px] font-medium transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>{item.title}</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
