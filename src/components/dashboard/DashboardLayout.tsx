@@ -45,7 +45,7 @@ const DashboardMenu = () => {
   
   return (
     <div className="space-y-2">
-      <h2 className="px-4 text-lg font-semibold text-brand-700 pt-6">Account</h2>
+      <h2 className={`px-4 text-lg font-semibold text-brand-700 pt-6 transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>Account</h2>
       <SidebarMenu>
         {menuItems.map((item) => (
           <SidebarMenuItem key={item.href}>
