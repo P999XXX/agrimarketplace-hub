@@ -5,9 +5,10 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Users, Search, Filter, SortAsc, LayoutGrid, LayoutList, Plus } from "lucide-react";
+import { Users, Search, Filter, SortAsc, LayoutGrid, LayoutList, Plus, Mail, ExternalLink } from "lucide-react";
 import { InviteMemberForm } from "./InviteMemberForm";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -119,7 +120,43 @@ export const TeamMembersContent = () => {
             <TableBody>
               <TableRow>
                 <TableCell className="font-semibold">John Doe</TableCell>
-                <TableCell>john@example.com</TableCell>
+                <TableCell className="flex items-center gap-2">
+                  john@example.com
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-4 w-4 hover:bg-gray-100"
+                          onClick={() => window.open(`mailto:john@example.com`)}
+                        >
+                          <Mail className="h-4 w-4 text-gray-500" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Send email</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-4 w-4 hover:bg-gray-100"
+                          onClick={() => window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=john@example.com`, '_blank')}
+                        >
+                          <ExternalLink className="h-4 w-4 text-gray-500" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Open in Gmail</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </TableCell>
                 <TableCell>
                   <Badge className={getRoleBadgeClass()}>Admin</Badge>
                 </TableCell>
