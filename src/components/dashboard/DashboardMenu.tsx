@@ -50,19 +50,23 @@ export const DashboardMenu = () => {
                 asChild
                 variant="ghost"
                 className={`w-full justify-start gap-3 px-4 py-2.5 rounded-md transition-colors min-h-[44px] ${
-                  state === "collapsed" 
-                    ? "text-brand-700" 
-                    : isActive 
-                      ? "text-brand-900 bg-brand-50/50" 
-                      : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
+                  isActive 
+                    ? "text-brand-900 bg-brand-50/50" 
+                    : "text-brand-700 hover:text-brand-900 hover:bg-brand-50/50"
                 }`}
               >
                 <a href={item.href}>
                   <div className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
-                      <item.icon className="w-5 h-5" />
+                    <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-all duration-200 ${
+                      state === "collapsed" ? "w-full" : ""
+                    }`}>
+                      <item.icon className={`w-5 h-5 transition-all duration-200 ${
+                        state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
+                      }`} />
                     </div>
-                    <span className={`text-[15px] font-medium transition-opacity duration-200 ${state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
+                    <span className={`text-[15px] font-medium transition-all duration-200 ${
+                      state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
+                    }`}>
                       {item.title}
                     </span>
                   </div>
