@@ -57,28 +57,47 @@ export const TeamMembersContent = () => {
         />
       </div>
       
-      <div className="flex-1 min-h-0">
-        <ScrollArea className="h-full lg:px-1">
+      <div className="flex-1 min-h-0 flex flex-col">
+        <ScrollArea className="h-full lg:px-1 flex-1">
+          <div className="h-full pb-14 lg:pb-0">
+            {viewMode === 'table' ? (
+              <TeamMembersTable 
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                itemsPerPage={10}
+              />
+            ) : (
+              <TeamMembersGrid 
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                itemsPerPage={9}
+              />
+            )}
+          </div>
+        </ScrollArea>
+        <div className="hidden lg:block flex-none border-t bg-white py-4">
           {viewMode === 'table' ? (
-            <TeamMembersTable 
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
+            <TeamMembersTable.Pagination 
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              totalItems={10}
               itemsPerPage={10}
             />
           ) : (
-            <TeamMembersGrid 
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
+            <TeamMembersGrid.Pagination 
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              totalItems={9}
               itemsPerPage={9}
             />
           )}
-        </ScrollArea>
+        </div>
       </div>
       {isMobile && <MobileInviteButton />}
     </div>
