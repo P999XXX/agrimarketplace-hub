@@ -12,7 +12,7 @@ export const MobileNav = () => {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="p-2 h-auto w-auto hover:bg-transparent md:hidden"
+          className="p-0 h-auto w-auto hover:bg-transparent md:hidden"
         >
           <PanelLeftOpen size={20} className="text-gray-500" />
         </Button>
@@ -24,7 +24,7 @@ export const MobileNav = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="p-2 h-auto w-auto hover:bg-transparent"
+              className="p-0 h-auto w-auto hover:bg-transparent"
             >
               <PanelLeftClose size={20} className="text-gray-500" />
             </Button>
