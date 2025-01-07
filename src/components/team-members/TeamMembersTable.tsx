@@ -75,9 +75,9 @@ export const TeamMembersTable = ({
             {teamMembers.map((member) => (
               <TableRow
                 key={member.id}
-                className={`transition-colors ${
+                className={`transition-all duration-500 ${
                   Date.now() - new Date(member.created_at).getTime() < 3000
-                    ? 'bg-green-50'
+                    ? 'animate-[highlight_1s_ease-in-out]'
                     : ''
                 }`}
               >
