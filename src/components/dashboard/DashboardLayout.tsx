@@ -19,9 +19,9 @@ const menuItems = [
     href: "/dashboard"
   },
   {
-    title: "Users",
+    title: "Team Members",
     icon: Users,
-    href: "/dashboard/users"
+    href: "/dashboard/team-members"
   },
   {
     title: "Companies",
