@@ -60,10 +60,10 @@ export const SignInForm = () => {
         <div className="text-center mt-6">
           <Link 
             to="/signup" 
-            className="inline-flex items-center text-white/90 md:text-gray-600 hover:text-primary transition-colors gap-2"
+            className="text-white/90 md:text-gray-600"
           >
-            <LogIn className="w-4 h-4" />
-            <span>Don't have an account? Sign up here</span>
+            <span>Don't have an account? </span>
+            <span className="hover:text-primary transition-colors">Sign up here</span>
           </Link>
         </div>
       </div>
