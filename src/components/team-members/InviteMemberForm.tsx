@@ -33,21 +33,22 @@ export const InviteMemberForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 mt-6">
-      <div className="space-y-2">
-        <Label htmlFor="email">Email address</Label>
+    <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+      <div className="space-y-1">
+        <Label htmlFor="email" className="text-foreground">Email address</Label>
         <Input
           id="email"
           type="email"
           placeholder="colleague@company.com"
           required
+          className="h-12"
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="role">Role</Label>
+      <div className="space-y-1">
+        <Label htmlFor="role" className="text-foreground">Role</Label>
         <Select required>
-          <SelectTrigger className="h-10">
+          <SelectTrigger className="h-12">
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
@@ -58,21 +59,21 @@ export const InviteMemberForm = () => {
         </Select>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="message">Personal message (optional)</Label>
+      <div className="space-y-1">
+        <Label htmlFor="message" className="text-foreground">Personal message (optional)</Label>
         <Textarea
           id="message"
           placeholder="Write a personal message..."
-          className="h-32"
+          className="min-h-[120px] resize-none"
         />
       </div>
 
-      <div className="space-y-3">
-        <Button type="submit" className="w-full" disabled={isLoading}>
+      <div className="space-y-2 pt-2">
+        <Button type="submit" className="w-full py-6" disabled={isLoading}>
           {isLoading ? "Sending invitation..." : "Send invitation"}
         </Button>
         <SheetClose asChild>
-          <Button type="button" variant="outline" className="w-full">
+          <Button type="button" variant="outline" className="w-full py-6">
             Cancel
           </Button>
         </SheetClose>
