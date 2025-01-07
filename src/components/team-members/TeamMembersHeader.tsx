@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "./InviteMemberForm";
 
-export const TeamMembersHeader = () => {
+export const TeamMembersHeader = ({ className }: { className?: string }) => {
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className={`flex justify-between items-center mb-6 ${className}`}>
       <h1 className="text-2xl font-bold">
         Team Members
       </h1>
       <Sheet>
         <SheetTrigger asChild>
-          <Button>
+          <Button className="hidden md:flex">
             <Plus className="h-4 w-4 mr-2" />
             Invite Member
           </Button>

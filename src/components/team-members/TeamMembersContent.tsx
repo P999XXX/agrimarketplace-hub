@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "./InviteMemberForm";
@@ -16,7 +17,6 @@ export const TeamMembersContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
 
-  // Set initial view mode based on screen size
   useEffect(() => {
     setViewMode(isMobile ? 'grid' : 'table');
   }, [isMobile]);
@@ -34,6 +34,20 @@ export const TeamMembersContent = () => {
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button className="md:hidden w-full mb-6">
+            <Plus className="h-4 w-4 mr-2" />
+            Invite Member
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="w-full sm:w-[450px] sm:max-w-full h-full">
+          <SheetHeader>
+            <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
+          </SheetHeader>
+          <InviteMemberForm />
+        </SheetContent>
+      </Sheet>
       {viewMode === 'table' ? (
         <TeamMembersTable 
           searchQuery={searchQuery}
