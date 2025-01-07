@@ -11,7 +11,7 @@ interface AuthCardProps {
 
 export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 relative overflow-hidden animate-gradient-shift bg-[length:200%_200%]">
       {/* Background Shapes */}
       <div className="absolute -top-20 -left-20 opacity-0 -rotate-12 animate-fade-in-down">
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none">

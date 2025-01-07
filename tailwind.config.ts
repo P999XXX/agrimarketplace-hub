@@ -52,11 +52,20 @@ export default {
             transform: "translateX(0)",
           },
         },
+        "gradient-shift": {
+          "0%, 100%": {
+            "background-position": "0% 50%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+          },
+        },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "fade-in-down": "fade-in-down 0.6s ease-out forwards",
         "fade-in-left": "fade-in-left 0.6s ease-out forwards",
+        "gradient-shift": "gradient-shift 15s ease infinite",
       },
       colors: {
         border: "hsl(var(--border))",
