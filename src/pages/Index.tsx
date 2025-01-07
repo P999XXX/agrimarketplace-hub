@@ -28,7 +28,6 @@ const Index = () => {
         <Logo />
         
         <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
-          {/* Left side with hero content */}
           <div className="w-full lg:w-1/2 lg:pe-12">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6 animate-fade">
               Transform your 
@@ -38,7 +37,7 @@ const Index = () => {
             <p className="text-lg text-white/70 mb-8 max-w-xl animate-fade">
               cropio.app is your trusted B2B marketplace for agricultural commodities. Connect with verified buyers and sellers, streamline your trading process, and grow your business.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white py-6">
                 <Link to="/signup">Get Started</Link>
               </Button>
@@ -48,7 +47,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Right side with key features */}
           <div className="w-full lg:w-1/2">
             <div className="grid gap-6">
               <FeatureCard 
@@ -74,7 +72,6 @@ const Index = () => {
   );
 };
 
-// Feature Card Component
 const FeatureCard = ({ 
   title, 
   description, 
