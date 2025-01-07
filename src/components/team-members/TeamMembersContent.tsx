@@ -8,17 +8,20 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Users, Search, Filter, SortAsc, LayoutGrid, LayoutList, Plus } from "lucide-react";
 import { InviteMemberForm } from "./InviteMemberForm";
 
-export const TeamMembersContent = () => {
+interface TeamMembersContentProps {
+  onSheetOpenChange: (open: boolean) => void;
+}
+
+export const TeamMembersContent = ({ onSheetOpenChange }: TeamMembersContentProps) => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
-    <div className={`container py-8 transition-all duration-200 ${isSheetOpen ? 'blur-sm' : ''}`}>
+    <div className="container py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">
           Team Members
         </h1>
-        <Sheet onOpenChange={setIsSheetOpen}>
+        <Sheet onOpenChange={onSheetOpenChange}>
           <SheetTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />

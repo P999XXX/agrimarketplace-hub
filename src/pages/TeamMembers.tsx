@@ -4,7 +4,9 @@ import { TeamMembersContent } from "@/components/team-members/TeamMembersContent
 const TeamMembers = () => {
   return (
     <DashboardLayout>
-      <TeamMembersContent />
+      {({ onSheetOpenChange }) => (
+        <TeamMembersContent onSheetOpenChange={onSheetOpenChange} />
+      )}
     </DashboardLayout>
   );
 };
