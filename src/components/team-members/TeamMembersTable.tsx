@@ -15,7 +15,7 @@ interface TeamMember {
   inviter: {
     first_name: string | null;
     last_name: string | null;
-  };
+  } | null;
 }
 
 export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: { 
@@ -46,10 +46,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
           status,
           created_at,
           invited_by,
-          inviter:profiles!invitations_invited_by_fkey (
-            first_name,
-            last_name
-          )
+          inviter:profiles(first_name, last_name)
         `)
         .eq('company_id', profile.company_id);
 
@@ -57,7 +54,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
         query = query.ilike('email', `%${searchQuery}%`);
       }
 
-      if (roleFilter) {
+      if (roleFilter && roleFilter !== 'all') {
         query = query.eq('role', roleFilter);
       }
 
@@ -129,7 +126,7 @@ export const TeamMembersTable = ({ searchQuery, roleFilter, sortBy }: {
                 <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
               </TableCell>
               <TableCell className="whitespace-nowrap">
-                {member.inviter.first_name || ''} {member.inviter.last_name || ''}
+                {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
               </TableCell>
               <TableCell className="whitespace-nowrap">
                 {format(new Date(member.created_at), 'MMM d, yyyy')}
