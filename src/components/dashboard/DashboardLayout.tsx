@@ -52,7 +52,7 @@ const DashboardMenu = () => {
               href={item.href} 
               className="flex items-center text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 rounded-md transition-colors w-full"
             >
-              <div className={`flex items-center gap-3 py-3 w-full ${state === "collapsed" ? "justify-center px-0" : "px-4"}`}>
+              <div className={`flex items-center gap-3 py-3 w-full ${state === "collapsed" ? "justify-center px-2" : "px-4"}`}>
                 <item.icon className="h-5 w-5 flex-shrink-0" />
                 {state !== "collapsed" && (
                   <span className="text-[15px] font-medium">{item.title}</span>
