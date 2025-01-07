@@ -38,8 +38,9 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Index />} />
             <Route
-              path="/"
+              path="/signin"
               element={
                 isAuthenticated ? (
                   <Navigate to="/dashboard" replace />
@@ -68,7 +69,7 @@ const App = () => {
                 isAuthenticated ? (
                   <Dashboard />
                 ) : (
-                  <Navigate to="/" replace />
+                  <Navigate to="/signin" replace />
                 )
               }
             />
