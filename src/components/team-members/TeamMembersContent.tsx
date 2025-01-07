@@ -84,7 +84,7 @@ export const TeamMembersContent = () => {
             )}
           </div>
         </ScrollArea>
-        <div className="hidden lg:flex h-12 flex-none border-t bg-white items-center justify-center shadow-sm">
+        <div className="hidden lg:block flex-none border-t bg-white py-4">
           {allTeamMembers.length > (viewMode === 'table' ? 10 : 9) && (
             <TeamMembersPagination 
               currentPage={currentPage}
