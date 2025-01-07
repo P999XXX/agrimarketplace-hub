@@ -143,26 +143,29 @@ export const SignUpForm = () => {
         title="Register for Free"
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
-        <div className="flex flex-col h-full">
-          <div className="flex-grow">
-            <div className="animate-fade mb-6">
-              <StepProgressBar currentStep={currentStep} />
-            </div>
-            
-            <form onSubmit={(e) => {
+        <div className="min-h-full flex flex-col">
+          <div className="mb-6 animate-fade">
+            <StepProgressBar currentStep={currentStep} />
+          </div>
+          
+          <form 
+            onSubmit={(e) => {
               e.preventDefault();
               if (currentStep === 3) {
                 handleSubmit(e);
               } else {
                 handleNext();
               }
-            }} className="flex flex-col h-full">
-              <div className="flex-grow">
-                {renderStepContent()}
-              </div>
+            }} 
+            className="flex flex-col flex-grow"
+          >
+            <div className="flex-grow overflow-y-auto">
+              {renderStepContent()}
+            </div>
 
-              {currentStep > 1 && (
-                <div className="flex justify-between mt-8 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none animate-fade sticky bottom-0 left-0 right-0 p-4 md:p-0">
+            {currentStep > 1 && (
+              <div className="mt-8 sticky bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none p-4 md:p-0 animate-fade">
+                <div className="flex justify-between">
                   <Button
                     type="button"
                     variant="outline"
@@ -189,9 +192,9 @@ export const SignUpForm = () => {
                     />
                   )}
                 </div>
-              )}
-            </form>
-          </div>
+              </div>
+            )}
+          </form>
         </div>
       </AuthCard>
     </>
