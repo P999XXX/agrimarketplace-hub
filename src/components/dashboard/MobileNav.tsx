@@ -9,11 +9,7 @@ export const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="p-0 h-auto w-auto hover:bg-transparent md:hidden"
-        >
+        <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
           <PanelLeftOpen size={20} className="text-gray-500" />
         </Button>
       </SheetTrigger>
@@ -21,13 +17,7 @@ export const MobileNav = () => {
         <div className="flex h-full flex-col">
           <div className="h-16 flex items-center justify-between border-b p-4 bg-white">
             <Logo />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="p-0 h-auto w-auto hover:bg-transparent"
-            >
-              <PanelLeftClose size={20} className="text-gray-500" />
-            </Button>
+            <PanelLeftClose size={20} className="text-gray-500" />
           </div>
           <SidebarContent>
             <SidebarGroup>
