@@ -27,7 +27,7 @@ export const LeftContent = () => {
           </span>
         </h1>
         <p className="text-lg text-white/70 mb-8 max-w-md">
-          Built for agricultural businesses, cropio.app helps you connect with buyers and sellers of agricultural raw materials in a fraction of the time.
+          Empowering agricultural businesses with AI-driven trading, cropio.app connects buyers and sellers of agricultural raw materials faster and smarter than ever before.
         </p>
       </div>
       <Stats />
