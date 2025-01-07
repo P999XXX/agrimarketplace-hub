@@ -48,9 +48,16 @@ const DashboardMenu = () => {
       {menuItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton asChild tooltip={item.title}>
-            <a href={item.href} className={`flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-4 py-3 rounded-md transition-colors ${state === "collapsed" ? "justify-center" : ""}`}>
-              <item.icon className="h-5 w-5" />
-              <span className="text-[15px] font-medium">{item.title}</span>
+            <a 
+              href={item.href} 
+              className="flex items-center text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 rounded-md transition-colors w-full"
+            >
+              <div className={`flex items-center gap-3 py-3 ${state === "collapsed" ? "justify-center w-full px-0" : "px-4"}`}>
+                <item.icon className="h-5 w-5" />
+                {state !== "collapsed" && (
+                  <span className="text-[15px] font-medium">{item.title}</span>
+                )}
+              </div>
             </a>
           </SidebarMenuButton>
         </SidebarMenuItem>
