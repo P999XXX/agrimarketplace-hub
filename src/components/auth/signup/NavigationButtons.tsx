@@ -24,7 +24,7 @@ export const NavigationButtons = ({
           type="button"
           variant="outline"
           onClick={handleBack}
-          className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem] md:bg-white max-md:bg-transparent max-md:text-white max-md:border-0 max-md:hover:bg-primary max-md:hover:text-white"
+          className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem] md:bg-white max-md:bg-transparent max-md:text-white max-md:border-0 max-md:hover:bg-[rgb(0,77,58)] max-md:hover:bg-opacity-50 max-md:hover:text-white"
         >
           <ChevronLeft className="w-4 h-4 mr-2" />
           Back
