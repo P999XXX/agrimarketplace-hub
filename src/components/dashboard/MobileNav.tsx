@@ -14,7 +14,7 @@ export const MobileNav = () => {
           size="icon" 
           className="p-0 h-auto w-auto hover:bg-transparent md:hidden"
         >
-          <PanelLeftOpen size={24} className="text-gray-500" />
+          <PanelLeftOpen size={20} className="text-gray-500" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
@@ -26,7 +26,7 @@ export const MobileNav = () => {
               size="icon" 
               className="p-0 h-auto w-auto hover:bg-transparent"
             >
-              <PanelLeftClose size={24} className="text-gray-500" />
+              <PanelLeftClose size={20} className="text-gray-500" />
             </Button>
           </div>
           <SidebarContent>
