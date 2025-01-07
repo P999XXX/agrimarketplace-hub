@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "@/components/ui/sidebar";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage } from "@/components/ui/breadcrumb";
+import { useLocation } from "react-router-dom";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -117,6 +119,28 @@ const SidebarLogo = () => {
   return <Logo />;
 };
 
+const DashboardBreadcrumb = () => {
+  const location = useLocation();
+  const path = location.pathname.split('/').filter(Boolean);
+  
+  return (
+    <Breadcrumb className="ml-6">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+        </BreadcrumbItem>
+        {path.length > 1 && (
+          <BreadcrumbItem>
+            <BreadcrumbPage className="capitalize">
+              {path[1].replace('-', ' ')}
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        )}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const isMobile = useIsMobile();
 
@@ -149,6 +173,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
+              <DashboardBreadcrumb />
             </div>
           </header>
           <main className="flex-1 bg-gray-50">{children}</main>
