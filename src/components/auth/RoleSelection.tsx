@@ -16,36 +16,38 @@ export const RoleSelection = ({ selectedRole, onRoleChange }: RoleSelectionProps
           <Button
             type="button"
             variant="outline"
-            className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 ${
-              selectedRole === "supplier" ? "border-2 border-primary" : ""
-            }`}
+            className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
+              md:bg-white md:hover:bg-[#f8f8f8]
+              bg-white/10 backdrop-blur-sm border-white/20
+              ${selectedRole === "supplier" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
             onClick={() => onRoleChange("supplier")}
           >
             <img 
               src="/lovable-uploads/41cb0215-9cd9-4afa-82b8-64482d35a703.png" 
               alt="Supplier Icon" 
-              className="w-14 h-14 object-contain"
+              className="w-14 h-14 object-contain md:filter-none brightness-0 invert"
             />
             <div className="space-y-2">
-              <div className="text-lg font-semibold">Supplier</div>
+              <div className="text-lg font-semibold md:text-gray-900 text-white">Supplier</div>
             </div>
           </Button>
 
           <Button
             type="button"
             variant="outline"
-            className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 ${
-              selectedRole === "buyer" ? "border-2 border-primary" : ""
-            }`}
+            className={`w-full p-3 h-auto flex flex-col items-center justify-center space-y-3 
+              md:bg-white md:hover:bg-[#f8f8f8]
+              bg-white/10 backdrop-blur-sm border-white/20
+              ${selectedRole === "buyer" ? "md:border-2 md:border-primary border-2 border-white/40" : ""}`}
             onClick={() => onRoleChange("buyer")}
           >
             <img 
               src="/lovable-uploads/f45a7e35-0200-423a-a9d1-3342a197efe2.png" 
               alt="Buyer Icon" 
-              className="w-14 h-14 object-contain"
+              className="w-14 h-14 object-contain md:filter-none brightness-0 invert"
             />
             <div className="space-y-2">
-              <div className="text-lg font-semibold">Buyer</div>
+              <div className="text-lg font-semibold md:text-gray-900 text-white">Buyer</div>
             </div>
           </Button>
         </div>
