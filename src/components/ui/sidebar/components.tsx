@@ -1,9 +1,7 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useSidebar } from "./context"
 import { SidebarProps } from "./types"
 
@@ -153,17 +151,3 @@ export const SidebarMenuItem = React.forwardRef<
   />
 ))
 SidebarMenuItem.displayName = "SidebarMenuItem"
-
-export const SidebarMenuButton = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => (
-  <Button
-    ref={ref}
-    variant="ghost"
-    size="sm"
-    className={cn("w-full justify-start", className)}
-    {...props}
-  />
-))
-SidebarMenuButton.displayName = "SidebarMenuButton"
