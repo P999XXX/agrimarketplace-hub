@@ -8,6 +8,7 @@ import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersGrid } from "./TeamMembersGrid";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Plus } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -41,8 +42,8 @@ export const TeamMembersContent = () => {
   );
 
   return (
-    <div className="container pt-4 pb-8 md:pb-8">
-      <div className="pb-16 md:pb-0">
+    <div className="container h-[calc(100vh-4rem)] flex flex-col lg:py-4">
+      <div className="flex-none">
         <TeamMembersHeader />
         <TeamMembersFilters 
           viewMode={viewMode} 
@@ -54,25 +55,30 @@ export const TeamMembersContent = () => {
           sortBy={sortBy}
           setSortBy={setSortBy}
         />
-        {viewMode === 'table' ? (
-          <TeamMembersTable 
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={10}
-          />
-        ) : (
-          <TeamMembersGrid 
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={9}
-          />
-        )}
+      </div>
+      
+      <div className="flex-1 min-h-0">
+        <ScrollArea className="h-full lg:px-1">
+          {viewMode === 'table' ? (
+            <TeamMembersTable 
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              itemsPerPage={10}
+            />
+          ) : (
+            <TeamMembersGrid 
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              itemsPerPage={9}
+            />
+          )}
+        </ScrollArea>
       </div>
       {isMobile && <MobileInviteButton />}
     </div>
