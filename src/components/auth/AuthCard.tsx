@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { LeftContent } from "./LeftContent";
@@ -35,7 +34,7 @@ export const AuthCard = ({ title, subtitle, children }: AuthCardProps) => {
         <Logo />
         
         {/* Main content */}
-        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
+        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start gap-16 lg:gap-8 pt-8 lg:pt-0">
           {/* Left side with static content - Hidden on mobile */}
           <div className="hidden lg:block lg:w-[45%] xl:w-[40%]">
             <LeftContent />
