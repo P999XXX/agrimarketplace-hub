@@ -3,7 +3,7 @@ import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 
 export const CustomSidebarTrigger = () => {
-  const { state, setOpen } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
 
   useEffect(() => {
     localStorage.setItem('sidebarState', state);
@@ -11,10 +11,7 @@ export const CustomSidebarTrigger = () => {
 
   return (
     <button 
-      onClick={() => {
-        const trigger = document.querySelector('[data-sidebar="trigger"]') as HTMLElement;
-        if (trigger) trigger.click();
-      }} 
+      onClick={toggleSidebar}
       className="flex items-center justify-center w-8 h-8 text-white rounded-md hover:bg-white/10 transition-colors focus:outline-none"
     >
       {state === "expanded" ? (
