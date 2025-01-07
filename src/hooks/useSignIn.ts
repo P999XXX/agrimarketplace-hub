@@ -1,19 +1,38 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
 
 export const useSignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const [formData, setFormData] = useState<SignInFormData>({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
+  const { toast } = useToast();
 
-  const handleSignIn = async (email: string, password: string) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: formData.email,
+        password: formData.password,
       });
 
       if (error) throw error;
@@ -22,7 +41,7 @@ export const useSignIn = () => {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message || "Could not sign in",
         variant: "destructive",
       });
     } finally {
@@ -31,7 +50,9 @@ export const useSignIn = () => {
   };
 
   return {
-    handleSignIn,
+    formData,
     isLoading,
+    handleChange,
+    handleSubmit,
   };
 };

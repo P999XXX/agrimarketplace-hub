@@ -39,7 +39,7 @@ export const SignInForm = () => {
 
         <GoogleSignInButton isSignUp={false} />
 
-        <div className="text-center mt-6">
+        <div className="text-center">
           <Link 
             to="/signup" 
             className="text-white/90 md:text-gray-600"
