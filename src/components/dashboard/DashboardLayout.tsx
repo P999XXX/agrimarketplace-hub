@@ -44,9 +44,9 @@ const DashboardMenu = () => {
       {menuItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton asChild tooltip={item.title}>
-            <a href={item.href} className="flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-4 py-3 rounded-md transition-colors text-[15px]">
+            <a href={item.href} className="flex items-center gap-3 text-brand-700 hover:text-brand-900 hover:bg-brand-50/50 px-6 py-4 rounded-md transition-colors">
               <item.icon className="h-5 w-5" />
-              <span className="font-medium">{item.title}</span>
+              <span className="font-medium text-[15px]">{item.title}</span>
             </a>
           </SidebarMenuButton>
         </SidebarMenuItem>
