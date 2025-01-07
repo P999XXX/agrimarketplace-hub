@@ -41,8 +41,8 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Cropio <invitations@cropio.app>",
-        to: to, // Geändert: Senden der E-Mail-Adresse direkt, nicht als Array
+        from: "Cropio <onboarding@resend.dev>", // Using default Resend domain
+        to: to,
         subject: `Join ${companyName} on Cropio`,
         html: emailHtml,
       }),
