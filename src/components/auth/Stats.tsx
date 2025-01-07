@@ -28,7 +28,7 @@ export const Stats = () => {
           <Leaf className="w-10 h-10 stroke-[1.5]" />
         </div>
         <div className="ml-4">
-          <h6 className="text-white text-xl font-bold mb-1">Sustainable</h6>
+          <h6 className="text-white text-xl font-bold mb-1">Sustainable &</h6>
           <p className="text-white/70">Organic Products</p>
         </div>
       </div>
