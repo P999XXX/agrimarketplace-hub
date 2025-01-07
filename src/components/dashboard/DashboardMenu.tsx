@@ -70,8 +70,8 @@ export const DashboardMenu = () => {
                               !isMobile && state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
                             }`} />
                           </div>
-                          <span className={`text-[15px] font-medium transition-all duration-200 overflow-hidden ${
-                            !isMobile && state === "collapsed" ? "w-0 opacity-0 absolute" : "w-auto opacity-100 relative"
+                          <span className={`text-[15px] font-medium transition-all duration-200 ${
+                            !isMobile && state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
                           }`}>
                             {item.title}
                           </span>
