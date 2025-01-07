@@ -65,18 +65,16 @@ export const TeamMembersFilters = ({
           </Select>
           <div className="flex border rounded-md h-10">
             <Button
-              variant="ghost"
+              variant={viewMode === 'table' ? 'default' : 'ghost'}
               size="icon"
               onClick={() => setViewMode('table')}
-              className={viewMode === 'table' ? 'bg-primary text-white hover:bg-primary/90' : 'bg-gray-100 hover:bg-gray-200'}
             >
               <LayoutList className="h-4 w-4" />
             </Button>
             <Button
-              variant="ghost"
+              variant={viewMode === 'grid' ? 'default' : 'ghost'}
               size="icon"
               onClick={() => setViewMode('grid')}
-              className={viewMode === 'grid' ? 'bg-primary text-white hover:bg-primary/90' : 'bg-gray-100 hover:bg-gray-200'}
             >
               <LayoutGrid className="h-4 w-4" />
             </Button>
