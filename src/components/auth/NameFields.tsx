@@ -9,8 +9,8 @@ interface NameFieldsProps {
 
 export const NameFields = ({ firstName, lastName, onChange }: NameFieldsProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div className="space-y-1">
+    <div className="space-y-4 w-full">
+      <div className="space-y-1 w-full">
         <Label htmlFor="firstName" className="text-white md:text-foreground">First Name</Label>
         <Input
           id="firstName"
@@ -22,7 +22,7 @@ export const NameFields = ({ firstName, lastName, onChange }: NameFieldsProps) =
         />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1 w-full">
         <Label htmlFor="lastName" className="text-white md:text-foreground">Last Name</Label>
         <Input
           id="lastName"
