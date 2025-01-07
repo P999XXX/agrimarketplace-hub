@@ -7,7 +7,7 @@ export const SignInLeftContent = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6">
           Welcome back to
           <br />
-          your agricultural
+          your <span className="text-secondary">agricultural</span>
           <br />
           trading platform
         </h1>
