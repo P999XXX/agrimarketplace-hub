@@ -172,7 +172,7 @@ export const SignUpForm = () => {
                     type="button"
                     variant="outline"
                     onClick={handleBack}
-                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem]"
+                    className="w-[120px] py-6 [&_svg]:!w-[1.2rem] [&_svg]:!h-[1.2rem] md:bg-white max-md:bg-transparent"
                   >
                     <ChevronLeft className="w-4 h-4 mr-2" />
                     Back
