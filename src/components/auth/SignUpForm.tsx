@@ -78,7 +78,7 @@ export const SignUpForm = () => {
       case 1:
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <RoleSelection
               selectedRole={formData.userType}
               onRoleChange={handleRoleChange}
@@ -90,7 +90,7 @@ export const SignUpForm = () => {
       case 2:
         return (
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <CompanyField
               companyName={formData.companyName}
               onChange={handleChange}
@@ -105,7 +105,7 @@ export const SignUpForm = () => {
       case 3:
         return (
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6">{getStepTitle()}</h3>
+            <h3 className="text-xl font-semibold text-white md:text-gray-900 mb-6">{getStepTitle()}</h3>
             <EmailField
               email={formData.email}
               onChange={handleChange}
