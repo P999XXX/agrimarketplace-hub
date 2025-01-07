@@ -68,7 +68,7 @@ export const TeamMembersFilters = ({
             </SelectContent>
           </Select>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             onClick={toggleView}
             className="h-10 hover:bg-gray-100"
