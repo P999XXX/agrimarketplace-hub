@@ -146,7 +146,7 @@ export const SignUpForm = () => {
         subtitle="Hundreds of agricultural businesses are already using cropio.app to trade their products."
       >
         <div className="min-h-[calc(100vh-16rem)] md:min-h-0 flex flex-col">
-          <div className="mb-6 animate-fade">
+          <div className="animate-fade">
             <StepProgressBar currentStep={currentStep} />
           </div>
           
