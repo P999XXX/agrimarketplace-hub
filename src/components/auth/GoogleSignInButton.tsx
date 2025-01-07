@@ -41,7 +41,7 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
   return (
     <Button
       type="button"
-      className="w-full bg-[#F1F1F1] hover:bg-[#E4E4E4] text-black md:text-black text-white py-6 text-base"
+      className="w-full bg-[#F1F1F1] hover:bg-[#E4E4E4] text-black md:text-black text-white py-6"
       onClick={handleGoogleSignIn}
     >
       <div className="bg-white rounded-full p-1 mr-2">
@@ -73,7 +73,7 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
           />
         </svg>
       </div>
-      <span className="text-base">Sign Up with Google</span>
+      <span>{isSignUp ? "Sign Up" : "Sign In"} with Google</span>
     </Button>
   );
 };
