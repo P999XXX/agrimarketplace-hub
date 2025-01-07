@@ -128,7 +128,7 @@ const DashboardBreadcrumb = () => {
   const path = location.pathname.split('/').filter(Boolean);
   
   return (
-    <Breadcrumb className="ml-6">
+    <Breadcrumb className="ml-6 hidden md:block">
       <BreadcrumbList className="text-white/90 text-base">
         <BreadcrumbItem>
           <BreadcrumbLink href="/dashboard" className="text-white hover:text-white/80 font-medium">
