@@ -8,11 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Users, Search, Filter, SortAsc, LayoutGrid, LayoutList, Plus } from "lucide-react";
 import { InviteMemberForm } from "./InviteMemberForm";
 
-interface TeamMembersContentProps {
-  onSheetOpenChange: (open: boolean) => void;
-}
-
-export const TeamMembersContent = ({ onSheetOpenChange }: TeamMembersContentProps) => {
+export const TeamMembersContent = () => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
 
   return (
@@ -21,7 +17,7 @@ export const TeamMembersContent = ({ onSheetOpenChange }: TeamMembersContentProp
         <h1 className="text-2xl font-bold">
           Team Members
         </h1>
-        <Sheet onOpenChange={onSheetOpenChange}>
+        <Sheet>
           <SheetTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />

@@ -5,7 +5,6 @@ import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
 import { HeaderLogo } from "./HeaderLogo";
 import { SidebarLogo } from "./SidebarLogo";
 import { MobileNav } from "./MobileNav";
-import { useState } from "react";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -13,13 +12,12 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const defaultOpen = localStorage.getItem('sidebarState') === 'expanded';
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <div className="flex min-h-screen w-full">
         {/* Desktop Sidebar */}
-        <Sidebar variant="sidebar" collapsible="icon" className={`hidden md:flex bg-white border-r transition-all duration-200 ${isSheetOpen ? 'blur-sm' : ''}`}>
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
           <SidebarHeader className="h-16 flex items-center border-b px-4 bg-brand-700">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
@@ -39,17 +37,14 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className={`h-16 flex items-center justify-between border-b bg-brand-700 px-4 sticky top-0 z-50 shadow-sm transition-all duration-200 ${isSheetOpen ? 'blur-sm' : ''}`}>
+          <header className="h-16 flex items-center justify-between border-b bg-brand-700 px-4 sticky top-0 z-50 shadow-sm">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
               <DashboardBreadcrumb />
             </div>
           </header>
-          {typeof children === 'function' 
-            ? children({ onSheetOpenChange: setIsSheetOpen })
-            : children
-          }
+          <main className="flex-1 bg-gray-50">{children}</main>
         </div>
       </div>
     </SidebarProvider>
