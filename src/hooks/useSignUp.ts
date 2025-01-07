@@ -57,8 +57,10 @@ export const useSignUp = () => {
       });
 
       if (signUpError) {
+        // Prüfen auf Rate Limiting Fehler
         if (signUpError.message.includes('over_email_send_rate_limit')) {
-          const seconds = parseInt(signUpError.message.match(/\d+/)?.[0] || "60", 10);
+          const errorBody = JSON.parse(signUpError.message);
+          const seconds = parseInt(errorBody.message.match(/\d+/)?.[0] || "60", 10);
           setWaitTime(seconds);
           toast({
             title: "Bitte warten",
