@@ -1,4 +1,4 @@
-import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Logo } from "@/components/auth/Logo";
@@ -10,7 +10,7 @@ export const MobileNav = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
-          <PanelLeftOpen size={20} className="text-gray-500" />
+          <ChevronRight className="h-5 w-5 text-gray-500" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 p-0 bg-white">
@@ -19,7 +19,7 @@ export const MobileNav = () => {
             <Logo />
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent">
-                <PanelLeftClose size={20} className="text-gray-500" />
+                <ChevronLeft className="h-5 w-5 text-gray-500" />
               </Button>
             </SheetClose>
           </div>
