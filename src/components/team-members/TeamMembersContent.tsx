@@ -3,7 +3,6 @@ import { TeamMembersGrid } from "./TeamMembersGrid";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { useState, useEffect } from "react";
-import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
