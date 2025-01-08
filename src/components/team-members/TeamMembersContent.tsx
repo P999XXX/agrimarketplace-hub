@@ -9,29 +9,41 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const TeamMembersContent = () => {
-  const isMobile = useMediaQuery("(max-width: 1024px)");
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [isScrolled, setIsScrolled] = useState(false);
   const [view, setView] = useState<"grid" | "table">(() => {
+    // Wenn Mobile, dann immer Grid View
+    if (isMobile) return "grid";
+    
     const savedView = localStorage.getItem('teamMembersViewMode');
     if (savedView === 'grid' || savedView === 'table') {
       return savedView;
     }
-    return isMobile ? "grid" : "table";
+    return "table";
   });
   
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
 
+  // Wenn Mobile Device, dann immer Grid View
   useEffect(() => {
-    if (!localStorage.getItem('teamMembersViewMode')) {
-      setView(isMobile ? "grid" : "table");
+    if (isMobile) {
+      setView("grid");
+    } else {
+      const savedView = localStorage.getItem('teamMembersViewMode');
+      if (savedView === 'grid' || savedView === 'table') {
+        setView(savedView as "grid" | "table");
+      }
     }
   }, [isMobile]);
 
+  // Nur speichern wenn nicht Mobile
   useEffect(() => {
-    localStorage.setItem('teamMembersViewMode', view);
-  }, [view]);
+    if (!isMobile) {
+      localStorage.setItem('teamMembersViewMode', view);
+    }
+  }, [view, isMobile]);
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const scrollTop = event.currentTarget.scrollTop;
@@ -57,6 +69,7 @@ export const TeamMembersContent = () => {
             sortBy={sortBy}
             setSortBy={setSortBy}
             onExportCSV={() => {}}
+            isMobile={isMobile}
           />
         </div>
 

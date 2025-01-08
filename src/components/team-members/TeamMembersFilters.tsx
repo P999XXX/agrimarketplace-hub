@@ -12,6 +12,7 @@ interface TeamMembersFiltersProps {
   sortBy: string;
   setSortBy: (sort: string) => void;
   onExportCSV: () => void;
+  isMobile: boolean;
 }
 
 export const TeamMembersFilters = ({
@@ -24,6 +25,7 @@ export const TeamMembersFilters = ({
   sortBy,
   setSortBy,
   onExportCSV,
+  isMobile,
 }: TeamMembersFiltersProps) => {
   return (
     <div className="flex flex-wrap items-center gap-4">
@@ -40,6 +42,7 @@ export const TeamMembersFilters = ({
           setViewMode={setViewMode}
           onExportCSV={onExportCSV}
           searchQuery={searchQuery}
+          showViewToggle={!isMobile}
         />
       </div>
 
@@ -54,6 +57,7 @@ export const TeamMembersFilters = ({
           setViewMode={setViewMode}
           onExportCSV={onExportCSV}
           searchQuery={searchQuery}
+          showViewToggle={false}
         />
       </div>
     </div>
