@@ -66,14 +66,6 @@ export const TeamMemberCard = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-end space-y-1">
-            <Badge className={getStatusBadgeClass(member.status)}>
-              {member.status}
-            </Badge>
-            <Badge className={getRoleBadgeClass()}>
-              {member.role}
-            </Badge>
-          </div>
         </div>
       </CardHeader>
 
@@ -98,10 +90,22 @@ export const TeamMemberCard = ({
 
       <Separator className="w-full bg-border" />
       
-      <CardFooter className="p-3 sm:p-4 flex justify-end space-x-4">
-        <MessageCircle size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-        <Mail size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-        <ChevronRight size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+      <CardFooter className="p-3 sm:p-4">
+        <div className="flex items-center justify-between w-full">
+          <div className="flex gap-2">
+            <Badge className={getStatusBadgeClass(member.status)}>
+              {member.status}
+            </Badge>
+            <Badge className={getRoleBadgeClass()}>
+              {member.role}
+            </Badge>
+          </div>
+          <div className="flex items-center space-x-4">
+            <MessageCircle size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+            <Mail size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+            <ChevronRight size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+          </div>
+        </div>
       </CardFooter>
     </Card>
   );
