@@ -54,7 +54,7 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         return [];
       }
 
-      // 3. Get invitations with profiles
+      // 3. Get invitations
       let invitationsQuery = supabase
         .from('invitations')
         .select(`
@@ -65,11 +65,7 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
           status, 
           created_at, 
           last_login, 
-          invited_by,
-          inviter:profiles!invitations_invited_by_fkey (
-            first_name,
-            last_name
-          )
+          invited_by
         `)
         .eq('company_id', profile.company_id);
 
@@ -114,12 +110,26 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         throw profilesError;
       }
 
-      // 5. Map profiles to invitations
-      const profilesMap = new Map(profiles?.map(profile => [profile.id, profile]) || []);
+      // 5. Get inviters profiles
+      const { data: inviters, error: invitersError } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name')
+        .in('id', invitations.map(inv => inv.invited_by));
 
+      if (invitersError) {
+        console.error('Inviters error:', invitersError);
+        throw invitersError;
+      }
+
+      // 6. Create maps for both profiles and inviters
+      const profilesMap = new Map(profiles?.map(profile => [profile.id, profile]) || []);
+      const invitersMap = new Map(inviters?.map(inviter => [inviter.id, inviter]) || []);
+
+      // 7. Combine all data
       const teamMembers = invitations.map(invitation => ({
         ...invitation,
-        profile: profilesMap.get(invitation.invited_by) || null
+        profile: profilesMap.get(invitation.invited_by) || null,
+        inviter: invitersMap.get(invitation.invited_by) || null
       }));
 
       console.log(`Found ${teamMembers.length} team members`);
