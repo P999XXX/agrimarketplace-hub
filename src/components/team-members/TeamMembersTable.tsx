@@ -1,12 +1,13 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import { EmailCell } from "./EmailCell";
+import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
+import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
+import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
+import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -37,27 +38,27 @@ export const TeamMembersTable = ({
   };
 
   const getRoleBadgeClass = () => {
-    return "bg-secondary text-secondary-foreground hover:bg-secondary/80";
+    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
   };
 
   const getStatusBadgeClass = (status: string) => {
     switch (status.toLowerCase()) {
       case 'active':
       case 'accepted':
-        return 'bg-success-50 text-success-700 dark:bg-success-900/20 dark:text-success-400 hover:bg-success-100 dark:hover:bg-success-900/30';
+        return 'bg-green-100 text-green-700 hover:bg-green-200';
       case 'pending':
-        return 'bg-warning-50 text-warning-700 dark:bg-warning-900/20 dark:text-warning-400 hover:bg-warning-100 dark:hover:bg-warning-900/30';
+        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
       case 'declined':
       case 'inactive':
-        return 'bg-error-50 text-error-700 dark:bg-error-900/20 dark:text-error-400 hover:bg-error-100 dark:hover:bg-error-900/30';
+        return 'bg-red-100 text-red-700 hover:bg-red-200';
       default:
-        return 'bg-secondary text-secondary-foreground hover:bg-secondary/80';
+        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
     }
   };
 
   if (error) {
     return (
-      <Alert variant="destructive">
+      <Alert variant="destructive" className="mb-6">
         <AlertCircle className="h-4 w-4" />
         <AlertDescription>
           {error instanceof Error ? error.message : 'Failed to load team members'}
@@ -67,98 +68,26 @@ export const TeamMembersTable = ({
   }
 
   if (isLoading) {
-    return <div className="space-y-3">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[250px]">Name / Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Last Login</TableHead>
-            <TableHead>Invited By</TableHead>
-            <TableHead>Invited</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {[1, 2, 3].map((i) => (
-            <TableRow key={i}>
-              <TableCell className="font-medium">
-                <div className="h-6 w-32 bg-muted animate-pulse rounded" />
-              </TableCell>
-              <TableCell>
-                <div className="h-6 w-20 bg-muted animate-pulse rounded" />
-              </TableCell>
-              <TableCell>
-                <div className="h-6 w-24 bg-muted animate-pulse rounded" />
-              </TableCell>
-              <TableCell>
-                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
-              </TableCell>
-              <TableCell>
-                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
-              </TableCell>
-              <TableCell>
-                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    return <TeamMembersTableLoading />;
   }
 
   if (allTeamMembers.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-muted-foreground text-lg">No team members found</p>
-        <p className="text-muted-foreground/60 text-sm mt-2">Try adjusting your filters or search criteria</p>
-      </div>
-    );
+    return <TeamMembersTableEmpty />;
   }
 
   return (
     <div className="space-y-6">
-      <div className="rounded-md border">
+      <div className="bg-white rounded-lg shadow overflow-hidden">
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[250px]">Name / Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Last Login</TableHead>
-              <TableHead>Invited By</TableHead>
-              <TableHead>Invited</TableHead>
-            </TableRow>
-          </TableHeader>
+          <TeamMembersTableHeader />
           <TableBody>
             {teamMembers.map((member) => (
-              <TableRow key={member.id}>
-                <TableCell className="font-medium">
-                  <div className="space-y-1">
-                    <div className="font-medium">{member.name || 'Unnamed User'}</div>
-                    <EmailCell email={member.email} />
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Badge className={getRoleBadgeClass()}>
-                    {member.role}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Badge className={getStatusBadgeClass(member.status)}>
-                    {member.status}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
-                </TableCell>
-                <TableCell>
-                  {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
-                </TableCell>
-                <TableCell>
-                  {format(new Date(member.created_at), 'MMM d, yyyy')}
-                </TableCell>
-              </TableRow>
+              <TeamMembersTableRow
+                key={member.id}
+                member={member}
+                getRoleBadgeClass={getRoleBadgeClass}
+                getStatusBadgeClass={getStatusBadgeClass}
+              />
             ))}
           </TableBody>
         </Table>
@@ -170,7 +99,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== 1 && handlePageChange(1)}
-                className={`flex items-center justify-center h-9 w-9 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
               </PaginationLink>
@@ -230,7 +159,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-                className={`flex items-center justify-center h-9 w-9 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
               </PaginationLink>
