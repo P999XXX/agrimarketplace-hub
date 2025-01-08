@@ -78,7 +78,9 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
       <PopoverContent className="w-80" align="end" sideOffset={8}>
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
-            {children}
+            <div className="h-12 w-12">
+              {children}
+            </div>
             <div className="space-y-1">
               <p className="text-base font-medium leading-none">
                 {userName}
@@ -96,11 +98,11 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           </div>
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+            className="w-full justify-start text-sm font-normal hover:bg-destructive/5 hover:text-destructive"
             onClick={handleLogout}
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Logout
+            Sign out
           </Button>
         </div>
       </PopoverContent>
