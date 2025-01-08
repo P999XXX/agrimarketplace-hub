@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, Grid, Search, Table as TableIcon } from "lucide-react";
+import { Download, Grid, Search, Table as TableIcon, Filter, ArrowUpDown } from "lucide-react";
 
 interface TeamMembersFiltersProps {
   viewMode: "grid" | "table";
@@ -40,7 +40,10 @@ export const TeamMembersFilters = ({
 
       <Select value={roleFilter} onValueChange={setRoleFilter}>
         <SelectTrigger className="w-[180px] shadow-sm">
-          <SelectValue placeholder="Filter by role" />
+          <div className="flex items-center gap-2">
+            <Filter className="h-4 w-4" />
+            <SelectValue placeholder="Filter by role" />
+          </div>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All roles</SelectItem>
@@ -52,7 +55,10 @@ export const TeamMembersFilters = ({
 
       <Select value={sortBy} onValueChange={setSortBy}>
         <SelectTrigger className="w-[180px] shadow-sm">
-          <SelectValue placeholder="Sort by" />
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="h-4 w-4" />
+            <SelectValue placeholder="Sort by" />
+          </div>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="created_at-desc">Newest first</SelectItem>
