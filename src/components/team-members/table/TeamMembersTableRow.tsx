@@ -54,8 +54,8 @@ export const TeamMembersTableRow = ({
       }`}
     >
       <TableCell className="whitespace-nowrap">
-        <div className="flex items-center gap-2">
-          <div className={`w-7 h-7 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
+        <div className="flex items-center gap-3">
+          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
             {initials}
           </div>
           <span className="font-semibold">
