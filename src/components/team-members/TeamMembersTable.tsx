@@ -40,7 +40,7 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <div className="rounded-md border bg-card/60 backdrop-blur-sm supports-[backdrop-filter]:bg-card/40">
+    <div className="rounded-md border border-border/50 bg-transparent backdrop-blur-sm supports-[backdrop-filter]:bg-card/10">
       <Table>
         <TeamMembersTableHeader />
         <TableBody>

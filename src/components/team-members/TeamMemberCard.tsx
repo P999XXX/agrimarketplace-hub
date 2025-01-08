@@ -45,7 +45,7 @@ export const TeamMemberCard = ({
 
   return (
     <Card
-      className={`transition-all duration-500 hover:shadow-md bg-card/60 backdrop-blur-sm supports-[backdrop-filter]:bg-card/40 border-border ${
+      className={`transition-all duration-500 hover:shadow-md bg-transparent backdrop-blur-sm supports-[backdrop-filter]:bg-card/10 border-border/50 ${
         Date.now() - new Date(member.created_at).getTime() < 3000
           ? 'animate-[highlight_1s_ease-in-out]'
           : ''
@@ -69,7 +69,7 @@ export const TeamMemberCard = ({
         </div>
       </CardHeader>
 
-      <Separator className="w-full bg-border" />
+      <Separator className="w-full bg-border/50" />
 
       <CardContent className="p-4 sm:p-6">
         <div className="text-sm text-muted-foreground space-y-2">
@@ -88,7 +88,7 @@ export const TeamMemberCard = ({
         </div>
       </CardContent>
 
-      <Separator className="w-full bg-border" />
+      <Separator className="w-full bg-border/50" />
       
       <CardFooter className="p-3 sm:p-4">
         <div className="flex items-center justify-between w-full">

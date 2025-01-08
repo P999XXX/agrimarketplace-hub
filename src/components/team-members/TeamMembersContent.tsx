@@ -43,8 +43,8 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background/60 backdrop-blur-sm supports-[backdrop-filter]:bg-background/40">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
