@@ -21,13 +21,15 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <div className="container max-w-7xl mx-auto py-8 px-8">
-      <div className="space-y-6">
+    <div className="container py-8">
+      <div className="flex items-center justify-between mb-6">
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
         />
+      </div>
 
+      <div className="space-y-6">
         <TeamMembersFilters
           viewMode={view}
           setViewMode={setView}
