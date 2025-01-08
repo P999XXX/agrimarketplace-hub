@@ -33,7 +33,7 @@ export const TeamMembersFilters = ({
   onExportCSV,
 }: TeamMembersFiltersProps) => {
   const FilterButtons = () => (
-    <>
+    <div className="flex items-center gap-2">
       <Select value={roleFilter} onValueChange={setRoleFilter}>
         <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none">
           <div className="flex items-center gap-2">
@@ -80,7 +80,7 @@ export const TeamMembersFilters = ({
       >
         <Download className="h-4 w-4" />
       </Button>
-    </>
+    </div>
   );
 
   return (
@@ -113,7 +113,7 @@ export const TeamMembersFilters = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-[200px] p-2">
-            <DropdownMenuItem className="p-0">
+            <DropdownMenuItem className="p-2">
               <Select value={roleFilter} onValueChange={setRoleFilter}>
                 <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
                   <div className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export const TeamMembersFilters = ({
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem className="p-0">
+            <DropdownMenuItem className="p-2">
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
                   <div className="flex items-center gap-2">
@@ -145,8 +145,8 @@ export const TeamMembersFilters = ({
               </Select>
             </DropdownMenuItem>
             <DropdownMenuItem 
-              className="cursor-pointer"
               onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+              className="cursor-pointer p-2"
             >
               <div className="flex items-center gap-2">
                 {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
@@ -154,8 +154,8 @@ export const TeamMembersFilters = ({
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem 
-              className="cursor-pointer"
               onClick={onExportCSV}
+              className="cursor-pointer p-2"
             >
               <div className="flex items-center gap-2">
                 <Download className="h-4 w-4" />
