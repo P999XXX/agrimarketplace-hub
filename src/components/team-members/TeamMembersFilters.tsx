@@ -33,7 +33,7 @@ export const TeamMembersFilters = ({
           placeholder="Search team members..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full"
+          className="h-10" // Anpassung der Höhe auf 40px (h-10), um mit den Select-Komponenten übereinzustimmen
         />
       </div>
 
