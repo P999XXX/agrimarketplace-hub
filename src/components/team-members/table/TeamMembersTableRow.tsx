@@ -22,7 +22,7 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
 
   const initials = getInitials(member.name || '', member.email);
 
-  const getStatusBadgeVariant = (status: string) => {
+  const getStatusBadgeVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
     switch (status.toLowerCase()) {
       case 'active':
       case 'accepted':
@@ -37,7 +37,7 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
     }
   };
 
-  const getRoleBadgeVariant = () => {
+  const getRoleBadgeVariant = (): "default" | "secondary" | "destructive" | "outline" => {
     return 'secondary';
   };
 
