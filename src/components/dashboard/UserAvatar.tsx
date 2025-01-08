@@ -15,7 +15,7 @@ export const UserAvatar = () => {
       if (session?.user) {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('first_name, last_name, avatar_url')
+          .select('first_name, last_name, avatar_url, user_type')
           .eq('id', session.user.id)
           .single();
 
@@ -29,16 +29,11 @@ export const UserAvatar = () => {
           } else if (!isGenerating) {
             setIsGenerating(true);
             try {
-              const { data: userData } = await supabase
-                .from('profiles')
-                .select('user_type')
-                .eq('id', session.user.id)
-                .single();
-
+              // Generate avatar for current user
               const { data, error } = await supabase.functions.invoke('generate-avatar', {
                 body: {
                   name: `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || session.user.email?.split('@')[0],
-                  role: userData?.user_type || 'user'
+                  role: profile.user_type || 'user'
                 }
               });
 
@@ -53,9 +48,12 @@ export const UserAvatar = () => {
                 if (updateError) throw updateError;
                 setAvatarUrl(data.image);
                 
+                // Also trigger update for all other profiles without avatars
+                await supabase.functions.invoke('update-all-avatars');
+                
                 toast({
-                  title: "Avatar Generated",
-                  description: "Your new professional avatar has been created.",
+                  title: "Avatars Generated",
+                  description: "Professional avatars are being generated for all team members.",
                 });
               }
             } catch (error) {
