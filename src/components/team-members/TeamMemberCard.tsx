@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
-import { MessageCircle, Mail, ArrowRight } from "lucide-react";
+import { MessageCircle, Mail, ChevronRight } from "lucide-react";
 
 const colorSchemes = [
   { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
@@ -104,7 +104,7 @@ export const TeamMemberCard = ({
       <CardFooter className="p-3 flex justify-end space-x-4">
         <MessageCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
         <Mail className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <ArrowRight className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <ChevronRight className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
       </CardFooter>
     </Card>
   );
