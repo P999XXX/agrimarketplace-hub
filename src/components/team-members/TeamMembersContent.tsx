@@ -42,7 +42,6 @@ export const TeamMembersContent = () => {
     console.log("Export to CSV");
   };
 
-  // Erstelle die Hintergrund-Elemente, die mit dem Content scrollen
   const backgroundElements = Array.from({ length: 50 }, (_, i) => (
     <div
       key={i}
@@ -58,8 +57,8 @@ export const TeamMembersContent = () => {
   ));
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/40 backdrop-blur supports-[backdrop-filter]:bg-background/20 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden relative">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-background/10 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -79,7 +78,7 @@ export const TeamMembersContent = () => {
       </div>
 
       <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20 bg-transparent" 
+        className="flex-1 relative md:pb-0 pb-20" 
         onScroll={handleScroll}
       >
         <div className="relative min-h-full">
