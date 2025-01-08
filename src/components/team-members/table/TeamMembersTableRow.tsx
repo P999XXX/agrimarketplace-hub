@@ -61,7 +61,7 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
     <TableRow className="hover:bg-muted/50">
       <TableCell>
         <div className="flex items-center gap-3">
-          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium`}>
+          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>
             {initials}
           </div>
           <span className="font-medium">
