@@ -5,6 +5,8 @@ import { format } from "date-fns";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { TeamMemberDialog } from "./TeamMemberDialog";
 
 interface TeamMembersGridProps {
   searchQuery: string;
@@ -24,6 +26,8 @@ export const TeamMembersGrid = ({
   itemsPerPage
 }: TeamMembersGridProps) => {
   const { data: allTeamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -72,11 +76,15 @@ export const TeamMembersGrid = ({
         {teamMembers.map((member) => (
           <Card
             key={member.id}
-            className={`transition-all duration-500 ${
+            className={`transition-all duration-500 cursor-pointer hover:shadow-md ${
               Date.now() - new Date(member.created_at).getTime() < 3000
                 ? 'animate-[highlight_1s_ease-in-out]'
                 : ''
             }`}
+            onClick={() => {
+              setSelectedMember(member);
+              setIsDialogOpen(true);
+            }}
           >
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
@@ -177,6 +185,12 @@ export const TeamMembersGrid = ({
           </PaginationContent>
         </Pagination>
       )}
+
+      <TeamMemberDialog 
+        member={selectedMember}
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+      />
     </div>
   );
 };
