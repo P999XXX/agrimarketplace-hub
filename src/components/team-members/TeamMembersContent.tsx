@@ -42,7 +42,7 @@ export const TeamMembersContent = () => {
     console.log("Export to CSV");
   };
 
-  // Hintergrund-Elemente für den Scroll-Effekt
+  // Erstelle die Hintergrund-Elemente, die mit dem Content scrollen
   const backgroundElements = Array.from({ length: 50 }, (_, i) => (
     <div
       key={i}
@@ -58,30 +58,8 @@ export const TeamMembersContent = () => {
   ));
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden relative">
-      {/* Container für Hintergrund-Elemente */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="relative w-full h-full">
-          {backgroundElements}
-        </div>
-      </div>
-      
-      {/* Header-Bereich */}
-      <div 
-        className={`
-          relative
-          flex-none 
-          space-y-4 
-          p-4 
-          sticky 
-          top-0 
-          backdrop-blur-sm 
-          z-20
-          transition-shadow 
-          duration-200 
-          ${isScrolled ? 'shadow-sm' : ''}
-        `}
-      >
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/40 backdrop-blur supports-[backdrop-filter]:bg-background/20 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -100,25 +78,27 @@ export const TeamMembersContent = () => {
         />
       </div>
 
-      {/* Scroll-Bereich für den Hauptinhalt */}
       <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20 z-10" 
+        className="flex-1 relative md:pb-0 pb-20 bg-transparent" 
         onScroll={handleScroll}
       >
-        <div className="p-4">
-          {view === "grid" ? (
-            <TeamMembersGrid
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
-            />
-          ) : (
-            <TeamMembersTable
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
-            />
-          )}
+        <div className="relative min-h-full">
+          {backgroundElements}
+          <div className="relative z-0 p-4">
+            {view === "grid" ? (
+              <TeamMembersGrid
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+              />
+            ) : (
+              <TeamMembersTable
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+              />
+            )}
+          </div>
         </div>
       </ScrollArea>
       
