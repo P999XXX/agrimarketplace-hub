@@ -26,14 +26,14 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
     switch (status.toLowerCase()) {
       case 'active':
       case 'accepted':
-        return 'success';
+        return 'default';
       case 'pending':
-        return 'warning';
+        return 'secondary';
       case 'declined':
       case 'inactive':
         return 'destructive';
       default:
-        return 'secondary';
+        return 'outline';
     }
   };
 
