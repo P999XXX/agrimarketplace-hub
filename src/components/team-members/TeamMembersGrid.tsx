@@ -85,14 +85,16 @@ export const TeamMembersGrid = ({
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-base font-semibold text-gray-900 truncate">
                       {member.name || 'Unnamed User'}
                     </p>
                     <Badge className={getStatusBadgeClass(member.status)}>
                       {member.status}
                     </Badge>
                   </div>
-                  <EmailCell email={member.email} />
+                  <div className="text-xs">
+                    <EmailCell email={member.email} />
+                  </div>
                 </div>
               </div>
               <div className="mt-2 flex flex-wrap gap-2">

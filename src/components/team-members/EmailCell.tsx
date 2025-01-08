@@ -10,7 +10,7 @@ export const EmailCell = ({ email }: EmailCellProps) => {
   const handleEmailClick = () => window.open(`mailto:${email}`);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -20,7 +20,7 @@ export const EmailCell = ({ email }: EmailCellProps) => {
               className="h-4 w-4 hover:bg-gray-100"
               onClick={handleEmailClick}
             >
-              <Mail className="h-4 w-4 text-gray-500" />
+              <Mail className="h-3 w-3 text-gray-500" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>
@@ -29,7 +29,7 @@ export const EmailCell = ({ email }: EmailCellProps) => {
         </Tooltip>
       </TooltipProvider>
       <span 
-        className="cursor-pointer hover:text-blue-600 hover:underline"
+        className="cursor-pointer text-gray-600 hover:text-blue-600 hover:underline truncate"
         onClick={handleEmailClick}
       >
         {email}
