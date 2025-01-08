@@ -113,7 +113,7 @@ export const TeamMembersFilters = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-[200px] p-2">
-            <DropdownMenuItem className="p-2">
+            <DropdownMenuItem className="p-0">
               <Select value={roleFilter} onValueChange={setRoleFilter}>
                 <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
                   <div className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export const TeamMembersFilters = ({
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem className="p-2">
+            <DropdownMenuItem className="p-0">
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
                   <div className="flex items-center gap-2">
