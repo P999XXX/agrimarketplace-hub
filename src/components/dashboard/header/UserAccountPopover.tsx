@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
@@ -102,18 +102,23 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
       <PopoverContent className="w-80 p-0" align="end" sideOffset={8}>
         {/* Header */}
         <div className="p-4">
-          <div className="flex items-center space-x-4">
-            <div className="h-10 w-10">
-              <UserAvatar size="large" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="h-10 w-10">
+                <UserAvatar size="large" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-base font-semibold leading-none">
+                  {userName}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {userProfile?.email}
+                </p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="text-base font-semibold leading-none">
-                {userName}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {userProfile?.email}
-              </p>
-            </div>
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <Settings className="h-4 w-4" />
+            </Button>
           </div>
         </div>
 
@@ -136,7 +141,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
                 <>
                   <span>{getCountryName(ipInfo.country)}</span>
                   <img 
-                    src={`https://flagcdn.com/h12/${ipInfo.country.toLowerCase()}.png`}
+                    src={`https://flagcdn.com/${ipInfo.country.toLowerCase()}.png`}
                     width="16"
                     height="12"
                     alt=""
