@@ -56,7 +56,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="flex min-h-screen w-full bg-background overflow-hidden">
+      <div className="flex min-h-screen w-full bg-background">
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex border-r border-border">
           <SidebarHeader className="h-16 flex items-center border-b border-border px-4">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
@@ -75,8 +75,8 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </SidebarContent>
         </Sidebar>
 
-        <div className="flex w-full flex-col overflow-hidden">
-          <header className="h-16 flex items-center justify-between border-b border-border px-4 fixed top-0 right-0 left-0 md:left-[240px] z-50 backdrop-blur-md bg-background/80 supports-[backdrop-filter]:bg-background/60">
+        <div className="flex w-full flex-col">
+          <header className="h-16 flex items-center justify-between border-b border-border px-4 sticky top-0 z-50 backdrop-blur-md bg-background/80 supports-[backdrop-filter]:bg-background/60">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
@@ -84,7 +84,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
             <UserAvatar />
           </header>
-          <main className="flex-1 min-h-[calc(100vh-4rem)] overflow-hidden pt-16">
+          <main className="flex-1 min-h-[calc(100vh-4rem)]">
             {children}
           </main>
         </div>
