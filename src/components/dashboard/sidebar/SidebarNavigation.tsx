@@ -2,7 +2,7 @@ import { LayoutDashboard, Users, Building2, ShoppingCart, Settings } from "lucid
 import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const menuItems = [
@@ -36,6 +36,13 @@ const menuItems = [
 export const SidebarNavigation = () => {
   const { state, isMobile } = useSidebar();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>, href: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(href);
+  };
 
   return (
     <div className="space-y-2">
@@ -51,15 +58,15 @@ export const SidebarNavigation = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
-                      asChild
                       variant="ghost"
+                      onClick={(e) => handleClick(e, item.href)}
                       className={`w-full justify-start gap-3 transition-colors min-h-[44px] px-2 py-2.5 rounded-md ${
                         isActive 
                           ? "text-primary bg-primary/10 dark:bg-primary/20" 
                           : "text-foreground hover:text-foreground hover:bg-accent"
                       }`}
                     >
-                      <a href={item.href} className="flex items-center gap-3">
+                      <div className="flex items-center gap-3">
                         <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
                           <item.icon className="w-5 h-5" />
                         </div>
@@ -68,7 +75,7 @@ export const SidebarNavigation = () => {
                         }`}>
                           {item.title}
                         </span>
-                      </a>
+                      </div>
                     </Button>
                   </TooltipTrigger>
                   {!isMobile && state === "collapsed" && (
