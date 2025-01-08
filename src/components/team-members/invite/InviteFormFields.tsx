@@ -59,7 +59,6 @@ export const InviteFormFields = ({
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="admin">Admin</SelectItem>
             <SelectItem value="member">Member</SelectItem>
             <SelectItem value="viewer">Viewer</SelectItem>
           </SelectContent>
