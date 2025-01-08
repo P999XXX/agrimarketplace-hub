@@ -42,9 +42,26 @@ export const TeamMembersContent = () => {
     console.log("Export to CSV");
   };
 
+  // Fügen Sie einige Test-Elemente für den Hintergrund hinzu
+  const backgroundElements = Array.from({ length: 50 }, (_, i) => (
+    <div
+      key={i}
+      className="fixed w-24 h-24 rounded-full opacity-5"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        transform: 'translate(-50%, -50%)',
+        background: `hsl(${Math.random() * 360}, 70%, 50%)`,
+        zIndex: -1,
+      }}
+    />
+  ));
+
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
+      {backgroundElements}
+      
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/40 backdrop-blur supports-[backdrop-filter]:bg-background/20 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
