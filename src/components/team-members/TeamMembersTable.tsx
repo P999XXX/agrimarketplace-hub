@@ -6,7 +6,6 @@ import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
 import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
 import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
 import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -41,21 +40,18 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <ScrollArea className="rounded-md border">
-      <div className="relative min-w-[800px]">
-        <Table>
-          <TeamMembersTableHeader />
-          <TableBody>
-            {teamMembers.map((member) => (
-              <TeamMembersTableRow
-                key={member.id}
-                member={member}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+    <div className="border rounded-md">
+      <Table>
+        <TeamMembersTableHeader />
+        <TableBody>
+          {teamMembers.map((member) => (
+            <TeamMembersTableRow
+              key={member.id}
+              member={member}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };

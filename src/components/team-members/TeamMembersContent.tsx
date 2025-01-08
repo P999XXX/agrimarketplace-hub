@@ -61,7 +61,7 @@ export const TeamMembersContent = () => {
         </div>
 
         <ScrollArea 
-          className="flex-1 relative md:pb-0 pb-20" 
+          className="flex-1 relative md:pb-0 pb-20 overflow-x-auto" 
           onScroll={handleScroll}
         >
           <div className="p-4">
@@ -72,11 +72,13 @@ export const TeamMembersContent = () => {
                 sortBy={sortBy}
               />
             ) : (
-              <TeamMembersTable
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                sortBy={sortBy}
-              />
+              <div className="min-w-[800px]">
+                <TeamMembersTable
+                  searchQuery={searchQuery}
+                  roleFilter={roleFilter}
+                  sortBy={sortBy}
+                />
+              </div>
             )}
           </div>
         </ScrollArea>
