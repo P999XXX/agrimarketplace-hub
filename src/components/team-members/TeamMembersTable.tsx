@@ -38,21 +38,21 @@ export const TeamMembersTable = ({
   };
 
   const getRoleBadgeClass = () => {
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
+    return "bg-secondary text-secondary-foreground hover:bg-secondary/80";
   };
 
   const getStatusBadgeClass = (status: string) => {
     switch (status.toLowerCase()) {
       case 'active':
       case 'accepted':
-        return 'bg-green-100 text-green-700 hover:bg-green-200';
+        return 'bg-success-50 text-success-700 dark:bg-success-900/20 dark:text-success-400 hover:bg-success-100 dark:hover:bg-success-900/30';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
+        return 'bg-warning-50 text-warning-700 dark:bg-warning-900/20 dark:text-warning-400 hover:bg-warning-100 dark:hover:bg-warning-900/30';
       case 'declined':
       case 'inactive':
-        return 'bg-red-100 text-red-700 hover:bg-red-200';
+        return 'bg-error-50 text-error-700 dark:bg-error-900/20 dark:text-error-400 hover:bg-error-100 dark:hover:bg-error-900/30';
       default:
-        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
+        return 'bg-secondary text-secondary-foreground hover:bg-secondary/80';
     }
   };
 
@@ -77,7 +77,7 @@ export const TeamMembersTable = ({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
         <Table>
           <TeamMembersTableHeader />
           <TableBody>
