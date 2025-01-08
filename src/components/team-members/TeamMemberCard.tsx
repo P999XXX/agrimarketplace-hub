@@ -4,6 +4,22 @@ import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 
+const colorSchemes = [
+  { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
+  { bg: 'bg-blue-600 hover:bg-blue-500', text: 'text-white' },
+  { bg: 'bg-green-600 hover:bg-green-500', text: 'text-white' },
+  { bg: 'bg-yellow-600 hover:bg-yellow-500', text: 'text-white' },
+  { bg: 'bg-red-600 hover:bg-red-500', text: 'text-white' },
+  { bg: 'bg-pink-600 hover:bg-pink-500', text: 'text-white' },
+  { bg: 'bg-indigo-600 hover:bg-indigo-500', text: 'text-white' },
+  { bg: 'bg-cyan-600 hover:bg-cyan-500', text: 'text-white' },
+];
+
+const getColorScheme = (initials: string) => {
+  const sum = initials.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return colorSchemes[sum % colorSchemes.length];
+};
+
 interface TeamMemberCardProps {
   member: any; // TODO: Add proper type
   getRoleBadgeClass: () => string;
@@ -26,6 +42,9 @@ export const TeamMemberCard = ({
     return (email[0] + (email[1] || '')).toUpperCase();
   };
 
+  const initials = getInitials(member.name || '', member.email);
+  const colorScheme = getColorScheme(initials);
+
   return (
     <Card
       className={`transition-all duration-500 hover:shadow-md ${
@@ -38,8 +57,8 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-base font-medium">
-                {getInitials(member.name || '', member.email)}
+              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-base font-medium transition-colors`}>
+                {initials}
               </div>
               <div className="min-w-0">
                 <p className="text-lg font-semibold text-gray-900 truncate">
