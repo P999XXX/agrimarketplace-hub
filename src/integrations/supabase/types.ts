@@ -40,6 +40,7 @@ export type Database = {
           email: string
           id: string
           invited_by: string
+          last_login: string | null
           message: string | null
           name: string | null
           role: string
@@ -51,6 +52,7 @@ export type Database = {
           email: string
           id?: string
           invited_by: string
+          last_login?: string | null
           message?: string | null
           name?: string | null
           role: string
@@ -62,6 +64,7 @@ export type Database = {
           email?: string
           id?: string
           invited_by?: string
+          last_login?: string | null
           message?: string | null
           name?: string | null
           role?: string

@@ -36,6 +36,9 @@ export const TeamMembersTableRow = ({
         <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
       </TableCell>
       <TableCell className="whitespace-nowrap">
+        {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy HH:mm') : 'Never'}
+      </TableCell>
+      <TableCell className="whitespace-nowrap">
         {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
       </TableCell>
       <TableCell className="whitespace-nowrap">

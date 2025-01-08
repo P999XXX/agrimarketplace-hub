@@ -8,6 +8,7 @@ export const TeamMembersTableHeader = () => {
         <TableHead className="whitespace-nowrap">Email</TableHead>
         <TableHead className="whitespace-nowrap">Role</TableHead>
         <TableHead className="whitespace-nowrap">Status</TableHead>
+        <TableHead className="whitespace-nowrap">Last Login</TableHead>
         <TableHead className="whitespace-nowrap">Invited by</TableHead>
         <TableHead className="whitespace-nowrap">Invited</TableHead>
       </TableRow>

@@ -14,6 +14,7 @@ export interface TeamMember {
   role: string;
   status: string;
   created_at: string;
+  last_login: string | null;
   invited_by: string;
   inviter: {
     first_name: string | null;
@@ -54,7 +55,7 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
       // 3. Get invitations
       let invitationsQuery = supabase
         .from('invitations')
-        .select('id, email, name, role, status, created_at, invited_by')
+        .select('id, email, name, role, status, created_at, last_login, invited_by')
         .eq('company_id', profile.company_id);
 
       if (searchQuery) {

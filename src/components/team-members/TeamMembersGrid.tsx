@@ -92,6 +92,7 @@ export const TeamMembersGrid = ({
                       <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
                     </div>
                     <div className="text-sm text-gray-500">
+                      <p>Last Login: {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy HH:mm') : 'Never'}</p>
                       <p>Invited by: {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</p>
                       <p>Invited: {format(new Date(member.created_at), 'MMM d, yyyy')}</p>
                     </div>
