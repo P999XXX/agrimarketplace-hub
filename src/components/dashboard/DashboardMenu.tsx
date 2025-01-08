@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 const menuItems = [
   {
@@ -37,20 +37,13 @@ const menuItems = [
 export const DashboardMenu = () => {
   const { state, isMobile } = useSidebar();
   const location = useLocation();
-  const [showTooltips, setShowTooltips] = useState(true);
-  
-  // Effect für Sidebar State Changes
+
+  // Effect für Sidebar State Changes - vereinfacht
   useEffect(() => {
-    // Wenn die Sidebar collapsed ist, zeige Tooltips
-    if (state === "collapsed") {
-      setShowTooltips(true);
-    } else {
-      // Wenn die Sidebar expanded ist, verstecke Tooltips
-      setShowTooltips(false);
-      // Entferne alle existierenden Tooltips
-      const tooltips = document.querySelectorAll('[role="tooltip"]');
-      tooltips.forEach(tooltip => tooltip.remove());
-    }
+    // Wenn die Sidebar expanded ist oder der State sich ändert, 
+    // entferne alle Tooltips sofort
+    const tooltips = document.querySelectorAll('[role="tooltip"]');
+    tooltips.forEach(tooltip => tooltip.remove());
   }, [state]);
 
   return (
@@ -87,7 +80,7 @@ export const DashboardMenu = () => {
                       </a>
                     </Button>
                   </TooltipTrigger>
-                  {!isMobile && state === "collapsed" && showTooltips && (
+                  {!isMobile && state === "collapsed" && (
                     <TooltipContent side="right" sideOffset={10}>
                       {item.title}
                     </TooltipContent>
