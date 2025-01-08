@@ -5,7 +5,7 @@ import { InviteMemberForm } from "./InviteMemberForm";
 
 export const MobileInviteButton = () => {
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border z-50">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/10 backdrop-blur-sm border-t border-border/50 z-50">
       <Sheet>
         <SheetTrigger asChild>
           <Button className="w-full">
