@@ -1,4 +1,4 @@
-import { Search, Filter, SortAsc, LayoutGrid, LayoutList } from "lucide-react";
+import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ interface TeamMembersFiltersProps {
   setRoleFilter: (role: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
+  onExportCSV: () => void;
 }
 
 export const TeamMembersFilters = ({ 
@@ -22,7 +23,8 @@ export const TeamMembersFilters = ({
   roleFilter,
   setRoleFilter,
   sortBy,
-  setSortBy
+  setSortBy,
+  onExportCSV
 }: TeamMembersFiltersProps) => {
   const toggleView = () => {
     setViewMode(viewMode === 'table' ? 'grid' : 'table');
@@ -78,6 +80,15 @@ export const TeamMembersFilters = ({
             ) : (
               <LayoutList className="h-4 w-4" />
             )}
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={onExportCSV}
+            className="min-w-[40px] min-h-[40px] w-10 h-10 hover:bg-gray-100"
+            title="Export as CSV"
+          >
+            <Download className="h-4 w-4" />
           </Button>
         </div>
       </div>
