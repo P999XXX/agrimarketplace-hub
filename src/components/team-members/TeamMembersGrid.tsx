@@ -82,7 +82,7 @@ export const TeamMembersGrid = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== 1 && handlePageChange(1)}
-                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 text-muted-foreground hover:text-foreground transition-colors ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
               </PaginationLink>
@@ -92,7 +92,7 @@ export const TeamMembersGrid = ({
               <PaginationItem>
                 <PaginationPrevious 
                   onClick={() => handlePageChange(currentPage - 1)}
-                  className="gap-1 px-2.5"
+                  className="gap-1 px-2.5 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </PaginationPrevious>
@@ -110,6 +110,7 @@ export const TeamMembersGrid = ({
                     <PaginationLink
                       onClick={() => handlePageChange(page)}
                       isActive={page === currentPage}
+                      className="text-muted-foreground hover:text-foreground transition-colors data-[active]:bg-primary data-[active]:text-primary-foreground"
                     >
                       {page}
                     </PaginationLink>
@@ -121,7 +122,7 @@ export const TeamMembersGrid = ({
               ) {
                 return (
                   <PaginationItem key={page}>
-                    <PaginationEllipsis />
+                    <PaginationEllipsis className="text-muted-foreground" />
                   </PaginationItem>
                 );
               }
@@ -132,7 +133,7 @@ export const TeamMembersGrid = ({
               <PaginationItem>
                 <PaginationNext 
                   onClick={() => handlePageChange(currentPage + 1)}
-                  className="gap-1 px-2.5"
+                  className="gap-1 px-2.5 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </PaginationNext>
@@ -142,7 +143,7 @@ export const TeamMembersGrid = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 text-muted-foreground hover:text-foreground transition-colors ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
               </PaginationLink>
