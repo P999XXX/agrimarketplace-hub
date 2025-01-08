@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const TeamMembersContent = () => {
   const isMobile = useMediaQuery("(max-width: 1024px)");
+  const [isScrolled, setIsScrolled] = useState(false);
   const [view, setView] = useState<"grid" | "table">(() => {
     const savedView = localStorage.getItem('teamMembersViewMode');
     if (savedView === 'grid' || savedView === 'table') {
@@ -31,13 +32,18 @@ export const TeamMembersContent = () => {
     localStorage.setItem('teamMembersViewMode', view);
   }, [view]);
 
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const scrollTop = event.currentTarget.scrollTop;
+    setIsScrolled(scrollTop > 0);
+  };
+
   const handleExportCSV = () => {
     console.log("Export to CSV");
   };
 
   return (
     <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
-      <div className="flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 shadow-sm">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -56,7 +62,7 @@ export const TeamMembersContent = () => {
         />
       </div>
 
-      <ScrollArea className="flex-1 relative">
+      <ScrollArea className="flex-1 relative" onScroll={handleScroll}>
         <div className="p-4">
           {view === "grid" ? (
             <TeamMembersGrid
