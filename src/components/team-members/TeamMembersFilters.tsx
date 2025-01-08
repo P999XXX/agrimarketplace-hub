@@ -46,12 +46,14 @@ export const TeamMembersFilters = ({
           />
         </div>
         
-        <div className="flex items-center space-x-2 overflow-x-auto pb-2">
+        <div className="flex items-center gap-2">
           {/* Filter Button/Select */}
           <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="md:w-[180px] w-10 h-10 md:px-3 px-0 md:justify-start justify-center">
+            <SelectTrigger className="w-[180px] max-md:w-10 h-10 max-md:px-0 max-md:justify-center">
               <Filter className="h-5 w-5 text-gray-500 md:mr-2" />
-              <SelectValue placeholder="Filter by role" className="hidden md:block" />
+              <span className="max-md:hidden">
+                <SelectValue placeholder="Filter by role" />
+              </span>
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All roles</SelectItem>
@@ -63,9 +65,11 @@ export const TeamMembersFilters = ({
 
           {/* Sort Button/Select */}
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="md:w-[180px] w-10 h-10 md:px-3 px-0 md:justify-start justify-center">
+            <SelectTrigger className="w-[180px] max-md:w-10 h-10 max-md:px-0 max-md:justify-center">
               <SortAsc className="h-5 w-5 text-gray-500 md:mr-2" />
-              <SelectValue placeholder="Sort by" className="hidden md:block" />
+              <span className="max-md:hidden">
+                <SelectValue placeholder="Sort by" />
+              </span>
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="created_at-desc">Newest first</SelectItem>
