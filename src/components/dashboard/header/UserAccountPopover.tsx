@@ -132,7 +132,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
               </div>
             </div>
             <Button variant="ghost" size="icon" className="h-8 w-8">
-              <Settings className="h-4 w-4" />
+              <Settings className="h-5 w-5" />
             </Button>
           </div>
         </div>
