@@ -10,7 +10,8 @@ export const TeamMembersTableHeader = () => {
         <TableHead>Status</TableHead>
         <TableHead>Last Login</TableHead>
         <TableHead>Invited By</TableHead>
-        <TableHead>Created At</TableHead>
+        <TableHead>Joined</TableHead>
+        <TableHead></TableHead>
       </TableRow>
     </TableHeader>
   );

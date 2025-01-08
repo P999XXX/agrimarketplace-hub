@@ -70,7 +70,7 @@ export const TeamMemberCard = ({
             <Badge className={getStatusBadgeClass(member.status)}>
               {member.status}
             </Badge>
-            <Badge variant="secondary" className={getRoleBadgeClass()}>
+            <Badge className={getRoleBadgeClass()}>
               {member.role}
             </Badge>
           </div>

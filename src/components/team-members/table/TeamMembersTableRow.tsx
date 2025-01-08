@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "../EmailCell";
 import { format } from "date-fns";
 import { TeamMember } from "@/hooks/useTeamMembers";
+import { ChevronRight } from "lucide-react";
 
 interface TeamMembersTableRowProps {
   member: TeamMember;
@@ -22,23 +23,23 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
 
   const initials = getInitials(member.name || '', member.email);
 
-  const getStatusBadgeVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
+  const getStatusBadgeClass = (status: string) => {
     switch (status.toLowerCase()) {
       case 'active':
       case 'accepted':
-        return 'default';
+        return 'bg-green-100 text-green-700 hover:bg-green-200';
       case 'pending':
-        return 'secondary';
+        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
       case 'declined':
       case 'inactive':
-        return 'destructive';
+        return 'bg-red-100 text-red-700 hover:bg-red-200';
       default:
-        return 'outline';
+        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
     }
   };
 
-  const getRoleBadgeVariant = (): "default" | "secondary" | "destructive" | "outline" => {
-    return 'secondary';
+  const getRoleBadgeClass = () => {
+    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
   };
 
   const colorSchemes = [
@@ -72,10 +73,14 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
         <EmailCell email={member.email} />
       </TableCell>
       <TableCell>
-        <Badge variant={getRoleBadgeVariant()}>{member.role}</Badge>
+        <Badge className={getRoleBadgeClass()}>
+          {member.role}
+        </Badge>
       </TableCell>
       <TableCell>
-        <Badge variant={getStatusBadgeVariant(member.status)}>{member.status}</Badge>
+        <Badge className={getStatusBadgeClass(member.status)}>
+          {member.status}
+        </Badge>
       </TableCell>
       <TableCell className="text-muted-foreground">
         {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
@@ -85,6 +90,9 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
       </TableCell>
       <TableCell className="text-muted-foreground">
         {format(new Date(member.created_at), 'MMM d, yyyy')}
+      </TableCell>
+      <TableCell>
+        <ChevronRight className="h-4 w-4 text-muted-foreground" />
       </TableCell>
     </TableRow>
   );
