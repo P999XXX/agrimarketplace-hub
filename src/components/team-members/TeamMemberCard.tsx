@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
@@ -54,53 +54,53 @@ export const TeamMemberCard = ({
           : ''
       }`}
     >
-      <CardContent className="p-4">
-        <div className="space-y-4">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-3">
-              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
-                {initials}
-              </div>
-              <div className="min-w-0">
-                <p className="text-lg font-semibold text-gray-900 truncate">
-                  {member.name || 'Unnamed User'}
-                </p>
-                <div className="text-sm">
-                  <EmailCell email={member.email} />
-                </div>
-              </div>
+      <CardHeader className="p-4">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center space-x-3">
+            <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
+              {initials}
             </div>
-            <div className="flex flex-col items-end space-y-1">
-              <Badge className={getStatusBadgeClass(member.status)}>
-                {member.status}
-              </Badge>
-              <Badge variant="secondary" className={getRoleBadgeClass()}>
-                {member.role}
-              </Badge>
+            <div className="min-w-0">
+              <p className="text-lg font-semibold text-gray-900 truncate">
+                {member.name || 'Unnamed User'}
+              </p>
+              <div className="text-sm">
+                <EmailCell email={member.email} />
+              </div>
             </div>
           </div>
+          <div className="flex flex-col items-end space-y-1">
+            <Badge className={getStatusBadgeClass(member.status)}>
+              {member.status}
+            </Badge>
+            <Badge variant="secondary" className={getRoleBadgeClass()}>
+              {member.role}
+            </Badge>
+          </div>
+        </div>
+      </CardHeader>
 
-          <Separator className="bg-gray-200" />
+      <Separator className="w-full" />
 
-          <div className="space-y-3">
-            <div className="text-sm text-gray-500 space-y-1">
-              <p className="flex justify-between">
-                <span>Last Login:</span>
-                <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Invited by:</span>
-                <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Invited:</span>
-                <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
-              </p>
-            </div>
+      <CardContent className="p-4">
+        <div className="text-sm text-gray-500 space-y-2">
+          <div className="flex justify-between">
+            <span>Last Login:</span>
+            <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Invited by:</span>
+            <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Invited:</span>
+            <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
           </div>
         </div>
       </CardContent>
+
       <Separator className="w-full" />
+      
       <CardFooter className="p-3 flex justify-end space-x-4">
         <MessageCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
         <Mail className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
