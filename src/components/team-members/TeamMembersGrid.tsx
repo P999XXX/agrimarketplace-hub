@@ -2,6 +2,7 @@ import { TeamMemberCard } from "./TeamMemberCard";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { TeamMembersGridLoading } from "./TeamMembersGridLoading";
 
 interface TeamMembersGridProps {
   searchQuery: string;
@@ -51,7 +52,7 @@ export const TeamMembersGrid = ({
   };
 
   if (isLoading) {
-    return <div className="text-center py-4">Loading...</div>;
+    return <TeamMembersGridLoading />;
   }
 
   if (allTeamMembers.length === 0) {
