@@ -38,10 +38,6 @@ export const TeamMembersContent = () => {
     setIsScrolled(scrollTop > 0);
   };
 
-  const handleExportCSV = () => {
-    console.log("Export to CSV");
-  };
-
   return (
     <DashboardContent>
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
@@ -60,7 +56,7 @@ export const TeamMembersContent = () => {
             setRoleFilter={setRoleFilter}
             sortBy={sortBy}
             setSortBy={setSortBy}
-            onExportCSV={handleExportCSV}
+            onExportCSV={() => {}}
           />
         </div>
 
