@@ -16,11 +16,9 @@ export const TeamMembersContent = () => {
     return isMobile ? "grid" : "table";
   });
   
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
-  const itemsPerPage = 9;
 
   useEffect(() => {
     if (!localStorage.getItem('teamMembersViewMode')) {
@@ -28,7 +26,6 @@ export const TeamMembersContent = () => {
     }
   }, [isMobile]);
 
-  // Speichern der View-Präferenz im localStorage
   useEffect(() => {
     localStorage.setItem('teamMembersViewMode', view);
   }, [view]);
@@ -62,18 +59,12 @@ export const TeamMembersContent = () => {
             searchQuery={searchQuery}
             roleFilter={roleFilter}
             sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={itemsPerPage}
           />
         ) : (
           <TeamMembersTable
             searchQuery={searchQuery}
             roleFilter={roleFilter}
             sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={itemsPerPage}
           />
         )}
       </div>
