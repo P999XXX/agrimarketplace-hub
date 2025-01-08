@@ -76,7 +76,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </Sidebar>
 
         <div className="flex w-full flex-col">
-          <header className="h-16 flex items-center justify-between px-4 sticky top-0 z-50 dark:bg-black/10 bg-white/70 backdrop-blur-sm border-b border-border/50">
+          <header className="h-16 flex items-center justify-between px-4 sticky top-0 z-50 dark:bg-black/10 bg-white/70 backdrop-blur-md border-b border-border/50">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
