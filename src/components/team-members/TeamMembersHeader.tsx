@@ -12,7 +12,7 @@ interface TeamMembersHeaderProps {
 export const TeamMembersHeader = ({ view, onViewChange }: TeamMembersHeaderProps) => {
   return (
     <div className="flex justify-between items-center">
-      <h1 className="text-2xl font-semibold tracking-tight">
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">
         Team Members
       </h1>
       <Sheet>
