@@ -91,11 +91,14 @@ export default {
             "background-position": "100% 50%",
           },
         },
-        "skeleton-pulse": {
-          "0%, 100%": {
-            opacity: "0.5",
+        "skeleton-loading": {
+          "0%": {
+            opacity: "0.15",
           },
           "50%": {
+            opacity: "0.5",
+          },
+          "100%": {
             opacity: "0.15",
           },
         },
@@ -106,7 +109,7 @@ export default {
         "fade-in-left": "fade-in-left 0.6s ease-out forwards",
         "fade": "fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
         "gradient-shift": "gradient-shift 15s ease infinite",
-        "skeleton": "skeleton-pulse 1.2s ease-in-out infinite",
+        "skeleton": "skeleton-loading 1.2s ease-in-out infinite",
       },
       colors: {
         primary: {
