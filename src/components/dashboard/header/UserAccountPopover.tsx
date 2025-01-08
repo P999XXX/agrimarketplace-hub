@@ -153,7 +153,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
                     width="20"
                     height="15"
                     alt={getCountryName(ipInfo.country)}
-                    className="inline-block"
+                    className="inline-block rounded-full object-cover"
                   />
                 </>
               )}
