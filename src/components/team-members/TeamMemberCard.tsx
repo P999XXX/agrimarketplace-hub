@@ -44,17 +44,11 @@ export const TeamMemberCard = ({
   const colorScheme = getColorScheme(initials);
 
   return (
-    <Card
-      className={`transition-all duration-500 hover:shadow-md backdrop-blur-sm border-border/50 ${
-        Date.now() - new Date(member.created_at).getTime() < 3000
-          ? 'animate-[highlight_1s_ease-in-out]'
-          : ''
-      }`}
-    >
+    <Card className="border-border/50 backdrop-blur-sm">
       <CardHeader className="p-3 sm:p-4">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm sm:text-base font-medium transition-colors`}>
+            <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm sm:text-base font-medium`}>
               {initials}
             </div>
             <div className="min-w-0">
