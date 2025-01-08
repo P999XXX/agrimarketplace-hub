@@ -38,7 +38,7 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-sm font-medium">
+              <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-base font-medium">
                 {getInitials(member.name || '', member.email)}
               </div>
               <div className="min-w-0">
