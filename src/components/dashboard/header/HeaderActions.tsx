@@ -1,7 +1,9 @@
+import { Bell } from "lucide-react";
 import { UserAvatar } from "../UserAvatar";
 import { MobileNav } from "../mobile/MobileNav";
 import { HeaderLogo } from "./HeaderLogo";
 import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
+import { UserAccountPopover } from "./UserAccountPopover";
 
 export const HeaderActions = () => {
   return (
@@ -11,7 +13,14 @@ export const HeaderActions = () => {
         <HeaderLogo />
         <DashboardBreadcrumb />
       </div>
-      <UserAvatar />
+      <div className="flex items-center gap-3">
+        <button className="text-muted-foreground hover:text-foreground transition-colors">
+          <Bell className="h-5 w-5" />
+        </button>
+        <UserAccountPopover>
+          <UserAvatar />
+        </UserAccountPopover>
+      </div>
     </header>
   );
 };
