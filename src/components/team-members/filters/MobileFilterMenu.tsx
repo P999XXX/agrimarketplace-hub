@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Filter, ArrowUpDown, Grid, Download, Table as TableIcon } from "lucide-react";
+import { ListFilter, ArrowUpDown, Grid, Download, Table as TableIcon } from "lucide-react";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
@@ -35,14 +35,14 @@ export const MobileFilterMenu = ({
           size="icon"
           className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
         >
-          <Filter className="h-4 w-4" />
+          <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
         <Select value={roleFilter} onValueChange={setRoleFilter}>
           <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
             <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4" />
+              <ListFilter className="h-4 w-4" />
               <SelectValue placeholder="Filter by role" />
             </div>
           </SelectTrigger>
