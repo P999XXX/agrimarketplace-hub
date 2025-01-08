@@ -2,6 +2,7 @@ import { LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import { getCountryData, getName } from "country-flag-icons/unicode";
 import {
   Popover,
   PopoverContent,
@@ -79,6 +80,22 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
     : 'No Name';
 
   const currentTime = new Date();
+  
+  const getCountryFlag = (countryCode: string) => {
+    try {
+      return getCountryData(countryCode)?.emoji || '';
+    } catch {
+      return '';
+    }
+  };
+
+  const getCountryName = (countryCode: string) => {
+    try {
+      return getName(countryCode) || countryCode;
+    } catch {
+      return countryCode;
+    }
+  };
 
   return (
     <Popover>
@@ -104,7 +121,11 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
             <div className="text-sm text-muted-foreground">
               <div className="mb-1">Account: {userProfile?.companies?.name || 'Not assigned'}</div>
               <div className="mb-1">Role: {userProfile?.user_type || 'Not assigned'}</div>
-              <div className="mb-1">Location: {ipInfo?.country || 'Loading...'}</div>
+              <div className="mb-1">Location: {ipInfo?.country ? (
+                <span>
+                  {getCountryFlag(ipInfo.country)} {getCountryName(ipInfo.country)}
+                </span>
+              ) : 'Loading...'}</div>
               <div>Time: {format(currentTime, 'PPpp')}</div>
             </div>
           </div>
