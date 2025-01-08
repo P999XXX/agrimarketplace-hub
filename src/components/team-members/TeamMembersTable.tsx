@@ -1,13 +1,12 @@
-import { Table, TableBody } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
-import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
-import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
-import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
+import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
+import { EmailCell } from "./EmailCell";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -58,7 +57,7 @@ export const TeamMembersTable = ({
 
   if (error) {
     return (
-      <Alert variant="destructive" className="mb-6">
+      <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertDescription>
           {error instanceof Error ? error.message : 'Failed to load team members'}
@@ -68,26 +67,98 @@ export const TeamMembersTable = ({
   }
 
   if (isLoading) {
-    return <TeamMembersTableLoading />;
+    return <div className="space-y-3">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[250px]">Name / Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Last Login</TableHead>
+            <TableHead>Invited By</TableHead>
+            <TableHead>Invited</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {[1, 2, 3].map((i) => (
+            <TableRow key={i}>
+              <TableCell className="font-medium">
+                <div className="h-6 w-32 bg-muted animate-pulse rounded" />
+              </TableCell>
+              <TableCell>
+                <div className="h-6 w-20 bg-muted animate-pulse rounded" />
+              </TableCell>
+              <TableCell>
+                <div className="h-6 w-24 bg-muted animate-pulse rounded" />
+              </TableCell>
+              <TableCell>
+                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
+              </TableCell>
+              <TableCell>
+                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
+              </TableCell>
+              <TableCell>
+                <div className="h-6 w-28 bg-muted animate-pulse rounded" />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   }
 
   if (allTeamMembers.length === 0) {
-    return <TeamMembersTableEmpty />;
+    return (
+      <div className="text-center py-8">
+        <p className="text-muted-foreground text-lg">No team members found</p>
+        <p className="text-muted-foreground/60 text-sm mt-2">Try adjusting your filters or search criteria</p>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
-      <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+      <div className="rounded-md border">
         <Table>
-          <TeamMembersTableHeader />
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[250px]">Name / Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Last Login</TableHead>
+              <TableHead>Invited By</TableHead>
+              <TableHead>Invited</TableHead>
+            </TableRow>
+          </TableHeader>
           <TableBody>
             {teamMembers.map((member) => (
-              <TeamMembersTableRow
-                key={member.id}
-                member={member}
-                getRoleBadgeClass={getRoleBadgeClass}
-                getStatusBadgeClass={getStatusBadgeClass}
-              />
+              <TableRow key={member.id}>
+                <TableCell className="font-medium">
+                  <div className="space-y-1">
+                    <div className="font-medium">{member.name || 'Unnamed User'}</div>
+                    <EmailCell email={member.email} />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Badge className={getRoleBadgeClass()}>
+                    {member.role}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge className={getStatusBadgeClass(member.status)}>
+                    {member.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
+                </TableCell>
+                <TableCell>
+                  {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
+                </TableCell>
+                <TableCell>
+                  {format(new Date(member.created_at), 'MMM d, yyyy')}
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
@@ -99,7 +170,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== 1 && handlePageChange(1)}
-                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
               </PaginationLink>
@@ -159,7 +230,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
               </PaginationLink>
