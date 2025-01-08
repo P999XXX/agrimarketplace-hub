@@ -38,7 +38,7 @@ export const MobileFilterMenu = ({
   searchQuery,
   showViewToggle = true,
 }: MobileFilterMenuProps) => {
-  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
 
   return (
