@@ -1,8 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
+import { MessageCircle, Mail, ArrowRight } from "lucide-react";
 
 const colorSchemes = [
   { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
@@ -57,7 +58,7 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-base font-medium transition-colors`}>
+              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
                 {initials}
               </div>
               <div className="min-w-0">
@@ -99,6 +100,12 @@ export const TeamMemberCard = ({
           </div>
         </div>
       </CardContent>
+      <Separator className="w-full" />
+      <CardFooter className="p-4 flex justify-end space-x-4">
+        <MessageCircle className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <Mail className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <ArrowRight className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+      </CardFooter>
     </Card>
   );
 };
