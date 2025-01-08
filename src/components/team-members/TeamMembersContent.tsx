@@ -44,7 +44,7 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/30 backdrop-blur-md z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''} border-b border-border/50`}>
+      <div className={`flex-none space-y-4 p-4 sticky top-0 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''} border-b border-border/50`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
