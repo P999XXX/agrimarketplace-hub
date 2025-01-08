@@ -2,7 +2,9 @@ import { LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { getCountryData, getName } from "country-flag-icons/unicode";
+import getUnicodeFlagIcon from 'country-flag-icons/unicode'
+import countries from 'i18n-iso-countries';
+import en from 'i18n-iso-countries/langs/en.json';
 import {
   Popover,
   PopoverContent,
@@ -12,6 +14,9 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { UserAvatar } from "../UserAvatar";
+
+// Initialize the countries library
+countries.registerLocale(en);
 
 interface UserAccountPopoverProps {
   children: React.ReactNode;
@@ -83,7 +88,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   
   const getCountryFlag = (countryCode: string) => {
     try {
-      return getCountryData(countryCode)?.emoji || '';
+      return getUnicodeFlagIcon(countryCode) || '';
     } catch {
       return '';
     }
@@ -91,7 +96,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
 
   const getCountryName = (countryCode: string) => {
     try {
-      return getName(countryCode) || countryCode;
+      return countries.getName(countryCode, 'en') || countryCode;
     } catch {
       return countryCode;
     }
