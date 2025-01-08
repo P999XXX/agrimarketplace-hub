@@ -76,16 +76,16 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           <div className="flex items-center space-x-4">
             {children}
             <div className="space-y-1">
-              <p className="text-sm font-medium leading-none">
+              <p className="text-base font-medium leading-none">
                 {userProfile?.first_name} {userProfile?.last_name}
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 {userProfile?.email}
               </p>
             </div>
           </div>
           <div className="space-y-1">
-            <div className="text-xs text-muted-foreground">
+            <div className="text-sm text-muted-foreground">
               <div className="mb-1">Account: {userProfile?.companies?.name || 'Not assigned'}</div>
               <div>Role: {userProfile?.user_type || 'Not assigned'}</div>
             </div>
