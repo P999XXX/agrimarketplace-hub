@@ -101,10 +101,10 @@ export const TeamMemberCard = ({
         </div>
       </CardContent>
       <Separator className="w-full" />
-      <CardFooter className="p-2 flex justify-end space-x-4">
-        <MessageCircle className="h-4.5 w-4.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <Mail className="h-4.5 w-4.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <ArrowRight className="h-4.5 w-4.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+      <CardFooter className="p-3 flex justify-end space-x-4">
+        <MessageCircle className="h-3.5 w-3.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <Mail className="h-3.5 w-3.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <ArrowRight className="h-3.5 w-3.5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
       </CardFooter>
     </Card>
   );
