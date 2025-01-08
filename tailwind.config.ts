@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       maxWidth: {
-        'lg': '25rem',
+        'lg': '25rem', // Hier setzen wir die neue Standard-Breite
       },
       fontFamily: {
         sans: ['Albert Sans', 'sans-serif'],
