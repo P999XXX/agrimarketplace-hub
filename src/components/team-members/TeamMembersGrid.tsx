@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { format } from "date-fns";
-import { useTeamMembers } from "@/hooks/useTeamMembers";
+import { useTeamMembers, TeamMember } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
