@@ -21,9 +21,27 @@ export const TeamMembersContent = () => {
   const { toast } = useToast();
   const { data: teamMembers = [] } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
+  // Load saved view mode from localStorage on component mount
+  useEffect(() => {
+    const savedViewMode = localStorage.getItem('teamMembersViewMode');
+    if (savedViewMode && (savedViewMode === 'table' || savedViewMode === 'grid')) {
+      // Only apply saved view mode if not on mobile
+      if (!isMobile) {
+        setViewMode(savedViewMode);
+      }
+    }
+  }, [isMobile]);
+
+  // Set initial view mode based on device and update when device changes
   useEffect(() => {
     setViewMode(isMobile ? 'grid' : 'table');
   }, [isMobile]);
+
+  // Custom setViewMode function that also saves to localStorage
+  const handleViewModeChange = (mode: 'table' | 'grid') => {
+    setViewMode(mode);
+    localStorage.setItem('teamMembersViewMode', mode);
+  };
 
   const handleExportCSV = () => {
     try {
@@ -92,7 +110,7 @@ export const TeamMembersContent = () => {
         <TeamMembersHeader />
         <TeamMembersFilters 
           viewMode={viewMode} 
-          setViewMode={setViewMode}
+          setViewMode={handleViewModeChange}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           roleFilter={roleFilter}
