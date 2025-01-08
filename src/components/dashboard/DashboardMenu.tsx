@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useEffect } from "react";
 
 const menuItems = [
   {
@@ -38,21 +37,13 @@ export const DashboardMenu = () => {
   const { state, isMobile } = useSidebar();
   const location = useLocation();
 
-  // Effect für Sidebar State Changes - vereinfacht
-  useEffect(() => {
-    // Wenn die Sidebar expanded ist oder der State sich ändert, 
-    // entferne alle Tooltips sofort
-    const tooltips = document.querySelectorAll('[role="tooltip"]');
-    tooltips.forEach(tooltip => tooltip.remove());
-  }, [state]);
-
   return (
     <div className="space-y-2">
       <h2 className={`px-4 text-sm font-semibold text-gray-500 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
         Menu
       </h2>
       <SidebarMenu>
-        <TooltipProvider delayDuration={0}>
+        <TooltipProvider delayDuration={0} disableHoverableContent>
           {menuItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
