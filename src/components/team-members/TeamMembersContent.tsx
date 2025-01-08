@@ -4,6 +4,7 @@ import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { useState } from "react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
+import { DashboardContent } from "@/components/dashboard/DashboardContent";
 
 export const TeamMembersContent = () => {
   const [view, setView] = useState<"grid" | "table">("grid");
@@ -20,7 +21,7 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 max-w-7xl">
+    <DashboardContent>
       <div className="space-y-6">
         <TeamMembersHeader 
           view={view} 
@@ -59,6 +60,6 @@ export const TeamMembersContent = () => {
           />
         )}
       </div>
-    </div>
+    </DashboardContent>
   );
 };

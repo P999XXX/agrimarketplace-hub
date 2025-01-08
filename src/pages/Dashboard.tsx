@@ -1,11 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LayoutDashboard, Users, ChartBar, Database } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { DashboardContent } from "@/components/dashboard/DashboardContent";
 
 const Dashboard = () => {
   return (
     <DashboardLayout>
-      <div className="container py-8 space-y-6">
+      <DashboardContent>
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold tracking-tight">
             Dashboard Overview
@@ -67,7 +68,7 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </DashboardContent>
     </DashboardLayout>
   );
 };
