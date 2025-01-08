@@ -58,7 +58,7 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
+              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
                 {initials}
               </div>
               <div className="min-w-0">
@@ -101,10 +101,10 @@ export const TeamMemberCard = ({
         </div>
       </CardContent>
       <Separator className="w-full" />
-      <CardFooter className="p-4 flex justify-end space-x-4">
-        <MessageCircle className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <Mail className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <ArrowRight className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+      <CardFooter className="p-3 flex justify-end space-x-4">
+        <MessageCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <Mail className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <ArrowRight className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
       </CardFooter>
     </Card>
   );
