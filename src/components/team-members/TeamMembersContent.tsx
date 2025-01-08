@@ -45,7 +45,7 @@ export const TeamMembersContent = () => {
   return (
     <DashboardContent>
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-        <div className="sticky top-0 flex-none space-y-4 p-4 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 border-b border-border/50">
+        <div className="fixed top-16 inset-x-0 max-w-[calc(100%-16rem)] mx-auto space-y-4 p-4 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 border-b border-border/50">
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
@@ -63,6 +63,8 @@ export const TeamMembersContent = () => {
             onExportCSV={handleExportCSV}
           />
         </div>
+
+        <div className="h-[7.5rem]" /> {/* Spacer für den fixed header */}
 
         <ScrollArea 
           className="flex-1 relative md:pb-0 pb-20" 
