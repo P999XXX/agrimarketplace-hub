@@ -1,22 +1,13 @@
-import { cn } from "@/lib/utils";
+export const Logo = () => {
+  // Check if we're on an auth page using the current URL
+  const isAuthPage = window.location.pathname.match(/^\/(signin|signup|thank-you)$/);
 
-interface LogoProps {
-  className?: string;
-}
-
-export const Logo = ({ className }: LogoProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={cn("h-6 w-6 text-white", className)}
-    >
-      <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-    </svg>
+    <div className="flex items-center">
+      <span className="flex items-center text-[1.65rem]">
+        <span className={`${isAuthPage ? 'text-white' : 'text-black'} font-[700] leading-[1] -mt-[4px]`}>cropio</span>
+        <span className={`${isAuthPage ? 'text-secondary' : 'text-black'} font-[700] leading-[1] -mt-[4px]`}>.app</span>
+      </span>
+    </div>
   );
 };

@@ -1,59 +1,52 @@
-import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarGroup } from "@/components/ui/sidebar";
+import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
 import { DashboardMenu } from "./DashboardMenu";
-import { UserNav } from "./UserNav";
-import { Logo } from "@/components/auth/Logo";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage } from "@/components/ui/breadcrumb";
-import { useLocation } from "react-router-dom";
+import { CustomSidebarTrigger } from "./CustomSidebarTrigger";
+import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
+import { HeaderLogo } from "./HeaderLogo";
+import { SidebarLogo } from "./SidebarLogo";
+import { MobileNav } from "./MobileNav";
+import { UserAvatar } from "./UserAvatar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-  const location = useLocation();
-  const path = location.pathname.split('/').filter(Boolean);
-  
+  const defaultOpen = localStorage.getItem('sidebarState') === 'expanded';
+
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-gray-50/50">
-        <Sidebar variant="inset" className="border-none">
-          <SidebarHeader className="border-none px-4 py-3">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-primary rounded-lg">
-                <Logo className="w-6 h-6" />
-              </div>
-              <div className="grid gap-0.5">
-                <h3 className="text-sm font-medium">Cropio Inc</h3>
-                <p className="text-xs text-muted-foreground">Enterprise</p>
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <div className="flex min-h-screen w-full bg-gray-50">
+        {/* Desktop Sidebar */}
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
+          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-white">
+            <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
+              <SidebarLogo />
+              <div className="flex items-center">
+                <CustomSidebarTrigger />
               </div>
             </div>
           </SidebarHeader>
           <SidebarContent>
-            <DashboardMenu />
+            <SidebarGroup>
+              <SidebarGroupContent>
+                <DashboardMenu />
+              </SidebarGroupContent>
+            </SidebarGroup>
           </SidebarContent>
         </Sidebar>
 
-        <div className="flex-1">
-          <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-                </BreadcrumbItem>
-                {path.length > 1 && (
-                  <BreadcrumbItem>
-                    <BreadcrumbPage className="capitalize">
-                      {path[1].replace('-', ' ')}
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
-                )}
-              </BreadcrumbList>
-            </Breadcrumb>
-            <div className="ml-auto flex items-center gap-2">
-              <UserNav />
+        {/* Main Content */}
+        <div className="flex w-full flex-col">
+          <header className="h-16 flex items-center justify-between border-b bg-white px-4 sticky top-0 z-50">
+            <div className="flex items-center gap-3">
+              <MobileNav />
+              <HeaderLogo />
+              <DashboardBreadcrumb />
             </div>
+            <UserAvatar />
           </header>
-          <main className="flex-1">
+          <main className="flex-1 min-h-[calc(100vh-4rem)]">
             {children}
           </main>
         </div>
