@@ -33,12 +33,12 @@ export const TeamMembersFilters = ({
           placeholder="Search team members..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="h-10" // Anpassung der Höhe auf 40px (h-10), um mit den Select-Komponenten übereinzustimmen
+          className="h-10 shadow-sm" 
         />
       </div>
 
       <Select value={roleFilter} onValueChange={setRoleFilter}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px] shadow-sm">
           <SelectValue placeholder="Filter by role" />
         </SelectTrigger>
         <SelectContent>
@@ -50,7 +50,7 @@ export const TeamMembersFilters = ({
       </Select>
 
       <Select value={sortBy} onValueChange={setSortBy}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px] shadow-sm">
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
         <SelectContent>
@@ -65,20 +65,12 @@ export const TeamMembersFilters = ({
         <Button
           variant="outline"
           size="icon"
-          onClick={() => setViewMode("grid")}
-          className={viewMode === "grid" ? "bg-accent" : ""}
+          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+          className="shadow-sm"
         >
-          <Grid className="h-4 w-4" />
+          {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
         </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setViewMode("table")}
-          className={viewMode === "table" ? "bg-accent" : ""}
-        >
-          <TableIcon className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" size="icon" onClick={onExportCSV}>
+        <Button variant="outline" size="icon" onClick={onExportCSV} className="shadow-sm">
           <Download className="h-4 w-4" />
         </Button>
       </div>
