@@ -28,14 +28,11 @@ export const TeamMembersTableRow = ({
 
   const initials = getInitials(member.name || '', member.email);
   const colorSchemes = [
-    { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
-    { bg: 'bg-blue-600 hover:bg-blue-500', text: 'text-white' },
-    { bg: 'bg-green-600 hover:bg-green-500', text: 'text-white' },
-    { bg: 'bg-yellow-600 hover:bg-yellow-500', text: 'text-white' },
-    { bg: 'bg-red-600 hover:bg-red-500', text: 'text-white' },
-    { bg: 'bg-pink-600 hover:bg-pink-500', text: 'text-white' },
-    { bg: 'bg-indigo-600 hover:bg-indigo-500', text: 'text-white' },
-    { bg: 'bg-cyan-600 hover:bg-cyan-500', text: 'text-white' },
+    { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
+    { bg: 'bg-[hsl(var(--chart-2))]', text: 'text-white' },
+    { bg: 'bg-[hsl(var(--chart-3))]', text: 'text-white' },
+    { bg: 'bg-[hsl(var(--chart-4))]', text: 'text-white' },
+    { bg: 'bg-[hsl(var(--chart-5))]', text: 'text-white' },
   ];
 
   const getColorScheme = (initials: string) => {
@@ -47,7 +44,7 @@ export const TeamMembersTableRow = ({
 
   return (
     <TableRow
-      className={`transition-all duration-500 ${
+      className={`transition-all duration-500 hover:bg-muted/50 ${
         Date.now() - new Date(member.created_at).getTime() < 3000
           ? 'animate-[highlight_1s_ease-in-out]'
           : ''
@@ -58,7 +55,7 @@ export const TeamMembersTableRow = ({
           <div className={`w-7 h-7 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
             {initials}
           </div>
-          <span className="font-semibold">
+          <span className="font-semibold text-foreground">
             {member.name || 'Unnamed User'}
           </span>
         </div>
@@ -72,13 +69,13 @@ export const TeamMembersTableRow = ({
       <TableCell className="whitespace-nowrap">
         <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
       </TableCell>
-      <TableCell className="whitespace-nowrap">
+      <TableCell className="whitespace-nowrap text-muted-foreground">
         {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy HH:mm') : 'Never'}
       </TableCell>
-      <TableCell className="whitespace-nowrap">
+      <TableCell className="whitespace-nowrap text-muted-foreground">
         {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
       </TableCell>
-      <TableCell className="whitespace-nowrap">
+      <TableCell className="whitespace-nowrap text-muted-foreground">
         {format(new Date(member.created_at), 'MMM d, yyyy')}
       </TableCell>
     </TableRow>

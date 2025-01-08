@@ -6,14 +6,11 @@ import { format } from "date-fns";
 import { MessageCircle, Mail, ChevronRight } from "lucide-react";
 
 const colorSchemes = [
-  { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
-  { bg: 'bg-blue-600 hover:bg-blue-500', text: 'text-white' },
-  { bg: 'bg-green-600 hover:bg-green-500', text: 'text-white' },
-  { bg: 'bg-yellow-600 hover:bg-yellow-500', text: 'text-white' },
-  { bg: 'bg-red-600 hover:bg-red-500', text: 'text-white' },
-  { bg: 'bg-pink-600 hover:bg-pink-500', text: 'text-white' },
-  { bg: 'bg-indigo-600 hover:bg-indigo-500', text: 'text-white' },
-  { bg: 'bg-cyan-600 hover:bg-cyan-500', text: 'text-white' },
+  { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
+  { bg: 'bg-[hsl(var(--chart-2))]', text: 'text-white' },
+  { bg: 'bg-[hsl(var(--chart-3))]', text: 'text-white' },
+  { bg: 'bg-[hsl(var(--chart-4))]', text: 'text-white' },
+  { bg: 'bg-[hsl(var(--chart-5))]', text: 'text-white' },
 ];
 
 const getColorScheme = (initials: string) => {
@@ -22,7 +19,7 @@ const getColorScheme = (initials: string) => {
 };
 
 interface TeamMemberCardProps {
-  member: any; // TODO: Add proper type
+  member: any;
   getRoleBadgeClass: () => string;
   getStatusBadgeClass: (status: string) => string;
 }
@@ -48,7 +45,7 @@ export const TeamMemberCard = ({
 
   return (
     <Card
-      className={`transition-all duration-500 hover:shadow-md ${
+      className={`transition-all duration-500 hover:shadow-md bg-card border-border ${
         Date.now() - new Date(member.created_at).getTime() < 3000
           ? 'animate-[highlight_1s_ease-in-out]'
           : ''
@@ -61,7 +58,7 @@ export const TeamMemberCard = ({
               {initials}
             </div>
             <div className="min-w-0">
-              <p className="text-base sm:text-lg font-semibold text-gray-900 truncate">
+              <p className="text-base sm:text-lg font-semibold text-card-foreground truncate">
                 {member.name || 'Unnamed User'}
               </p>
               <div className="text-sm">
@@ -80,10 +77,10 @@ export const TeamMemberCard = ({
         </div>
       </CardHeader>
 
-      <Separator className="w-full" />
+      <Separator className="w-full bg-border" />
 
       <CardContent className="p-4 sm:p-6">
-        <div className="text-sm text-gray-500 space-y-2">
+        <div className="text-sm text-muted-foreground space-y-2">
           <div className="flex justify-between">
             <span>Last Login:</span>
             <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
@@ -99,12 +96,12 @@ export const TeamMemberCard = ({
         </div>
       </CardContent>
 
-      <Separator className="w-full" />
+      <Separator className="w-full bg-border" />
       
       <CardFooter className="p-3 sm:p-4 flex justify-end space-x-4">
-        <MessageCircle size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <Mail size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <ChevronRight size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <MessageCircle size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+        <Mail size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+        <ChevronRight size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
       </CardFooter>
     </Card>
   );
