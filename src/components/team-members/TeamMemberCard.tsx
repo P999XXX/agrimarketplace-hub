@@ -3,9 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 
 interface TeamMemberCardProps {
   member: any; // TODO: Add proper type
@@ -18,9 +15,6 @@ export const TeamMemberCard = ({
   getRoleBadgeClass,
   getStatusBadgeClass
 }: TeamMemberCardProps) => {
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-
   const getInitials = (name: string, email: string) => {
     if (name) {
       const nameParts = name.split(' ');
@@ -31,44 +25,6 @@ export const TeamMemberCard = ({
     }
     return (email[0] + (email[1] || '')).toUpperCase();
   };
-
-  useEffect(() => {
-    const generateAvatar = async () => {
-      if (!member.profile?.avatar_url && !isGenerating) {
-        setIsGenerating(true);
-        try {
-          const { data, error } = await supabase.functions.invoke('generate-avatar', {
-            body: {
-              name: member.name || member.email.split('@')[0],
-              role: member.role
-            }
-          });
-
-          if (error) throw error;
-
-          if (data.image) {
-            // Update the profile with the new avatar URL
-            const { error: updateError } = await supabase
-              .from('profiles')
-              .update({ avatar_url: data.image })
-              .eq('id', member.profile?.id);
-
-            if (updateError) throw updateError;
-
-            setAvatarUrl(data.image);
-          }
-        } catch (error) {
-          console.error('Error generating avatar:', error);
-        } finally {
-          setIsGenerating(false);
-        }
-      } else if (member.profile?.avatar_url) {
-        setAvatarUrl(member.profile.avatar_url);
-      }
-    };
-
-    generateAvatar();
-  }, [member, isGenerating]);
 
   return (
     <Card
@@ -82,15 +38,9 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <Avatar className="h-10 w-10">
-                <AvatarImage 
-                  src={avatarUrl || ''} 
-                  alt={member.name || 'Team member'} 
-                />
-                <AvatarFallback className="bg-brand-100 text-brand-700 text-base font-medium">
-                  {getInitials(member.name || '', member.email)}
-                </AvatarFallback>
-              </Avatar>
+              <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-base font-medium">
+                {getInitials(member.name || '', member.email)}
+              </div>
               <div className="min-w-0">
                 <p className="text-lg font-semibold text-gray-900 truncate">
                   {member.name || 'Unnamed User'}
