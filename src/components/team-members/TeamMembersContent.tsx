@@ -28,7 +28,7 @@ export const TeamMembersContent = () => {
   const handleExportCSV = () => {
     try {
       // Convert team members data to CSV format
-      const headers = ['Name', 'Email', 'Role', 'Status', 'Invited By', 'Created At'];
+      const headers = ['Name', 'Email', 'Role', 'Status', 'Last Login', 'Invited By', 'Created At'];
       const csvContent = [
         headers.join(','),
         ...teamMembers.map(member => [
@@ -36,6 +36,7 @@ export const TeamMembersContent = () => {
           `"${member.email}"`,
           `"${member.role}"`,
           `"${member.status}"`,
+          `"${member.last_login ? new Date(member.last_login).toLocaleString() : 'Never'}"`,
           `"${member.inviter?.first_name || ''} ${member.inviter?.last_name || ''}"`,
           `"${new Date(member.created_at).toLocaleDateString()}"`,
         ].join(','))
