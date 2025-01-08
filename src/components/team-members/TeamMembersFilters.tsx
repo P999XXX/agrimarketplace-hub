@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, Grid, Search, Table as TableIcon, Filter, ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { Download, Grid, Search, Table as TableIcon, Filter, ArrowUpDown, ListFilter } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -109,7 +109,7 @@ export const TeamMembersFilters = ({
               size="icon"
               className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
             >
-              <MoreHorizontal className="h-4 w-4" />
+              <ListFilter className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-[200px]">
