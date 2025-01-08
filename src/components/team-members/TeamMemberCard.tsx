@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface TeamMemberCardProps {
   member: any; // TODO: Add proper type
@@ -38,9 +39,12 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-base font-medium">
-                {getInitials(member.name || '', member.email)}
-              </div>
+              <Avatar className="w-10 h-10">
+                <AvatarImage src={member.avatar_url || ''} alt={member.name || 'Team member'} />
+                <AvatarFallback className="bg-brand-100 text-brand-700 text-base font-medium">
+                  {getInitials(member.name || '', member.email)}
+                </AvatarFallback>
+              </Avatar>
               <div className="min-w-0">
                 <p className="text-lg font-semibold text-gray-900 truncate">
                   {member.name || 'Unnamed User'}
