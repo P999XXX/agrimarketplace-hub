@@ -1,22 +1,16 @@
-import { LogOut, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
-import countries from 'i18n-iso-countries';
-import en from 'i18n-iso-countries/langs/en.json';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { UserAvatar } from "../UserAvatar";
-
-// Initialize the countries library
-countries.registerLocale(en);
+import { UserAccountHeader } from "./user-account/UserAccountHeader";
+import { UserAccountContent } from "./user-account/UserAccountContent";
+import { UserAccountFooter } from "./user-account/UserAccountFooter";
 
 interface UserAccountPopoverProps {
   children: React.ReactNode;
@@ -62,10 +56,8 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           email: session.user.email
         });
 
-        // Fetch IP info
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
-        console.log("IP Info received:", data); // Debug log
         setIpInfo(data);
       } catch (error) {
         console.error("Error in getProfile:", error);
@@ -93,21 +85,6 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   const userName = userProfile?.first_name || userProfile?.last_name 
     ? `${userProfile?.first_name || ''} ${userProfile?.last_name || ''}`.trim()
     : 'No Name';
-  
-  const getCountryName = (countryCode: string) => {
-    try {
-      return countries.getName(countryCode, 'en') || countryCode;
-    } catch {
-      return countryCode;
-    }
-  };
-
-  // Debug log für Flaggen-URL
-  const getFlagUrl = (countryCode: string) => {
-    const url = `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`;
-    console.log("Flag URL:", url);
-    return url;
-  };
 
   return (
     <Popover>
@@ -115,75 +92,27 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
         <button className="outline-none">{children}</button>
       </PopoverTrigger>
       <PopoverContent className="w-80 p-0" align="end" sideOffset={8}>
-        {/* Header */}
         <div className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="h-10 w-10">
-                <UserAvatar size="large" />
-              </div>
-              <div className="space-y-1">
-                <p className="text-base font-semibold leading-none">
-                  {userName}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {userProfile?.email}
-                </p>
-              </div>
-            </div>
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Settings className="h-6 w-6" />
-            </Button>
-          </div>
+          <UserAccountHeader 
+            userName={userName}
+            email={userProfile?.email}
+          />
         </div>
 
         <Separator />
 
-        {/* Content */}
-        <div className="p-4 text-sm text-muted-foreground space-y-3">
-          <div className="flex justify-between items-center">
-            <span>Account:</span>
-            <span>{userProfile?.companies?.name || 'Not assigned'}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span>Role:</span>
-            <span>{userProfile?.user_type || 'Not assigned'}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span>Location:</span>
-            <div className="flex items-center gap-2">
-              {ipInfo?.country && (
-                <>
-                  <span>{getCountryName(ipInfo.country)}</span>
-                  <img 
-                    src={getFlagUrl(ipInfo.country)}
-                    width="20"
-                    height="15"
-                    alt={getCountryName(ipInfo.country)}
-                    className="inline-block rounded-full object-cover"
-                  />
-                </>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-between items-center">
-            <span>Time:</span>
-            <span>{format(currentTime, 'PPpp')}</span>
-          </div>
+        <div className="p-4">
+          <UserAccountContent 
+            userProfile={userProfile}
+            ipInfo={ipInfo}
+            currentTime={currentTime}
+          />
         </div>
 
         <Separator />
 
-        {/* Footer */}
         <div className="p-2.5">
-          <Button 
-            variant="ghost" 
-            className="w-full justify-between text-sm font-normal hover:bg-destructive/5 hover:text-destructive"
-            onClick={handleLogout}
-          >
-            <span>Sign out</span>
-            <LogOut className="h-4 w-4" />
-          </Button>
+          <UserAccountFooter onLogout={handleLogout} />
         </div>
       </PopoverContent>
     </Popover>
