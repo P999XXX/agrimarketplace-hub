@@ -44,26 +44,24 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent>
-      <div className="flex flex-col h-[calc(100vh-4rem)]">
-        <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex-none space-y-4 p-4 border-b">
-            <TeamMembersHeader 
-              view={view} 
-              onViewChange={setView}
-            />
+      <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+        <div className="sticky top-0 flex-none space-y-4 p-4 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 border-b border-border/50">
+          <TeamMembersHeader 
+            view={view} 
+            onViewChange={setView}
+          />
 
-            <TeamMembersFilters
-              viewMode={view}
-              setViewMode={setView}
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              roleFilter={roleFilter}
-              setRoleFilter={setRoleFilter}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              onExportCSV={handleExportCSV}
-            />
-          </div>
+          <TeamMembersFilters
+            viewMode={view}
+            setViewMode={setView}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            roleFilter={roleFilter}
+            setRoleFilter={setRoleFilter}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            onExportCSV={handleExportCSV}
+          />
         </div>
 
         <ScrollArea 
