@@ -10,15 +10,17 @@ import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
 interface TeamMembersTableProps {
   searchQuery: string;
   roleFilter: string;
+  statusFilter: string;
   sortBy: string;
 }
 
 export const TeamMembersTable = ({ 
   searchQuery, 
-  roleFilter, 
+  roleFilter,
+  statusFilter, 
   sortBy,
 }: TeamMembersTableProps) => {
-  const { data: teamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const { data: teamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
 
   if (error) {
     return (

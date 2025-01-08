@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
-export const fetchTeamMembers = async (searchQuery: string, roleFilter: string, sortBy: string) => {
-  console.log('Fetching team members with filters:', { searchQuery, roleFilter, sortBy });
+export const fetchTeamMembers = async (searchQuery: string, roleFilter: string, statusFilter: string, sortBy: string) => {
+  console.log('Fetching team members with filters:', { searchQuery, roleFilter, statusFilter, sortBy });
 
   // 1. Get authenticated user
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -41,6 +41,11 @@ export const fetchTeamMembers = async (searchQuery: string, roleFilter: string, 
   if (roleFilter && roleFilter !== 'all') {
     console.log('Applying role filter:', roleFilter);
     invitationsQuery = invitationsQuery.eq('role', roleFilter);
+  }
+
+  if (statusFilter && statusFilter !== 'all') {
+    console.log('Applying status filter:', statusFilter);
+    invitationsQuery = invitationsQuery.eq('status', statusFilter);
   }
 
   if (sortBy) {

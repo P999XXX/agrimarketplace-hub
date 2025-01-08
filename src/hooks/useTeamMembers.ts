@@ -16,10 +16,10 @@ export interface TeamMember {
   } | null;
 }
 
-export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: string) => {
+export const useTeamMembers = (searchQuery: string, roleFilter: string, statusFilter: string, sortBy: string) => {
   return useQuery({
-    queryKey: ['team-members', searchQuery, roleFilter, sortBy],
-    queryFn: () => fetchTeamMembers(searchQuery, roleFilter, sortBy),
+    queryKey: ['team-members', searchQuery, roleFilter, statusFilter, sortBy],
+    queryFn: () => fetchTeamMembers(searchQuery, roleFilter, statusFilter, sortBy),
     staleTime: 1000 * 60, // Cache for 1 minute
     retry: 1, // Only retry once on failure
   });

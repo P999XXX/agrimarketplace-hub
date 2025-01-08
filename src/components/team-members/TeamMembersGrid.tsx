@@ -5,15 +5,17 @@ import { TeamMembersGridLoading } from "./TeamMembersGridLoading";
 interface TeamMembersGridProps {
   searchQuery: string;
   roleFilter: string;
+  statusFilter: string;
   sortBy: string;
 }
 
 export const TeamMembersGrid = ({ 
   searchQuery, 
-  roleFilter, 
+  roleFilter,
+  statusFilter, 
   sortBy,
 }: TeamMembersGridProps) => {
-  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
 
   const getRoleBadgeClass = () => {
     return "bg-gray-100 text-gray-700 hover:bg-gray-200";
