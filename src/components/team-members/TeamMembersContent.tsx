@@ -58,7 +58,7 @@ export const TeamMembersContent = () => {
   ));
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden relative">
       {/* Container für Hintergrund-Elemente */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="relative w-full h-full">
@@ -75,9 +75,7 @@ export const TeamMembersContent = () => {
           p-4 
           sticky 
           top-0 
-          bg-background/40
           backdrop-blur-sm 
-          supports-[backdrop-filter]:bg-background/20 
           z-20
           transition-shadow 
           duration-200 
@@ -104,7 +102,7 @@ export const TeamMembersContent = () => {
 
       {/* Scroll-Bereich für den Hauptinhalt */}
       <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20 bg-transparent z-10" 
+        className="flex-1 relative md:pb-0 pb-20 z-10" 
         onScroll={handleScroll}
       >
         <div className="p-4">

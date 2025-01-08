@@ -45,7 +45,7 @@ export const TeamMemberCard = ({
 
   return (
     <Card
-      className={`transition-all duration-500 hover:shadow-md bg-transparent backdrop-blur-sm supports-[backdrop-filter]:bg-card/10 border-border/50 ${
+      className={`transition-all duration-500 hover:shadow-md backdrop-blur-sm border-border/50 ${
         Date.now() - new Date(member.created_at).getTime() < 3000
           ? 'animate-[highlight_1s_ease-in-out]'
           : ''
