@@ -130,10 +130,10 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         ...invitation,
         profile: profilesMap.get(invitation.invited_by) || null,
         inviter: invitersMap.get(invitation.invited_by) || null
-      }));
+      })) as TeamMember[];
 
       console.log(`Found ${teamMembers.length} team members`);
-      return teamMembers as TeamMember[];
+      return teamMembers;
     },
     staleTime: 1000 * 60, // Cache for 1 minute
     retry: 1, // Only retry once on failure
