@@ -47,7 +47,7 @@ export const MobileFilterMenu = ({
           <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={`${isMobile ? 'w-screen px-4' : 'w-[200px]'}`}>
+      <DropdownMenuContent align="end" className={`${isMobile ? 'w-fit px-4' : 'w-[200px]'}`}>
         <RoleFilter value={roleFilter} onChange={setRoleFilter} />
         <SortFilter value={sortBy} onChange={setSortBy} />
 
