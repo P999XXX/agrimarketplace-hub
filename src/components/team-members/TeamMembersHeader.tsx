@@ -2,8 +2,14 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "./InviteMemberForm";
+import { Dispatch, SetStateAction } from "react";
 
-export const TeamMembersHeader = () => {
+interface TeamMembersHeaderProps {
+  view: "grid" | "table";
+  onViewChange: Dispatch<SetStateAction<"grid" | "table">>;
+}
+
+export const TeamMembersHeader = ({ view, onViewChange }: TeamMembersHeaderProps) => {
   return (
     <div className="flex justify-between items-center mb-6">
       <h1 className="text-2xl font-bold">
