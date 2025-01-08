@@ -5,9 +5,12 @@ interface DashboardContentProps {
   className?: string;
 }
 
-export const DashboardContent = ({ children, className }: DashboardContentProps) => {
+export const DashboardContent = ({
+  children,
+  className,
+}: DashboardContentProps) => {
   return (
-    <div className={cn("h-[calc(100vh-4rem)] overflow-hidden", className)}>
+    <div className={cn("relative bg-background", className)}>
       {children}
     </div>
   );

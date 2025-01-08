@@ -36,7 +36,7 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
       <div className="flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 border-b border-border">
         <TeamMembersHeader 
           view={view} 
@@ -56,7 +56,7 @@ export const TeamMembersContent = () => {
         />
       </div>
 
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 relative">
         <div className="p-4">
           {view === "grid" ? (
             <TeamMembersGrid
