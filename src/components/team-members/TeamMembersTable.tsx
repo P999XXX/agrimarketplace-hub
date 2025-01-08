@@ -37,28 +37,9 @@ export const TeamMembersTable = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const getRoleBadgeClass = () => {
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active':
-      case 'accepted':
-        return 'bg-green-100 text-green-700 hover:bg-green-200';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
-      case 'declined':
-      case 'inactive':
-        return 'bg-red-100 text-red-700 hover:bg-red-200';
-      default:
-        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-    }
-  };
-
   if (error) {
     return (
-      <Alert variant="destructive" className="mb-6">
+      <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertDescription>
           {error instanceof Error ? error.message : 'Failed to load team members'}
@@ -77,7 +58,7 @@ export const TeamMembersTable = ({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="rounded-md border">
         <Table>
           <TeamMembersTableHeader />
           <TableBody>
@@ -85,8 +66,6 @@ export const TeamMembersTable = ({
               <TeamMembersTableRow
                 key={member.id}
                 member={member}
-                getRoleBadgeClass={getRoleBadgeClass}
-                getStatusBadgeClass={getStatusBadgeClass}
               />
             ))}
           </TableBody>
@@ -99,7 +78,7 @@ export const TeamMembersTable = ({
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== 1 && handlePageChange(1)}
-                className={`flex ${currentPage === 1 ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsLeft className="h-4 w-4" />
               </PaginationLink>
@@ -110,9 +89,7 @@ export const TeamMembersTable = ({
                 <PaginationPrevious 
                   onClick={() => handlePageChange(currentPage - 1)}
                   className="gap-1 px-2.5"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </PaginationPrevious>
+                />
               </PaginationItem>
             )}
             
@@ -150,16 +127,14 @@ export const TeamMembersTable = ({
                 <PaginationNext 
                   onClick={() => handlePageChange(currentPage + 1)}
                   className="gap-1 px-2.5"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </PaginationNext>
+                />
               </PaginationItem>
             )}
 
             <PaginationItem>
               <PaginationLink
                 onClick={() => currentPage !== totalPages && handlePageChange(totalPages)}
-                className={`flex ${currentPage === totalPages ? 'opacity-50' : ''}`}
+                className={`flex items-center justify-center h-9 w-9 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <ChevronsRight className="h-4 w-4" />
               </PaginationLink>

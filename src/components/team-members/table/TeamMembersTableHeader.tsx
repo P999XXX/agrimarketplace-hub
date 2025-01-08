@@ -4,13 +4,13 @@ export const TeamMembersTableHeader = () => {
   return (
     <TableHeader>
       <TableRow>
-        <TableHead className="whitespace-nowrap text-foreground">Name</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Email</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Role</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Status</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Last Login</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Invited by</TableHead>
-        <TableHead className="whitespace-nowrap text-foreground">Invited</TableHead>
+        <TableHead>Name</TableHead>
+        <TableHead>Email</TableHead>
+        <TableHead>Role</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead>Last Login</TableHead>
+        <TableHead>Invited By</TableHead>
+        <TableHead>Created At</TableHead>
       </TableRow>
     </TableHeader>
   );

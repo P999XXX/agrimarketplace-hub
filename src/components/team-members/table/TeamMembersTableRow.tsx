@@ -6,15 +6,9 @@ import { TeamMember } from "@/hooks/useTeamMembers";
 
 interface TeamMembersTableRowProps {
   member: TeamMember;
-  getRoleBadgeClass: () => string;
-  getStatusBadgeClass: (status: string) => string;
 }
 
-export const TeamMembersTableRow = ({ 
-  member, 
-  getRoleBadgeClass, 
-  getStatusBadgeClass 
-}: TeamMembersTableRowProps) => {
+export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
   const getInitials = (name: string, email: string) => {
     if (name) {
       const nameParts = name.split(' ');
@@ -27,6 +21,26 @@ export const TeamMembersTableRow = ({
   };
 
   const initials = getInitials(member.name || '', member.email);
+
+  const getStatusBadgeVariant = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+      case 'accepted':
+        return 'success';
+      case 'pending':
+        return 'warning';
+      case 'declined':
+      case 'inactive':
+        return 'destructive';
+      default:
+        return 'secondary';
+    }
+  };
+
+  const getRoleBadgeVariant = () => {
+    return 'secondary';
+  };
+
   const colorSchemes = [
     { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
     { bg: 'bg-[hsl(var(--chart-2))]', text: 'text-white' },
@@ -43,39 +57,33 @@ export const TeamMembersTableRow = ({
   const colorScheme = getColorScheme(initials);
 
   return (
-    <TableRow
-      className={`transition-all duration-500 hover:bg-muted/50 ${
-        Date.now() - new Date(member.created_at).getTime() < 3000
-          ? 'animate-[highlight_1s_ease-in-out]'
-          : ''
-      }`}
-    >
-      <TableCell className="whitespace-nowrap">
+    <TableRow className="hover:bg-muted/50">
+      <TableCell>
         <div className="flex items-center gap-3">
-          <div className={`w-7 h-7 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
+          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium`}>
             {initials}
           </div>
-          <span className="font-semibold text-foreground">
+          <span className="font-medium">
             {member.name || 'Unnamed User'}
           </span>
         </div>
       </TableCell>
-      <TableCell className="whitespace-nowrap">
+      <TableCell>
         <EmailCell email={member.email} />
       </TableCell>
-      <TableCell className="whitespace-nowrap">
-        <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
+      <TableCell>
+        <Badge variant={getRoleBadgeVariant()}>{member.role}</Badge>
       </TableCell>
-      <TableCell className="whitespace-nowrap">
-        <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
+      <TableCell>
+        <Badge variant={getStatusBadgeVariant(member.status)}>{member.status}</Badge>
       </TableCell>
-      <TableCell className="whitespace-nowrap text-muted-foreground">
-        {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy HH:mm') : 'Never'}
+      <TableCell className="text-muted-foreground">
+        {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
       </TableCell>
-      <TableCell className="whitespace-nowrap text-muted-foreground">
+      <TableCell className="text-muted-foreground">
         {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
       </TableCell>
-      <TableCell className="whitespace-nowrap text-muted-foreground">
+      <TableCell className="text-muted-foreground">
         {format(new Date(member.created_at), 'MMM d, yyyy')}
       </TableCell>
     </TableRow>
