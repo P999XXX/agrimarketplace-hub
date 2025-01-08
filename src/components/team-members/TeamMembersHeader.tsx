@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const TeamMembersHeader = () => {
   return (
-    <div>
+    <>
       <div className="px-6 py-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">
@@ -29,6 +29,6 @@ export const TeamMembersHeader = () => {
         </div>
       </div>
       <Separator />
-    </div>
+    </>
   );
 };
