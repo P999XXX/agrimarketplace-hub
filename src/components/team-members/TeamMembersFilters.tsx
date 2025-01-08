@@ -112,38 +112,36 @@ export const TeamMembersFilters = ({
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[200px] p-2">
-            <DropdownMenuItem className="p-0">
-              <Select value={roleFilter} onValueChange={setRoleFilter}>
-                <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
-                  <div className="flex items-center gap-2">
-                    <Filter className="h-4 w-4" />
-                    <SelectValue placeholder="Filter by role" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All roles</SelectItem>
-                  <SelectItem value="member">Member</SelectItem>
-                  <SelectItem value="viewer">Viewer</SelectItem>
-                </SelectContent>
-              </Select>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="p-0">
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
-                  <div className="flex items-center gap-2">
-                    <ArrowUpDown className="h-4 w-4" />
-                    <SelectValue placeholder="Sort by" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="created_at-desc">Newest first</SelectItem>
-                  <SelectItem value="created_at-asc">Oldest first</SelectItem>
-                  <SelectItem value="name-asc">Name A-Z</SelectItem>
-                  <SelectItem value="name-desc">Name Z-A</SelectItem>
-                </SelectContent>
-              </Select>
-            </DropdownMenuItem>
+          <DropdownMenuContent align="end" className="w-[200px]">
+            <Select value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
+                <div className="flex items-center gap-2">
+                  <Filter className="h-4 w-4" />
+                  <SelectValue placeholder="Filter by role" />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All roles</SelectItem>
+                <SelectItem value="member">Member</SelectItem>
+                <SelectItem value="viewer">Viewer</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
+                <div className="flex items-center gap-2">
+                  <ArrowUpDown className="h-4 w-4" />
+                  <SelectValue placeholder="Sort by" />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="created_at-desc">Newest first</SelectItem>
+                <SelectItem value="created_at-asc">Oldest first</SelectItem>
+                <SelectItem value="name-asc">Name A-Z</SelectItem>
+                <SelectItem value="name-desc">Name Z-A</SelectItem>
+              </SelectContent>
+            </Select>
+
             <DropdownMenuItem 
               onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
               className="cursor-pointer p-2"
@@ -153,6 +151,7 @@ export const TeamMembersFilters = ({
                 <span>Change view</span>
               </div>
             </DropdownMenuItem>
+
             <DropdownMenuItem 
               onClick={onExportCSV}
               className="cursor-pointer p-2"
