@@ -66,6 +66,10 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
     }
   };
 
+  const userName = userProfile?.first_name || userProfile?.last_name 
+    ? `${userProfile?.first_name || ''} ${userProfile?.last_name || ''}`.trim()
+    : 'No Name';
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -77,7 +81,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
             {children}
             <div className="space-y-1">
               <p className="text-base font-medium leading-none">
-                {userProfile?.first_name} {userProfile?.last_name}
+                {userName}
               </p>
               <p className="text-sm text-muted-foreground">
                 {userProfile?.email}

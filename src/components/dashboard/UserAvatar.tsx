@@ -36,11 +36,11 @@ export const UserAvatar = () => {
         if (profile) {
           const firstInitial = profile.first_name?.[0] || '';
           const lastInitial = profile.last_name?.[0] || '';
-          const userInitials = (firstInitial + lastInitial).toUpperCase();
+          const userInitials = (firstInitial + lastInitial).toUpperCase() || 'NN';
           setInitials(userInitials);
         } else {
           console.log("No profile found for user");
-          const emailInitial = session.user.email?.[0].toUpperCase() || '?';
+          const emailInitial = session.user.email?.[0].toUpperCase() || 'NN';
           setInitials(emailInitial);
         }
       } catch (error) {
@@ -59,7 +59,7 @@ export const UserAvatar = () => {
   return (
     <Avatar className="h-8 w-8 cursor-pointer">
       <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-        {initials || '??'}
+        {initials || 'NN'}
       </AvatarFallback>
     </Avatar>
   );
