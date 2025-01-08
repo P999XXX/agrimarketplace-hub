@@ -56,6 +56,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
         // Fetch IP info
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
+        console.log("IP Info received:", data); // Debug log
         setIpInfo(data);
       } catch (error) {
         console.error("Error in getProfile:", error);
@@ -92,6 +93,13 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
     } catch {
       return countryCode;
     }
+  };
+
+  // Debug log für Flaggen-URL
+  const getFlagUrl = (countryCode: string) => {
+    const url = `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`;
+    console.log("Flag URL:", url);
+    return url;
   };
 
   return (
@@ -141,10 +149,10 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
                 <>
                   <span>{getCountryName(ipInfo.country)}</span>
                   <img 
-                    src={`https://flagcdn.com/${ipInfo.country.toLowerCase()}.png`}
-                    width="16"
-                    height="12"
-                    alt=""
+                    src={getFlagUrl(ipInfo.country)}
+                    width="20"
+                    height="15"
+                    alt={getCountryName(ipInfo.country)}
                     className="inline-block"
                   />
                 </>
