@@ -12,35 +12,35 @@ import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { useToast } from "@/hooks/use-toast";
 
 export const TeamMembersContent = () => {
-  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const isMobile = useIsMobile();
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>(isMobile ? 'grid' : 'table');
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const isMobile = useIsMobile();
   const { toast } = useToast();
   const { data: teamMembers = [] } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
-  // Load saved view mode from localStorage on component mount
+  // Einheitlicher useEffect für View Mode Management
   useEffect(() => {
-    const savedViewMode = localStorage.getItem('teamMembersViewMode');
-    if (savedViewMode && (savedViewMode === 'table' || savedViewMode === 'grid')) {
-      // Only apply saved view mode if not on mobile
-      if (!isMobile) {
+    if (isMobile) {
+      setViewMode('grid');
+    } else {
+      const savedViewMode = localStorage.getItem('teamMembersViewMode');
+      if (savedViewMode === 'table' || savedViewMode === 'grid') {
         setViewMode(savedViewMode);
+      } else {
+        setViewMode('table');
       }
     }
   }, [isMobile]);
 
-  // Set initial view mode based on device and update when device changes
-  useEffect(() => {
-    setViewMode(isMobile ? 'grid' : 'table');
-  }, [isMobile]);
-
   // Custom setViewMode function that also saves to localStorage
   const handleViewModeChange = (mode: 'table' | 'grid') => {
-    setViewMode(mode);
-    localStorage.setItem('teamMembersViewMode', mode);
+    if (!isMobile) {
+      setViewMode(mode);
+      localStorage.setItem('teamMembersViewMode', mode);
+    }
   };
 
   const handleExportCSV = () => {
