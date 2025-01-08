@@ -44,11 +44,17 @@ export const TeamMemberCard = ({
   const colorScheme = getColorScheme(initials);
 
   return (
-    <Card className="border-border/50 backdrop-blur-sm">
+    <Card
+      className={`transition-all duration-500 hover:shadow-md bg-card border-border ${
+        Date.now() - new Date(member.created_at).getTime() < 3000
+          ? 'animate-[highlight_1s_ease-in-out]'
+          : ''
+      }`}
+    >
       <CardHeader className="p-3 sm:p-4">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm sm:text-base font-medium`}>
+            <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm sm:text-base font-medium transition-colors`}>
               {initials}
             </div>
             <div className="min-w-0">
@@ -63,7 +69,7 @@ export const TeamMemberCard = ({
         </div>
       </CardHeader>
 
-      <Separator className="w-full border-border/50" />
+      <Separator className="w-full bg-border" />
 
       <CardContent className="p-4 sm:p-6">
         <div className="text-sm text-muted-foreground space-y-2">
@@ -82,7 +88,7 @@ export const TeamMemberCard = ({
         </div>
       </CardContent>
 
-      <Separator className="w-full border-border/50" />
+      <Separator className="w-full bg-border" />
       
       <CardFooter className="p-3 sm:p-4">
         <div className="flex items-center justify-between w-full">

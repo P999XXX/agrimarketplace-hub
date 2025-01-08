@@ -10,7 +10,7 @@ export const DashboardContent = ({
   className,
 }: DashboardContentProps) => {
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative bg-background", className)}>
       {children}
     </div>
   );

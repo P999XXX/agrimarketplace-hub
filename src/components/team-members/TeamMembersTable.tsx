@@ -40,7 +40,7 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <div className="rounded-md border border-border/50 backdrop-blur-sm">
+    <div className="rounded-md border">
       <Table>
         <TeamMembersTableHeader />
         <TableBody>

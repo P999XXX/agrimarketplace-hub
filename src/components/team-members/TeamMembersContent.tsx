@@ -43,8 +43,8 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden relative">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 backdrop-blur-sm z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -67,22 +67,20 @@ export const TeamMembersContent = () => {
         className="flex-1 relative md:pb-0 pb-20" 
         onScroll={handleScroll}
       >
-        <div className="relative min-h-full">
-          <div className="relative z-0 p-4">
-            {view === "grid" ? (
-              <TeamMembersGrid
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                sortBy={sortBy}
-              />
-            ) : (
-              <TeamMembersTable
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                sortBy={sortBy}
-              />
-            )}
-          </div>
+        <div className="p-4">
+          {view === "grid" ? (
+            <TeamMembersGrid
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+            />
+          ) : (
+            <TeamMembersTable
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+            />
+          )}
         </div>
       </ScrollArea>
       
