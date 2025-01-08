@@ -42,23 +42,9 @@ export const TeamMembersContent = () => {
     console.log("Export to CSV");
   };
 
-  const backgroundElements = Array.from({ length: 50 }, (_, i) => (
-    <div
-      key={i}
-      className="absolute w-24 h-24 rounded-full opacity-5"
-      style={{
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 200}%`,
-        transform: 'translate(-50%, -50%)',
-        background: `hsl(${Math.random() * 360}, 70%, 50%)`,
-        zIndex: -1,
-      }}
-    />
-  ));
-
   return (
     <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden relative">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-background/10 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+      <div className={`flex-none space-y-4 p-4 sticky top-0 backdrop-blur z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -82,7 +68,6 @@ export const TeamMembersContent = () => {
         onScroll={handleScroll}
       >
         <div className="relative min-h-full">
-          {backgroundElements}
           <div className="relative z-0 p-4">
             {view === "grid" ? (
               <TeamMembersGrid
