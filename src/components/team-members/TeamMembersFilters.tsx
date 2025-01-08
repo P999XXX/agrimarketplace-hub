@@ -28,7 +28,9 @@ export const TeamMembersFilters = ({
   onExportCSV
 }: TeamMembersFiltersProps) => {
   const toggleView = () => {
-    setViewMode(viewMode === 'table' ? 'grid' : 'table');
+    const newView = viewMode === 'table' ? 'grid' : 'table';
+    setViewMode(newView);
+    localStorage.setItem('teamMembersViewMode', newView);
   };
 
   return (
@@ -38,7 +40,7 @@ export const TeamMembersFilters = ({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
             placeholder="Search team members..."
-            className="pl-10"
+            className="pl-10 h-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

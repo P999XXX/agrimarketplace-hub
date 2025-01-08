@@ -2,19 +2,32 @@ import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersGrid } from "./TeamMembersGrid";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export const TeamMembersContent = () => {
-  const [view, setView] = useState<"grid" | "table">("grid");
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [view, setView] = useState<"grid" | "table">(() => {
+    const savedView = localStorage.getItem('teamMembersViewMode');
+    if (savedView === 'grid' || savedView === 'table') {
+      return savedView;
+    }
+    return isMobile ? "grid" : "table";
+  });
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
   const itemsPerPage = 9;
 
-  const { data: members, isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  useEffect(() => {
+    if (!localStorage.getItem('teamMembersViewMode')) {
+      setView(isMobile ? "grid" : "table");
+    }
+  }, [isMobile]);
 
   const handleExportCSV = () => {
     console.log("Export to CSV");
