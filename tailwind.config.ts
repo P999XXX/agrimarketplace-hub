@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       maxWidth: {
-        'lg': '25rem', // Hier setzen wir die neue Standard-Breite
+        'lg': '25rem',
       },
       fontFamily: {
         sans: ['Albert Sans', 'sans-serif'],
@@ -38,12 +38,7 @@ export default {
         '4.5': '1.125rem',
         '5.5': '1.375rem',
         '6.5': '1.625rem',
-      },
-      borderRadius: {
-        'sm': '0.375rem',
-        DEFAULT: '0.5rem',
-        'md': '0.625rem',
-        'lg': '0.75rem',
+        '1.8': '0.45rem', // Neuer Wert für 0.45rem
       },
       keyframes: {
         "fade-in-up": {
@@ -103,7 +98,6 @@ export default {
         "gradient-shift": "gradient-shift 15s ease infinite",
       },
       colors: {
-        // Hauptfarben
         primary: {
           50: '#e6f2ef',
           100: '#cce6df',
@@ -118,7 +112,6 @@ export default {
           DEFAULT: '#008060',
           foreground: "hsl(var(--primary-foreground))",
         },
-        // Sekundärfarben
         secondary: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -133,7 +126,6 @@ export default {
           DEFAULT: "rgb(241,185,128)",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        // Neutrale Farben
         gray: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -146,7 +138,6 @@ export default {
           800: '#1f2937',
           900: '#111827',
         },
-        // System Farben
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -165,7 +156,6 @@ export default {
           500: '#ef4444',
           700: '#b91c1c',
         },
-        // Shadcn Farben für Kompatibilität
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
