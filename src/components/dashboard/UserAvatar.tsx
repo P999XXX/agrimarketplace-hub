@@ -56,8 +56,8 @@ export const UserAvatar = ({ size = "default" }: { size?: "default" | "large" })
     getProfile();
   }, []);
 
-  const avatarSize = size === "large" ? "h-12 w-12" : "h-8 w-8";
-  const textSize = size === "large" ? "text-base" : "text-sm";
+  const avatarSize = size === "large" ? "h-10 w-10" : "h-8 w-8";
+  const textSize = size === "large" ? "text-sm" : "text-sm";
 
   return (
     <Avatar className={`cursor-pointer ${avatarSize}`}>
