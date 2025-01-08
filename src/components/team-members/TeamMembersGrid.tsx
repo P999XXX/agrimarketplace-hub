@@ -72,32 +72,47 @@ export const TeamMembersGrid = ({
         {teamMembers.map((member) => (
           <Card
             key={member.id}
-            className={`transition-all duration-500 ${
+            className={`transition-all duration-500 hover:shadow-md ${
               Date.now() - new Date(member.created_at).getTime() < 3000
                 ? 'animate-[highlight_1s_ease-in-out]'
                 : ''
             }`}
           >
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-sm font-medium">
                   {member.name?.charAt(0).toUpperCase() || member.email.charAt(0).toUpperCase()}
                 </div>
-                <div className="flex-1">
-                  <div className="font-medium">{member.name || 'Unnamed User'}</div>
-                  <EmailCell email={member.email} />
-                  <div className="mt-2 space-y-1.5">
-                    <Badge className={getRoleBadgeClass()}>{member.role}</Badge>
-                    <div className="block">
-                      <Badge className={getStatusBadgeClass(member.status)}>{member.status}</Badge>
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      <p>Last Login: {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy HH:mm') : 'Never'}</p>
-                      <p>Invited by: {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</p>
-                      <p>Invited: {format(new Date(member.created_at), 'MMM d, yyyy')}</p>
-                    </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      {member.name || 'Unnamed User'}
+                    </p>
+                    <Badge className={getStatusBadgeClass(member.status)}>
+                      {member.status}
+                    </Badge>
                   </div>
+                  <EmailCell email={member.email} />
                 </div>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <Badge variant="secondary" className={getRoleBadgeClass()}>
+                  {member.role}
+                </Badge>
+              </div>
+              <div className="mt-2 text-xs text-gray-500 space-y-1">
+                <p className="flex justify-between">
+                  <span>Last Login:</span>
+                  <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Invited by:</span>
+                  <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Invited:</span>
+                  <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
+                </p>
               </div>
             </CardContent>
           </Card>
