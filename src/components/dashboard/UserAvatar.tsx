@@ -57,7 +57,7 @@ export const UserAvatar = () => {
   }, []);
 
   return (
-    <Avatar className="h-8 w-8">
+    <Avatar className="h-8 w-8 cursor-pointer">
       <AvatarFallback className="bg-primary text-primary-foreground text-sm">
         {initials || '??'}
       </AvatarFallback>

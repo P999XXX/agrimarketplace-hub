@@ -69,14 +69,14 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        {children}
+        <button className="outline-none">{children}</button>
       </PopoverTrigger>
-      <PopoverContent className="w-80" align="end">
+      <PopoverContent className="w-80" align="end" sideOffset={8}>
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
             {children}
             <div className="space-y-1">
-              <p className="text-sm font-medium">
+              <p className="text-sm font-medium leading-none">
                 {userProfile?.first_name} {userProfile?.last_name}
               </p>
               <p className="text-xs text-muted-foreground">
@@ -86,7 +86,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           </div>
           <div className="space-y-1">
             <div className="text-xs text-muted-foreground">
-              <div>Account: {userProfile?.companies?.name || 'Not assigned'}</div>
+              <div className="mb-1">Account: {userProfile?.companies?.name || 'Not assigned'}</div>
               <div>Role: {userProfile?.user_type || 'Not assigned'}</div>
             </div>
           </div>
