@@ -62,7 +62,10 @@ export const TeamMembersContent = () => {
         />
       </div>
 
-      <ScrollArea className="flex-1 relative" onScroll={handleScroll}>
+      <ScrollArea 
+        className="flex-1 relative pb-[4.5rem] md:pb-0" 
+        onScroll={handleScroll}
+      >
         <div className="p-4">
           {view === "grid" ? (
             <TeamMembersGrid
