@@ -37,8 +37,8 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent>
-      <div className="flex flex-col h-[calc(100vh-4rem)]">
-        <div className="flex-none space-y-6">
+      <div className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+        <div className="flex-none space-y-4">
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
@@ -57,7 +57,7 @@ export const TeamMembersContent = () => {
           />
         </div>
 
-        <ScrollArea className="flex-1 mt-6">
+        <ScrollArea className="flex-1 mt-4">
           {view === "grid" ? (
             <TeamMembersGrid
               searchQuery={searchQuery}

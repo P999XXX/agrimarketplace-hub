@@ -7,7 +7,7 @@ interface DashboardContentProps {
 
 export const DashboardContent = ({ children, className }: DashboardContentProps) => {
   return (
-    <div className={cn("container py-8 space-y-6", className)}>
+    <div className={cn("container py-4 space-y-4", className)}>
       {children}
     </div>
   );
