@@ -1,11 +1,8 @@
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
-import { DashboardMenu } from "./DashboardMenu";
+import { SidebarNavigation } from "./sidebar/SidebarNavigation";
 import { CustomSidebarTrigger } from "./CustomSidebarTrigger";
-import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
-import { HeaderLogo } from "./HeaderLogo";
 import { SidebarLogo } from "./SidebarLogo";
-import { MobileNav } from "./MobileNav";
-import { UserAvatar } from "./UserAvatar";
+import { HeaderActions } from "./header/HeaderActions";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -69,21 +66,14 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <SidebarContent>
             <SidebarGroup>
               <SidebarGroupContent>
-                <DashboardMenu />
+                <SidebarNavigation />
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
         </Sidebar>
 
         <div className="flex w-full flex-col">
-          <header className="h-16 flex items-center justify-between px-4 sticky top-0 z-50 dark:bg-black bg-white border-b border-border/50">
-            <div className="flex items-center gap-3">
-              <MobileNav />
-              <HeaderLogo />
-              <DashboardBreadcrumb />
-            </div>
-            <UserAvatar />
-          </header>
+          <HeaderActions />
           <main className="flex-1 min-h-[calc(100vh-4rem)]">
             {children}
           </main>
