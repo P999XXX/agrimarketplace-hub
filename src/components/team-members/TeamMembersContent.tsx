@@ -5,6 +5,7 @@ import { TeamMembersFilters } from "./TeamMembersFilters";
 import { useState, useEffect } from "react";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const TeamMembersContent = () => {
   const isMobile = useMediaQuery("(max-width: 1024px)");
@@ -36,37 +37,41 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent>
-      <div className="space-y-6 pb-[4.5rem] md:pb-0">
-        <TeamMembersHeader 
-          view={view} 
-          onViewChange={setView}
-        />
-
-        <TeamMembersFilters
-          viewMode={view}
-          setViewMode={setView}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          roleFilter={roleFilter}
-          setRoleFilter={setRoleFilter}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          onExportCSV={handleExportCSV}
-        />
-
-        {view === "grid" ? (
-          <TeamMembersGrid
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
+      <div className="flex flex-col h-[calc(100vh-4rem)]">
+        <div className="flex-none space-y-6">
+          <TeamMembersHeader 
+            view={view} 
+            onViewChange={setView}
           />
-        ) : (
-          <TeamMembersTable
+
+          <TeamMembersFilters
+            viewMode={view}
+            setViewMode={setView}
             searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
             roleFilter={roleFilter}
+            setRoleFilter={setRoleFilter}
             sortBy={sortBy}
+            setSortBy={setSortBy}
+            onExportCSV={handleExportCSV}
           />
-        )}
+        </div>
+
+        <ScrollArea className="flex-1 mt-6">
+          {view === "grid" ? (
+            <TeamMembersGrid
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+            />
+          ) : (
+            <TeamMembersTable
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+            />
+          )}
+        </ScrollArea>
       </div>
     </DashboardContent>
   );
