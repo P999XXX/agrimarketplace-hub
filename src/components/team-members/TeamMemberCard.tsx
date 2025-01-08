@@ -36,7 +36,7 @@ export const TeamMemberCard = ({
     >
       <CardContent className="p-4">
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 text-brand-700 text-base font-medium">
                 {getInitials(member.name || '', member.email)}
@@ -50,18 +50,19 @@ export const TeamMemberCard = ({
                 </div>
               </div>
             </div>
-            <Badge className={getStatusBadgeClass(member.status)}>
-              {member.status}
-            </Badge>
+            <div className="flex flex-col items-end space-y-1">
+              <Badge className={getStatusBadgeClass(member.status)}>
+                {member.status}
+              </Badge>
+              <Badge variant="secondary" className={getRoleBadgeClass()}>
+                {member.role}
+              </Badge>
+            </div>
           </div>
 
           <Separator className="bg-gray-200" />
 
           <div className="space-y-3">
-            <Badge variant="secondary" className={getRoleBadgeClass()}>
-              {member.role}
-            </Badge>
-            
             <div className="text-xs text-gray-500 space-y-1">
               <p className="flex justify-between">
                 <span>Last Login:</span>
