@@ -18,7 +18,7 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
       }
       return (name[0] + (nameParts[0][1] || '')).toUpperCase();
     }
-    return (email[0] + (email[1] || '')).toUpperCase();
+    return email ? (email[0] + (email[1] || '')).toUpperCase() : '??';
   };
 
   const initials = getInitials(member.name || '', member.email);
