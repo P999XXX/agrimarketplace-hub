@@ -1,5 +1,6 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { EmailCell } from "../EmailCell";
 import { format } from "date-fns";
 import { TeamMember } from "@/hooks/useTeamMembers";
@@ -8,12 +9,16 @@ interface TeamMembersTableRowProps {
   member: TeamMember;
   getRoleBadgeClass: () => string;
   getStatusBadgeClass: (status: string) => string;
+  isSelected: boolean;
+  onSelect: (checked: boolean) => void;
 }
 
 export const TeamMembersTableRow = ({ 
   member, 
   getRoleBadgeClass, 
-  getStatusBadgeClass 
+  getStatusBadgeClass,
+  isSelected,
+  onSelect
 }: TeamMembersTableRowProps) => {
   return (
     <TableRow
@@ -23,6 +28,13 @@ export const TeamMembersTableRow = ({
           : ''
       }`}
     >
+      <TableCell>
+        <Checkbox
+          checked={isSelected}
+          onCheckedChange={onSelect}
+          className="ml-4"
+        />
+      </TableCell>
       <TableCell className="whitespace-nowrap">
         {member.name || 'Unnamed User'}
       </TableCell>

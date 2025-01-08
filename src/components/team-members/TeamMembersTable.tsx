@@ -1,13 +1,16 @@
 import { Table, TableBody } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight, Trash2, Download } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
 import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
 import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
 import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -27,6 +30,8 @@ export const TeamMembersTable = ({
   itemsPerPage
 }: TeamMembersTableProps) => {
   const { data: allTeamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
+  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+  const { toast } = useToast();
 
   const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -35,6 +40,69 @@ export const TeamMembersTable = ({
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedMembers(teamMembers.map(member => member.id));
+    } else {
+      setSelectedMembers([]);
+    }
+  };
+
+  const handleSelectMember = (memberId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedMembers(prev => [...prev, memberId]);
+    } else {
+      setSelectedMembers(prev => prev.filter(id => id !== memberId));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (!selectedMembers.length) return;
+    
+    // TODO: Implement bulk delete functionality
+    toast({
+      title: "Bulk delete",
+      description: `${selectedMembers.length} members selected for deletion`,
+    });
+  };
+
+  const handleBulkExport = () => {
+    if (!selectedMembers.length) return;
+
+    const selectedData = allTeamMembers.filter(member => 
+      selectedMembers.includes(member.id)
+    );
+
+    // Create CSV content
+    const headers = ["Name", "Email", "Role", "Status", "Invited By", "Invited"];
+    const csvContent = [
+      headers.join(","),
+      ...selectedData.map(member => [
+        member.name || "Unnamed User",
+        member.email,
+        member.role,
+        member.status,
+        `${member.inviter?.first_name || ''} ${member.inviter?.last_name || ''}`.trim(),
+        new Date(member.created_at).toLocaleDateString()
+      ].join(","))
+    ].join("\n");
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "team-members.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Export complete",
+      description: `${selectedMembers.length} members exported to CSV`,
+    });
   };
 
   const getRoleBadgeClass = () => {
@@ -77,9 +145,36 @@ export const TeamMembersTable = ({
 
   return (
     <div className="space-y-6">
+      {selectedMembers.length > 0 && (
+        <div className="flex items-center gap-2">
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={handleBulkDelete}
+            className="flex items-center gap-2"
+          >
+            <Trash2 className="h-4 w-4" />
+            Delete Selected ({selectedMembers.length})
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBulkExport}
+            className="flex items-center gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Export Selected ({selectedMembers.length})
+          </Button>
+        </div>
+      )}
+
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <Table>
-          <TeamMembersTableHeader />
+          <TeamMembersTableHeader 
+            onSelectAll={handleSelectAll}
+            allSelected={selectedMembers.length === teamMembers.length && teamMembers.length > 0}
+            someSelected={selectedMembers.length > 0 && selectedMembers.length < teamMembers.length}
+          />
           <TableBody>
             {teamMembers.map((member) => (
               <TeamMembersTableRow
@@ -87,6 +182,8 @@ export const TeamMembersTable = ({
                 member={member}
                 getRoleBadgeClass={getRoleBadgeClass}
                 getStatusBadgeClass={getStatusBadgeClass}
+                isSelected={selectedMembers.includes(member.id)}
+                onSelect={(checked) => handleSelectMember(member.id, checked)}
               />
             ))}
           </TableBody>
