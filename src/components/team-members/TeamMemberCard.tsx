@@ -102,9 +102,9 @@ export const TeamMemberCard = ({
       <Separator className="w-full" />
       
       <CardFooter className="p-3 flex justify-end space-x-4">
-        <MessageCircle className="h-4.2 w-4.2 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <Mail className="h-4.2 w-4.2 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
-        <ChevronRight className="h-4.2 w-4.2 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <MessageCircle size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <Mail size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        <ChevronRight size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
       </CardFooter>
     </Card>
   );
