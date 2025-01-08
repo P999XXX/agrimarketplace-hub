@@ -17,7 +17,7 @@ export const TeamMembersHeader = ({ view, onViewChange }: TeamMembersHeaderProps
       </h1>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="default" className="gap-2">
+          <Button>
             <Plus className="h-4 w-4" />
             Invite Member
           </Button>
