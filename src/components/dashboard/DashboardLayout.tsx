@@ -16,10 +16,10 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="flex min-h-screen w-full bg-gray-50">
+      <div className="flex min-h-screen w-full bg-gray-50/50">
         {/* Desktop Sidebar */}
-        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
-          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-white">
+        <Sidebar variant="inset" collapsible="icon" className="hidden md:flex">
+          <SidebarHeader className="h-16 flex items-center border-b px-4">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
               <div className="flex items-center">
