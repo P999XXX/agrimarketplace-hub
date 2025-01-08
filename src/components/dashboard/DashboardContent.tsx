@@ -10,7 +10,7 @@ export const DashboardContent = ({
   className,
 }: DashboardContentProps) => {
   return (
-    <div className={cn("relative w-full h-full overflow-hidden", className)}>
+    <div className={cn("relative", className)}>
       {children}
     </div>
   );

@@ -40,7 +40,7 @@ export const TeamMembersTable = ({
   }
 
   return (
-    <div className="border rounded-md h-full">
+    <div className="rounded-md border">
       <Table>
         <TeamMembersTableHeader />
         <TableBody>
