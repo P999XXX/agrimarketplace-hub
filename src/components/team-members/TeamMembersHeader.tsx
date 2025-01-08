@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "./InviteMemberForm";
 import { Separator } from "@/components/ui/separator";
+import { CardHeader } from "@/components/ui/card";
 
 export const TeamMembersHeader = () => {
   return (
     <>
-      <div className="px-6 py-6">
+      <CardHeader className="px-6 py-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">
             Team Members
@@ -27,7 +28,7 @@ export const TeamMembersHeader = () => {
             </SheetContent>
           </Sheet>
         </div>
-      </div>
+      </CardHeader>
       <Separator />
     </>
   );
