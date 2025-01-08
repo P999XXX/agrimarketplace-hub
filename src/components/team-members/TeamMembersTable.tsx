@@ -1,5 +1,5 @@
 import { Table, TableBody } from "@/components/ui/table";
-import { useTeamMembers, TeamMember } from "@/hooks/useTeamMembers";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -8,8 +8,6 @@ import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
 import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
 import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
 import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
-import { useState } from "react";
-import { TeamMemberDialog } from "./TeamMemberDialog";
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -29,7 +27,6 @@ export const TeamMembersTable = ({
   itemsPerPage
 }: TeamMembersTableProps) => {
   const { data: allTeamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   const totalPages = Math.ceil(allTeamMembers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -90,7 +87,6 @@ export const TeamMembersTable = ({
                 member={member}
                 getRoleBadgeClass={getRoleBadgeClass}
                 getStatusBadgeClass={getStatusBadgeClass}
-                onClick={() => setSelectedMember(member)}
               />
             ))}
           </TableBody>
@@ -170,14 +166,6 @@ export const TeamMembersTable = ({
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      )}
-
-      {selectedMember && (
-        <TeamMemberDialog
-          member={selectedMember}
-          isOpen={true}
-          onClose={() => setSelectedMember(null)}
-        />
       )}
     </div>
   );
