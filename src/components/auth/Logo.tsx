@@ -17,8 +17,11 @@ export const Logo = () => {
           </defs>
         </svg>
         <Leaf 
-          className={`${isAuthPage ? 'text-white' : ''} h-7 w-7 -translate-y-0.5 -rotate-12`}
-          style={isAuthPage ? {} : { stroke: "url(#leaf-gradient)" }}
+          className={`${isAuthPage ? 'text-white' : ''} h-7 w-7 -translate-y-0.5 -rotate-12 transition-all duration-300`}
+          style={isAuthPage ? {} : { 
+            stroke: "url(#leaf-gradient)",
+            animation: "gradient-shift 15s ease infinite"
+          }}
         />
       </div>
       <span className="flex items-center text-[1.45rem]">
