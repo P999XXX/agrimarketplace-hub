@@ -47,42 +47,28 @@ export const TeamMemberCard = ({
           if (error) throw error;
 
           if (data.image) {
-            // Upload the generated image to Supabase Storage
-            const fileName = `${member.id}-avatar.png`;
-            const { data: uploadData, error: uploadError } = await supabase.storage
-              .from('avatars')
-              .upload(fileName, data.image, {
-                contentType: 'image/png',
-                upsert: true
-              });
-
-            if (uploadError) throw uploadError;
-
-            // Get the public URL
-            const { data: publicUrl } = supabase.storage
-              .from('avatars')
-              .getPublicUrl(fileName);
-
             // Update the profile with the new avatar URL
             const { error: updateError } = await supabase
               .from('profiles')
-              .update({ avatar_url: publicUrl.publicUrl })
+              .update({ avatar_url: data.image })
               .eq('id', member.profile?.id);
 
             if (updateError) throw updateError;
 
-            setAvatarUrl(publicUrl.publicUrl);
+            setAvatarUrl(data.image);
           }
         } catch (error) {
           console.error('Error generating avatar:', error);
         } finally {
           setIsGenerating(false);
         }
+      } else if (member.profile?.avatar_url) {
+        setAvatarUrl(member.profile.avatar_url);
       }
     };
 
     generateAvatar();
-  }, [member]);
+  }, [member, isGenerating]);
 
   return (
     <Card
@@ -98,7 +84,7 @@ export const TeamMemberCard = ({
             <div className="flex items-center space-x-3">
               <Avatar className="h-10 w-10">
                 <AvatarImage 
-                  src={avatarUrl || member.profile?.avatar_url || ''} 
+                  src={avatarUrl || ''} 
                   alt={member.name || 'Team member'} 
                 />
                 <AvatarFallback className="bg-brand-100 text-brand-700 text-base font-medium">

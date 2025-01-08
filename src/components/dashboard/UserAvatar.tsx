@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 export const UserAvatar = () => {
   const [initials, setInitials] = useState("");
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -25,19 +26,37 @@ export const UserAvatar = () => {
           
           if (profile.avatar_url) {
             setAvatarUrl(profile.avatar_url);
-          } else {
-            // Generate and save new avatar if none exists
+          } else if (!isGenerating) {
+            setIsGenerating(true);
             try {
-              const { data, error } = await supabase.functions.invoke('generate-avatar');
+              const { data: userData } = await supabase
+                .from('profiles')
+                .select('user_type')
+                .eq('id', session.user.id)
+                .single();
+
+              const { data, error } = await supabase.functions.invoke('generate-avatar', {
+                body: {
+                  name: `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || session.user.email?.split('@')[0],
+                  role: userData?.user_type || 'user'
+                }
+              });
+
               if (error) throw error;
               
               if (data.image) {
-                await supabase
+                const { error: updateError } = await supabase
                   .from('profiles')
                   .update({ avatar_url: data.image })
                   .eq('id', session.user.id);
                 
+                if (updateError) throw updateError;
                 setAvatarUrl(data.image);
+                
+                toast({
+                  title: "Avatar Generated",
+                  description: "Your new professional avatar has been created.",
+                });
               }
             } catch (error) {
               console.error('Error generating avatar:', error);
@@ -46,6 +65,8 @@ export const UserAvatar = () => {
                 description: "Using initials as fallback",
                 variant: "destructive",
               });
+            } finally {
+              setIsGenerating(false);
             }
           }
         }
@@ -53,7 +74,7 @@ export const UserAvatar = () => {
     };
 
     getProfile();
-  }, [toast]);
+  }, [toast, isGenerating]);
 
   return (
     <Avatar className="h-8 w-8 bg-brand-600 hover:bg-brand-500 transition-colors cursor-pointer">
