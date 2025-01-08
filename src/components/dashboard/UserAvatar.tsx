@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
-export const UserAvatar = () => {
+export const UserAvatar = ({ size = "default" }: { size?: "default" | "large" }) => {
   const [initials, setInitials] = useState("");
   const { toast } = useToast();
 
@@ -56,9 +56,12 @@ export const UserAvatar = () => {
     getProfile();
   }, []);
 
+  const avatarSize = size === "large" ? "h-12 w-12" : "h-8 w-8";
+  const textSize = size === "large" ? "text-base" : "text-sm";
+
   return (
-    <Avatar className="h-8 w-8 cursor-pointer">
-      <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+    <Avatar className={`cursor-pointer ${avatarSize}`}>
+      <AvatarFallback className={`bg-primary text-primary-foreground ${textSize}`}>
         {initials || 'NN'}
       </AvatarFallback>
     </Avatar>

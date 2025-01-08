@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { UserAvatar } from "../UserAvatar";
 
 interface UserAccountPopoverProps {
   children: React.ReactNode;
@@ -79,7 +80,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
             <div className="h-12 w-12">
-              {children}
+              <UserAvatar size="large" />
             </div>
             <div className="space-y-1">
               <p className="text-base font-medium leading-none">
