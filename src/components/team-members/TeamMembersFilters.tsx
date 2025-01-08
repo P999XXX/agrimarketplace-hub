@@ -1,13 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, Grid, Search, Table as TableIcon, Filter, ArrowUpDown, ListFilter } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { SearchInput } from "./filters/SearchInput";
+import { FilterButtons } from "./filters/FilterButtons";
+import { MobileFilterMenu } from "./filters/MobileFilterMenu";
 
 interface TeamMembersFiltersProps {
   viewMode: "grid" | "table";
@@ -32,137 +25,34 @@ export const TeamMembersFilters = ({
   setSortBy,
   onExportCSV,
 }: TeamMembersFiltersProps) => {
-  const FilterButtons = () => (
-    <div className="flex items-center gap-2">
-      <Select value={roleFilter} onValueChange={setRoleFilter}>
-        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none">
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4" />
-            <SelectValue placeholder="Filter by role" />
-          </div>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All roles</SelectItem>
-          <SelectItem value="member">Member</SelectItem>
-          <SelectItem value="viewer">Viewer</SelectItem>
-        </SelectContent>
-      </Select>
-
-      <Select value={sortBy} onValueChange={setSortBy}>
-        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none">
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="h-4 w-4" />
-            <SelectValue placeholder="Sort by" />
-          </div>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="created_at-desc">Newest first</SelectItem>
-          <SelectItem value="created_at-asc">Oldest first</SelectItem>
-          <SelectItem value="name-asc">Name A-Z</SelectItem>
-          <SelectItem value="name-desc">Name Z-A</SelectItem>
-        </SelectContent>
-      </Select>
-
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-        className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-      >
-        {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
-      </Button>
-
-      <Button 
-        variant="outline" 
-        size="icon" 
-        onClick={onExportCSV}
-        className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-      >
-        <Download className="h-4 w-4" />
-      </Button>
-    </div>
-  );
-
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <div className="flex-1 min-w-[200px] relative">
-        <Input
-          placeholder="Search team members..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="h-10 shadow-sm pl-10" 
-        />
-        <Search className="h-4 w-4 absolute left-3 top-3 text-gray-500" />
-      </div>
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* Desktop View */}
       <div className="hidden md:flex items-center gap-2">
-        <FilterButtons />
+        <FilterButtons
+          roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          onExportCSV={onExportCSV}
+        />
       </div>
 
       {/* Mobile View */}
       <div className="md:hidden">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-            >
-              <ListFilter className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[200px]">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
-                <div className="flex items-center gap-2">
-                  <Filter className="h-4 w-4" />
-                  <SelectValue placeholder="Filter by role" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All roles</SelectItem>
-                <SelectItem value="member">Member</SelectItem>
-                <SelectItem value="viewer">Viewer</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full border-0 shadow-none focus:ring-0 focus-visible:ring-0">
-                <div className="flex items-center gap-2">
-                  <ArrowUpDown className="h-4 w-4" />
-                  <SelectValue placeholder="Sort by" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="created_at-desc">Newest first</SelectItem>
-                <SelectItem value="created_at-asc">Oldest first</SelectItem>
-                <SelectItem value="name-asc">Name A-Z</SelectItem>
-                <SelectItem value="name-desc">Name Z-A</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <DropdownMenuItem 
-              onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-              className="cursor-pointer p-2"
-            >
-              <div className="flex items-center gap-2">
-                {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
-                <span>Change view</span>
-              </div>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem 
-              onClick={onExportCSV}
-              className="cursor-pointer p-2"
-            >
-              <div className="flex items-center gap-2">
-                <Download className="h-4 w-4" />
-                <span>Export CSV</span>
-              </div>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <MobileFilterMenu
+          roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          onExportCSV={onExportCSV}
+        />
       </div>
     </div>
   );

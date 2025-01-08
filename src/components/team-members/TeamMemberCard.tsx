@@ -1,9 +1,9 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
-import { format } from "date-fns";
-import { ChevronRight } from "lucide-react";
+import { EmailCell } from "./EmailCell";
+import { UserAvatar } from "./card/UserAvatar";
+import { CardStats } from "./card/CardStats";
+import { CardFooter as CustomCardFooter } from "./card/CardFooter";
 
 const colorSchemes = [
   { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
@@ -18,6 +18,17 @@ const getColorScheme = (initials: string) => {
   return colorSchemes[sum % colorSchemes.length];
 };
 
+const getInitials = (name: string, email: string) => {
+  if (name) {
+    const nameParts = name.split(' ');
+    if (nameParts.length >= 2) {
+      return (nameParts[0][0] + nameParts[1][0]).toUpperCase();
+    }
+    return (name[0] + (nameParts[0][1] || '')).toUpperCase();
+  }
+  return email ? (email[0] + (email[1] || '')).toUpperCase() : '??';
+};
+
 interface TeamMemberCardProps {
   member: any;
   getRoleBadgeClass: () => string;
@@ -29,17 +40,6 @@ export const TeamMemberCard = ({
   getRoleBadgeClass,
   getStatusBadgeClass
 }: TeamMemberCardProps) => {
-  const getInitials = (name: string, email: string) => {
-    if (name) {
-      const nameParts = name.split(' ');
-      if (nameParts.length >= 2) {
-        return (nameParts[0][0] + nameParts[1][0]).toUpperCase();
-      }
-      return (name[0] + (nameParts[0][1] || '')).toUpperCase();
-    }
-    return email ? (email[0] + (email[1] || '')).toUpperCase() : '??';
-  };
-
   const initials = getInitials(member.name || '', member.email);
   const colorScheme = getColorScheme(initials);
 
@@ -54,9 +54,7 @@ export const TeamMemberCard = ({
       <CardHeader className="p-3 sm:p-4">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm sm:text-base font-medium transition-colors`}>
-              {initials}
-            </div>
+            <UserAvatar initials={initials} colorScheme={colorScheme} />
             <div className="min-w-0">
               <p className="text-base sm:text-lg font-semibold text-card-foreground truncate">
                 {member.name || 'Unnamed User'}
@@ -72,36 +70,22 @@ export const TeamMemberCard = ({
       <Separator className="w-full bg-border" />
 
       <CardContent className="p-4 sm:p-6">
-        <div className="text-sm text-muted-foreground space-y-2">
-          <div className="flex justify-between">
-            <span>Last Login:</span>
-            <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Invited by:</span>
-            <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Invited:</span>
-            <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
-          </div>
-        </div>
+        <CardStats
+          lastLogin={member.last_login}
+          inviterName={`${member.inviter?.first_name || ''} ${member.inviter?.last_name || ''}`}
+          createdAt={member.created_at}
+        />
       </CardContent>
 
       <Separator className="w-full bg-border" />
       
       <CardFooter className="p-3 sm:p-4">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex gap-2">
-            <Badge className={getStatusBadgeClass(member.status)}>
-              {member.status}
-            </Badge>
-            <Badge className={getRoleBadgeClass()}>
-              {member.role}
-            </Badge>
-          </div>
-          <ChevronRight size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-        </div>
+        <CustomCardFooter
+          status={member.status}
+          role={member.role}
+          getStatusBadgeClass={getStatusBadgeClass}
+          getRoleBadgeClass={getRoleBadgeClass}
+        />
       </CardFooter>
     </Card>
   );
