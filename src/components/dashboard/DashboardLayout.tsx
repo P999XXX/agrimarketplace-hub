@@ -7,12 +7,14 @@ import { SidebarLogo } from "./SidebarLogo";
 import { MobileNav } from "./MobileNav";
 import { UserAvatar } from "./UserAvatar";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  const location = useLocation();
   const defaultOpen = localStorage.getItem('sidebarState') === 'expanded';
 
   useEffect(() => {
@@ -36,6 +38,30 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
       observer.observe(sidebar, { attributes: true });
       return () => observer.disconnect();
+    }
+  }, []);
+
+  // Schließe Sidebar bei Routenwechsel, aber speichere den vorherigen Zustand
+  useEffect(() => {
+    const sidebar = document.querySelector('[data-state]');
+    if (sidebar) {
+      const currentState = sidebar.getAttribute('data-state');
+      if (currentState === 'expanded') {
+        localStorage.setItem('previousSidebarState', 'expanded');
+      }
+      sidebar.setAttribute('data-state', 'collapsed');
+    }
+  }, [location.pathname]);
+
+  // Stelle den vorherigen Zustand wieder her, wenn die gleiche Seite neu geladen wird
+  useEffect(() => {
+    const previousState = localStorage.getItem('previousSidebarState');
+    if (previousState === 'expanded') {
+      const sidebar = document.querySelector('[data-state]');
+      if (sidebar) {
+        sidebar.setAttribute('data-state', 'expanded');
+      }
+      localStorage.removeItem('previousSidebarState');
     }
   }, []);
 
