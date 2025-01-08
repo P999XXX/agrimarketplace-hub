@@ -15,11 +15,11 @@ export const TeamMembersContent = () => {
   const { data: members, isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   return (
-    <div className="container max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Team Members</h1>
-        <TeamMembersHeader view={view} onViewChange={setView} />
-      </div>
+    <div className="container max-w-7xl mx-auto py-8 px-8">
+      <TeamMembersHeader 
+        view={view} 
+        onViewChange={setView}
+      />
 
       <div className="space-y-6">
         {view === "grid" ? (

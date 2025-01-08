@@ -43,7 +43,7 @@ export const DashboardMenu = () => {
         Menu
       </h2>
       <SidebarMenu>
-        <TooltipProvider delayDuration={0}>
+        <TooltipProvider delayDuration={100}>
           {menuItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -54,33 +54,27 @@ export const DashboardMenu = () => {
                       asChild
                       variant="ghost"
                       className={`w-full justify-start gap-3 transition-colors min-h-[44px] ${
-                        !isMobile && state === "collapsed" ? "px-[5px]" : "px-4"
+                        !isMobile && state === "collapsed" ? "px-2" : "px-4"
                       } py-2.5 rounded-md ${
                         isActive 
                           ? "text-primary bg-primary/10" 
                           : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/80"
                       }`}
                     >
-                      <a href={item.href}>
-                        <div className="flex items-center gap-3">
-                          <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-all duration-200 ${
-                            !isMobile && state === "collapsed" ? "w-full" : ""
-                          }`}>
-                            <item.icon className={`transition-all duration-200 ${
-                              !isMobile && state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
-                            }`} />
-                          </div>
-                          <span className={`text-[15px] font-medium transition-all duration-200 ${
-                            !isMobile && state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
-                          }`}>
-                            {item.title}
-                          </span>
+                      <a href={item.href} className="flex items-center gap-3">
+                        <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                          <item.icon className="w-5 h-5" />
                         </div>
+                        <span className={`text-[15px] font-medium transition-all duration-200 ${
+                          !isMobile && state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
+                        }`}>
+                          {item.title}
+                        </span>
                       </a>
                     </Button>
                   </TooltipTrigger>
                   {!isMobile && state === "collapsed" && (
-                    <TooltipContent side="right">
+                    <TooltipContent side="right" sideOffset={10}>
                       {item.title}
                     </TooltipContent>
                   )}
