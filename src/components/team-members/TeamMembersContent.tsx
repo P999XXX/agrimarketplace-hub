@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { TeamMembersGrid } from "./TeamMembersGrid";
+import { Separator } from "@/components/ui/separator";
 
 export const TeamMembersContent = () => {
   // State Management
@@ -21,42 +22,54 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <Card className="border-0 shadow-none">
-      <TeamMembersHeader />
-      <CardContent className="p-0">
-        <div className="px-6">
-          <TeamMembersFilters 
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            roleFilter={roleFilter}
-            setRoleFilter={setRoleFilter}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            onExportCSV={handleExportCSV}
-          />
-          {viewMode === 'table' ? (
-            <TeamMembersTable 
+    <div className="flex flex-col">
+      {/* Header Section */}
+      <Card className="rounded-none border-0 shadow-none">
+        <CardHeader className="px-6 py-6 border-b">
+          <TeamMembersHeader />
+        </CardHeader>
+      </Card>
+
+      {/* Content Section */}
+      <Card className="rounded-none border-0 shadow-none">
+        <CardContent className="p-0">
+          <div className="px-6 py-4">
+            <TeamMembersFilters 
+              viewMode={viewMode}
+              setViewMode={setViewMode}
               searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
               roleFilter={roleFilter}
+              setRoleFilter={setRoleFilter}
               sortBy={sortBy}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              itemsPerPage={itemsPerPage}
+              setSortBy={setSortBy}
+              onExportCSV={handleExportCSV}
             />
-          ) : (
-            <TeamMembersGrid
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              itemsPerPage={itemsPerPage}
-            />
-          )}
-        </div>
-      </CardContent>
-    </Card>
+          </div>
+          <Separator className="w-full" />
+          <div className="px-6 py-4">
+            {viewMode === 'table' ? (
+              <TeamMembersTable 
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
+              />
+            ) : (
+              <TeamMembersGrid
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
+              />
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
