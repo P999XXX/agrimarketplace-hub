@@ -21,47 +21,43 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <div className="container py-8">
-      <div className="flex items-center justify-between mb-6">
-        <TeamMembersHeader 
-          view={view} 
-          onViewChange={setView}
-        />
-      </div>
+    <div className="container py-8 space-y-6">
+      <TeamMembersHeader 
+        view={view} 
+        onViewChange={setView}
+      />
 
-      <div className="space-y-6">
-        <TeamMembersFilters
-          viewMode={view}
-          setViewMode={setView}
+      <TeamMembersFilters
+        viewMode={view}
+        setViewMode={setView}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        roleFilter={roleFilter}
+        setRoleFilter={setRoleFilter}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        onExportCSV={handleExportCSV}
+      />
+
+      {view === "grid" ? (
+        <TeamMembersGrid
           searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
           roleFilter={roleFilter}
-          setRoleFilter={setRoleFilter}
           sortBy={sortBy}
-          setSortBy={setSortBy}
-          onExportCSV={handleExportCSV}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          itemsPerPage={itemsPerPage}
         />
-
-        {view === "grid" ? (
-          <TeamMembersGrid
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={itemsPerPage}
-          />
-        ) : (
-          <TeamMembersTable
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={itemsPerPage}
-          />
-        )}
-      </div>
+      ) : (
+        <TeamMembersTable
+          searchQuery={searchQuery}
+          roleFilter={roleFilter}
+          sortBy={sortBy}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          itemsPerPage={itemsPerPage}
+        />
+      )}
     </div>
   );
 };

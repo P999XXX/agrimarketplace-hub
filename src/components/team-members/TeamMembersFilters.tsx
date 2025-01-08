@@ -2,6 +2,7 @@ import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download } from "lucid
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface TeamMembersFiltersProps {
   viewMode: 'table' | 'grid';
@@ -31,20 +32,20 @@ export const TeamMembersFilters = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 transition-all duration-200 hover:shadow-md">
+    <Card className="p-4">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
         <div className="relative flex-1 w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
             placeholder="Search team members..."
-            className="pl-10 h-10 w-full"
+            className="pl-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="w-full sm:w-[180px] h-10">
+            <SelectTrigger className="w-full sm:w-[180px]">
               <Filter className="h-4 w-4 mr-2" />
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
@@ -56,7 +57,7 @@ export const TeamMembersFilters = ({
             </SelectContent>
           </Select>
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full sm:w-[180px] h-10">
+            <SelectTrigger className="w-full sm:w-[180px]">
               <SortAsc className="h-4 w-4 mr-2" />
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
@@ -73,7 +74,7 @@ export const TeamMembersFilters = ({
             variant="outline"
             size="icon"
             onClick={toggleView}
-            className="min-w-[40px] min-h-[40px] w-10 h-10 hover:bg-gray-100"
+            className="min-w-[40px]"
           >
             {viewMode === 'table' ? (
               <LayoutGrid className="h-4 w-4" />
@@ -85,13 +86,13 @@ export const TeamMembersFilters = ({
             variant="outline"
             size="icon"
             onClick={onExportCSV}
-            className="min-w-[40px] min-h-[40px] w-10 h-10 hover:bg-gray-100"
+            className="min-w-[40px]"
             title="Export as CSV"
           >
             <Download className="h-4 w-4" />
           </Button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
