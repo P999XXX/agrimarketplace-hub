@@ -5,7 +5,7 @@ import { InviteMemberForm } from "./InviteMemberForm";
 
 export const TeamMembersHeader = () => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mb-6">
       <h1 className="text-2xl font-bold">
         Team Members
       </h1>

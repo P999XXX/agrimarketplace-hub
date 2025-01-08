@@ -54,56 +54,53 @@ export const TeamMemberCard = ({
           : ''
       }`}
     >
-      {/* Header Section */}
-      <CardContent className="p-4 border-b">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-3">
-            <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
-              {initials}
-            </div>
-            <div className="min-w-0">
-              <p className="text-lg font-semibold text-gray-900 truncate">
-                {member.name || 'Unnamed User'}
-              </p>
-              <div className="text-sm">
-                <EmailCell email={member.email} />
+      <CardContent className="p-4">
+        <div className="space-y-4">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center space-x-3">
+              <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium transition-colors`}>
+                {initials}
+              </div>
+              <div className="min-w-0">
+                <p className="text-lg font-semibold text-gray-900 truncate">
+                  {member.name || 'Unnamed User'}
+                </p>
+                <div className="text-sm">
+                  <EmailCell email={member.email} />
+                </div>
               </div>
             </div>
+            <div className="flex flex-col items-end space-y-1">
+              <Badge className={getStatusBadgeClass(member.status)}>
+                {member.status}
+              </Badge>
+              <Badge variant="secondary" className={getRoleBadgeClass()}>
+                {member.role}
+              </Badge>
+            </div>
           </div>
-          <div className="flex flex-col items-end space-y-1">
-            <Badge className={getStatusBadgeClass(member.status)}>
-              {member.status}
-            </Badge>
-            <Badge variant="secondary" className={getRoleBadgeClass()}>
-              {member.role}
-            </Badge>
+
+          <Separator className="bg-gray-200" />
+
+          <div className="space-y-3">
+            <div className="text-sm text-gray-500 space-y-1">
+              <p className="flex justify-between">
+                <span>Last Login:</span>
+                <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Invited by:</span>
+                <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Invited:</span>
+                <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
+              </p>
+            </div>
           </div>
         </div>
       </CardContent>
-
-      {/* Content Section */}
-      <CardContent className="p-4">
-        <div className="space-y-3">
-          <div className="text-sm text-gray-500 space-y-1">
-            <p className="flex justify-between">
-              <span>Last Login:</span>
-              <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
-            </p>
-            <p className="flex justify-between">
-              <span>Invited by:</span>
-              <span>{member.inviter?.first_name || ''} {member.inviter?.last_name || ''}</span>
-            </p>
-            <p className="flex justify-between">
-              <span>Invited:</span>
-              <span>{format(new Date(member.created_at), 'MMM d, yyyy')}</span>
-            </p>
-          </div>
-        </div>
-      </CardContent>
-
-      <Separator />
-      
-      {/* Footer Section */}
+      <Separator className="w-full" />
       <CardFooter className="p-4 flex justify-end space-x-4">
         <MessageCircle className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
         <Mail className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
