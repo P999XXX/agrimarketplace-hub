@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "../EmailCell";
 import { format } from "date-fns";
 import { TeamMember } from "@/hooks/useTeamMembers";
-import { ChevronRight } from "lucide-react";
+import { ListFilter } from "lucide-react";
 
 interface TeamMembersTableRowProps {
   member: TeamMember;
@@ -92,7 +92,7 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
         {format(new Date(member.created_at), 'MMM d, yyyy')}
       </TableCell>
       <TableCell>
-        <ChevronRight className="h-4 w-4 text-muted-foreground" />
+        <ListFilter className="h-4 w-4 text-muted-foreground" />
       </TableCell>
     </TableRow>
   );
