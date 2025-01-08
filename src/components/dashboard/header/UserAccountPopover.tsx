@@ -2,7 +2,6 @@ import { LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 import countries from 'i18n-iso-countries';
 import en from 'i18n-iso-countries/langs/en.json';
 import {
@@ -11,6 +10,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { UserAvatar } from "../UserAvatar";
@@ -86,14 +86,6 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
 
   const currentTime = new Date();
   
-  const getCountryFlag = (countryCode: string) => {
-    try {
-      return getUnicodeFlagIcon(countryCode) || '';
-    } catch {
-      return '';
-    }
-  };
-
   const getCountryName = (countryCode: string) => {
     try {
       return countries.getName(countryCode, 'en') || countryCode;
@@ -107,14 +99,15 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
       <PopoverTrigger asChild>
         <button className="outline-none">{children}</button>
       </PopoverTrigger>
-      <PopoverContent className="w-80" align="end" sideOffset={8}>
-        <div className="flex flex-col space-y-4">
+      <PopoverContent className="w-80 p-0" align="end" sideOffset={8}>
+        {/* Header */}
+        <div className="p-4">
           <div className="flex items-center space-x-4">
             <div className="h-10 w-10">
               <UserAvatar size="large" />
             </div>
             <div className="space-y-1">
-              <p className="text-base font-medium leading-none">
+              <p className="text-base font-semibold leading-none">
                 {userName}
               </p>
               <p className="text-sm text-muted-foreground">
@@ -122,25 +115,55 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
               </p>
             </div>
           </div>
-          <div className="space-y-2">
-            <div className="text-sm text-muted-foreground">
-              <div className="mb-1">Account: {userProfile?.companies?.name || 'Not assigned'}</div>
-              <div className="mb-1">Role: {userProfile?.user_type || 'Not assigned'}</div>
-              <div className="mb-1">Location: {ipInfo?.country ? (
-                <span>
-                  {getCountryFlag(ipInfo.country)} {getCountryName(ipInfo.country)}
-                </span>
-              ) : 'Loading...'}</div>
-              <div>Time: {format(currentTime, 'PPpp')}</div>
+        </div>
+
+        <Separator />
+
+        {/* Content */}
+        <div className="p-4 text-sm text-muted-foreground space-y-3">
+          <div className="flex justify-between items-center">
+            <span>Account:</span>
+            <span>{userProfile?.companies?.name || 'Not assigned'}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span>Role:</span>
+            <span>{userProfile?.user_type || 'Not assigned'}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span>Location:</span>
+            <div className="flex items-center gap-2">
+              {ipInfo?.country && (
+                <>
+                  <img 
+                    src={`https://flagcdn.com/w20/${ipInfo.country.toLowerCase()}.png`}
+                    srcSet={`https://flagcdn.com/w40/${ipInfo.country.toLowerCase()}.png 2x`}
+                    width="20"
+                    height="15"
+                    alt={getCountryName(ipInfo.country)}
+                    className="inline-block"
+                  />
+                  <span>{getCountryName(ipInfo.country)}</span>
+                </>
+              )}
             </div>
           </div>
+          <div className="flex justify-between items-center">
+            <span>Time:</span>
+            <span>{format(currentTime, 'PPpp')}</span>
+          </div>
+        </div>
+
+        <Separator />
+
+        {/* Footer */}
+        <div className="p-4">
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-sm font-normal hover:bg-destructive/5 hover:text-destructive"
+            className="w-full justify-between text-sm font-normal hover:bg-destructive/5 hover:text-destructive"
             onClick={handleLogout}
           >
-            <LogOut className="mr-2 h-4 w-4" />
-            Sign out
+            <span>Sign out</span>
+            <LogOut className="h-4 w-4" />
           </Button>
         </div>
       </PopoverContent>
