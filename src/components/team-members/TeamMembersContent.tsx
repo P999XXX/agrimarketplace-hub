@@ -16,48 +16,49 @@ export const TeamMembersContent = () => {
   const { data: members, isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
   const handleExportCSV = () => {
-    // TODO: Implement CSV export functionality
     console.log("Export to CSV");
   };
 
   return (
-    <div className="container py-8 space-y-6">
-      <TeamMembersHeader 
-        view={view} 
-        onViewChange={setView}
-      />
-
-      <TeamMembersFilters
-        viewMode={view}
-        setViewMode={setView}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        roleFilter={roleFilter}
-        setRoleFilter={setRoleFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        onExportCSV={handleExportCSV}
-      />
-
-      {view === "grid" ? (
-        <TeamMembersGrid
-          searchQuery={searchQuery}
-          roleFilter={roleFilter}
-          sortBy={sortBy}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={itemsPerPage}
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 max-w-7xl">
+      <div className="space-y-6">
+        <TeamMembersHeader 
+          view={view} 
+          onViewChange={setView}
         />
-      ) : (
-        <TeamMembersTable
+
+        <TeamMembersFilters
+          viewMode={view}
+          setViewMode={setView}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
           sortBy={sortBy}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={itemsPerPage}
+          setSortBy={setSortBy}
+          onExportCSV={handleExportCSV}
         />
-      )}
+
+        {view === "grid" ? (
+          <TeamMembersGrid
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={itemsPerPage}
+          />
+        ) : (
+          <TeamMembersTable
+            searchQuery={searchQuery}
+            roleFilter={roleFilter}
+            sortBy={sortBy}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={itemsPerPage}
+          />
+        )}
+      </div>
     </div>
   );
 };

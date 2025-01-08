@@ -54,14 +54,14 @@ export const TeamMemberCard = ({
           : ''
       }`}
     >
-      <CardHeader className="p-4">
+      <CardHeader className="p-4 sm:p-6">
         <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-3">
-            <div className={`w-10 h-10 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-sm font-medium transition-colors`}>
               {initials}
             </div>
             <div className="min-w-0">
-              <p className="text-lg font-semibold text-gray-900 truncate">
+              <p className="text-base sm:text-lg font-semibold text-gray-900 truncate">
                 {member.name || 'Unnamed User'}
               </p>
               <div className="text-sm">
@@ -82,7 +82,7 @@ export const TeamMemberCard = ({
 
       <Separator className="w-full" />
 
-      <CardContent className="p-4">
+      <CardContent className="p-4 sm:p-6">
         <div className="text-sm text-gray-500 space-y-2">
           <div className="flex justify-between">
             <span>Last Login:</span>
@@ -101,7 +101,7 @@ export const TeamMemberCard = ({
 
       <Separator className="w-full" />
       
-      <CardFooter className="p-3 flex justify-end space-x-4">
+      <CardFooter className="p-3 sm:p-4 flex justify-end space-x-4">
         <MessageCircle size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
         <Mail size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
         <ChevronRight size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />

@@ -32,8 +32,8 @@ export const TeamMembersFilters = ({
   };
 
   return (
-    <Card className="p-4">
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+    <Card className="p-4 sm:p-6">
+      <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:items-center">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
@@ -43,7 +43,7 @@ export const TeamMembersFilters = ({
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="flex gap-2 w-full sm:w-auto">
+        <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 md:w-auto">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
             <SelectTrigger className="w-full sm:w-[180px]">
               <Filter className="h-4 w-4 mr-2" />
@@ -70,27 +70,29 @@ export const TeamMembersFilters = ({
               <SelectItem value="role-desc">Role Z-A</SelectItem>
             </SelectContent>
           </Select>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={toggleView}
-            className="min-w-[40px]"
-          >
-            {viewMode === 'table' ? (
-              <LayoutGrid className="h-4 w-4" />
-            ) : (
-              <LayoutList className="h-4 w-4" />
-            )}
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={onExportCSV}
-            className="min-w-[40px]"
-            title="Export as CSV"
-          >
-            <Download className="h-4 w-4" />
-          </Button>
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleView}
+              className="min-w-[40px]"
+            >
+              {viewMode === 'table' ? (
+                <LayoutGrid className="h-4 w-4" />
+              ) : (
+                <LayoutList className="h-4 w-4" />
+              )}
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={onExportCSV}
+              className="min-w-[40px]"
+              title="Export as CSV"
+            >
+              <Download className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </Card>
