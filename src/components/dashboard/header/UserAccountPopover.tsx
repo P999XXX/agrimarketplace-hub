@@ -134,15 +134,15 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
             <div className="flex items-center gap-2">
               {ipInfo?.country && (
                 <>
+                  <span>{getCountryName(ipInfo.country)}</span>
                   <img 
-                    src={`https://flagcdn.com/w20/${ipInfo.country.toLowerCase()}.png`}
-                    srcSet={`https://flagcdn.com/w40/${ipInfo.country.toLowerCase()}.png 2x`}
-                    width="20"
-                    height="15"
+                    src={`https://flagcdn.com/w16/${ipInfo.country.toLowerCase()}.png`}
+                    srcSet={`https://flagcdn.com/w32/${ipInfo.country.toLowerCase()}.png 2x`}
+                    width="16"
+                    height="12"
                     alt={getCountryName(ipInfo.country)}
                     className="inline-block"
                   />
-                  <span>{getCountryName(ipInfo.country)}</span>
                 </>
               )}
             </div>
