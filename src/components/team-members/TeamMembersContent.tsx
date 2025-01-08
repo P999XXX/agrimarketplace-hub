@@ -13,7 +13,11 @@ import { useToast } from "@/hooks/use-toast";
 
 export const TeamMembersContent = () => {
   const isMobile = useIsMobile();
-  const [viewMode, setViewMode] = useState<'table' | 'grid'>(isMobile ? 'grid' : 'table');
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>(() => {
+    // Initialisiere mit dem gespeicherten Wert oder Standard 'table'
+    const savedViewMode = localStorage.getItem('teamMembersViewMode');
+    return (savedViewMode === 'table' || savedViewMode === 'grid') ? savedViewMode : 'table';
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -21,26 +25,10 @@ export const TeamMembersContent = () => {
   const { toast } = useToast();
   const { data: teamMembers = [] } = useTeamMembers(searchQuery, roleFilter, sortBy);
 
-  // Einheitlicher useEffect für View Mode Management
-  useEffect(() => {
-    if (isMobile) {
-      setViewMode('grid');
-    } else {
-      const savedViewMode = localStorage.getItem('teamMembersViewMode');
-      if (savedViewMode === 'table' || savedViewMode === 'grid') {
-        setViewMode(savedViewMode);
-      } else {
-        setViewMode('table');
-      }
-    }
-  }, [isMobile]);
-
-  // Custom setViewMode function that also saves to localStorage
+  // Speichere ViewMode bei Änderungen
   const handleViewModeChange = (mode: 'table' | 'grid') => {
-    if (!isMobile) {
-      setViewMode(mode);
-      localStorage.setItem('teamMembersViewMode', mode);
-    }
+    setViewMode(mode);
+    localStorage.setItem('teamMembersViewMode', mode);
   };
 
   const handleExportCSV = () => {
@@ -120,14 +108,16 @@ export const TeamMembersContent = () => {
           onExportCSV={handleExportCSV}
         />
         {viewMode === 'table' ? (
-          <TeamMembersTable 
-            searchQuery={searchQuery}
-            roleFilter={roleFilter}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={10}
-          />
+          <div className={`${isMobile ? 'overflow-x-auto -mx-4 px-4' : ''}`}>
+            <TeamMembersTable 
+              searchQuery={searchQuery}
+              roleFilter={roleFilter}
+              sortBy={sortBy}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              itemsPerPage={10}
+            />
+          </div>
         ) : (
           <TeamMembersGrid 
             searchQuery={searchQuery}
