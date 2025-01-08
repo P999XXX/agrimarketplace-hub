@@ -42,7 +42,7 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
+    <DashboardContent>
       <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
@@ -63,7 +63,7 @@ export const TeamMembersContent = () => {
       </div>
 
       <ScrollArea 
-        className="flex-1 relative pb-[4.5rem] md:pb-0" 
+        className="flex-1 overflow-y-auto pb-[4.5rem] md:pb-0"
         onScroll={handleScroll}
       >
         <div className="p-4">

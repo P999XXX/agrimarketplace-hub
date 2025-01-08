@@ -10,7 +10,7 @@ export const DashboardContent = ({
   className,
 }: DashboardContentProps) => {
   return (
-    <div className={cn("relative bg-background", className)}>
+    <div className={cn("relative flex flex-col h-[calc(100vh-4rem)] bg-background", className)}>
       {children}
     </div>
   );
