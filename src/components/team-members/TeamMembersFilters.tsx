@@ -39,7 +39,7 @@ export const TeamMembersFilters = ({
       </div>
 
       <Select value={roleFilter} onValueChange={setRoleFilter}>
-        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0">
+        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <SelectValue placeholder="Filter by role" />
@@ -53,7 +53,7 @@ export const TeamMembersFilters = ({
       </Select>
 
       <Select value={sortBy} onValueChange={setSortBy}>
-        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0">
+        <SelectTrigger className="w-[180px] shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none">
           <div className="flex items-center gap-2">
             <ArrowUpDown className="h-4 w-4" />
             <SelectValue placeholder="Sort by" />
@@ -72,7 +72,7 @@ export const TeamMembersFilters = ({
           variant="outline"
           size="icon"
           onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-          className="shadow-sm focus:ring-0 focus-visible:ring-0"
+          className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
         >
           {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
         </Button>
@@ -80,7 +80,7 @@ export const TeamMembersFilters = ({
           variant="outline" 
           size="icon" 
           onClick={onExportCSV} 
-          className="shadow-sm focus:ring-0 focus-visible:ring-0"
+          className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
         >
           <Download className="h-4 w-4" />
         </Button>
