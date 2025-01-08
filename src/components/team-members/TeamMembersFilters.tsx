@@ -32,7 +32,7 @@ export const TeamMembersFilters = ({
   };
 
   return (
-    <Card className="p-4 sm:p-6">
+    <Card className="p-4">
       <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:items-center">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
