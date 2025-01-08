@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, Grid, Table as TableIcon } from "lucide-react";
+import { Download, Grid, Search, Table as TableIcon } from "lucide-react";
 
 interface TeamMembersFiltersProps {
   viewMode: "grid" | "table";
@@ -28,13 +28,14 @@ export const TeamMembersFilters = ({
 }: TeamMembersFiltersProps) => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <div className="flex-1 min-w-[200px]">
+      <div className="flex-1 min-w-[200px] relative">
         <Input
           placeholder="Search team members..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="h-10 shadow-sm" 
+          className="h-10 shadow-sm pl-10" 
         />
+        <Search className="h-4 w-4 absolute left-3 top-3 text-gray-500" />
       </div>
 
       <Select value={roleFilter} onValueChange={setRoleFilter}>
