@@ -40,8 +40,13 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent>
-      <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-        <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-1.8 dark:bg-black/10 bg-white/70 backdrop-blur-md z-10 transition-shadow duration-200">
+      <div className="flex flex-col h-[calc(100vh-4rem)]">
+        <div 
+          className={cn(
+            "sticky top-16 flex-none space-y-4 px-4 pt-4 pb-1.8 dark:bg-black/10 bg-white/70 backdrop-blur-md z-10",
+            isScrolled && "shadow-sm"
+          )}
+        >
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
@@ -61,10 +66,10 @@ export const TeamMembersContent = () => {
         </div>
 
         <ScrollArea 
-          className="flex-1 relative md:pb-0 pb-20 overflow-x-auto" 
+          className="flex-1 relative md:pb-0 pb-20 overflow-hidden"
           onScroll={handleScroll}
         >
-          <div className="p-4">
+          <div className="h-full p-4">
             {view === "grid" ? (
               <TeamMembersGrid
                 searchQuery={searchQuery}
@@ -72,7 +77,7 @@ export const TeamMembersContent = () => {
                 sortBy={sortBy}
               />
             ) : (
-              <div className="min-w-[800px]">
+              <div className="min-w-[800px] h-full">
                 <TeamMembersTable
                   searchQuery={searchQuery}
                   roleFilter={roleFilter}
