@@ -1,4 +1,4 @@
-import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -35,8 +35,8 @@ export const TeamMembersFilters = ({
 
   return (
     <Card className="p-3">
-      <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:items-center">
-        <div className="relative flex-1 w-full">
+      <div className="flex flex-col space-y-4">
+        <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
             placeholder="Search team members..."
@@ -45,9 +45,9 @@ export const TeamMembersFilters = ({
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 md:w-auto">
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="w-full sm:w-[180px]">
+            <SelectTrigger className="min-w-[140px]">
               <Filter className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
@@ -59,7 +59,7 @@ export const TeamMembersFilters = ({
             </SelectContent>
           </Select>
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full sm:w-[180px]">
+            <SelectTrigger className="min-w-[140px]">
               <SortAsc className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
@@ -72,29 +72,27 @@ export const TeamMembersFilters = ({
               <SelectItem value="role-desc">Role Z-A</SelectItem>
             </SelectContent>
           </Select>
-          <div className="flex space-x-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={toggleView}
-              className="min-w-[40px]"
-            >
-              {viewMode === 'table' ? (
-                <LayoutGrid className="h-5 w-5 text-gray-500" />
-              ) : (
-                <LayoutList className="h-5 w-5 text-gray-500" />
-              )}
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onExportCSV}
-              className="min-w-[40px]"
-              title="Export as CSV"
-            >
-              <Download className="h-5 w-5 text-gray-500" />
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleView}
+            className="min-w-[40px] flex-shrink-0"
+          >
+            {viewMode === 'table' ? (
+              <LayoutGrid className="h-5 w-5 text-gray-500" />
+            ) : (
+              <LayoutList className="h-5 w-5 text-gray-500" />
+            )}
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={onExportCSV}
+            className="min-w-[40px] flex-shrink-0"
+            title="Export as CSV"
+          >
+            <Download className="h-5 w-5 text-gray-500" />
+          </Button>
         </div>
       </div>
     </Card>
