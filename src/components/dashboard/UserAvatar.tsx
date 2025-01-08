@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const colorSchemes = [
   { bg: 'bg-purple-600 hover:bg-purple-500', text: 'text-white' },
@@ -22,16 +23,33 @@ const getColorScheme = (initials: string) => {
 export const UserAvatar = () => {
   const [initials, setInitials] = useState("");
   const [colorScheme, setColorScheme] = useState(colorSchemes[0]);
+  const { toast } = useToast();
 
   useEffect(() => {
     const getProfile = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        const { data: profile } = await supabase
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session?.user) {
+          console.log("No active session found");
+          return;
+        }
+
+        const { data: profile, error } = await supabase
           .from('profiles')
           .select('first_name, last_name')
           .eq('id', session.user.id)
-          .single();
+          .maybeSingle();
+
+        if (error) {
+          console.error("Error fetching profile:", error);
+          toast({
+            title: "Error loading profile",
+            description: "Please try refreshing the page",
+            variant: "destructive",
+          });
+          return;
+        }
 
         if (profile) {
           const firstInitial = profile.first_name?.[0] || '';
@@ -39,7 +57,20 @@ export const UserAvatar = () => {
           const userInitials = (firstInitial + lastInitial).toUpperCase();
           setInitials(userInitials);
           setColorScheme(getColorScheme(userInitials));
+        } else {
+          console.log("No profile found for user");
+          // Fallback zu Email-Initialen wenn kein Profil gefunden wurde
+          const emailInitial = session.user.email?.[0].toUpperCase() || '?';
+          setInitials(emailInitial);
+          setColorScheme(getColorScheme(emailInitial));
         }
+      } catch (error) {
+        console.error("Error in getProfile:", error);
+        toast({
+          title: "Error",
+          description: "Could not load user profile",
+          variant: "destructive",
+        });
       }
     };
 
