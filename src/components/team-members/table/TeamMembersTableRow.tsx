@@ -8,20 +8,23 @@ interface TeamMembersTableRowProps {
   member: TeamMember;
   getRoleBadgeClass: () => string;
   getStatusBadgeClass: (status: string) => string;
+  onClick: () => void;
 }
 
 export const TeamMembersTableRow = ({ 
   member, 
   getRoleBadgeClass, 
-  getStatusBadgeClass 
+  getStatusBadgeClass,
+  onClick
 }: TeamMembersTableRowProps) => {
   return (
     <TableRow
-      className={`transition-all duration-500 ${
+      className={`transition-all duration-500 cursor-pointer hover:bg-gray-50 ${
         Date.now() - new Date(member.created_at).getTime() < 3000
           ? 'animate-[highlight_1s_ease-in-out]'
           : ''
       }`}
+      onClick={onClick}
     >
       <TableCell className="whitespace-nowrap">
         {member.name || 'Unnamed User'}
