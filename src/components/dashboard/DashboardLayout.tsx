@@ -76,7 +76,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </Sidebar>
 
         <div className="flex w-full flex-col overflow-hidden">
-          <header className="h-16 flex items-center justify-between border-b border-border px-4 sticky top-0 z-50 backdrop-blur-md bg-background/80 supports-[backdrop-filter]:bg-background/60">
+          <header className="h-16 flex items-center justify-between border-b border-border px-4 fixed top-0 right-0 left-0 md:left-[240px] z-50 backdrop-blur-md bg-background/80 supports-[backdrop-filter]:bg-background/60">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
@@ -84,7 +84,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
             <UserAvatar />
           </header>
-          <main className="flex-1 min-h-[calc(100vh-4rem)] overflow-hidden">
+          <main className="flex-1 min-h-[calc(100vh-4rem)] overflow-hidden pt-16">
             {children}
           </main>
         </div>
