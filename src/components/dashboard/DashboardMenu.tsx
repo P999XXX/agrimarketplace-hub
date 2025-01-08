@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useEffect, useRef } from "react";
 
 const menuItems = [
   {
@@ -36,7 +37,28 @@ const menuItems = [
 export const DashboardMenu = () => {
   const { state, isMobile } = useSidebar();
   const location = useLocation();
+  const tooltipTimeoutRef = useRef<NodeJS.Timeout>();
   
+  // Cleanup function für Tooltips
+  const cleanupTooltips = () => {
+    const tooltips = document.querySelectorAll('[role="tooltip"]');
+    tooltips.forEach(tooltip => tooltip.remove());
+  };
+
+  // Effect für Sidebar State Changes
+  useEffect(() => {
+    if (state === "collapsed") {
+      // Verzögerung für Animation
+      tooltipTimeoutRef.current = setTimeout(cleanupTooltips, 200);
+    }
+    
+    return () => {
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current);
+      }
+    };
+  }, [state]);
+
   return (
     <div className="space-y-2">
       <h2 className={`px-4 text-sm font-semibold text-gray-500 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
@@ -48,12 +70,7 @@ export const DashboardMenu = () => {
             const isActive = location.pathname === item.href;
             return (
               <SidebarMenuItem key={item.href}>
-                <Tooltip onOpenChange={(open) => {
-                  if (!open && state === "collapsed") {
-                    const tooltips = document.querySelectorAll('[role="tooltip"]');
-                    tooltips.forEach(tooltip => tooltip.remove());
-                  }
-                }}>
+                <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       asChild
