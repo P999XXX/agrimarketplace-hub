@@ -2,6 +2,7 @@ import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersGrid } from "./TeamMembersGrid";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
+import { MobileInviteButton } from "./MobileInviteButton";
 import { useState, useEffect } from "react";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -62,7 +63,10 @@ export const TeamMembersContent = () => {
         />
       </div>
 
-      <ScrollArea className="flex-1 relative" onScroll={handleScroll}>
+      <ScrollArea 
+        className="flex-1 relative md:pb-0 pb-20" 
+        onScroll={handleScroll}
+      >
         <div className="p-4">
           {view === "grid" ? (
             <TeamMembersGrid
@@ -79,6 +83,8 @@ export const TeamMembersContent = () => {
           )}
         </div>
       </ScrollArea>
+      
+      <MobileInviteButton />
     </DashboardContent>
   );
 };
