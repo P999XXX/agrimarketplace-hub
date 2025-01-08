@@ -1,15 +1,55 @@
-import { LayoutDashboard, Users, Building2, ShoppingCart, Settings } from "lucide-react";
-import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { useSidebar } from "@/components/ui/sidebar";
+import { 
+  Building2, 
+  LayoutDashboard, 
+  Users, 
+  ShoppingCart, 
+  Settings,
+  ChevronDown,
+  History,
+  Star,
+  Boxes,
+  FileText,
+  MessageSquare,
+  HelpCircle
+} from "lucide-react";
+import { 
+  SidebarMenu, 
+  SidebarMenuItem, 
+  SidebarMenuButton,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel
+} from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-const menuItems = [
+const platformItems = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
     href: "/dashboard"
+  },
+  {
+    title: "History",
+    icon: History,
+    href: "/dashboard/history"
+  },
+  {
+    title: "Starred",
+    icon: Star,
+    href: "/dashboard/starred"
+  },
+  {
+    title: "Settings",
+    icon: Settings,
+    href: "/dashboard/settings"
+  }
+];
+
+const resourceItems = [
+  {
+    title: "Products",
+    icon: Boxes,
+    href: "/dashboard/products"
   },
   {
     title: "Team Members",
@@ -22,68 +62,77 @@ const menuItems = [
     href: "/dashboard/companies"
   },
   {
-    title: "Products",
-    icon: ShoppingCart,
-    href: "/dashboard/products"
+    title: "Documentation",
+    icon: FileText,
+    href: "/dashboard/documentation"
+  }
+];
+
+const supportItems = [
+  {
+    title: "Support",
+    icon: HelpCircle,
+    href: "/dashboard/support"
   },
   {
-    title: "Settings",
-    icon: Settings,
-    href: "/dashboard/settings"
+    title: "Messages",
+    icon: MessageSquare,
+    href: "/dashboard/messages"
   }
 ];
 
 export const DashboardMenu = () => {
-  const { state, isMobile } = useSidebar();
   const location = useLocation();
   
+  const renderMenuItem = (item: { title: string; icon: any; href: string }) => {
+    const isActive = location.pathname === item.href;
+    const Icon = item.icon;
+    
+    return (
+      <SidebarMenuItem key={item.href}>
+        <SidebarMenuButton
+          asChild
+          className={`w-full justify-start gap-2 ${
+            isActive ? "bg-secondary" : "hover:bg-secondary/50"
+          }`}
+        >
+          <a href={item.href} className="flex items-center">
+            <Icon className="h-4 w-4" />
+            <span>{item.title}</span>
+          </a>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
+
   return (
-    <div className="space-y-2">
-      <h2 className={`px-4 text-sm font-semibold text-gray-500 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
-        Menu
-      </h2>
-      <SidebarMenu>
-        <TooltipProvider delayDuration={100}>
-          {menuItems.map((item) => {
-            const isActive = location.pathname === item.href;
-            return (
-              <SidebarMenuItem key={item.href}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      asChild
-                      variant="ghost"
-                      className={`w-full justify-start gap-3 transition-colors min-h-[44px] ${
-                        !isMobile && state === "collapsed" ? "px-2" : "px-4"
-                      } py-2.5 rounded-md ${
-                        isActive 
-                          ? "text-primary bg-primary/10" 
-                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/80"
-                      }`}
-                    >
-                      <a href={item.href} className="flex items-center gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-                          <item.icon className="w-5 h-5" />
-                        </div>
-                        <span className={`text-[15px] font-medium transition-all duration-200 ${
-                          !isMobile && state === "collapsed" ? "opacity-0 w-0" : "opacity-100"
-                        }`}>
-                          {item.title}
-                        </span>
-                      </a>
-                    </Button>
-                  </TooltipTrigger>
-                  {!isMobile && state === "collapsed" && (
-                    <TooltipContent side="right" sideOffset={10}>
-                      {item.title}
-                    </TooltipContent>
-                  )}
-                </Tooltip>
-              </SidebarMenuItem>
-            );
-          })}
-        </TooltipProvider>
-      </SidebarMenu>
+    <div className="px-2 py-2">
+      <SidebarGroup>
+        <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {platformItems.map(renderMenuItem)}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+
+      <SidebarGroup>
+        <SidebarGroupLabel>Resources</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {resourceItems.map(renderMenuItem)}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+
+      <SidebarGroup>
+        <SidebarGroupLabel>Support</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {supportItems.map(renderMenuItem)}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </div>
   );
 };
