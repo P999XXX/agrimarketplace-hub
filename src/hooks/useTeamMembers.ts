@@ -5,6 +5,7 @@ interface Profile {
   id: string;
   first_name: string | null;
   last_name: string | null;
+  avatar_url: string | null;
 }
 
 export interface TeamMember {
@@ -16,6 +17,7 @@ export interface TeamMember {
   created_at: string;
   last_login: string | null;
   invited_by: string;
+  profile: Profile | null;
   inviter: {
     first_name: string | null;
     last_name: string | null;
@@ -52,10 +54,29 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         return [];
       }
 
-      // 3. Get invitations
+      // 3. Get invitations with profiles
       let invitationsQuery = supabase
         .from('invitations')
-        .select('id, email, name, role, status, created_at, last_login, invited_by')
+        .select(`
+          id, 
+          email, 
+          name, 
+          role, 
+          status, 
+          created_at, 
+          last_login, 
+          invited_by,
+          profile:profiles!invitations_invited_by_fkey (
+            id,
+            first_name,
+            last_name,
+            avatar_url
+          ),
+          inviter:profiles!invitations_invited_by_fkey (
+            first_name,
+            last_name
+          )
+        `)
         .eq('company_id', profile.company_id);
 
       if (searchQuery) {
@@ -88,33 +109,8 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         return [];
       }
 
-      // 4. Get unique inviter IDs
-      const inviterIds = [...new Set(invitations.map(inv => inv.invited_by))];
-
-      // 5. Get profiles for inviters
-      const { data: profiles, error: profilesError } = await supabase
-        .from('profiles')
-        .select('id, first_name, last_name')
-        .in('id', inviterIds);
-
-      if (profilesError) {
-        console.error('Profiles error:', profilesError);
-        throw profilesError;
-      }
-
-      // 6. Create a map of profiles for easy lookup
-      const profilesMap = new Map(
-        profiles?.map(profile => [profile.id, profile]) || []
-      );
-
-      // 7. Combine the data
-      const teamMembers = invitations.map(invitation => ({
-        ...invitation,
-        inviter: profilesMap.get(invitation.invited_by) || null
-      }));
-
-      console.log(`Found ${teamMembers.length} team members`);
-      return teamMembers as TeamMember[];
+      console.log(`Found ${invitations.length} team members`);
+      return invitations as TeamMember[];
     },
     staleTime: 1000 * 60, // Cache for 1 minute
     retry: 1, // Only retry once on failure

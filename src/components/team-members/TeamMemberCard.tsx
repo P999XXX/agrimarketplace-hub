@@ -39,8 +39,11 @@ export const TeamMemberCard = ({
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <Avatar className="w-10 h-10">
-                <AvatarImage src={member.avatar_url || ''} alt={member.name || 'Team member'} />
+              <Avatar className="h-10 w-10">
+                <AvatarImage 
+                  src={member.profile?.avatar_url || ''} 
+                  alt={member.name || 'Team member'} 
+                />
                 <AvatarFallback className="bg-brand-100 text-brand-700 text-base font-medium">
                   {getInitials(member.name || '', member.email)}
                 </AvatarFallback>
