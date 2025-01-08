@@ -1,6 +1,7 @@
 import { LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 import {
   Popover,
   PopoverContent,
@@ -17,6 +18,7 @@ interface UserAccountPopoverProps {
 
 export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   const [userProfile, setUserProfile] = useState<any>(null);
+  const [ipInfo, setIpInfo] = useState<{ country: string } | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -44,6 +46,11 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           ...profile,
           email: session.user.email
         });
+
+        // Fetch IP info
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        setIpInfo(data);
       } catch (error) {
         console.error("Error in getProfile:", error);
       }
@@ -71,6 +78,8 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
     ? `${userProfile?.first_name || ''} ${userProfile?.last_name || ''}`.trim()
     : 'No Name';
 
+  const currentTime = new Date();
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -79,7 +88,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
       <PopoverContent className="w-80" align="end" sideOffset={8}>
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
-            <div className="h-12 w-12">
+            <div className="h-10 w-10">
               <UserAvatar size="large" />
             </div>
             <div className="space-y-1">
@@ -91,10 +100,12 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
               </p>
             </div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <div className="text-sm text-muted-foreground">
               <div className="mb-1">Account: {userProfile?.companies?.name || 'Not assigned'}</div>
-              <div>Role: {userProfile?.user_type || 'Not assigned'}</div>
+              <div className="mb-1">Role: {userProfile?.user_type || 'Not assigned'}</div>
+              <div className="mb-1">Location: {ipInfo?.country || 'Loading...'}</div>
+              <div>Time: {format(currentTime, 'PPpp')}</div>
             </div>
           </div>
           <Button 
