@@ -82,7 +82,7 @@ export const TeamMemberCard = ({
           <Separator className="bg-gray-200" />
 
           <div className="space-y-3">
-            <div className="text-xs text-gray-500 space-y-1">
+            <div className="text-sm text-gray-500 space-y-1">
               <p className="flex justify-between">
                 <span>Last Login:</span>
                 <span>{member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}</span>
