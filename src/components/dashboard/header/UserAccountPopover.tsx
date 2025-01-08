@@ -137,9 +137,9 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
                   <span>{getCountryName(ipInfo.country)}</span>
                   <img 
                     src={`https://flagcdn.com/h12/${ipInfo.country.toLowerCase()}.png`}
-                    width="auto"
+                    width="16"
                     height="12"
-                    alt={getCountryName(ipInfo.country)}
+                    alt=""
                     className="inline-block"
                   />
                 </>
