@@ -48,7 +48,7 @@ export const UserAvatar = () => {
                 if (updateError) throw updateError;
                 setAvatarUrl(data.image);
                 
-                // Also trigger update for all other profiles without avatars
+                // Also trigger update for all other profiles
                 await supabase.functions.invoke('update-all-avatars');
                 
                 toast({

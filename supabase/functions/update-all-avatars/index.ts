@@ -12,27 +12,30 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting avatar update process for all profiles')
+    
     // Initialize Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // Fetch all profiles that don't have an avatar_url
+    // Fetch all profiles
     const { data: profiles, error: profilesError } = await supabaseClient
       .from('profiles')
       .select('*')
-      .is('avatar_url', null)
 
     if (profilesError) throw profilesError
 
-    console.log(`Found ${profiles?.length} profiles without avatars`)
+    console.log(`Found ${profiles?.length} profiles to update`)
 
     const results = []
     
     // Generate avatar for each profile
     for (const profile of profiles || []) {
       try {
+        console.log(`Generating avatar for profile ${profile.id}`)
+        
         const response = await fetch(
           "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
           {
@@ -42,9 +45,9 @@ serve(async (req) => {
             },
             method: "POST",
             body: JSON.stringify({
-              inputs: `A professional business avatar in vector style, ${profile.user_type || 'user'} in B2B marketplace, wearing business attire, minimalist corporate style, clean background, inspired by ${profile.first_name || ''} ${profile.last_name || ''}, professional headshot, high quality, modern corporate style`,
+              inputs: `A professional business avatar in modern vector art style, ${profile.user_type || 'professional'} in B2B marketplace, wearing business attire, minimalist corporate style, clean background, inspired by ${profile.first_name || ''} ${profile.last_name || ''}, professional headshot, high quality, modern corporate style, vector illustration`,
               parameters: {
-                negative_prompt: "cartoon, anime, 3d, low quality, blurry, distorted",
+                negative_prompt: "cartoon, anime, 3d, low quality, blurry, distorted, photographic, realistic, photo",
                 num_inference_steps: 50,
                 guidance_scale: 7.5,
                 width: 512,
@@ -71,7 +74,10 @@ serve(async (req) => {
         if (updateError) throw updateError
 
         results.push({ id: profile.id, status: 'success' })
-        console.log(`Generated avatar for profile ${profile.id}`)
+        console.log(`Successfully generated and updated avatar for profile ${profile.id}`)
+        
+        // Add a small delay to avoid rate limiting
+        await new Promise(resolve => setTimeout(resolve, 1000))
       } catch (error) {
         console.error(`Error processing profile ${profile.id}:`, error)
         results.push({ id: profile.id, status: 'error', error: error.message })
