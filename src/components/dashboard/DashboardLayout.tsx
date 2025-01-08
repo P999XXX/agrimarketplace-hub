@@ -22,7 +22,6 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       localStorage.setItem('sidebarState', state);
     };
 
-    // Event listener für Sidebar-Änderungen
     const sidebar = document.querySelector('[data-state]');
     if (sidebar) {
       const observer = new MutationObserver((mutations) => {
@@ -41,29 +40,22 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     }
   }, []);
 
-  // Schließe Sidebar bei Routenwechsel, aber speichere den vorherigen Zustand
+  // Schließe Sidebar bei Routenwechsel
   useEffect(() => {
-    const sidebar = document.querySelector('[data-state]');
-    if (sidebar) {
-      const currentState = sidebar.getAttribute('data-state');
-      if (currentState === 'expanded') {
-        localStorage.setItem('previousSidebarState', 'expanded');
-      }
-      sidebar.setAttribute('data-state', 'collapsed');
-    }
-  }, [location.pathname]);
-
-  // Stelle den vorherigen Zustand wieder her, wenn die gleiche Seite neu geladen wird
-  useEffect(() => {
-    const previousState = localStorage.getItem('previousSidebarState');
-    if (previousState === 'expanded') {
+    const currentPath = location.pathname;
+    const lastPath = localStorage.getItem('lastPath');
+    
+    // Nur schließen wenn sich der Pfad wirklich geändert hat
+    if (lastPath && lastPath !== currentPath) {
       const sidebar = document.querySelector('[data-state]');
       if (sidebar) {
-        sidebar.setAttribute('data-state', 'expanded');
+        sidebar.setAttribute('data-state', 'collapsed');
       }
-      localStorage.removeItem('previousSidebarState');
     }
-  }, []);
+    
+    // Aktuellen Pfad speichern
+    localStorage.setItem('lastPath', currentPath);
+  }, [location.pathname]);
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>

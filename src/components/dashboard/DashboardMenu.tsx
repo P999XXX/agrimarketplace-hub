@@ -43,7 +43,7 @@ export const DashboardMenu = () => {
         Menu
       </h2>
       <SidebarMenu>
-        <TooltipProvider delayDuration={100}>
+        <TooltipProvider delayDuration={0}>
           {menuItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -72,7 +72,16 @@ export const DashboardMenu = () => {
                     </Button>
                   </TooltipTrigger>
                   {!isMobile && state === "collapsed" && (
-                    <TooltipContent side="right" sideOffset={10}>
+                    <TooltipContent 
+                      side="right" 
+                      sideOffset={10}
+                      onOpenChange={(open) => {
+                        if (!open && state === "collapsed") {
+                          const tooltips = document.querySelectorAll('[role="tooltip"]');
+                          tooltips.forEach(tooltip => tooltip.remove());
+                        }
+                      }}
+                    >
                       {item.title}
                     </TooltipContent>
                   )}
