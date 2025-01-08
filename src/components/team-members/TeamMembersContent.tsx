@@ -36,28 +36,28 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent>
-      <div className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
-        <div className="flex-none space-y-4">
-          <TeamMembersHeader 
-            view={view} 
-            onViewChange={setView}
-          />
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+      <div className="flex-none space-y-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 border-b border-border">
+        <TeamMembersHeader 
+          view={view} 
+          onViewChange={setView}
+        />
 
-          <TeamMembersFilters
-            viewMode={view}
-            setViewMode={setView}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            roleFilter={roleFilter}
-            setRoleFilter={setRoleFilter}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            onExportCSV={handleExportCSV}
-          />
-        </div>
+        <TeamMembersFilters
+          viewMode={view}
+          setViewMode={setView}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          onExportCSV={handleExportCSV}
+        />
+      </div>
 
-        <ScrollArea className="flex-1 mt-4">
+      <ScrollArea className="flex-1">
+        <div className="p-4">
           {view === "grid" ? (
             <TeamMembersGrid
               searchQuery={searchQuery}
@@ -71,8 +71,8 @@ export const TeamMembersContent = () => {
               sortBy={sortBy}
             />
           )}
-        </ScrollArea>
-      </div>
+        </div>
+      </ScrollArea>
     </DashboardContent>
   );
 };
