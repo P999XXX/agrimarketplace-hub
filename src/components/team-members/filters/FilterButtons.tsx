@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button";
 import { RoleFilter } from "./RoleFilter";
 import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
-import { LayoutGrid, Table } from "lucide-react";
+import { LayoutGrid, Table, Download } from "lucide-react";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
+import { useExportTeamMembers } from "@/utils/exportTeamMembers";
 
 interface FilterButtonsProps {
   roleFilter: string;
@@ -27,10 +29,12 @@ export const FilterButtons = ({
   setSortBy,
   viewMode,
   setViewMode,
-  onExportCSV,
   searchQuery,
   showViewToggle = true,
 }: FilterButtonsProps) => {
+  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
+  const { exportToExcel } = useExportTeamMembers();
+
   return (
     <>
       <RoleFilter value={roleFilter} onChange={setRoleFilter} />
@@ -38,25 +42,28 @@ export const FilterButtons = ({
       <SortFilter value={sortBy} onChange={setSortBy} />
       
       {showViewToggle && (
-        <div className="flex items-center gap-2 border rounded-md">
-          <Button
-            variant={viewMode === "grid" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setViewMode("grid")}
-            className="rounded-none"
-          >
-            <LayoutGrid className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={viewMode === "table" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setViewMode("table")}
-            className="rounded-none"
-          >
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+          className="rounded-md"
+        >
+          {viewMode === "grid" ? (
             <Table className="h-4 w-4" />
-          </Button>
-        </div>
+          ) : (
+            <LayoutGrid className="h-4 w-4" />
+          )}
+        </Button>
       )}
+
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => exportToExcel(teamMembers, isLoading)}
+        className="rounded-md"
+      >
+        <Download className="h-4 w-4" />
+      </Button>
     </>
   );
 };
