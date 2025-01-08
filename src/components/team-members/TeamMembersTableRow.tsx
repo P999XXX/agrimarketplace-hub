@@ -88,8 +88,8 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
       <TableCell className="text-muted-foreground">
         {format(new Date(member.created_at), 'MMM d, yyyy')}
       </TableCell>
-      <TableCell>
-        <ChevronRight className="h-4 w-4 text-muted-foreground" />
+      <TableCell className="text-right">
+        <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto" />
       </TableCell>
     </TableRow>
   );
