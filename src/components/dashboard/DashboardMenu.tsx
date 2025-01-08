@@ -39,7 +39,7 @@ export const DashboardMenu = () => {
 
   return (
     <div className="space-y-2">
-      <h2 className={`px-4 text-sm font-semibold text-gray-500 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
+      <h2 className={`px-4 text-sm font-semibold text-muted-foreground uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
         Menu
       </h2>
       <SidebarMenu>
@@ -55,8 +55,8 @@ export const DashboardMenu = () => {
                       variant="ghost"
                       className={`w-full justify-start gap-3 transition-colors min-h-[44px] px-2 py-2.5 rounded-md ${
                         isActive 
-                          ? "text-primary bg-primary/10" 
-                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/80"
+                          ? "text-primary bg-primary/10 dark:bg-primary/20" 
+                          : "text-foreground hover:text-foreground hover:bg-accent"
                       }`}
                     >
                       <a href={item.href} className="flex items-center gap-3">
