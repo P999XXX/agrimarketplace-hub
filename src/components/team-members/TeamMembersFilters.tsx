@@ -1,4 +1,4 @@
-import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download } from "lucide-react";
+import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ export const TeamMembersFilters = ({
     <Card className="p-3">
       <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:items-center">
         <div className="relative flex-1 w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
             placeholder="Search team members..."
             className="pl-10"
@@ -46,7 +46,7 @@ export const TeamMembersFilters = ({
         <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 md:w-auto">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
             <SelectTrigger className="w-full sm:w-[180px]">
-              <Filter className="h-4 w-4 mr-2" />
+              <Filter className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
             <SelectContent>
@@ -58,7 +58,7 @@ export const TeamMembersFilters = ({
           </Select>
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full sm:w-[180px]">
-              <SortAsc className="h-4 w-4 mr-2" />
+              <SortAsc className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
@@ -78,9 +78,9 @@ export const TeamMembersFilters = ({
               className="min-w-[40px]"
             >
               {viewMode === 'table' ? (
-                <LayoutGrid className="h-4 w-4" />
+                <LayoutGrid className="h-5 w-5 text-gray-500" />
               ) : (
-                <LayoutList className="h-4 w-4" />
+                <LayoutList className="h-5 w-5 text-gray-500" />
               )}
             </Button>
             <Button
@@ -90,7 +90,7 @@ export const TeamMembersFilters = ({
               className="min-w-[40px]"
               title="Export as CSV"
             >
-              <Download className="h-4 w-4" />
+              <Download className="h-5 w-5 text-gray-500" />
             </Button>
           </div>
         </div>
