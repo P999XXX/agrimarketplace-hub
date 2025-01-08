@@ -5,9 +5,9 @@ export const Logo = () => {
   const isAuthPage = window.location.pathname.match(/^\/(signin|signup|thank-you)$/);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       <Leaf 
-        className={`${isAuthPage ? 'text-white' : 'text-foreground dark:text-foreground'} h-5 w-5`}
+        className={`${isAuthPage ? 'text-white' : 'text-foreground dark:text-foreground'} h-6 w-6`}
       />
       <span className="flex items-center text-[1.45rem]">
         <span className={`${isAuthPage ? 'text-white' : 'text-foreground dark:text-foreground'} font-[700] leading-[1] -mt-[4px]`}>
