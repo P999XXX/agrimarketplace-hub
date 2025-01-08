@@ -43,48 +43,52 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''} border-b border-border/50`}>
-        <TeamMembersHeader 
-          view={view} 
-          onViewChange={setView}
-        />
+    <DashboardContent>
+      <div className="relative flex flex-col min-h-[calc(100vh-4rem)]">
+        <div className="absolute inset-x-0 top-0 flex-none space-y-4 p-4 dark:bg-black/20 bg-white/80 backdrop-blur-md z-10 transition-shadow duration-200 border-b border-border/50">
+          <TeamMembersHeader 
+            view={view} 
+            onViewChange={setView}
+          />
 
-        <TeamMembersFilters
-          viewMode={view}
-          setViewMode={setView}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          roleFilter={roleFilter}
-          setRoleFilter={setRoleFilter}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          onExportCSV={handleExportCSV}
-        />
-      </div>
-
-      <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20" 
-        onScroll={handleScroll}
-      >
-        <div className="p-4">
-          {view === "grid" ? (
-            <TeamMembersGrid
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
-            />
-          ) : (
-            <TeamMembersTable
-              searchQuery={searchQuery}
-              roleFilter={roleFilter}
-              sortBy={sortBy}
-            />
-          )}
+          <TeamMembersFilters
+            viewMode={view}
+            setViewMode={setView}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            roleFilter={roleFilter}
+            setRoleFilter={setRoleFilter}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            onExportCSV={handleExportCSV}
+          />
         </div>
-      </ScrollArea>
-      
-      <MobileInviteButton />
+
+        <div className="h-[calc(7.5rem+1px)]" /> {/* Spacer for fixed header */}
+
+        <ScrollArea 
+          className="flex-1 relative md:pb-0 pb-20" 
+          onScroll={handleScroll}
+        >
+          <div className="p-4">
+            {view === "grid" ? (
+              <TeamMembersGrid
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+              />
+            ) : (
+              <TeamMembersTable
+                searchQuery={searchQuery}
+                roleFilter={roleFilter}
+                sortBy={sortBy}
+              />
+            )}
+          </div>
+        </ScrollArea>
+        
+        <MobileInviteButton />
+      </div>
     </DashboardContent>
   );
 };
