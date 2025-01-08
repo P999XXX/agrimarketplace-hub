@@ -7,10 +7,10 @@ import { useTeamMembers } from "@/hooks/useTeamMembers";
 
 export const TeamMembersContent = () => {
   const [view, setView] = useState<"grid" | "table">("grid");
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
-  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
   const { data: members, isLoading, error } = useTeamMembers(searchQuery, roleFilter, sortBy);
@@ -22,26 +22,26 @@ export const TeamMembersContent = () => {
 
   return (
     <div className="container max-w-7xl mx-auto py-8 px-8">
-      <TeamMembersHeader 
-        view={view} 
-        onViewChange={setView}
-      />
-
-      <TeamMembersFilters
-        viewMode={view}
-        setViewMode={setView}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        roleFilter={roleFilter}
-        setRoleFilter={setRoleFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        onExportCSV={handleExportCSV}
-      />
-
       <div className="space-y-6">
+        <TeamMembersHeader 
+          view={view} 
+          onViewChange={setView}
+        />
+
+        <TeamMembersFilters
+          viewMode={view}
+          setViewMode={setView}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          onExportCSV={handleExportCSV}
+        />
+
         {view === "grid" ? (
-          <TeamMembersGrid 
+          <TeamMembersGrid
             searchQuery={searchQuery}
             roleFilter={roleFilter}
             sortBy={sortBy}
@@ -50,7 +50,7 @@ export const TeamMembersContent = () => {
             itemsPerPage={itemsPerPage}
           />
         ) : (
-          <TeamMembersTable 
+          <TeamMembersTable
             searchQuery={searchQuery}
             roleFilter={roleFilter}
             sortBy={sortBy}
