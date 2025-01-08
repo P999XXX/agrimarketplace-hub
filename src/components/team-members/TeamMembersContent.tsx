@@ -7,7 +7,7 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 export const TeamMembersContent = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 1024px)");
   const [view, setView] = useState<"grid" | "table">(() => {
     const savedView = localStorage.getItem('teamMembersViewMode');
     if (savedView === 'grid' || savedView === 'table') {
@@ -27,6 +27,11 @@ export const TeamMembersContent = () => {
       setView(isMobile ? "grid" : "table");
     }
   }, [isMobile]);
+
+  // Speichern der View-Präferenz im localStorage
+  useEffect(() => {
+    localStorage.setItem('teamMembersViewMode', view);
+  }, [view]);
 
   const handleExportCSV = () => {
     console.log("Export to CSV");
