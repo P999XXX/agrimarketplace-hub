@@ -136,9 +136,8 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
                 <>
                   <span>{getCountryName(ipInfo.country)}</span>
                   <img 
-                    src={`https://flagcdn.com/w16/${ipInfo.country.toLowerCase()}.png`}
-                    srcSet={`https://flagcdn.com/w32/${ipInfo.country.toLowerCase()}.png 2x`}
-                    width="16"
+                    src={`https://flagcdn.com/h12/${ipInfo.country.toLowerCase()}.png`}
+                    width="auto"
                     height="12"
                     alt={getCountryName(ipInfo.country)}
                     className="inline-block"
@@ -156,7 +155,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
         <Separator />
 
         {/* Footer */}
-        <div className="p-4">
+        <div className="p-2.5">
           <Button 
             variant="ghost" 
             className="w-full justify-between text-sm font-normal hover:bg-destructive/5 hover:text-destructive"
