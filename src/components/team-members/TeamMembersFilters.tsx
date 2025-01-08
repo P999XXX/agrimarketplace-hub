@@ -48,38 +48,34 @@ export const TeamMembersFilters = ({
         
         <div className="flex items-center space-x-2 overflow-x-auto pb-2">
           {/* Filter Button/Select */}
-          <div className="md:w-[180px] w-10">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="w-full h-10 md:px-3 px-0 justify-center">
-                <Filter className="h-5 w-5 text-gray-500 md:mr-2" />
-                <SelectValue placeholder="Filter by role" className="hidden md:block" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All roles</SelectItem>
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="member">Member</SelectItem>
-                <SelectItem value="viewer">Viewer</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <Select value={roleFilter} onValueChange={setRoleFilter}>
+            <SelectTrigger className="md:w-[180px] w-10 h-10 md:px-3 px-0 md:justify-start justify-center">
+              <Filter className="h-5 w-5 text-gray-500 md:mr-2" />
+              <SelectValue placeholder="Filter by role" className="hidden md:block" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All roles</SelectItem>
+              <SelectItem value="admin">Admin</SelectItem>
+              <SelectItem value="member">Member</SelectItem>
+              <SelectItem value="viewer">Viewer</SelectItem>
+            </SelectContent>
+          </Select>
 
           {/* Sort Button/Select */}
-          <div className="md:w-[180px] w-10">
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full h-10 md:px-3 px-0 justify-center">
-                <SortAsc className="h-5 w-5 text-gray-500 md:mr-2" />
-                <SelectValue placeholder="Sort by" className="hidden md:block" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="created_at-desc">Newest first</SelectItem>
-                <SelectItem value="created_at-asc">Oldest first</SelectItem>
-                <SelectItem value="email-asc">Email A-Z</SelectItem>
-                <SelectItem value="email-desc">Email Z-A</SelectItem>
-                <SelectItem value="role-asc">Role A-Z</SelectItem>
-                <SelectItem value="role-desc">Role Z-A</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="md:w-[180px] w-10 h-10 md:px-3 px-0 md:justify-start justify-center">
+              <SortAsc className="h-5 w-5 text-gray-500 md:mr-2" />
+              <SelectValue placeholder="Sort by" className="hidden md:block" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="created_at-desc">Newest first</SelectItem>
+              <SelectItem value="created_at-asc">Oldest first</SelectItem>
+              <SelectItem value="email-asc">Email A-Z</SelectItem>
+              <SelectItem value="email-desc">Email Z-A</SelectItem>
+              <SelectItem value="role-asc">Role A-Z</SelectItem>
+              <SelectItem value="role-desc">Role Z-A</SelectItem>
+            </SelectContent>
+          </Select>
 
           {/* View Toggle Button */}
           <Button
