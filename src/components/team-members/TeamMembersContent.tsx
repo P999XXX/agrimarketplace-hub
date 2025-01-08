@@ -43,8 +43,8 @@ export const TeamMembersContent = () => {
   };
 
   return (
-    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+    <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background/60 backdrop-blur-sm supports-[backdrop-filter]:bg-background/40">
+      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -64,7 +64,7 @@ export const TeamMembersContent = () => {
       </div>
 
       <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20" 
+        className="flex-1 relative md:pb-0 pb-20 bg-transparent" 
         onScroll={handleScroll}
       >
         <div className="p-4">
