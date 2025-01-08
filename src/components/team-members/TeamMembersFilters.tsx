@@ -39,6 +39,7 @@ export const TeamMembersFilters = ({
           viewMode={viewMode}
           setViewMode={setViewMode}
           onExportCSV={onExportCSV}
+          searchQuery={searchQuery}
         />
       </div>
 
@@ -52,6 +53,7 @@ export const TeamMembersFilters = ({
           viewMode={viewMode}
           setViewMode={setViewMode}
           onExportCSV={onExportCSV}
+          searchQuery={searchQuery}
         />
       </div>
     </div>
