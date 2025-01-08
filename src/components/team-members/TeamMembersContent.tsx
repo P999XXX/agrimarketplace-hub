@@ -33,7 +33,7 @@ export const TeamMembersContent = () => {
       {/* Content Section */}
       <Card className="rounded-none border-0 shadow-none">
         <CardContent className="p-0">
-          <div className="px-6 py-4">
+          <div>
             <TeamMembersFilters 
               viewMode={viewMode}
               setViewMode={setViewMode}
@@ -46,7 +46,6 @@ export const TeamMembersContent = () => {
               onExportCSV={handleExportCSV}
             />
           </div>
-          <Separator className="w-full" />
           <div className="px-6 py-4">
             {viewMode === 'table' ? (
               <TeamMembersTable 
