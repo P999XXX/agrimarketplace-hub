@@ -48,7 +48,12 @@ export const DashboardMenu = () => {
             const isActive = location.pathname === item.href;
             return (
               <SidebarMenuItem key={item.href}>
-                <Tooltip>
+                <Tooltip onOpenChange={(open) => {
+                  if (!open && state === "collapsed") {
+                    const tooltips = document.querySelectorAll('[role="tooltip"]');
+                    tooltips.forEach(tooltip => tooltip.remove());
+                  }
+                }}>
                   <TooltipTrigger asChild>
                     <Button
                       asChild
@@ -72,16 +77,7 @@ export const DashboardMenu = () => {
                     </Button>
                   </TooltipTrigger>
                   {!isMobile && state === "collapsed" && (
-                    <TooltipContent 
-                      side="right" 
-                      sideOffset={10}
-                      onOpenChange={(open) => {
-                        if (!open && state === "collapsed") {
-                          const tooltips = document.querySelectorAll('[role="tooltip"]');
-                          tooltips.forEach(tooltip => tooltip.remove());
-                        }
-                      }}
-                    >
+                    <TooltipContent side="right" sideOffset={10}>
                       {item.title}
                     </TooltipContent>
                   )}
