@@ -4,6 +4,8 @@ import { EmailCell } from "./EmailCell";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface TeamMemberCardProps {
   member: any; // TODO: Add proper type
@@ -16,6 +18,9 @@ export const TeamMemberCard = ({
   getRoleBadgeClass,
   getStatusBadgeClass
 }: TeamMemberCardProps) => {
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const getInitials = (name: string, email: string) => {
     if (name) {
       const nameParts = name.split(' ');
@@ -26,6 +31,58 @@ export const TeamMemberCard = ({
     }
     return (email[0] + (email[1] || '')).toUpperCase();
   };
+
+  useEffect(() => {
+    const generateAvatar = async () => {
+      if (!member.profile?.avatar_url && !isGenerating) {
+        setIsGenerating(true);
+        try {
+          const { data, error } = await supabase.functions.invoke('generate-avatar', {
+            body: {
+              name: member.name || member.email.split('@')[0],
+              role: member.role
+            }
+          });
+
+          if (error) throw error;
+
+          if (data.image) {
+            // Upload the generated image to Supabase Storage
+            const fileName = `${member.id}-avatar.png`;
+            const { data: uploadData, error: uploadError } = await supabase.storage
+              .from('avatars')
+              .upload(fileName, data.image, {
+                contentType: 'image/png',
+                upsert: true
+              });
+
+            if (uploadError) throw uploadError;
+
+            // Get the public URL
+            const { data: publicUrl } = supabase.storage
+              .from('avatars')
+              .getPublicUrl(fileName);
+
+            // Update the profile with the new avatar URL
+            const { error: updateError } = await supabase
+              .from('profiles')
+              .update({ avatar_url: publicUrl.publicUrl })
+              .eq('id', member.profile?.id);
+
+            if (updateError) throw updateError;
+
+            setAvatarUrl(publicUrl.publicUrl);
+          }
+        } catch (error) {
+          console.error('Error generating avatar:', error);
+        } finally {
+          setIsGenerating(false);
+        }
+      }
+    };
+
+    generateAvatar();
+  }, [member]);
 
   return (
     <Card
@@ -41,7 +98,7 @@ export const TeamMemberCard = ({
             <div className="flex items-center space-x-3">
               <Avatar className="h-10 w-10">
                 <AvatarImage 
-                  src={member.profile?.avatar_url || ''} 
+                  src={avatarUrl || member.profile?.avatar_url || ''} 
                   alt={member.name || 'Team member'} 
                 />
                 <AvatarFallback className="bg-brand-100 text-brand-700 text-base font-medium">
