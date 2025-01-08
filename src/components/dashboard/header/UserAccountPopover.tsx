@@ -25,8 +25,17 @@ interface UserAccountPopoverProps {
 export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   const [userProfile, setUserProfile] = useState<any>(null);
   const [ipInfo, setIpInfo] = useState<{ country: string } | null>(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -84,8 +93,6 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   const userName = userProfile?.first_name || userProfile?.last_name 
     ? `${userProfile?.first_name || ''} ${userProfile?.last_name || ''}`.trim()
     : 'No Name';
-
-  const currentTime = new Date();
   
   const getCountryName = (countryCode: string) => {
     try {
