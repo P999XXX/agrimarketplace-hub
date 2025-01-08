@@ -25,8 +25,8 @@ export const TeamMembersHeader = ({ view, onViewChange }: TeamMembersHeaderProps
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
-              <SheetHeader>
-                <SheetTitle>Invite Team Member</SheetTitle>
+              <SheetHeader className="text-left">
+                <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
               </SheetHeader>
               <InviteMemberForm />
             </SheetContent>
@@ -44,8 +44,8 @@ export const TeamMembersHeader = ({ view, onViewChange }: TeamMembersHeaderProps
             </Button>
           </SheetTrigger>
           <SheetContent className="w-full sm:max-w-lg">
-            <SheetHeader>
-              <SheetTitle>Invite Team Member</SheetTitle>
+            <SheetHeader className="text-left">
+              <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
             </SheetHeader>
             <InviteMemberForm />
           </SheetContent>
