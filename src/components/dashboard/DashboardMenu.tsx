@@ -43,17 +43,17 @@ export const DashboardMenu = () => {
         Menu
       </h2>
       <SidebarMenu>
-        <TooltipProvider delayDuration={0} onOpenChange={(open) => {
-          if (!open && state === "collapsed") {
-            const tooltips = document.querySelectorAll('[role="tooltip"]');
-            tooltips.forEach(tooltip => tooltip.remove());
-          }
-        }}>
+        <TooltipProvider delayDuration={0}>
           {menuItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
               <SidebarMenuItem key={item.href}>
-                <Tooltip>
+                <Tooltip onOpenChange={(open) => {
+                  if (!open && state === "collapsed") {
+                    const tooltips = document.querySelectorAll('[role="tooltip"]');
+                    tooltips.forEach(tooltip => tooltip.remove());
+                  }
+                }}>
                   <TooltipTrigger asChild>
                     <Button
                       asChild
