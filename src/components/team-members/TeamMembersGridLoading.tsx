@@ -6,7 +6,7 @@ export const TeamMembersGridLoading = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {Array.from({ length: 6 }).map((_, index) => (
-        <Card key={index} className="animate-skeleton">
+        <Card key={index} className="animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]">
           <CardHeader className="p-3 sm:p-4">
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-3 sm:space-x-4">

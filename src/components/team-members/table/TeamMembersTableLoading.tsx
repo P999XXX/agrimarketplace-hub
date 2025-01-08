@@ -19,7 +19,7 @@ export const TeamMembersTableLoading = () => {
         </TableHeader>
         <TableBody>
           {Array.from({ length: 5 }).map((_, index) => (
-            <TableRow key={index} className="animate-skeleton">
+            <TableRow key={index} className="animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]">
               <TableCell>
                 <div className="flex items-center gap-3">
                   <Skeleton className="h-8 w-8 rounded-full" />
