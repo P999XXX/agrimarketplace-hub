@@ -29,7 +29,6 @@ export const UserAvatar = () => {
           } else if (!isGenerating) {
             setIsGenerating(true);
             try {
-              // Generate avatar for current user
               const { data, error } = await supabase.functions.invoke('generate-avatar', {
                 body: {
                   name: `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || session.user.email?.split('@')[0],
@@ -48,19 +47,19 @@ export const UserAvatar = () => {
                 if (updateError) throw updateError;
                 setAvatarUrl(data.image);
                 
-                // Also trigger update for all other profiles
+                // Trigger update for all other profiles
                 await supabase.functions.invoke('update-all-avatars');
                 
                 toast({
-                  title: "Avatars Generated",
-                  description: "Professional avatars are being generated for all team members.",
+                  title: "Neue Avatare werden generiert",
+                  description: "Individuelle Avatare werden für alle Teammitglieder erstellt.",
                 });
               }
             } catch (error) {
               console.error('Error generating avatar:', error);
               toast({
-                title: "Avatar Generation Failed",
-                description: "Using initials as fallback",
+                title: "Avatar-Generierung fehlgeschlagen",
+                description: "Initialen werden als Fallback verwendet",
                 variant: "destructive",
               });
             } finally {

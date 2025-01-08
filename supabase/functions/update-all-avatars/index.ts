@@ -14,13 +14,11 @@ serve(async (req) => {
   try {
     console.log('Starting avatar update process for all profiles')
     
-    // Initialize Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // Fetch all profiles
     const { data: profiles, error: profilesError } = await supabaseClient
       .from('profiles')
       .select('*')
@@ -31,11 +29,43 @@ serve(async (req) => {
 
     const results = []
     
-    // Generate avatar for each profile
+    // Verschiedene Stile für mehr Vielfalt
+    const styles = [
+      'minimalist vector art',
+      'modern line art',
+      'geometric vector design',
+      'abstract business portrait',
+      'contemporary digital illustration'
+    ]
+
+    // Verschiedene Hintergründe für mehr Vielfalt
+    const backgrounds = [
+      'clean white background',
+      'subtle gradient background',
+      'minimal geometric background',
+      'soft neutral background',
+      'abstract business background'
+    ]
+    
     for (const profile of profiles || []) {
       try {
         console.log(`Generating avatar for profile ${profile.id}`)
         
+        // Zufällige Auswahl von Stil und Hintergrund
+        const randomStyle = styles[Math.floor(Math.random() * styles.length)]
+        const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)]
+        
+        // Geschlechtsneutrale Beschreibung basierend auf der Rolle
+        const roleDescription = profile.user_type === 'supplier' 
+          ? 'agricultural supplier professional'
+          : profile.user_type === 'buyer' 
+            ? 'agricultural buyer professional'
+            : 'agribusiness professional'
+
+        const prompt = `Professional ${randomStyle} business portrait, ${roleDescription} in modern B2B marketplace setting, 
+          wearing professional business attire, ${randomBg}, inspired by name ${profile.first_name || ''} ${profile.last_name || ''}, 
+          high quality professional headshot, modern corporate style, focusing on professionalism and authenticity`
+
         const response = await fetch(
           "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
           {
@@ -45,11 +75,11 @@ serve(async (req) => {
             },
             method: "POST",
             body: JSON.stringify({
-              inputs: `A professional business avatar in modern vector art style, ${profile.user_type || 'professional'} in B2B marketplace, wearing business attire, minimalist corporate style, clean background, inspired by ${profile.first_name || ''} ${profile.last_name || ''}, professional headshot, high quality, modern corporate style, vector illustration`,
+              inputs: prompt,
               parameters: {
-                negative_prompt: "cartoon, anime, 3d, low quality, blurry, distorted, photographic, realistic, photo",
+                negative_prompt: "cartoon, anime, 3d, ((photograph)), ((photo)), ((realistic)), low quality, blurry, distorted, text, watermark, signature, frame, multiple people, group photo",
                 num_inference_steps: 50,
-                guidance_scale: 7.5,
+                guidance_scale: 8.5,
                 width: 512,
                 height: 512,
               }
@@ -65,7 +95,6 @@ serve(async (req) => {
         const base64Image = btoa(String.fromCharCode(...new Uint8Array(imageData)))
         const avatarUrl = `data:image/png;base64,${base64Image}`
 
-        // Update profile with new avatar
         const { error: updateError } = await supabaseClient
           .from('profiles')
           .update({ avatar_url: avatarUrl })
@@ -76,8 +105,8 @@ serve(async (req) => {
         results.push({ id: profile.id, status: 'success' })
         console.log(`Successfully generated and updated avatar for profile ${profile.id}`)
         
-        // Add a small delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        // Delay zwischen den Generierungen um Rate Limiting zu vermeiden
+        await new Promise(resolve => setTimeout(resolve, 2000))
       } catch (error) {
         console.error(`Error processing profile ${profile.id}:`, error)
         results.push({ id: profile.id, status: 'error', error: error.message })
