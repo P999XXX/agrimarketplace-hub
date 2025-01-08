@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { RoleFilter } from "./RoleFilter";
+import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
 import { LayoutGrid, Table } from "lucide-react";
 
 interface FilterButtonsProps {
   roleFilter: string;
   setRoleFilter: (role: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
   viewMode: "grid" | "table";
@@ -18,6 +21,8 @@ interface FilterButtonsProps {
 export const FilterButtons = ({
   roleFilter,
   setRoleFilter,
+  statusFilter,
+  setStatusFilter,
   sortBy,
   setSortBy,
   viewMode,
@@ -29,6 +34,7 @@ export const FilterButtons = ({
   return (
     <>
       <RoleFilter value={roleFilter} onChange={setRoleFilter} />
+      <StatusFilter value={statusFilter} onChange={setStatusFilter} />
       <SortFilter value={sortBy} onChange={setSortBy} />
       
       {showViewToggle && (

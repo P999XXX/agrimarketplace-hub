@@ -12,7 +12,6 @@ export const TeamMembersContent = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isScrolled, setIsScrolled] = useState(false);
   const [view, setView] = useState<"grid" | "table">(() => {
-    // Wenn Mobile, dann immer Grid View
     if (isMobile) return "grid";
     
     const savedView = localStorage.getItem('teamMembersViewMode');
@@ -24,9 +23,9 @@ export const TeamMembersContent = () => {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
 
-  // Wenn Mobile Device, dann immer Grid View
   useEffect(() => {
     if (isMobile) {
       setView("grid");
@@ -38,7 +37,6 @@ export const TeamMembersContent = () => {
     }
   }, [isMobile]);
 
-  // Nur speichern wenn nicht Mobile
   useEffect(() => {
     if (!isMobile) {
       localStorage.setItem('teamMembersViewMode', view);
@@ -66,6 +64,8 @@ export const TeamMembersContent = () => {
             setSearchQuery={setSearchQuery}
             roleFilter={roleFilter}
             setRoleFilter={setRoleFilter}
+            statusFilter={statusFilter}
+            setStatusFilter={setStatusFilter}
             sortBy={sortBy}
             setSortBy={setSortBy}
             onExportCSV={() => {}}
@@ -82,12 +82,14 @@ export const TeamMembersContent = () => {
               <TeamMembersGrid
                 searchQuery={searchQuery}
                 roleFilter={roleFilter}
+                statusFilter={statusFilter}
                 sortBy={sortBy}
               />
             ) : (
               <TeamMembersTable
                 searchQuery={searchQuery}
                 roleFilter={roleFilter}
+                statusFilter={statusFilter}
                 sortBy={sortBy}
               />
             )}

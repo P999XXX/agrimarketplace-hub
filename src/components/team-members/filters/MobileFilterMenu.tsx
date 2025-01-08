@@ -8,12 +8,15 @@ import { Button } from "@/components/ui/button";
 import { ListFilter, Grid, Download, Table as TableIcon } from "lucide-react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { RoleFilter } from "./RoleFilter";
+import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
   setRoleFilter: (role: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
   viewMode: "grid" | "table";
@@ -26,6 +29,8 @@ interface MobileFilterMenuProps {
 export const MobileFilterMenu = ({
   roleFilter,
   setRoleFilter,
+  statusFilter,
+  setStatusFilter,
   sortBy,
   setSortBy,
   viewMode,
@@ -49,6 +54,7 @@ export const MobileFilterMenu = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
         <RoleFilter value={roleFilter} onChange={setRoleFilter} />
+        <StatusFilter value={statusFilter} onChange={setStatusFilter} />
         <SortFilter value={sortBy} onChange={setSortBy} />
 
         {showViewToggle && (

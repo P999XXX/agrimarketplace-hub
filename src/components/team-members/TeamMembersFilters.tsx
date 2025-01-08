@@ -9,6 +9,8 @@ interface TeamMembersFiltersProps {
   setSearchQuery: (query: string) => void;
   roleFilter: string;
   setRoleFilter: (role: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
   onExportCSV: () => void;
@@ -22,6 +24,8 @@ export const TeamMembersFilters = ({
   setSearchQuery,
   roleFilter,
   setRoleFilter,
+  statusFilter,
+  setStatusFilter,
   sortBy,
   setSortBy,
   onExportCSV,
@@ -36,6 +40,8 @@ export const TeamMembersFilters = ({
         <FilterButtons
           roleFilter={roleFilter}
           setRoleFilter={setRoleFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
           sortBy={sortBy}
           setSortBy={setSortBy}
           viewMode={viewMode}
@@ -51,6 +57,8 @@ export const TeamMembersFilters = ({
         <MobileFilterMenu
           roleFilter={roleFilter}
           setRoleFilter={setRoleFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
           sortBy={sortBy}
           setSortBy={setSortBy}
           viewMode={viewMode}
