@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
+import { TeamMembersGrid } from "./TeamMembersGrid";
 
 export const TeamMembersContent = () => {
   // State Management
