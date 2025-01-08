@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import countries from 'i18n-iso-countries';
 import en from 'i18n-iso-countries/langs/en.json';
+import { useState, useEffect } from "react";
 
 countries.registerLocale(en);
 
@@ -11,6 +12,16 @@ interface UserAccountContentProps {
 }
 
 export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAccountContentProps) => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const getCountryName = (countryCode: string) => {
     try {
       return countries.getName(countryCode, 'en') || countryCode;
@@ -52,11 +63,11 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       </div>
       <div className="flex justify-between items-center">
         <span>Date:</span>
-        <span>{format(currentTime, 'PP')}</span>
+        <span>{format(time, 'PP')}</span>
       </div>
       <div className="flex justify-between items-center">
         <span>Time:</span>
-        <span>{format(currentTime, 'p')}</span>
+        <span>{format(time, 'p:ss')}</span>
       </div>
     </div>
   );
