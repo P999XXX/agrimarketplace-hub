@@ -42,14 +42,14 @@ export const TeamMembersContent = () => {
     console.log("Export to CSV");
   };
 
-  // Fügen Sie einige Test-Elemente für den Hintergrund hinzu
+  // Hintergrund-Elemente für den Scroll-Effekt
   const backgroundElements = Array.from({ length: 50 }, (_, i) => (
     <div
       key={i}
-      className="fixed w-24 h-24 rounded-full opacity-5"
+      className="absolute w-24 h-24 rounded-full opacity-5"
       style={{
         left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
+        top: `${Math.random() * 200}%`, // Vergrößert den vertikalen Bereich
         transform: 'translate(-50%, -50%)',
         background: `hsl(${Math.random() * 360}, 70%, 50%)`,
         zIndex: -1,
@@ -59,9 +59,30 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
-      {backgroundElements}
+      {/* Container für Hintergrund-Elemente mit eigenem Scroll-Bereich */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="relative w-full h-full">
+          {backgroundElements}
+        </div>
+      </div>
       
-      <div className={`flex-none space-y-4 p-4 sticky top-0 bg-background/40 backdrop-blur supports-[backdrop-filter]:bg-background/20 z-10 transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+      {/* Header-Bereich mit transparentem Hintergrund */}
+      <div 
+        className={`
+          flex-none 
+          space-y-4 
+          p-4 
+          sticky 
+          top-0 
+          bg-background/40
+          backdrop-blur-sm 
+          supports-[backdrop-filter]:bg-background/20 
+          z-10 
+          transition-shadow 
+          duration-200 
+          ${isScrolled ? 'shadow-sm' : ''}
+        `}
+      >
         <TeamMembersHeader 
           view={view} 
           onViewChange={setView}
@@ -80,6 +101,7 @@ export const TeamMembersContent = () => {
         />
       </div>
 
+      {/* Scroll-Bereich für den Hauptinhalt */}
       <ScrollArea 
         className="flex-1 relative md:pb-0 pb-20 bg-transparent" 
         onScroll={handleScroll}
