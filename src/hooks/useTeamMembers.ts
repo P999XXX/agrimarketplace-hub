@@ -66,12 +66,6 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
           created_at, 
           last_login, 
           invited_by,
-          profile:profiles!invitations_invited_by_fkey (
-            id,
-            first_name,
-            last_name,
-            avatar_url
-          ),
           inviter:profiles!invitations_invited_by_fkey (
             first_name,
             last_name
@@ -109,8 +103,27 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, sortBy: 
         return [];
       }
 
-      console.log(`Found ${invitations.length} team members`);
-      return invitations as TeamMember[];
+      // 4. Get profiles for invited users
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name, avatar_url')
+        .in('id', invitations.map(inv => inv.invited_by));
+
+      if (profilesError) {
+        console.error('Profiles error:', profilesError);
+        throw profilesError;
+      }
+
+      // 5. Map profiles to invitations
+      const profilesMap = new Map(profiles?.map(profile => [profile.id, profile]) || []);
+
+      const teamMembers = invitations.map(invitation => ({
+        ...invitation,
+        profile: profilesMap.get(invitation.invited_by) || null
+      }));
+
+      console.log(`Found ${teamMembers.length} team members`);
+      return teamMembers as TeamMember[];
     },
     staleTime: 1000 * 60, // Cache for 1 minute
     retry: 1, // Only retry once on failure
