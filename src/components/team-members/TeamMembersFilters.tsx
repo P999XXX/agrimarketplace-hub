@@ -1,4 +1,4 @@
-import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Filter, SortAsc, LayoutGrid, LayoutList, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -35,8 +35,8 @@ export const TeamMembersFilters = ({
 
   return (
     <Card className="p-3">
-      <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:items-center">
-        <div className="relative flex-1 w-full">
+      <div className="space-y-4">
+        <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
             placeholder="Search team members..."
@@ -45,56 +45,66 @@ export const TeamMembersFilters = ({
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 md:w-auto">
-          <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="w-full sm:w-[180px]">
-              <Filter className="h-5 w-5 mr-2 text-gray-500" />
-              <SelectValue placeholder="Filter by role" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All roles</SelectItem>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="member">Member</SelectItem>
-              <SelectItem value="viewer">Viewer</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full sm:w-[180px]">
-              <SortAsc className="h-5 w-5 mr-2 text-gray-500" />
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="created_at-desc">Newest first</SelectItem>
-              <SelectItem value="created_at-asc">Oldest first</SelectItem>
-              <SelectItem value="email-asc">Email A-Z</SelectItem>
-              <SelectItem value="email-desc">Email Z-A</SelectItem>
-              <SelectItem value="role-asc">Role A-Z</SelectItem>
-              <SelectItem value="role-desc">Role Z-A</SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="flex space-x-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={toggleView}
-              className="min-w-[40px]"
-            >
-              {viewMode === 'table' ? (
-                <LayoutGrid className="h-5 w-5 text-gray-500" />
-              ) : (
-                <LayoutList className="h-5 w-5 text-gray-500" />
-              )}
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onExportCSV}
-              className="min-w-[40px]"
-              title="Export as CSV"
-            >
-              <Download className="h-5 w-5 text-gray-500" />
-            </Button>
+        
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2">
+          {/* Filter Button/Select */}
+          <div className="md:w-[180px] w-10">
+            <Select value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger className="w-full h-10 md:px-3 px-0 justify-center">
+                <Filter className="h-5 w-5 text-gray-500 md:mr-2" />
+                <SelectValue placeholder="Filter by role" className="hidden md:block" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All roles</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="member">Member</SelectItem>
+                <SelectItem value="viewer">Viewer</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
+
+          {/* Sort Button/Select */}
+          <div className="md:w-[180px] w-10">
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="w-full h-10 md:px-3 px-0 justify-center">
+                <SortAsc className="h-5 w-5 text-gray-500 md:mr-2" />
+                <SelectValue placeholder="Sort by" className="hidden md:block" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="created_at-desc">Newest first</SelectItem>
+                <SelectItem value="created_at-asc">Oldest first</SelectItem>
+                <SelectItem value="email-asc">Email A-Z</SelectItem>
+                <SelectItem value="email-desc">Email Z-A</SelectItem>
+                <SelectItem value="role-asc">Role A-Z</SelectItem>
+                <SelectItem value="role-desc">Role Z-A</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* View Toggle Button */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleView}
+            className="w-10 h-10 flex-shrink-0"
+          >
+            {viewMode === 'table' ? (
+              <LayoutGrid className="h-5 w-5 text-gray-500" />
+            ) : (
+              <LayoutList className="h-5 w-5 text-gray-500" />
+            )}
+          </Button>
+
+          {/* Export Button */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={onExportCSV}
+            className="w-10 h-10 flex-shrink-0"
+            title="Export as CSV"
+          >
+            <Download className="h-5 w-5 text-gray-500" />
+          </Button>
         </div>
       </div>
     </Card>
