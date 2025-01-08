@@ -35,7 +35,7 @@ export const TeamMembersFilters = ({
 
   return (
     <Card className="p-3">
-      <div className="space-y-4">
+      <div className="flex flex-col space-y-4">
         <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
@@ -45,9 +45,9 @@ export const TeamMembersFilters = ({
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="grid grid-cols-2 md:flex md:items-center gap-2 overflow-x-auto pb-2">
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="h-10 md:min-w-[140px]">
+            <SelectTrigger className="min-w-[140px]">
               <Filter className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
@@ -59,7 +59,7 @@ export const TeamMembersFilters = ({
             </SelectContent>
           </Select>
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="h-10 md:min-w-[140px]">
+            <SelectTrigger className="min-w-[140px]">
               <SortAsc className="h-5 w-5 mr-2 text-gray-500" />
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
@@ -76,7 +76,7 @@ export const TeamMembersFilters = ({
             variant="outline"
             size="icon"
             onClick={toggleView}
-            className="h-10 w-full md:w-10"
+            className="min-w-[40px] flex-shrink-0"
           >
             {viewMode === 'table' ? (
               <LayoutGrid className="h-5 w-5 text-gray-500" />
@@ -88,7 +88,7 @@ export const TeamMembersFilters = ({
             variant="outline"
             size="icon"
             onClick={onExportCSV}
-            className="h-10 w-full md:w-10"
+            className="min-w-[40px] flex-shrink-0"
             title="Export as CSV"
           >
             <Download className="h-5 w-5 text-gray-500" />
