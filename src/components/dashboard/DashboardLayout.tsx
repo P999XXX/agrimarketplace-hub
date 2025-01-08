@@ -16,10 +16,10 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full bg-gray-50">
         {/* Desktop Sidebar */}
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex bg-white border-r">
-          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-white shadow-sm">
+          <SidebarHeader className="h-16 flex items-center border-b px-4 bg-white">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
               <div className="flex items-center">
@@ -38,7 +38,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         {/* Main Content */}
         <div className="flex w-full flex-col">
-          <header className="h-16 flex items-center justify-between border-b bg-white px-4 sticky top-0 z-50 shadow-sm">
+          <header className="h-16 flex items-center justify-between border-b bg-white px-4 sticky top-0 z-50">
             <div className="flex items-center gap-3">
               <MobileNav />
               <HeaderLogo />
@@ -46,7 +46,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
             <UserAvatar />
           </header>
-          <main className="flex-1 bg-gray-50">{children}</main>
+          <main className="flex-1 min-h-[calc(100vh-4rem)]">
+            {children}
+          </main>
         </div>
       </div>
     </SidebarProvider>

@@ -6,76 +6,46 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       <div className="container py-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard Overview</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+        </div>
         
         {/* Stats Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="card-shadow">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Total Products
-              </CardTitle>
-              <Database className="h-4 w-4 text-brand-500" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-brand-900">145</div>
-              <p className="text-xs text-muted-foreground">
-                +12.5% from last month
-              </p>
-            </CardContent>
-          </Card>
+          <StatsCard
+            title="Total Products"
+            value="145"
+            subtext="+12.5% from last month"
+            icon={<Database className="h-5 w-5" />}
+          />
 
-          <Card className="card-shadow">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Active Users
-              </CardTitle>
-              <Users className="h-4 w-4 text-brand-500" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-brand-900">2,350</div>
-              <p className="text-xs text-muted-foreground">
-                +180 new users this week
-              </p>
-            </CardContent>
-          </Card>
+          <StatsCard
+            title="Active Users"
+            value="2,350"
+            subtext="+180 new users this week"
+            icon={<Users className="h-5 w-5" />}
+          />
 
-          <Card className="card-shadow">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Sales Volume
-              </CardTitle>
-              <ChartBar className="h-4 w-4 text-brand-500" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-brand-900">$12.5M</div>
-              <p className="text-xs text-muted-foreground">
-                +8.2% from last quarter
-              </p>
-            </CardContent>
-          </Card>
+          <StatsCard
+            title="Sales Volume"
+            value="$12.5M"
+            subtext="+8.2% from last quarter"
+            icon={<ChartBar className="h-5 w-5" />}
+          />
 
-          <Card className="card-shadow">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Active Listings
-              </CardTitle>
-              <LayoutDashboard className="h-4 w-4 text-brand-500" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-brand-900">892</div>
-              <p className="text-xs text-muted-foreground">
-                +24 new listings today
-              </p>
-            </CardContent>
-          </Card>
+          <StatsCard
+            title="Active Listings"
+            value="892"
+            subtext="+24 new listings today"
+            icon={<LayoutDashboard className="h-5 w-5" />}
+          />
         </div>
 
         {/* Recent Activity */}
         <div className="mt-8">
-          <Card className="card-shadow">
+          <Card className="shadow-md hover:shadow-lg transition-shadow duration-200">
             <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
+              <CardTitle className="text-xl font-semibold text-gray-900">Recent Activity</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -85,12 +55,12 @@ const Dashboard = () => {
                     className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
                   >
                     <div className="space-y-1">
-                      <p className="text-sm font-medium">New order placed</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-base font-medium text-gray-900">New order placed</p>
+                      <p className="text-sm text-gray-500">
                         Order #12{i}45 - Wheat (Premium Quality)
                       </p>
                     </div>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-gray-500">
                       2 hours ago
                     </span>
                   </div>
@@ -101,6 +71,34 @@ const Dashboard = () => {
         </div>
       </div>
     </DashboardLayout>
+  );
+};
+
+interface StatsCardProps {
+  title: string;
+  value: string;
+  subtext: string;
+  icon: React.ReactNode;
+}
+
+const StatsCard = ({ title, value, subtext, icon }: StatsCardProps) => {
+  return (
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-200">
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="text-sm font-medium text-gray-500">
+          {title}
+        </CardTitle>
+        <div className="text-primary">
+          {icon}
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold text-gray-900">{value}</div>
+        <p className="text-sm text-gray-500 mt-1">
+          {subtext}
+        </p>
+      </CardContent>
+    </Card>
   );
 };
 

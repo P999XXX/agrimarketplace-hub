@@ -39,8 +39,8 @@ export const DashboardMenu = () => {
   
   return (
     <div className="space-y-2">
-      <h2 className={`px-4 text-sm font-bold text-gray-400 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
-        Account
+      <h2 className={`px-4 text-sm font-semibold text-gray-500 uppercase pt-6 transition-opacity duration-200 ${!isMobile && state === "collapsed" ? "opacity-0" : "opacity-100"}`}>
+        Menu
       </h2>
       <SidebarMenu>
         <TooltipProvider delayDuration={0}>
@@ -57,7 +57,7 @@ export const DashboardMenu = () => {
                         !isMobile && state === "collapsed" ? "px-[5px]" : "px-4"
                       } py-2.5 rounded-md ${
                         isActive 
-                          ? "text-gray-900 bg-gray-100" 
+                          ? "text-primary bg-primary/10" 
                           : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/80"
                       }`}
                     >
@@ -66,7 +66,7 @@ export const DashboardMenu = () => {
                           <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-all duration-200 ${
                             !isMobile && state === "collapsed" ? "w-full" : ""
                           }`}>
-                            <item.icon className={`w-5 h-5 transition-all duration-200 ${
+                            <item.icon className={`transition-all duration-200 ${
                               !isMobile && state === "collapsed" ? "w-5 h-5" : "w-5 h-5"
                             }`} />
                           </div>
