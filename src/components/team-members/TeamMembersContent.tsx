@@ -49,7 +49,7 @@ export const TeamMembersContent = () => {
       className="absolute w-24 h-24 rounded-full opacity-5"
       style={{
         left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 200}%`, // Vergrößert den vertikalen Bereich
+        top: `${Math.random() * 200}%`,
         transform: 'translate(-50%, -50%)',
         background: `hsl(${Math.random() * 360}, 70%, 50%)`,
         zIndex: -1,
@@ -59,16 +59,17 @@ export const TeamMembersContent = () => {
 
   return (
     <DashboardContent className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-transparent relative">
-      {/* Container für Hintergrund-Elemente mit eigenem Scroll-Bereich */}
+      {/* Container für Hintergrund-Elemente */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="relative w-full h-full">
           {backgroundElements}
         </div>
       </div>
       
-      {/* Header-Bereich mit transparentem Hintergrund */}
+      {/* Header-Bereich */}
       <div 
         className={`
+          relative
           flex-none 
           space-y-4 
           p-4 
@@ -77,7 +78,7 @@ export const TeamMembersContent = () => {
           bg-background/40
           backdrop-blur-sm 
           supports-[backdrop-filter]:bg-background/20 
-          z-10 
+          z-20
           transition-shadow 
           duration-200 
           ${isScrolled ? 'shadow-sm' : ''}
@@ -103,7 +104,7 @@ export const TeamMembersContent = () => {
 
       {/* Scroll-Bereich für den Hauptinhalt */}
       <ScrollArea 
-        className="flex-1 relative md:pb-0 pb-20 bg-transparent" 
+        className="flex-1 relative md:pb-0 pb-20 bg-transparent z-10" 
         onScroll={handleScroll}
       >
         <div className="p-4">
