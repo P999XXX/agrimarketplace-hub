@@ -12,7 +12,7 @@ export const RoleFilter = ({ value, onChange }: RoleFilterProps) => {
   
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`w-[180px] ${!isMobile ? 'shadow-sm' : ''} focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none ${!isMobile ? 'border' : 'border-0'}`}>
+      <SelectTrigger className={`${isMobile ? 'w-full' : 'w-[180px]'} ${!isMobile ? 'shadow-sm border' : 'border-0'} focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none`}>
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4" />
           <SelectValue placeholder="Filter by role" />
