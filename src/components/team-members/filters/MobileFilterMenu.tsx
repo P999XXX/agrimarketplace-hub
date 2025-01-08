@@ -10,7 +10,6 @@ import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { RoleFilter } from "./RoleFilter";
 import { SortFilter } from "./SortFilter";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
@@ -34,7 +33,6 @@ export const MobileFilterMenu = ({
 }: MobileFilterMenuProps) => {
   const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <DropdownMenu>
@@ -47,7 +45,7 @@ export const MobileFilterMenu = ({
           <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={`${isMobile ? 'w-fit px-4' : 'w-[200px]'}`}>
+      <DropdownMenuContent align="end" className="w-[200px]">
         <RoleFilter value={roleFilter} onChange={setRoleFilter} />
         <SortFilter value={sortBy} onChange={setSortBy} />
 
