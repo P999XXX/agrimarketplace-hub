@@ -91,6 +91,14 @@ export default {
             "background-position": "100% 50%",
           },
         },
+        "skeleton-pulse": {
+          "0%, 100%": {
+            opacity: "0.5",
+          },
+          "50%": {
+            opacity: "0.15",
+          },
+        },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
@@ -98,16 +106,16 @@ export default {
         "fade-in-left": "fade-in-left 0.6s ease-out forwards",
         "fade": "fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
         "gradient-shift": "gradient-shift 15s ease infinite",
+        "skeleton": "skeleton-pulse 1.2s ease-in-out infinite",
       },
       colors: {
-        // Hauptfarben
         primary: {
           50: '#e6f2ef',
           100: '#cce6df',
           200: '#99ccbf',
           300: '#66b39f',
           400: '#33997f',
-          500: '#008060', // Hauptfarbe
+          500: '#008060',
           600: '#00664d',
           700: '#004d3a',
           800: '#003326',
@@ -115,7 +123,6 @@ export default {
           DEFAULT: '#008060',
           foreground: "hsl(var(--primary-foreground))",
         },
-        // Sekundärfarben
         secondary: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -130,7 +137,6 @@ export default {
           DEFAULT: "rgb(241,185,128)",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        // Neutrale Farben
         gray: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -143,7 +149,6 @@ export default {
           800: '#1f2937',
           900: '#111827',
         },
-        // System Farben
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -162,7 +167,6 @@ export default {
           500: '#ef4444',
           700: '#b91c1c',
         },
-        // Shadcn Farben für Kompatibilität
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
