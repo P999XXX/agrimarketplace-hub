@@ -20,6 +20,7 @@ interface MobileFilterMenuProps {
   setViewMode: (mode: "grid" | "table") => void;
   onExportCSV: () => void;
   searchQuery: string;
+  showViewToggle?: boolean;
 }
 
 export const MobileFilterMenu = ({
@@ -30,6 +31,7 @@ export const MobileFilterMenu = ({
   viewMode,
   setViewMode,
   searchQuery,
+  showViewToggle = true,
 }: MobileFilterMenuProps) => {
   const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
@@ -49,15 +51,17 @@ export const MobileFilterMenu = ({
         <RoleFilter value={roleFilter} onChange={setRoleFilter} />
         <SortFilter value={sortBy} onChange={setSortBy} />
 
-        <DropdownMenuItem 
-          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-          className="cursor-pointer p-2"
-        >
-          <div className="flex items-center gap-2">
-            {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
-            <span>Change view</span>
-          </div>
-        </DropdownMenuItem>
+        {showViewToggle && (
+          <DropdownMenuItem 
+            onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+            className="cursor-pointer p-2"
+          >
+            <div className="flex items-center gap-2">
+              {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
+              <span>Change view</span>
+            </div>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem 
           onClick={() => exportToExcel(teamMembers, isLoading)}
