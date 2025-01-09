@@ -89,13 +89,13 @@ export const MobileFilterMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
-        <div className="px-2 py-1.5">
+        <div className="p-0">
           <RoleFilter value={roleFilter} onChange={handleRoleChange} />
         </div>
-        <div className="px-2 py-1.5">
+        <div className="p-0">
           <StatusFilter value={statusFilter} onChange={handleStatusChange} />
         </div>
-        <div className="px-2 py-1.5">
+        <div className="p-0">
           <SortFilter value={sortBy} onChange={handleSortChange} />
         </div>
 
