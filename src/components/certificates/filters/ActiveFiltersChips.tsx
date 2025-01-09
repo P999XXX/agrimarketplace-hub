@@ -21,18 +21,14 @@ export const ActiveFiltersChips = ({
 }: ActiveFiltersChipsProps) => {
   const getSortLabel = (sort: string) => {
     switch (sort) {
-      case "created_at-desc":
+      case "date-desc":
         return "Newest first";
-      case "created_at-asc":
+      case "date-asc":
         return "Oldest first";
       case "name-asc":
         return "Name A-Z";
       case "name-desc":
         return "Name Z-A";
-      case "expiry_date-asc":
-        return "Expiry Date (Ascending)";
-      case "expiry_date-desc":
-        return "Expiry Date (Descending)";
       default:
         return "";
     }
@@ -40,14 +36,12 @@ export const ActiveFiltersChips = ({
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
-      case "iso":
-        return "ISO";
+      case "organic":
+        return "Organic";
       case "quality":
         return "Quality";
       case "safety":
         return "Safety";
-      case "environmental":
-        return "Environmental";
       default:
         return "";
     }
@@ -59,8 +53,6 @@ export const ActiveFiltersChips = ({
         return "Valid";
       case "expired":
         return "Expired";
-      case "revoked":
-        return "Revoked";
       default:
         return "";
     }
@@ -94,12 +86,12 @@ export const ActiveFiltersChips = ({
             </Button>
           )}
           
-          {sortBy !== "created_at-desc" && (
+          {sortBy !== "date-desc" && (
             <Button
               variant="secondary"
               size="sm"
               className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setSortBy("created_at-desc")}
+              onClick={() => setSortBy("date-desc")}
             >
               Sort: {getSortLabel(sortBy)}
               <X className="ml-1 h-2.5 w-2.5" />

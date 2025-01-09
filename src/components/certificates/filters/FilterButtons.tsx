@@ -34,15 +34,15 @@ export const FilterButtons = ({
   showViewToggle,
 }: FilterButtonsProps) => {
   return (
-    <>
+    <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="shadow-sm">
             Category
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="w-[180px]">
           <DropdownMenuItem onClick={() => setCategoryFilter("all")}>
             All Categories
           </DropdownMenuItem>
@@ -60,12 +60,12 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="shadow-sm">
             Status
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="w-[180px]">
           <DropdownMenuItem onClick={() => setStatusFilter("all")}>
             All Status
           </DropdownMenuItem>
@@ -80,12 +80,12 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="shadow-sm">
             Sort
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="w-[180px]">
           <DropdownMenuItem onClick={() => setSortBy("name-asc")}>
             Name (A-Z)
           </DropdownMenuItem>
@@ -107,6 +107,7 @@ export const FilterButtons = ({
             variant={viewMode === "grid" ? "secondary" : "ghost"}
             size="icon"
             onClick={() => setViewMode("grid")}
+            className="shadow-sm"
           >
             <LayoutGrid className="h-4 w-4" />
           </Button>
@@ -114,16 +115,17 @@ export const FilterButtons = ({
             variant={viewMode === "table" ? "secondary" : "ghost"}
             size="icon"
             onClick={() => setViewMode("table")}
+            className="shadow-sm"
           >
             <LayoutList className="h-4 w-4" />
           </Button>
         </div>
       )}
 
-      <Button variant="outline" size="sm" onClick={onExportCSV}>
+      <Button variant="outline" size="sm" onClick={onExportCSV} className="shadow-sm">
         <Download className="mr-2 h-4 w-4" />
         Export
       </Button>
-    </>
+    </div>
   );
 };

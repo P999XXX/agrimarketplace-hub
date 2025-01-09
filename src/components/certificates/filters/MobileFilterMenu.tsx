@@ -27,7 +27,7 @@ export const MobileFilterMenu = (props: MobileFilterMenuProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="shadow-sm">
           <SlidersHorizontal className="mr-2 h-4 w-4" />
           Filters
         </Button>
