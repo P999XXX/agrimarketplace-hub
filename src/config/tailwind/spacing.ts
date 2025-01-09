@@ -6,6 +6,4 @@ export const spacing: SpacingConfig = {
   '6.5': '1.625rem',
   '1.8': '0.45rem',
   '3.6': '0.9rem',
-  '0.8': '0.2rem', // 2px
-  '1.6': '0.4rem', // 4px
 };

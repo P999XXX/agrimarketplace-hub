@@ -14,13 +14,13 @@ export const HeaderActions = () => {
         <DashboardBreadcrumb />
       </div>
       <div className="flex items-center gap-4">
-        <button className="text-primary/60 hover:text-primary transition-colors -mt-0.5">
+        <button className="text-muted-foreground hover:text-foreground transition-colors -mt-0.5">
           <Bot className="h-6 w-6" />
         </button>
-        <button className="text-primary/70 hover:text-primary transition-colors">
+        <button className="text-muted-foreground hover:text-foreground transition-colors">
           <MessageSquare className="h-5 w-5" />
         </button>
-        <button className="text-primary/80 hover:text-primary transition-colors">
+        <button className="text-muted-foreground hover:text-foreground transition-colors">
           <Bell className="h-5 w-5" />
         </button>
         <UserAccountPopover>
