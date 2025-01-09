@@ -11,6 +11,7 @@ export const CertificateForm = () => {
   const [issueDate, setIssueDate] = useState<Date>();
   const [expiryDate, setExpiryDate] = useState<Date>();
   const [categoryId, setCategoryId] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: categories } = useCertificateCategoriesQuery();
   const { toast } = useToast();
   
@@ -25,7 +26,7 @@ export const CertificateForm = () => {
         });
         return;
       }
-      if (file.size > 10 * 1024 * 1024) { // 10MB
+      if (file.size > 10 * 1024 * 1024) {
         toast({
           title: "File too large",
           description: "File size should not exceed 10MB",
@@ -37,16 +38,14 @@ export const CertificateForm = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const validateForm = () => {
     if (!categoryId) {
       toast({
         title: "Category required",
         description: "Please select a certificate category",
         variant: "destructive",
       });
-      return;
+      return false;
     }
 
     if (!issueDate) {
@@ -55,7 +54,7 @@ export const CertificateForm = () => {
         description: "Please select an issue date",
         variant: "destructive",
       });
-      return;
+      return false;
     }
 
     if (!expiryDate) {
@@ -64,7 +63,7 @@ export const CertificateForm = () => {
         description: "Please select an expiry date",
         variant: "destructive",
       });
-      return;
+      return false;
     }
 
     if (!selectedFile) {
@@ -73,10 +72,31 @@ export const CertificateForm = () => {
         description: "Please upload a certificate file",
         variant: "destructive",
       });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
       return;
     }
 
-    // TODO: Implement form submission
+    setIsSubmitting(true);
+    try {
+      // TODO: Implement form submission
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to upload certificate",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -97,7 +117,7 @@ export const CertificateForm = () => {
         </div>
       </ScrollArea>
       <div className="sticky bottom-0 mt-6 bg-background pt-4 border-t px-2">
-        <CertificateFormFooter isLoading={false} />
+        <CertificateFormFooter isLoading={isSubmitting} />
       </div>
       <SheetClose className="hidden" />
     </form>
