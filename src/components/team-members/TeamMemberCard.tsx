@@ -5,6 +5,7 @@ import { UserAvatar } from "./card/UserAvatar";
 import { CardStats } from "./card/CardStats";
 import { CardFooter as CustomCardFooter } from "./card/CardFooter";
 import { useState, useEffect } from "react";
+import { TeamMemberDialog } from "./TeamMemberDialog";
 
 const colorSchemes = [
   { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
@@ -45,6 +46,7 @@ export const TeamMemberCard = ({
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
   const [showHighlight, setShowHighlight] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     if (isNew) {
@@ -56,47 +58,56 @@ export const TeamMemberCard = ({
   }, [isNew]);
 
   return (
-    <Card
-      className={`transition-all duration-500 hover:shadow-md bg-card border-border ${
-        showHighlight ? 'animate-highlight' : ''
-      }`}
-    >
-      <CardHeader className="p-3 sm:p-4">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <UserAvatar initials={initials} colorScheme={colorScheme} />
-            <div className="min-w-0">
-              <p className="text-base sm:text-lg font-semibold text-card-foreground truncate">
-                {member.name || 'Unnamed User'}
-              </p>
-              <div className="text-sm">
-                <EmailCell email={member.email} />
+    <>
+      <Card
+        className={`transition-all duration-500 hover:shadow-md bg-card border-border cursor-pointer ${
+          showHighlight ? 'animate-highlight' : ''
+        }`}
+        onClick={() => setIsDialogOpen(true)}
+      >
+        <CardHeader className="p-3 sm:p-4">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <UserAvatar initials={initials} colorScheme={colorScheme} />
+              <div className="min-w-0">
+                <p className="text-base sm:text-lg font-semibold text-card-foreground truncate">
+                  {member.name || 'Unnamed User'}
+                </p>
+                <div className="text-sm">
+                  <EmailCell email={member.email} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
 
-      <Separator className="w-full bg-border" />
+        <Separator className="w-full bg-border" />
 
-      <CardContent className="p-4 sm:p-6">
-        <CardStats
-          lastLogin={member.last_login}
-          inviterName={`${member.inviter?.first_name || ''} ${member.inviter?.last_name || ''}`}
-          createdAt={member.created_at}
-        />
-      </CardContent>
+        <CardContent className="p-4 sm:p-6">
+          <CardStats
+            lastLogin={member.last_login}
+            inviterName={`${member.inviter?.first_name || ''} ${member.inviter?.last_name || ''}`}
+            createdAt={member.created_at}
+          />
+        </CardContent>
 
-      <Separator className="w-full bg-border" />
-      
-      <CardFooter className="p-3 sm:p-4">
-        <CustomCardFooter
-          status={member.status}
-          role={member.role}
-          getStatusBadgeClass={getStatusBadgeClass}
-          getRoleBadgeClass={getRoleBadgeClass}
-        />
-      </CardFooter>
-    </Card>
+        <Separator className="w-full bg-border" />
+        
+        <CardFooter className="p-3 sm:p-4">
+          <CustomCardFooter
+            status={member.status}
+            role={member.role}
+            getStatusBadgeClass={getStatusBadgeClass}
+            getRoleBadgeClass={getRoleBadgeClass}
+          />
+        </CardFooter>
+      </Card>
+
+      <TeamMemberDialog 
+        member={member}
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+      />
+    </>
   );
 };
