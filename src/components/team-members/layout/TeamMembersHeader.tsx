@@ -1,9 +1,10 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "../InviteMemberForm";
 import { TeamMembersFilters } from "../TeamMembersFilters";
 import { Dispatch, SetStateAction } from "react";
+import { InviteSheetHeader } from "../invite/InviteSheetHeader";
 
 interface TeamMembersHeaderProps {
   view: "grid" | "table";
@@ -49,11 +50,7 @@ export const TeamMembersHeader = ({
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
-              <div className="px-2">
-                <SheetHeader className="text-left mb-8">
-                  <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
-                </SheetHeader>
-              </div>
+              <InviteSheetHeader />
               <div className="flex-1">
                 <InviteMemberForm />
               </div>
