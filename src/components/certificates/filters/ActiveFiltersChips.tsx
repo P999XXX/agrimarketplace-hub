@@ -1,6 +1,4 @@
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { CommonActiveFiltersChips } from "@/components/common/filters/CommonActiveFiltersChips";
 
 interface ActiveFiltersChipsProps {
   categoryFilter: string;
@@ -58,48 +56,29 @@ export const ActiveFiltersChips = ({
     }
   };
 
-  return (
-    <div className="[padding-top:0px_!important] [padding-bottom:0px_!important] [margin-top:10px_!important] [margin-bottom:-12px_!important]">
-      <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex gap-1.8 [padding-left:0px_!important] [padding-right:0px_!important]">
-          {categoryFilter !== "all" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setCategoryFilter("all")}
-            >
-              Category: {getCategoryLabel(categoryFilter)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-          
-          {statusFilter !== "all" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setStatusFilter("all")}
-            >
-              Status: {getStatusLabel(statusFilter)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-          
-          {sortBy !== "date-desc" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setSortBy("date-desc")}
-            >
-              Sort: {getSortLabel(sortBy)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-        </div>
-        <ScrollBar orientation="horizontal" className="h-0.5" />
-      </ScrollArea>
-    </div>
-  );
+  const filters = [
+    {
+      value: categoryFilter,
+      defaultValue: "all",
+      label: "Category",
+      getLabel: getCategoryLabel,
+      onReset: setCategoryFilter,
+    },
+    {
+      value: statusFilter,
+      defaultValue: "all",
+      label: "Status",
+      getLabel: getStatusLabel,
+      onReset: setStatusFilter,
+    },
+    {
+      value: sortBy,
+      defaultValue: "date-desc",
+      label: "Sort",
+      getLabel: getSortLabel,
+      onReset: setSortBy,
+    },
+  ];
+
+  return <CommonActiveFiltersChips filters={filters} />;
 };
