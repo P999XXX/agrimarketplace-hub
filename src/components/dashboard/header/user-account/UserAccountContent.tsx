@@ -20,10 +20,14 @@ export const UserAccountContent = ({ userProfile, currentTime }: UserAccountCont
 
     return () => clearInterval(timer);
   }, []);
-
-  // Default to United States if no country is specified
-  const defaultCountry = 'US';
   
+  // Get user's country from browser language
+  const getUserCountry = () => {
+    const language = navigator.language || 'en-US';
+    const country = language.split('-')[1] || 'US';
+    return country;
+  };
+
   const getCountryName = (countryCode: string) => {
     try {
       return countries.getName(countryCode, 'en') || countryCode;
@@ -38,6 +42,7 @@ export const UserAccountContent = ({ userProfile, currentTime }: UserAccountCont
 
   // Get timezone abbreviation
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userCountry = getUserCountry();
 
   return (
     <div className="text-sm text-muted-foreground space-y-3">
@@ -52,12 +57,12 @@ export const UserAccountContent = ({ userProfile, currentTime }: UserAccountCont
       <div className="flex justify-between items-center">
         <span>Location:</span>
         <div className="flex items-center gap-2">
-          <span>{getCountryName(defaultCountry)}</span>
+          <span>{getCountryName(userCountry)}</span>
           <img 
-            src={getFlagUrl(defaultCountry)}
+            src={getFlagUrl(userCountry)}
             width="20"
             height="15"
-            alt={getCountryName(defaultCountry)}
+            alt={getCountryName(userCountry)}
             className="inline-block rounded-full object-cover"
           />
         </div>
