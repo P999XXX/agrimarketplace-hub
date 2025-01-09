@@ -60,10 +60,8 @@ export const UserAvatar = ({ size = "default" }: { size?: "default" | "large" })
   const textSize = size === "large" ? "text-sm" : "text-sm";
 
   return (
-    <Avatar className={`cursor-pointer ${avatarSize} transition-all duration-200 hover:scale-105`}>
-      <AvatarFallback 
-        className={`${textSize} bg-gradient-to-br from-[#E5DEFF] to-[#FFDEE2] text-gray-700 hover:from-[#D3E4FD] hover:to-[#FDE1D3] transition-colors`}
-      >
+    <Avatar className={`cursor-pointer ${avatarSize}`}>
+      <AvatarFallback className={`bg-primary text-primary-foreground ${textSize}`}>
         {initials || 'NN'}
       </AvatarFallback>
     </Avatar>
