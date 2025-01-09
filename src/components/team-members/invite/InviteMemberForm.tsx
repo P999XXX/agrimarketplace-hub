@@ -3,7 +3,7 @@ import { SheetClose } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { InviteFormFields } from "./InviteFormFields";
 import { InviteFormFooter } from "./InviteFormFooter";
-import { useInviteMember } from "../../hooks/useInviteMember";
+import { useInviteMember } from "../hooks/useInviteMember";
 
 export const InviteMemberForm = () => {
   const [name, setName] = useState("");
