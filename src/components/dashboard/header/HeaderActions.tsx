@@ -1,4 +1,4 @@
-import { Bell, MessageSquare } from "lucide-react";
+import { Bell, MessageSquare, Bot } from "lucide-react";
 import { UserAvatar } from "../UserAvatar";
 import { MobileNav } from "../mobile/MobileNav";
 import { HeaderLogo } from "./HeaderLogo";
@@ -14,6 +14,9 @@ export const HeaderActions = () => {
         <DashboardBreadcrumb />
       </div>
       <div className="flex items-center gap-4">
+        <button className="text-muted-foreground hover:text-foreground transition-colors">
+          <Bot className="h-5 w-5" />
+        </button>
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <MessageSquare className="h-5 w-5" />
         </button>
