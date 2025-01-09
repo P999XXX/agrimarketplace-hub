@@ -56,11 +56,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="flex min-h-screen w-full">
         <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex border-r border-border/50">
           <SidebarHeader className="h-16 flex items-center border-b border-border/50 px-4">
-            <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
+            <div className="flex items-center justify-between w-full h-full">
               <SidebarLogo />
-              <div className="flex items-center">
-                <CustomSidebarTrigger />
-              </div>
+              <CustomSidebarTrigger />
             </div>
           </SidebarHeader>
           <SidebarContent>

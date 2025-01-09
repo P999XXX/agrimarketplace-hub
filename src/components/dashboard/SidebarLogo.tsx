@@ -8,5 +8,5 @@ export const SidebarLogo = () => {
     return null;
   }
   
-  return <Logo />;
+  return <div className="flex-1"><Logo /></div>;
 };
