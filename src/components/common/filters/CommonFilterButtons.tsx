@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { LayoutGrid, Table as TableIcon, Download } from "lucide-react";
 import { FilterDropdownButton } from "./FilterDropdownButton";
+import { ViewToggle } from "../views/ViewToggle";
+import { ExportButton } from "../actions/ExportButton";
 
 interface CommonFilterButtonsProps {
   filters: Array<{
@@ -40,30 +40,10 @@ export const CommonFilterButtons = ({
       ))}
 
       {showViewToggle && viewMode && setViewMode && (
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-          className="h-10 w-10 shadow-sm"
-        >
-          {viewMode === "grid" ? (
-            <TableIcon className="h-4 w-4" />
-          ) : (
-            <LayoutGrid className="h-4 w-4" />
-          )}
-        </Button>
+        <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
       )}
 
-      {onExport && (
-        <Button 
-          variant="outline" 
-          size="icon"
-          onClick={onExport} 
-          className="h-10 w-10 shadow-sm"
-        >
-          <Download className="h-4 w-4" />
-        </Button>
-      )}
+      {onExport && <ExportButton onExport={onExport} />}
     </div>
   );
 };
