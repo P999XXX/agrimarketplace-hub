@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { TeamMember } from "../useTeamMembers";
 
 export const fetchTeamMembers = async (
   searchQuery: string, 
@@ -8,7 +9,7 @@ export const fetchTeamMembers = async (
   statusFilter: string, 
   sortBy: string,
   companyId?: string
-) => {
+): Promise<TeamMember[]> => {
   if (!companyId) {
     console.log('No company ID provided, skipping fetch');
     return [];
@@ -18,7 +19,20 @@ export const fetchTeamMembers = async (
 
   let invitationsQuery = supabase
     .from('invitations')
-    .select('id, email, name, role, status, created_at, last_login, invited_by, inviter:profiles!invitations_invited_by_fkey(first_name, last_name)')
+    .select(`
+      id, 
+      email, 
+      name, 
+      role, 
+      status, 
+      created_at, 
+      last_login, 
+      invited_by,
+      inviter:profiles!invitations_invited_by_fkey (
+        first_name,
+        last_name
+      )
+    `)
     .eq('company_id', companyId);
 
   if (searchQuery) {
@@ -47,7 +61,7 @@ export const fetchTeamMembers = async (
     throw invitationsError;
   }
 
-  return invitations || [];
+  return invitations as TeamMember[];
 };
 
 export const useTeamMembers = (
