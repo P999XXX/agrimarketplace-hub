@@ -9,6 +9,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      certificate_categories: {
+        Row: {
+          category_type: string
+          created_at: string
+          deleted_at: string | null
+          icon_path: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          category_type: string
+          created_at?: string
+          deleted_at?: string | null
+          icon_path?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          category_type?: string
+          created_at?: string
+          deleted_at?: string | null
+          icon_path?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       certificates: {
         Row: {
           category: string
