@@ -93,23 +93,27 @@ export const InviteMemberForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full max-h-[calc(100vh-4.5rem)] pt-6">
-      <ScrollArea className="flex-1">
-        <div className="space-y-4 px-2">
-          <InviteFormFields
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            role={role}
-            setRole={setRole}
-            message={message}
-            setMessage={setMessage}
-          />
+    <form onSubmit={handleSubmit} className="flex flex-col h-full max-h-[calc(100vh-4.5rem)]">
+      <div className="flex-1 pt-6">
+        <ScrollArea className="h-full">
+          <div className="space-y-4 px-6">
+            <InviteFormFields
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              role={role}
+              setRole={setRole}
+              message={message}
+              setMessage={setMessage}
+            />
+          </div>
+        </ScrollArea>
+      </div>
+      <div className="mt-auto border-t">
+        <div className="px-6 pt-4">
+          <InviteFormFooter isLoading={isLoading} />
         </div>
-      </ScrollArea>
-      <div className="sticky bottom-0 mt-6 bg-background pt-4 border-t px-2">
-        <InviteFormFooter isLoading={isLoading} />
       </div>
       <SheetClose ref={closeButtonRef} className="hidden" />
     </form>
