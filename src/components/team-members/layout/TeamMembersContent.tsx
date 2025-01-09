@@ -31,49 +31,12 @@ const TeamMembersContent = () => {
     },
   });
 
-  const filterButtons = [
+  const filterGroups = [
     {
       label: "Role",
       value: filters.role,
       onChange: (value: string) => updateFilter("role", value),
       icon: <Filter className="h-4 w-4" />,
-      options: [
-        { label: "All roles", value: "all" },
-        { label: "Member", value: "member" },
-        { label: "Viewer", value: "viewer" },
-      ],
-    },
-    {
-      label: "Status",
-      value: filters.status,
-      onChange: (value: string) => updateFilter("status", value),
-      icon: <Filter className="h-4 w-4" />,
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Pending", value: "pending" },
-        { label: "Accepted", value: "accepted" },
-        { label: "Declined", value: "declined" },
-      ],
-    },
-    {
-      label: "Sort",
-      value: sortBy,
-      onChange: setSortBy,
-      icon: <Filter className="h-4 w-4" />,
-      options: [
-        { label: "Newest first", value: "created_at-desc" },
-        { label: "Oldest first", value: "created_at-asc" },
-        { label: "Name A-Z", value: "name-asc" },
-        { label: "Name Z-A", value: "name-desc" },
-      ],
-    },
-  ];
-
-  const mobileFilters = [
-    {
-      label: "Role",
-      value: filters.role,
-      onChange: (value: string) => updateFilter("role", value),
       groups: [
         {
           label: "Team Member Roles",
@@ -89,6 +52,7 @@ const TeamMembersContent = () => {
       label: "Status",
       value: filters.status,
       onChange: (value: string) => updateFilter("status", value),
+      icon: <Filter className="h-4 w-4" />,
       groups: [
         {
           label: "Member Status",
@@ -105,12 +69,18 @@ const TeamMembersContent = () => {
       label: "Sort",
       value: sortBy,
       onChange: setSortBy,
+      icon: <Filter className="h-4 w-4" />,
       groups: [
         {
-          label: "Sort by",
+          label: "Sort by Date",
           options: [
             { label: "Newest first", value: "created_at-desc" },
             { label: "Oldest first", value: "created_at-asc" },
+          ],
+        },
+        {
+          label: "Sort by Name",
+          options: [
             { label: "Name A-Z", value: "name-asc" },
             { label: "Name Z-A", value: "name-desc" },
           ],
@@ -195,7 +165,7 @@ const TeamMembersContent = () => {
 
             <div className="hidden md:flex items-center gap-2">
               <CommonFilterButtons
-                filters={filterButtons}
+                filters={filterGroups}
                 viewMode={view}
                 setViewMode={setView}
                 onExport={() => {}}
@@ -204,10 +174,7 @@ const TeamMembersContent = () => {
             </div>
 
             <div className="md:hidden">
-              <CommonMobileFilter 
-                filters={mobileFilters}
-                title="Filter Team Members" 
-              />
+              <CommonMobileFilter filters={filterGroups} />
             </div>
           </div>
 
