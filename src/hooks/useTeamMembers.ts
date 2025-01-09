@@ -20,7 +20,7 @@ export const useTeamMembers = (searchQuery: string, roleFilter: string, statusFi
   return useQuery({
     queryKey: ['team-members', searchQuery, roleFilter, statusFilter, sortBy],
     queryFn: () => fetchTeamMembers(searchQuery, roleFilter, statusFilter, sortBy),
-    staleTime: 1000 * 60, // Cache for 1 minute
-    retry: 1, // Only retry once on failure
+    staleTime: 1000 * 60,
+    retry: 1,
   });
 };

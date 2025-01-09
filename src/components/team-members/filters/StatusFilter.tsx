@@ -18,7 +18,7 @@ export const StatusFilter = ({ value, onChange }: StatusFilterProps) => {
           <SelectValue placeholder="Filter by status" />
         </div>
       </SelectTrigger>
-      <SelectContent className="z-[60]">
+      <SelectContent className="z-[100]">
         <SelectItem value="all">All status</SelectItem>
         <SelectItem value="pending">Pending</SelectItem>
         <SelectItem value="accepted">Accepted</SelectItem>

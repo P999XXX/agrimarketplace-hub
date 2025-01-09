@@ -79,10 +79,16 @@ export const MobileFilterMenu = ({
           <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px]">
-        <RoleFilter value={roleFilter} onChange={handleRoleChange} />
-        <StatusFilter value={statusFilter} onChange={handleStatusChange} />
-        <SortFilter value={sortBy} onChange={handleSortChange} />
+      <DropdownMenuContent align="end" className="w-[200px] z-[100]">
+        <div className="p-2">
+          <RoleFilter value={roleFilter} onChange={handleRoleChange} />
+        </div>
+        <div className="p-2">
+          <StatusFilter value={statusFilter} onChange={handleStatusChange} />
+        </div>
+        <div className="p-2">
+          <SortFilter value={sortBy} onChange={handleSortChange} />
+        </div>
 
         {showViewToggle && (
           <DropdownMenuItem 
