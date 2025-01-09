@@ -48,11 +48,15 @@ export const TeamMembersHeader = ({
                 Invite Member
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-lg">
-              <SheetHeader className="text-left">
-                <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
-              </SheetHeader>
-              <InviteMemberForm />
+            <SheetContent className="w-full sm:max-w-lg p-0">
+              <div className="p-6 pb-0">
+                <SheetHeader className="text-left">
+                  <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
+                </SheetHeader>
+              </div>
+              <div className="px-6 py-4 flex-1">
+                <InviteMemberForm />
+              </div>
             </SheetContent>
           </Sheet>
         </div>
