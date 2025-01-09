@@ -61,7 +61,7 @@ export const ActiveFiltersChips = ({
   return (
     <div className="[padding-top:0px_!important] [padding-bottom:0px_!important] [margin-top:10px_!important] [margin-bottom:-12px_!important]">
       <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex gap-1.8 px-4">
+        <div className="flex gap-1.8 [padding-left:0px_!important] [padding-right:0px_!important]">
           {roleFilter !== "all" && (
             <Button
               variant="secondary"
