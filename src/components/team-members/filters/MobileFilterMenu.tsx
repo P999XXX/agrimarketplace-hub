@@ -79,7 +79,7 @@ export const MobileFilterMenu = ({
           <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px] z-[100]" sideOffset={8}>
+      <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
         <div className="p-2">
           <RoleFilter value={roleFilter} onChange={handleRoleChange} />
         </div>
@@ -93,7 +93,7 @@ export const MobileFilterMenu = ({
         {showViewToggle && (
           <DropdownMenuItem 
             onClick={handleViewChange}
-            className="cursor-pointer p-2"
+            className="cursor-pointer p-2 hover:bg-accent"
           >
             <div className="flex items-center gap-2">
               {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
@@ -104,9 +104,9 @@ export const MobileFilterMenu = ({
 
         <DropdownMenuItem 
           onClick={handleExport}
-          className="cursor-pointer p-2"
+          className="cursor-pointer p-2 hover:bg-accent w-full"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full">
             <Download className="h-4 w-4" />
             <span>Export Excel</span>
           </div>
