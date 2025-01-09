@@ -29,7 +29,7 @@ export const InviteMemberForm = () => {
       </div>
       
       <ScrollArea className="flex-1">
-        <div className="p-6 space-y-4">
+        <div className="p-4 space-y-4">
           <InviteFormFields
             name={name}
             setName={setName}
@@ -44,7 +44,7 @@ export const InviteMemberForm = () => {
       </ScrollArea>
 
       <div className="border-t mt-auto">
-        <div className="p-6">
+        <div className="p-4">
           <InviteFormFooter isLoading={isLoading} />
         </div>
       </div>
