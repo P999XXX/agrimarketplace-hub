@@ -79,7 +79,7 @@ export const MobileFilterMenu = ({
           <ListFilter className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px] z-[100]">
+      <DropdownMenuContent align="end" className="w-[200px] z-[100]" sideOffset={8}>
         <div className="p-2">
           <RoleFilter value={roleFilter} onChange={handleRoleChange} />
         </div>

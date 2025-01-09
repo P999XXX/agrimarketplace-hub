@@ -18,7 +18,7 @@ export const RoleFilter = ({ value, onChange }: RoleFilterProps) => {
           <SelectValue placeholder="Filter by role" />
         </div>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="z-[100]">
         <SelectItem value="all">All roles</SelectItem>
         <SelectItem value="member">Member</SelectItem>
         <SelectItem value="viewer">Viewer</SelectItem>
