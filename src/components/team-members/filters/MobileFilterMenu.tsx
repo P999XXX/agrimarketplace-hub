@@ -95,7 +95,7 @@ export const MobileFilterMenu = ({
             onClick={handleViewChange}
             className="cursor-pointer px-2 py-1.5 hover:bg-accent"
           >
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center gap-2 w-full pl-2">
               {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
               <span>Change view</span>
             </div>
@@ -106,7 +106,7 @@ export const MobileFilterMenu = ({
           onClick={handleExport}
           className="cursor-pointer px-2 py-1.5 hover:bg-accent"
         >
-          <div className="flex items-center gap-2 w-full">
+          <div className="flex items-center gap-2 w-full pl-2">
             <Download className="h-4 w-4" />
             <span>Export Excel</span>
           </div>
