@@ -1,4 +1,4 @@
-import { TeamMembersHeader } from "../TeamMembersHeader";
+import { TeamMembersHeader } from "./TeamMembersHeader";
 import { TeamMembersGrid } from "../TeamMembersGrid";
 import { TeamMembersTable } from "../TeamMembersTable";
 import { TeamMembersFilters } from "../TeamMembersFilters";
@@ -29,7 +29,7 @@ const TeamMembersContentView = () => {
   return (
     <DashboardContent>
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-        <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-3.6 dark:bg-black/10 bg-white/70 backdrop-blur-md z-10 transition-shadow duration-200">
+        <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-3.6 dark:bg-black/10 bg-white/70 backdrop-blur-md md:z-[5] transition-shadow duration-200">
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
