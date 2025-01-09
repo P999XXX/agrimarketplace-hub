@@ -13,14 +13,21 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to access this page",
-          variant: "destructive",
-        });
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) throw error;
+        
+        if (!session) {
+          toast({
+            title: "Authentication required",
+            description: "Please sign in to access this page",
+            variant: "destructive",
+          });
+          navigate("/signin");
+        }
+      } catch (error) {
+        console.error('Auth error:', error);
         navigate("/signin");
       }
     };
@@ -28,7 +35,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     checkAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT" || !session) {
+      if (event === 'SIGNED_OUT' || !session) {
         navigate("/signin");
       }
     });
