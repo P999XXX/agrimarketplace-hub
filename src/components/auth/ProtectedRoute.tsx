@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProtectedRouteProps {
@@ -10,32 +10,31 @@ interface ProtectedRouteProps {
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { session, isLoading, error } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !session) {
-      toast({
-        title: "Authentication required",
-        description: "Please sign in to access this page",
-        variant: "destructive",
-      });
-      navigate("/signin");
-    }
-  }, [session, isLoading, navigate, toast]);
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        toast({
+          title: "Authentication required",
+          description: "Please sign in to access this page",
+          variant: "destructive",
+        });
+        navigate("/signin");
+      }
+    };
 
-  if (isLoading) {
-    return null;
-  }
+    checkAuth();
 
-  if (error) {
-    toast({
-      title: "Authentication Error",
-      description: "Please try signing in again",
-      variant: "destructive",
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT" || !session) {
+        navigate("/signin");
+      }
     });
-    navigate("/signin");
-    return null;
-  }
 
-  return session ? <>{children}</> : null;
+    return () => subscription.unsubscribe();
+  }, [navigate, toast]);
+
+  return <>{children}</>;
 };
