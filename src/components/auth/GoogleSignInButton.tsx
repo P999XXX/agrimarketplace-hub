@@ -14,7 +14,6 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
           queryParams: {
             prompt: 'select_account',
             access_type: 'offline',
@@ -25,8 +24,8 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
       if (error) throw error;
 
       toast({
-        title: "Redirecting",
-        description: "Please wait while we redirect you to Google",
+        title: "Success",
+        description: "Successfully authenticated with Google",
       });
     } catch (error: any) {
       console.error('Google Sign In Error:', error);
