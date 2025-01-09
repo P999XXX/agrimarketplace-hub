@@ -54,7 +54,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <div className="flex min-h-screen w-full">
-        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex border-r border-border/50">
+        <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex border-r border-border/50 relative z-50">
           <SidebarHeader className="h-16 flex items-center border-b border-border/50 px-4">
             <div className="flex items-center justify-between w-full group-data-[state=collapsed]:justify-center h-full">
               <SidebarLogo />
