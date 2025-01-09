@@ -18,7 +18,7 @@ export const SortFilter = ({ value, onChange }: SortFilterProps) => {
           ${!isMobile ? 'shadow-sm border' : 'border-0'} 
           focus:ring-0 focus-visible:ring-0 
           focus:outline-none focus-visible:outline-none
-          bg-background
+          bg-background hover:bg-accent transition-colors
         `}
       >
         <div className="flex items-center gap-2">
@@ -27,7 +27,7 @@ export const SortFilter = ({ value, onChange }: SortFilterProps) => {
         </div>
       </SelectTrigger>
       <SelectContent 
-        className="z-[100] bg-popover" 
+        className="z-[100] bg-popover min-w-[180px]" 
         sideOffset={8}
       >
         <SelectItem value="created_at-desc">Newest first</SelectItem>

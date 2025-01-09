@@ -3,6 +3,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { Grid, Download, Table as TableIcon } from "lucide-react";
 import { RoleFilter } from "@/components/team-members/filters/RoleFilter";
@@ -82,46 +85,67 @@ export const CommonMobileFilterMenu = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-[200px] bg-background border border-border shadow-md" 
+        className="w-[240px] bg-background border border-border shadow-md" 
         sideOffset={8}
       >
         {showRoleFilter && roleFilter !== undefined && setRoleFilter && (
-          <div className="px-1 py-1">
-            <RoleFilter value={roleFilter} onChange={handleRoleChange} />
-          </div>
+          <>
+            <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
+              Role Filter
+            </DropdownMenuLabel>
+            <DropdownMenuGroup className="px-1 py-1">
+              <RoleFilter value={roleFilter} onChange={handleRoleChange} />
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+          </>
         )}
         
         {showStatusFilter && statusFilter !== undefined && setStatusFilter && (
-          <div className="px-1 py-1">
-            <StatusFilter value={statusFilter} onChange={handleStatusChange} />
-          </div>
+          <>
+            <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
+              Status Filter
+            </DropdownMenuLabel>
+            <DropdownMenuGroup className="px-1 py-1">
+              <StatusFilter value={statusFilter} onChange={handleStatusChange} />
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+          </>
         )}
         
-        <div className="px-1 py-1">
-          <SortFilter value={sortBy} onChange={handleSortChange} />
-        </div>
+        <>
+          <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
+            Sort Options
+          </DropdownMenuLabel>
+          <DropdownMenuGroup className="px-1 py-1">
+            <SortFilter value={sortBy} onChange={handleSortChange} />
+          </DropdownMenuGroup>
+        </>
 
-        {showViewToggle && (
+        <DropdownMenuSeparator />
+        
+        <DropdownMenuGroup>
+          {showViewToggle && (
+            <DropdownMenuItem 
+              onClick={handleViewChange}
+              className="cursor-pointer px-2 py-1.5 hover:bg-accent focus:bg-accent"
+            >
+              <div className="flex items-center gap-2 w-full pl-2">
+                {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
+                <span>Change view</span>
+              </div>
+            </DropdownMenuItem>
+          )}
+
           <DropdownMenuItem 
-            onClick={handleViewChange}
+            onClick={handleExport}
             className="cursor-pointer px-2 py-1.5 hover:bg-accent focus:bg-accent"
           >
             <div className="flex items-center gap-2 w-full pl-2">
-              {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
-              <span>Change view</span>
+              <Download className="h-4 w-4" />
+              <span>Export Excel</span>
             </div>
           </DropdownMenuItem>
-        )}
-
-        <DropdownMenuItem 
-          onClick={handleExport}
-          className="cursor-pointer px-2 py-1.5 hover:bg-accent focus:bg-accent"
-        >
-          <div className="flex items-center gap-2 w-full pl-2">
-            <Download className="h-4 w-4" />
-            <span>Export Excel</span>
-          </div>
-        </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
