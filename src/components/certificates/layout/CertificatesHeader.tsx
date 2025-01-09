@@ -1,24 +1,65 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { CertificateUploadDialog } from "../upload/CertificateUploadDialog";
+import { ViewMode } from "../types";
+import { CertificatesFilters } from "../filters/CertificatesFilters";
+import { ActiveFiltersChips } from "../filters/ActiveFiltersChips";
 
-export const CertificatesHeader = () => {
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
+interface CertificatesHeaderProps {
+  view: ViewMode;
+  onViewChange: (view: ViewMode) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  categoryFilter: string;
+  setCategoryFilter: (category: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
+  sortBy: string;
+  setSortBy: (sort: string) => void;
+  onExportCSV: () => void;
+  isMobile: boolean;
+  hasActiveFilters: boolean;
+}
 
+export const CertificatesHeader = ({
+  view,
+  onViewChange,
+  searchQuery,
+  setSearchQuery,
+  categoryFilter,
+  setCategoryFilter,
+  statusFilter,
+  setStatusFilter,
+  sortBy,
+  setSortBy,
+  onExportCSV,
+  isMobile,
+  hasActiveFilters,
+}: CertificatesHeaderProps) => {
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="text-2xl font-semibold tracking-tight">Certificates</h1>
-      <div className="flex items-center gap-4">
-        <Button onClick={() => setIsUploadOpen(true)} className="hidden md:flex">
-          <Plus className="mr-2 h-4 w-4" />
-          Upload Certificate
-        </Button>
-      </div>
-      <CertificateUploadDialog
-        open={isUploadOpen}
-        onOpenChange={setIsUploadOpen}
+    <div className="space-y-4">
+      <CertificatesFilters
+        viewMode={view}
+        setViewMode={onViewChange}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        onExportCSV={onExportCSV}
+        isMobile={isMobile}
       />
+
+      {hasActiveFilters && (
+        <ActiveFiltersChips
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
+      )}
     </div>
   );
 };

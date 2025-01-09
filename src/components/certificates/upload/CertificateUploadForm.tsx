@@ -20,7 +20,7 @@ import {
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface CertificateUploadFormProps {
@@ -55,7 +55,7 @@ export const CertificateUploadForm = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
-      if (selectedFile.size > 10 * 1024 * 1024) { // 10MB limit
+      if (selectedFile.size > 10 * 1024 * 1024) {
         toast({
           title: "File too large",
           description: "Please select a file smaller than 10MB",
@@ -79,6 +79,18 @@ export const CertificateUploadForm = ({
 
     setIsUploading(true);
     try {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not authenticated');
+
+      // Get user's profile for company_id
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .single();
+
+      if (!profile?.company_id) throw new Error('No company ID found');
+
       // Upload file to Supabase Storage
       const fileExt = file.name.split('.').pop();
       const filePath = `${crypto.randomUUID()}.${fileExt}`;
@@ -88,14 +100,6 @@ export const CertificateUploadForm = ({
         .upload(filePath, file);
 
       if (uploadError) throw uploadError;
-
-      // Get the user's profile for company_id
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('company_id')
-        .single();
-
-      if (!profile?.company_id) throw new Error('No company ID found');
 
       // Create certificate record in database
       const { error: dbError } = await supabase
@@ -108,6 +112,7 @@ export const CertificateUploadForm = ({
           file_type: file.type,
           file_size: file.size,
           company_id: profile.company_id,
+          uploaded_by: user.id,
           expiry_date: data.expiry_date.toISOString(),
         });
 
