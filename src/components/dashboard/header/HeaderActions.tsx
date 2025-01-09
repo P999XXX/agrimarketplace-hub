@@ -1,29 +1,24 @@
-import { Bell, MessageSquare } from "lucide-react";
-import { UserAvatar } from "../UserAvatar";
-import { MobileNav } from "../mobile/MobileNav";
+import { MessageSquare, Bell } from "lucide-react";
 import { HeaderLogo } from "./HeaderLogo";
-import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
 import { UserAccountPopover } from "./UserAccountPopover";
+import { DashboardBreadcrumb } from "../DashboardBreadcrumb";
 
 export const HeaderActions = () => {
   return (
-    <header className="h-16 flex items-center justify-between px-4 sticky top-0 z-50 dark:bg-black bg-white border-b border-border/50">
-      <div className="flex items-center gap-1.2">
-        <MobileNav />
+    <div className="flex items-center justify-between w-full">
+      <div className="flex items-center gap-6">
         <HeaderLogo />
         <DashboardBreadcrumb />
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <MessageSquare className="h-5 w-5" />
         </button>
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <Bell className="h-5 w-5" />
         </button>
-        <UserAccountPopover>
-          <UserAvatar />
-        </UserAccountPopover>
+        <UserAccountPopover />
       </div>
-    </header>
+    </div>
   );
 };
