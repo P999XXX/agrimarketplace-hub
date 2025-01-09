@@ -1,18 +1,6 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { ListFilter, Grid, Download, Table as TableIcon } from "lucide-react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import { RoleFilter } from "./RoleFilter";
-import { StatusFilter } from "./StatusFilter";
-import { SortFilter } from "./SortFilter";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { CommonMobileFilterMenu } from "@/components/common/filters/CommonMobileFilterMenu";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
@@ -42,85 +30,23 @@ export const MobileFilterMenu = ({
 }: MobileFilterMenuProps) => {
   const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
-  const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
-  // Close dropdown when screen size changes
-  useEffect(() => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  }, [isMobile]);
-
-  const handleRoleChange = (value: string) => {
-    setRoleFilter(value);
-    setIsOpen(false);
-  };
-
-  const handleStatusChange = (value: string) => {
-    setStatusFilter(value);
-    setIsOpen(false);
-  };
-
-  const handleSortChange = (value: string) => {
-    setSortBy(value);
-    setIsOpen(false);
-  };
-
-  const handleViewChange = () => {
-    setViewMode(viewMode === "grid" ? "table" : "grid");
-    setIsOpen(false);
-  };
 
   const handleExport = () => {
     exportToExcel(teamMembers, isLoading);
-    setIsOpen(false);
   };
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-        >
-          <ListFilter className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
-        <div className="p-0">
-          <RoleFilter value={roleFilter} onChange={handleRoleChange} />
-        </div>
-        <div className="p-0">
-          <StatusFilter value={statusFilter} onChange={handleStatusChange} />
-        </div>
-        <div className="p-0">
-          <SortFilter value={sortBy} onChange={handleSortChange} />
-        </div>
-
-        {showViewToggle && (
-          <DropdownMenuItem 
-            onClick={handleViewChange}
-            className="cursor-pointer px-2 py-1.5 hover:bg-accent"
-          >
-            <div className="flex items-center gap-2 w-full pl-2">
-              {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
-              <span>Change view</span>
-            </div>
-          </DropdownMenuItem>
-        )}
-
-        <DropdownMenuItem 
-          onClick={handleExport}
-          className="cursor-pointer px-2 py-1.5 hover:bg-accent"
-        >
-          <div className="flex items-center gap-2 w-full pl-2">
-            <Download className="h-4 w-4" />
-            <span>Export Excel</span>
-          </div>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <CommonMobileFilterMenu
+      roleFilter={roleFilter}
+      setRoleFilter={setRoleFilter}
+      statusFilter={statusFilter}
+      setStatusFilter={setStatusFilter}
+      sortBy={sortBy}
+      setSortBy={setSortBy}
+      viewMode={viewMode}
+      setViewMode={setViewMode}
+      onExport={handleExport}
+      showViewToggle={showViewToggle}
+    />
   );
 };
