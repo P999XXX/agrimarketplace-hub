@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchTeamMembers } from "./team-members/useTeamMembersQuery";
+import { useTeamMembersQuery } from "./team-members/useTeamMembersQuery";
 
 export interface TeamMember {
   id: string;
@@ -17,10 +16,5 @@ export interface TeamMember {
 }
 
 export const useTeamMembers = (searchQuery: string, roleFilter: string, statusFilter: string, sortBy: string) => {
-  return useQuery({
-    queryKey: ['team-members', searchQuery, roleFilter, statusFilter, sortBy],
-    queryFn: () => fetchTeamMembers(searchQuery, roleFilter, statusFilter, sortBy),
-    staleTime: 1000 * 60,
-    retry: 1,
-  });
+  return useTeamMembersQuery();
 };

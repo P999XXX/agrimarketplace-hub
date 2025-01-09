@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { TeamMember } from "../useTeamMembers";
+import type { TeamMember } from "@/components/team-members/types";
 
-// Mock data für Entwicklung
 const mockTeamMembers: TeamMember[] = [
   {
     id: '1',
@@ -11,17 +10,17 @@ const mockTeamMembers: TeamMember[] = [
     status: 'active',
     created_at: new Date().toISOString(),
     last_login: new Date().toISOString(),
+    invited_by: 'admin-user',
+    inviter: {
+      first_name: 'Admin',
+      last_name: 'User'
+    }
   }
 ];
 
-export const useTeamMembers = (
-  searchQuery: string, 
-  roleFilter: string, 
-  statusFilter: string, 
-  sortBy: string
-) => {
+export const useTeamMembersQuery = () => {
   return useQuery({
-    queryKey: ['team-members', searchQuery, roleFilter, statusFilter, sortBy],
+    queryKey: ['team-members'],
     queryFn: () => Promise.resolve(mockTeamMembers),
   });
 };
