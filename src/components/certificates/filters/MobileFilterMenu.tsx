@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ListFilter, Grid, Download, Table as TableIcon } from "lucide-react";
+import { Grid, Download, Table as TableIcon } from "lucide-react";
+import { CommonMobileFilterButtons } from "@/components/common/filters/CommonMobileFilterButtons";
 
 interface MobileFilterMenuProps {
   categoryFilter: string;
@@ -36,12 +36,7 @@ export const MobileFilterMenu = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className="h-10 shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-        >
-          <ListFilter className="h-4 w-4" />
-        </Button>
+        <CommonMobileFilterButtons onClick={() => {}} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
         <DropdownMenuItem 
