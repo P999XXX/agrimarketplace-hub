@@ -3,12 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "../InviteMemberForm";
 import { TeamMembersFilters } from "../TeamMembersFilters";
-import { Dispatch, SetStateAction } from "react";
 import { ActiveFiltersChips } from "../filters/ActiveFiltersChips";
 
 interface TeamMembersHeaderProps {
   view: "grid" | "table";
-  onViewChange: Dispatch<SetStateAction<"grid" | "table">>;
+  setView: (view: "grid" | "table") => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   roleFilter: string;
@@ -17,14 +16,13 @@ interface TeamMembersHeaderProps {
   setStatusFilter: (status: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
-  onExportCSV: () => void;
   isMobile: boolean;
   hasActiveFilters: boolean;
 }
 
-export const TeamMembersHeader = ({ 
-  view, 
-  onViewChange,
+export const TeamMembersHeader = ({
+  view,
+  setView,
   searchQuery,
   setSearchQuery,
   roleFilter,
@@ -33,7 +31,6 @@ export const TeamMembersHeader = ({
   setStatusFilter,
   sortBy,
   setSortBy,
-  onExportCSV,
   isMobile,
   hasActiveFilters
 }: TeamMembersHeaderProps) => {
@@ -63,7 +60,7 @@ export const TeamMembersHeader = ({
 
       <TeamMembersFilters
         viewMode={view}
-        setViewMode={onViewChange}
+        setViewMode={setView}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         roleFilter={roleFilter}
@@ -72,7 +69,7 @@ export const TeamMembersHeader = ({
         setStatusFilter={setStatusFilter}
         sortBy={sortBy}
         setSortBy={setSortBy}
-        onExportCSV={onExportCSV}
+        onExportCSV={() => {}}
         isMobile={isMobile}
       />
 

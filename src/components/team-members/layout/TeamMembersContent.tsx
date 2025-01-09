@@ -1,10 +1,9 @@
-import { TeamMembersGrid } from "../TeamMembersGrid";
-import { TeamMembersTable } from "../TeamMembersTable";
-import { MobileInviteButton } from "../MobileInviteButton";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { TeamMembersProvider, useTeamMembersContext } from "../providers/TeamMembersProvider";
 import { TeamMembersHeader } from "./TeamMembersHeader";
+import { TeamMembersViewContent } from "./TeamMembersViewContent";
+import { CommonMobileActionButton } from "@/components/common/mobile/CommonMobileActionButton";
+import { InviteMemberForm } from "../InviteMemberForm";
 
 const TeamMembersContentView = () => {
   const {
@@ -29,8 +28,8 @@ const TeamMembersContentView = () => {
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
         <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-3.6 dark:bg-black/10 bg-white/70 backdrop-blur-md md:z-[5] z-[20] transition-shadow duration-200">
           <TeamMembersHeader 
-            view={view} 
-            onViewChange={setView}
+            view={view}
+            setView={setView}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             roleFilter={roleFilter}
@@ -39,36 +38,26 @@ const TeamMembersContentView = () => {
             setStatusFilter={setStatusFilter}
             sortBy={sortBy}
             setSortBy={setSortBy}
-            onExportCSV={() => {}}
             isMobile={isMobile}
             hasActiveFilters={hasActiveFilters}
           />
         </div>
 
-        <ScrollArea 
-          className="flex-1 relative md:pb-0 pb-20" 
+        <TeamMembersViewContent 
+          view={view}
+          searchQuery={searchQuery}
+          roleFilter={roleFilter}
+          statusFilter={statusFilter}
+          sortBy={sortBy}
           onScroll={handleScroll}
-        >
-          <div className="p-4">
-            {view === "grid" ? (
-              <TeamMembersGrid
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                statusFilter={statusFilter}
-                sortBy={sortBy}
-              />
-            ) : (
-              <TeamMembersTable
-                searchQuery={searchQuery}
-                roleFilter={roleFilter}
-                statusFilter={statusFilter}
-                sortBy={sortBy}
-              />
-            )}
-          </div>
-        </ScrollArea>
+        />
         
-        <MobileInviteButton />
+        <CommonMobileActionButton
+          title="Invite Team Member"
+          buttonText="Invite Member"
+        >
+          <InviteMemberForm />
+        </CommonMobileActionButton>
       </div>
     </DashboardContent>
   );
