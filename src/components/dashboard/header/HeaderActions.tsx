@@ -13,7 +13,7 @@ export const HeaderActions = () => {
         <HeaderLogo />
         <DashboardBreadcrumb />
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <MessageSquare className="h-5 w-5" />
         </button>
