@@ -6,8 +6,6 @@ import { Certificate } from "../types";
 import { CommonCard } from "@/components/common/card/CommonCard";
 import { CommonAvatar } from "@/components/common/avatar/CommonAvatar";
 import { getInitials, getColorScheme } from "@/utils/colorSchemes";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 interface CertificateCardProps {
   certificate: Certificate;
@@ -25,78 +23,9 @@ const getStatusBadgeClass = (status: string) => {
 };
 
 export const CertificateCard = ({ certificate }: CertificateCardProps) => {
-  const { toast } = useToast();
   const initials = getInitials(certificate.name, '');
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(certificate.created_at).getTime() < 3000;
-
-  const handleDownload = async () => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('certificates')
-        .download(certificate.file_path);
-
-      if (error) {
-        throw error;
-      }
-
-      // Erstelle einen Blob aus den Daten
-      const blob = new Blob([data], { type: certificate.file_type });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = certificate.name;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-
-      toast({
-        title: "Download started",
-        description: `Downloading ${certificate.name}`,
-      });
-    } catch (error) {
-      console.error('Download error:', error);
-      toast({
-        title: "Download failed",
-        description: "Could not download the certificate. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      const { error: storageError } = await supabase.storage
-        .from('certificates')
-        .remove([certificate.file_path]);
-
-      if (storageError) {
-        throw storageError;
-      }
-
-      const { error: dbError } = await supabase
-        .from('certificates')
-        .update({ deleted_at: new Date().toISOString() })
-        .eq('id', certificate.id);
-
-      if (dbError) {
-        throw dbError;
-      }
-
-      toast({
-        title: "Certificate deleted",
-        description: `${certificate.name} has been deleted successfully.`,
-      });
-    } catch (error) {
-      console.error('Delete error:', error);
-      toast({
-        title: "Delete failed",
-        description: "Could not delete the certificate. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
 
   const header = (
     <div className="flex items-start justify-between">
@@ -140,7 +69,6 @@ export const CertificateCard = ({ certificate }: CertificateCardProps) => {
         variant="ghost" 
         size="icon"
         className="h-8 w-8"
-        onClick={handleDownload}
       >
         <Download className="h-4 w-4" />
         <span className="sr-only">Download certificate</span>
@@ -149,7 +77,6 @@ export const CertificateCard = ({ certificate }: CertificateCardProps) => {
         variant="ghost" 
         size="icon"
         className="h-8 w-8"
-        onClick={handleDelete}
       >
         <Trash2 className="h-4 w-4" />
         <span className="sr-only">Delete certificate</span>
