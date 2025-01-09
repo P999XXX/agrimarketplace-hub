@@ -28,9 +28,9 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="cropio-theme">
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider defaultTheme="light" storageKey="cropio-theme">
+        <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <Toaster />
             <Sonner />
@@ -68,9 +68,9 @@ const App = () => {
               </Routes>
             </BrowserRouter>
           </TooltipProvider>
-        </AuthProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 };
 
