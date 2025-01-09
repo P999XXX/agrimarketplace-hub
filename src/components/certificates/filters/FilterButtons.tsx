@@ -105,24 +105,18 @@ export const FilterButtons = ({
       </DropdownMenu>
 
       {showViewToggle && (
-        <div className="flex items-center gap-0.5">
-          <Button
-            variant={viewMode === "grid" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setViewMode("grid")}
-            className="h-9 shadow-sm"
-          >
-            <LayoutGrid className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={viewMode === "table" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setViewMode("table")}
-            className="h-9 shadow-sm"
-          >
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+          className="h-9 shadow-sm"
+        >
+          {viewMode === "grid" ? (
             <LayoutList className="h-4 w-4" />
-          </Button>
-        </div>
+          ) : (
+            <LayoutGrid className="h-4 w-4" />
+          )}
+        </Button>
       )}
 
       <Button variant="outline" size="sm" onClick={onExportCSV} className="h-9 shadow-sm">
