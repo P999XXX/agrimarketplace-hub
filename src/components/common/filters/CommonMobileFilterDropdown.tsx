@@ -8,7 +8,12 @@ import {
   DropdownMenuGroup,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
-import { Menu, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Menu, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 interface FilterOption {
@@ -37,6 +42,7 @@ export const CommonMobileFilterDropdown = ({
   onExport,
 }: CommonMobileFilterDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeGroup, setActiveGroup] = useState<FilterGroup | null>(null);
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -53,32 +59,51 @@ export const CommonMobileFilterDropdown = ({
         align="end" 
         className="w-[280px] bg-background border border-border"
       >
-        {groups.map((group, index) => (
+        {groups.map((group) => (
           <div key={group.label}>
-            {index > 0 && <DropdownMenuSeparator />}
-            <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
-              {group.label}
-            </DropdownMenuLabel>
-            <DropdownMenuGroup>
-              {group.options.map((option) => (
+            <Popover>
+              <PopoverTrigger asChild>
                 <DropdownMenuItem
-                  key={option.value}
-                  onClick={() => {
-                    group.onChange(option.value);
+                  className="cursor-pointer px-2 py-1.5"
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    setActiveGroup(group);
                   }}
-                  className={`cursor-pointer px-2 py-1.5 ${
-                    group.value === option.value ? "bg-accent" : ""
-                  }`}
                 >
-                  <div className="flex items-center gap-2 w-full pl-2">
-                    <span>{option.label}</span>
-                    {group.value === option.value && (
-                      <ChevronUp className="h-4 w-4 ml-auto" />
-                    )}
+                  <div className="flex items-center justify-between w-full pl-2">
+                    <span>{group.label}</span>
+                    <ChevronRight className="h-4 w-4 ml-auto" />
                   </div>
                 </DropdownMenuItem>
-              ))}
-            </DropdownMenuGroup>
+              </PopoverTrigger>
+              <PopoverContent
+                side="right"
+                align="start"
+                className="w-[200px] p-0 bg-background border border-border"
+              >
+                <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
+                  {group.label} Options
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {group.options.map((option) => (
+                  <DropdownMenuItem
+                    key={option.value}
+                    className="cursor-pointer px-2 py-1.5"
+                    onSelect={() => {
+                      group.onChange(option.value);
+                      setIsOpen(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-2 w-full pl-2">
+                      <span>{option.label}</span>
+                      {group.value === option.value && (
+                        <span className="ml-auto">✓</span>
+                      )}
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </PopoverContent>
+            </Popover>
           </div>
         ))}
 
@@ -93,7 +118,6 @@ export const CommonMobileFilterDropdown = ({
                 >
                   <div className="flex items-center gap-2 w-full pl-2">
                     <span>Change view</span>
-                    <ChevronDown className="h-4 w-4 ml-auto" />
                   </div>
                 </DropdownMenuItem>
               )}
