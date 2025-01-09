@@ -1,5 +1,13 @@
-import { Filter } from "lucide-react";
-import { CommonFilterButtons } from "@/components/common/filters/CommonFilterButtons";
+import { Filter, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { ViewToggle } from "@/components/common/views/ViewToggle";
+import { ExportButton } from "@/components/common/actions/ExportButton";
 
 interface FilterButtonsProps {
   categoryFilter: string;
@@ -27,51 +35,124 @@ export const FilterButtons = ({
   onExportCSV,
   showViewToggle = true,
 }: FilterButtonsProps) => {
-  const filters = [
-    {
-      icon: <Filter className="h-4 w-4 mr-2" />,
-      label: "Category",
-      value: categoryFilter,
-      onChange: setCategoryFilter,
-      options: [
-        { value: "all", label: "All Categories" },
-        { value: "organic", label: "Organic" },
-        { value: "quality", label: "Quality" },
-        { value: "safety", label: "Safety" },
-      ],
-    },
-    {
-      icon: <Filter className="h-4 w-4 mr-2" />,
-      label: "Status",
-      value: statusFilter,
-      onChange: setStatusFilter,
-      options: [
-        { value: "all", label: "All Status" },
-        { value: "valid", label: "Valid" },
-        { value: "expired", label: "Expired" },
-      ],
-    },
-    {
-      icon: <Filter className="h-4 w-4 mr-2" />,
-      label: "Sort",
-      value: sortBy,
-      onChange: setSortBy,
-      options: [
-        { value: "name-asc", label: "Name (A-Z)" },
-        { value: "name-desc", label: "Name (Z-A)" },
-        { value: "date-asc", label: "Date (Oldest)" },
-        { value: "date-desc", label: "Date (Newest)" },
-      ],
-    },
-  ];
+  const getCategoryLabel = () => {
+    switch (categoryFilter) {
+      case "organic":
+        return "Organic";
+      case "quality":
+        return "Quality";
+      case "safety":
+        return "Safety";
+      default:
+        return "All Categories";
+    }
+  };
+
+  const getStatusLabel = () => {
+    switch (statusFilter) {
+      case "valid":
+        return "Valid";
+      case "expired":
+        return "Expired";
+      default:
+        return "All Status";
+    }
+  };
+
+  const getSortLabel = () => {
+    switch (sortBy) {
+      case "name-asc":
+        return "Name (A-Z)";
+      case "name-desc":
+        return "Name (Z-A)";
+      case "date-asc":
+        return "Date (Oldest)";
+      case "date-desc":
+        return "Date (Newest)";
+      default:
+        return "Sort by";
+    }
+  };
 
   return (
-    <CommonFilterButtons
-      filters={filters}
-      viewMode={viewMode}
-      setViewMode={setViewMode}
-      onExport={onExportCSV}
-      showViewToggle={showViewToggle}
-    />
+    <div className="flex items-center gap-2">
+      {/* Category Dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="h-10 gap-2">
+            <Filter className="h-4 w-4" />
+            {getCategoryLabel()}
+            <ChevronDown className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px] bg-popover border border-border shadow-md">
+          <DropdownMenuItem onClick={() => setCategoryFilter("all")}>
+            All Categories
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCategoryFilter("organic")}>
+            Organic
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCategoryFilter("quality")}>
+            Quality
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCategoryFilter("safety")}>
+            Safety
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Status Dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="h-10 gap-2">
+            <Filter className="h-4 w-4" />
+            {getStatusLabel()}
+            <ChevronDown className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px] bg-popover border border-border shadow-md">
+          <DropdownMenuItem onClick={() => setStatusFilter("all")}>
+            All Status
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setStatusFilter("valid")}>
+            Valid
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setStatusFilter("expired")}>
+            Expired
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Sort Dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="h-10 gap-2">
+            <Filter className="h-4 w-4" />
+            {getSortLabel()}
+            <ChevronDown className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px] bg-popover border border-border shadow-md">
+          <DropdownMenuItem onClick={() => setSortBy("name-asc")}>
+            Name (A-Z)
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSortBy("name-desc")}>
+            Name (Z-A)
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSortBy("date-asc")}>
+            Date (Oldest)
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSortBy("date-desc")}>
+            Date (Newest)
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {showViewToggle && (
+        <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
+      )}
+
+      <ExportButton onClick={onExportCSV} />
+    </div>
   );
 };
