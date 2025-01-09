@@ -4,13 +4,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { ListFilter, Grid, Download, Table as TableIcon } from "lucide-react";
+import { Grid, Download, Table as TableIcon } from "lucide-react";
 import { RoleFilter } from "@/components/team-members/filters/RoleFilter";
 import { StatusFilter } from "@/components/team-members/filters/StatusFilter";
 import { SortFilter } from "@/components/team-members/filters/SortFilter";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { CommonMobileFilterButtons } from "./CommonMobileFilterButtons";
 
 interface CommonMobileFilterMenuProps {
   roleFilter?: string;
@@ -45,7 +45,7 @@ export const CommonMobileFilterMenu = ({
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
-    if (isOpen) {
+    if (!isMobile) {
       setIsOpen(false);
     }
   }, [isMobile]);
@@ -78,13 +78,7 @@ export const CommonMobileFilterMenu = ({
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
-        >
-          <ListFilter className="h-4 w-4" />
-        </Button>
+        <CommonMobileFilterButtons onClick={() => setIsOpen(true)} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
         {showRoleFilter && roleFilter && setRoleFilter && (
