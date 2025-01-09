@@ -3,6 +3,7 @@ import { TeamMembersGrid } from "./TeamMembersGrid";
 import { TeamMembersTable } from "./TeamMembersTable";
 import { TeamMembersFilters } from "./TeamMembersFilters";
 import { MobileInviteButton } from "./MobileInviteButton";
+import { ActiveFiltersChips } from "./filters/ActiveFiltersChips";
 import { useState, useEffect } from "react";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -48,6 +49,8 @@ export const TeamMembersContent = () => {
     setIsScrolled(scrollTop > 0);
   };
 
+  const hasActiveFilters = roleFilter !== "all" || statusFilter !== "all" || sortBy !== "created_at-desc";
+
   return (
     <DashboardContent>
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
@@ -71,6 +74,17 @@ export const TeamMembersContent = () => {
             onExportCSV={() => {}}
             isMobile={isMobile}
           />
+          
+          {isMobile && hasActiveFilters && (
+            <ActiveFiltersChips
+              roleFilter={roleFilter}
+              statusFilter={statusFilter}
+              sortBy={sortBy}
+              setRoleFilter={setRoleFilter}
+              setStatusFilter={setStatusFilter}
+              setSortBy={setSortBy}
+            />
+          )}
         </div>
 
         <ScrollArea 
