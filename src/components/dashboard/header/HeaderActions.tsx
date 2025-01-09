@@ -3,7 +3,7 @@ import { UserAvatar } from "../UserAvatar";
 import { MobileNav } from "../mobile/MobileNav";
 import { HeaderLogo } from "./HeaderLogo";
 import { DashboardBreadcrumb } from "./DashboardBreadcrumb";
-import { UserAccountPopover } from "./UserAccountPopover";
+import { UserAccountPopover } from "./user-account/UserAccountPopover";
 
 export const HeaderActions = () => {
   return (

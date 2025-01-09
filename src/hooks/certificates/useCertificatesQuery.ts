@@ -7,15 +7,16 @@ const mockCertificates: Certificate[] = [
     company_id: '1',
     name: 'Sample Certificate',
     category: 'organic',
-    status: 'valid',
-    created_at: new Date().toISOString(),
-    expiry_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    description: 'Sample certificate description',
     file_path: '/sample.pdf',
     file_type: 'pdf',
     file_size: 1024,
-    description: 'Sample certificate description',
-    issuer: 'Sample Issuer',
-    certificate_number: 'CERT-001'
+    uploaded_by: 'John Doe',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    expiry_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    status: 'valid',
+    version: 1
   }
 ];
 
