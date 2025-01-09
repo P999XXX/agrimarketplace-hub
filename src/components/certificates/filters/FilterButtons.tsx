@@ -1,6 +1,5 @@
 import { Filter } from "lucide-react";
 import { CommonFilterButtons } from "@/components/common/filters/CommonFilterButtons";
-import { useCertificateCategoriesQuery } from "@/hooks/certificates/useCertificateCategoriesQuery";
 
 interface FilterButtonsProps {
   categoryFilter: string;
@@ -28,23 +27,18 @@ export const FilterButtons = ({
   onExportCSV,
   showViewToggle = true,
 }: FilterButtonsProps) => {
-  const { data: categories } = useCertificateCategoriesQuery();
-
-  const categoryOptions = [
-    { value: "all", label: "All Categories" },
-    ...(categories?.map((category) => ({
-      value: category.category_type.toLowerCase(),
-      label: category.category_type,
-    })) ?? []),
-  ];
-
   const filters = [
     {
       icon: <Filter className="h-4 w-4" />,
       label: "Category",
       value: categoryFilter,
       onChange: setCategoryFilter,
-      options: categoryOptions,
+      options: [
+        { value: "all", label: "All Categories" },
+        { value: "organic", label: "Organic" },
+        { value: "quality", label: "Quality" },
+        { value: "safety", label: "Safety" },
+      ],
     },
     {
       icon: <Filter className="h-4 w-4" />,
