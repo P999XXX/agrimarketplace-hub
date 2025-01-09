@@ -1,8 +1,5 @@
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { CommonFormSheet } from "@/components/common/sheet/CommonFormSheet";
 import { CertificateForm } from "./forms/CertificateForm";
+import { CommonFormSheet } from "@/components/common/sheet/CommonFormSheet";
 
 export const MobileAddButton = () => {
   return (
@@ -10,6 +7,7 @@ export const MobileAddButton = () => {
       <CommonFormSheet
         title="Add New Certificate"
         triggerButtonText="Add Certificate"
+        fullWidthTrigger
       >
         <CertificateForm />
       </CommonFormSheet>
