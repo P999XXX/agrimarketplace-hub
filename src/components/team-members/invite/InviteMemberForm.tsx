@@ -42,9 +42,7 @@ export const InviteMemberForm = () => {
       </ScrollArea>
 
       <div className="border-t">
-        <div className="p-5">
-          <InviteFormFooter isLoading={isLoading} />
-        </div>
+        <InviteFormFooter isLoading={isLoading} />
       </div>
       
       <SheetClose ref={closeButtonRef} className="hidden" />
