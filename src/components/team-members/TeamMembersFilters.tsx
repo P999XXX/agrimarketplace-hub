@@ -1,6 +1,6 @@
 import { SearchInput } from "./filters/SearchInput";
 import { FilterButtons } from "./filters/FilterButtons";
-import { MobileFilterMenu } from "./filters/MobileFilterMenu";
+import { CommonMobileFilterDropdown } from "@/components/common/filters/CommonMobileFilterDropdown";
 
 interface TeamMembersFiltersProps {
   viewMode: "grid" | "table";
@@ -31,11 +31,44 @@ export const TeamMembersFilters = ({
   onExportCSV,
   isMobile,
 }: TeamMembersFiltersProps) => {
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+  const filterGroups = [
+    {
+      label: "Role",
+      value: roleFilter,
+      onChange: setRoleFilter,
+      options: [
+        { label: "All Roles", value: "all" },
+        { label: "Member", value: "member" },
+        { label: "Viewer", value: "viewer" },
+      ],
+    },
+    {
+      label: "Status",
+      value: statusFilter,
+      onChange: setStatusFilter,
+      options: [
+        { label: "All Status", value: "all" },
+        { label: "Pending", value: "pending" },
+        { label: "Accepted", value: "accepted" },
+        { label: "Declined", value: "declined" },
+      ],
+    },
+    {
+      label: "Sort",
+      value: sortBy,
+      onChange: setSortBy,
+      options: [
+        { label: "Newest First", value: "created_at-desc" },
+        { label: "Oldest First", value: "created_at-asc" },
+        { label: "Name A-Z", value: "name-asc" },
+        { label: "Name Z-A", value: "name-desc" },
+      ],
+    },
+  ];
 
-      {/* Desktop View */}
+  return (
+    <div className="flex items-center gap-4">
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <div className="hidden md:flex items-center gap-2">
         <FilterButtons
           roleFilter={roleFilter}
@@ -51,21 +84,12 @@ export const TeamMembersFilters = ({
           showViewToggle={!isMobile}
         />
       </div>
-
-      {/* Mobile View */}
       <div className="md:hidden">
-        <MobileFilterMenu
-          roleFilter={roleFilter}
-          setRoleFilter={setRoleFilter}
-          statusFilter={statusFilter}
-          setStatusFilter={setStatusFilter}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
+        <CommonMobileFilterDropdown
+          groups={filterGroups}
           viewMode={viewMode}
           setViewMode={setViewMode}
-          onExportCSV={onExportCSV}
-          searchQuery={searchQuery}
-          showViewToggle={false}
+          onExport={onExportCSV}
         />
       </div>
     </div>
