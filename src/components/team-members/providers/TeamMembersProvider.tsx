@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode } from 'react';
 import { useTeamMembersState } from '../hooks/useTeamMembersState';
-import { ViewMode } from '../types/TeamMember';
+import { ViewMode } from '../types';
 
 interface TeamMembersContextType {
   view: ViewMode;

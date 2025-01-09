@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from '@/hooks/use-media-query';
-import { ViewMode } from '../types/TeamMember';
+import { ViewMode } from '../types';
 
 export const useTeamMembersState = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
