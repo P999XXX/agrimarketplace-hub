@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { TeamMember } from "@/hooks/useTeamMembers";
 import { ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { TeamMemberDialog } from "../TeamMemberDialog";
 
 interface TeamMembersTableRowProps {
   member: TeamMember;
@@ -60,7 +59,6 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
   const [showHighlight, setShowHighlight] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     if (isNew) {
@@ -72,53 +70,42 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
   }, [isNew]);
 
   return (
-    <>
-      <TableRow 
-        className={`hover:bg-muted/50 ${showHighlight ? 'animate-highlight' : ''} cursor-pointer`}
-        onClick={() => setIsDialogOpen(true)}
-      >
-        <TableCell>
-          <div className="flex items-center gap-3">
-            <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>
-              {initials}
-            </div>
-            <span className="font-medium">
-              {member.name || 'Unnamed User'}
-            </span>
+    <TableRow className={`hover:bg-muted/50 ${showHighlight ? 'animate-highlight' : ''}`}>
+      <TableCell>
+        <div className="flex items-center gap-3">
+          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>
+            {initials}
           </div>
-        </TableCell>
-        <TableCell>
-          <EmailCell email={member.email} />
-        </TableCell>
-        <TableCell>
-          <Badge className={getRoleBadgeClass()}>
-            {member.role}
-          </Badge>
-        </TableCell>
-        <TableCell>
-          <Badge className={getStatusBadgeClass(member.status)}>
-            {member.status}
-          </Badge>
-        </TableCell>
-        <TableCell className="text-muted-foreground">
-          {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
-        </TableCell>
-        <TableCell className="text-muted-foreground">
-          {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
-        </TableCell>
-        <TableCell className="text-muted-foreground">
-          {format(new Date(member.created_at), 'MMM d, yyyy')}
-        </TableCell>
-        <TableCell>
-          <ChevronRight className="h-4 w-4 text-muted-foreground" />
-        </TableCell>
-      </TableRow>
-
-      <TeamMemberDialog 
-        member={member}
-        isOpen={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-      />
-    </>
+          <span className="font-medium">
+            {member.name || 'Unnamed User'}
+          </span>
+        </div>
+      </TableCell>
+      <TableCell>
+        <EmailCell email={member.email} />
+      </TableCell>
+      <TableCell>
+        <Badge className={getRoleBadgeClass()}>
+          {member.role}
+        </Badge>
+      </TableCell>
+      <TableCell>
+        <Badge className={getStatusBadgeClass(member.status)}>
+          {member.status}
+        </Badge>
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {format(new Date(member.created_at), 'MMM d, yyyy')}
+      </TableCell>
+      <TableCell>
+        <ChevronRight className="h-4 w-4 text-muted-foreground" />
+      </TableCell>
+    </TableRow>
   );
 };
