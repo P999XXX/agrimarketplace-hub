@@ -31,21 +31,16 @@ const TeamMembersContent = () => {
     },
   });
 
-  const filterGroups = [
+  const filterButtons = [
     {
       label: "Role",
       value: filters.role,
       onChange: (value: string) => updateFilter("role", value),
       icon: <Filter className="h-4 w-4" />,
-      groups: [
-        {
-          label: "Team Member Roles",
-          options: [
-            { label: "All roles", value: "all" },
-            { label: "Member", value: "member" },
-            { label: "Viewer", value: "viewer" },
-          ],
-        },
+      options: [
+        { label: "All roles", value: "all" },
+        { label: "Member", value: "member" },
+        { label: "Viewer", value: "viewer" },
       ],
     },
     {
@@ -53,16 +48,11 @@ const TeamMembersContent = () => {
       value: filters.status,
       onChange: (value: string) => updateFilter("status", value),
       icon: <Filter className="h-4 w-4" />,
-      groups: [
-        {
-          label: "Member Status",
-          options: [
-            { label: "All Status", value: "all" },
-            { label: "Pending", value: "pending" },
-            { label: "Accepted", value: "accepted" },
-            { label: "Declined", value: "declined" },
-          ],
-        },
+      options: [
+        { label: "All Status", value: "all" },
+        { label: "Pending", value: "pending" },
+        { label: "Accepted", value: "accepted" },
+        { label: "Declined", value: "declined" },
       ],
     },
     {
@@ -70,21 +60,40 @@ const TeamMembersContent = () => {
       value: sortBy,
       onChange: setSortBy,
       icon: <Filter className="h-4 w-4" />,
-      groups: [
-        {
-          label: "Sort by Date",
-          options: [
-            { label: "Newest first", value: "created_at-desc" },
-            { label: "Oldest first", value: "created_at-asc" },
-          ],
-        },
-        {
-          label: "Sort by Name",
-          options: [
-            { label: "Name A-Z", value: "name-asc" },
-            { label: "Name Z-A", value: "name-desc" },
-          ],
-        },
+      options: [
+        { label: "Newest first", value: "created_at-desc" },
+        { label: "Oldest first", value: "created_at-asc" },
+        { label: "Name A-Z", value: "name-asc" },
+        { label: "Name Z-A", value: "name-desc" },
+      ],
+    },
+  ];
+
+  const filterGroups = [
+    {
+      label: "Team Member Roles",
+      options: [
+        { label: "All roles", value: "all" },
+        { label: "Member", value: "member" },
+        { label: "Viewer", value: "viewer" },
+      ],
+    },
+    {
+      label: "Member Status",
+      options: [
+        { label: "All Status", value: "all" },
+        { label: "Pending", value: "pending" },
+        { label: "Accepted", value: "accepted" },
+        { label: "Declined", value: "declined" },
+      ],
+    },
+    {
+      label: "Sort by",
+      options: [
+        { label: "Newest first", value: "created_at-desc" },
+        { label: "Oldest first", value: "created_at-asc" },
+        { label: "Name A-Z", value: "name-asc" },
+        { label: "Name Z-A", value: "name-desc" },
       ],
     },
   ];
@@ -165,7 +174,7 @@ const TeamMembersContent = () => {
 
             <div className="hidden md:flex items-center gap-2">
               <CommonFilterButtons
-                filters={filterGroups}
+                filters={filterButtons}
                 viewMode={view}
                 setViewMode={setView}
                 onExport={() => {}}
