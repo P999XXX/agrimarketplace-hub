@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { CertificateForm } from "./forms/CertificateForm";
 
 export const MobileAddButton = () => {
   return (
@@ -16,7 +17,7 @@ export const MobileAddButton = () => {
           <SheetHeader className="text-left">
             <SheetTitle className="text-2xl">Add New Certificate</SheetTitle>
           </SheetHeader>
-          {/* Certificate form will be added here */}
+          <CertificateForm />
         </SheetContent>
       </Sheet>
     </div>

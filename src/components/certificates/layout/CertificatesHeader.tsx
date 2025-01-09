@@ -5,6 +5,7 @@ import { CertificatesFilters } from "../filters/CertificatesFilters";
 import { Dispatch, SetStateAction } from "react";
 import { ActiveFiltersChips } from "../filters/ActiveFiltersChips";
 import { ViewMode } from "../types";
+import { CertificateForm } from "../forms/CertificateForm";
 
 interface CertificatesHeaderProps {
   view: ViewMode;
@@ -55,7 +56,7 @@ export const CertificatesHeader = ({
               <SheetHeader className="text-left">
                 <SheetTitle className="text-2xl">Add New Certificate</SheetTitle>
               </SheetHeader>
-              {/* Certificate form will be added here */}
+              <CertificateForm />
             </SheetContent>
           </Sheet>
         </div>
