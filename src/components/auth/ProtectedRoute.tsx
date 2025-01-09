@@ -15,19 +15,31 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+
     const checkAuth = async () => {
       try {
         const { data: { session: currentSession }, error } = await supabase.auth.getSession();
+        
+        if (!mounted) return;
         
         console.log("Current session status:", currentSession ? "Active" : "None");
         
         if (error) {
           console.error("Session check error:", error);
-          toast({
-            title: "Authentication Error",
-            description: "Please sign in again",
-            variant: "destructive",
-          });
+          if (error.message.includes('session_not_found')) {
+            toast({
+              title: "Session expired",
+              description: "Please sign in again",
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: "Authentication Error",
+              description: "Please try signing in again",
+              variant: "destructive",
+            });
+          }
           navigate("/signin");
           return;
         }
@@ -46,12 +58,14 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         setIsCheckingAuth(false);
       } catch (error) {
         console.error("Auth check error:", error);
-        toast({
-          title: "Authentication Error",
-          description: "Please try signing in again",
-          variant: "destructive",
-        });
-        navigate("/signin");
+        if (mounted) {
+          toast({
+            title: "Authentication Error",
+            description: "Please try signing in again",
+            variant: "destructive",
+          });
+          navigate("/signin");
+        }
       }
     };
 
@@ -60,13 +74,16 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-      console.log("Auth state changed:", event);
-      if (event === 'SIGNED_OUT') {
-        navigate("/signin");
+      if (mounted) {
+        console.log("Auth state changed:", event);
+        if (event === 'SIGNED_OUT') {
+          navigate("/signin");
+        }
       }
     });
 
     return () => {
+      mounted = false;
       subscription.unsubscribe();
     };
   }, [navigate, toast, isLoading]);
