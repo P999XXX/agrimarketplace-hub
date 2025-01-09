@@ -53,7 +53,7 @@ export const CertificatesHeader = ({
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
-              <SheetHeader className="text-left">
+              <SheetHeader className="text-left mb-4">
                 <SheetTitle className="text-2xl">Add New Certificate</SheetTitle>
               </SheetHeader>
               <CertificateForm />

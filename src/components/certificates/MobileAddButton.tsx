@@ -13,8 +13,8 @@ export const MobileAddButton = () => {
             Add Certificate
           </Button>
         </SheetTrigger>
-        <SheetContent className="w-full sm:max-w-lg">
-          <SheetHeader className="text-left">
+        <SheetContent side="bottom" className="h-[85vh] w-full">
+          <SheetHeader className="text-left mb-4">
             <SheetTitle className="text-2xl">Add New Certificate</SheetTitle>
           </SheetHeader>
           <CertificateForm />
