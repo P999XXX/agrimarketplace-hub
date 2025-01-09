@@ -26,26 +26,18 @@ export const FilterDropdownButton = ({
   onChange,
   options,
 }: FilterDropdownButtonProps) => {
-  const selectedOption = options.find(option => option.value === value);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button 
-          variant="outline" 
-          className="h-10 shadow-sm w-[180px] flex justify-between items-center bg-background"
-        >
-          <div className="flex items-center gap-2 truncate">
+        <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
+          <div className="flex items-center">
             {icon}
-            <span className="truncate">{selectedOption?.label || label}</span>
+            <span>{label}</span>
           </div>
-          <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
+          <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        className="w-[180px] bg-popover"
-      >
+      <DropdownMenuContent align="end" className="w-[180px]">
         {options.map((option) => (
           <DropdownMenuItem
             key={option.value}
