@@ -66,11 +66,11 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       </div>
       <div className="flex justify-between items-center">
         <span>Date:</span>
-        <span>{format(time, 'PP')}</span>
+        <span className="w-[120px] text-right">{format(time, 'PP')}</span>
       </div>
       <div className="flex justify-between items-center">
         <span>Time:</span>
-        <span>{timeZone} {format(time, 'h:mm:ss a')}</span>
+        <span className="w-[200px] text-right font-mono">{timeZone} {format(time, 'h:mm:ss a')}</span>
       </div>
     </div>
   );
