@@ -1,9 +1,12 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { EmailCell } from "../EmailCell";
-import { format } from "date-fns";
-import { TeamMember } from "@/hooks/useTeamMembers";
 import { ChevronRight } from "lucide-react";
+import { TeamMember } from "@/hooks/useTeamMembers";
+import { TableUserAvatar } from "./TableUserAvatar";
+import { StatusBadge } from "../components/badges/StatusBadge";
+import { RoleBadge } from "../components/badges/RoleBadge";
+import { TableCellDate } from "../components/table/TableCellDate";
+import { getColorScheme, getInitials } from "../utils/colorSchemes";
 import { useState, useEffect } from "react";
 
 interface TeamMembersTableRowProps {
@@ -11,51 +14,7 @@ interface TeamMembersTableRowProps {
 }
 
 export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
-  const getInitials = (name: string, email: string) => {
-    if (name) {
-      const nameParts = name.split(' ');
-      if (nameParts.length >= 2) {
-        return (nameParts[0][0] + nameParts[1][0]).toUpperCase();
-      }
-      return (name[0] + (nameParts[0][1] || '')).toUpperCase();
-    }
-    return email ? (email[0] + (email[1] || '')).toUpperCase() : '??';
-  };
-
   const initials = getInitials(member.name || '', member.email);
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active':
-      case 'accepted':
-        return 'bg-green-100 text-green-700 hover:bg-green-200';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
-      case 'declined':
-      case 'inactive':
-        return 'bg-red-100 text-red-700 hover:bg-red-200';
-      default:
-        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-    }
-  };
-
-  const getRoleBadgeClass = () => {
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
-  };
-
-  const colorSchemes = [
-    { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
-    { bg: 'bg-[hsl(var(--chart-2))]', text: 'text-white' },
-    { bg: 'bg-[hsl(var(--chart-3))]', text: 'text-white' },
-    { bg: 'bg-[hsl(var(--chart-4))]', text: 'text-white' },
-    { bg: 'bg-[hsl(var(--chart-5))]', text: 'text-white' },
-  ];
-
-  const getColorScheme = (initials: string) => {
-    const sum = initials.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return colorSchemes[sum % colorSchemes.length];
-  };
-
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
   const [showHighlight, setShowHighlight] = useState(false);
@@ -72,37 +31,26 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
   return (
     <TableRow className={`hover:bg-muted/50 ${showHighlight ? 'animate-highlight' : ''}`}>
       <TableCell>
-        <div className="flex items-center gap-3">
-          <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>
-            {initials}
-          </div>
-          <span className="font-medium">
-            {member.name || 'Unnamed User'}
-          </span>
-        </div>
+        <TableUserAvatar
+          initials={initials}
+          colorScheme={colorScheme}
+          name={member.name}
+        />
       </TableCell>
       <TableCell>
         <EmailCell email={member.email} />
       </TableCell>
       <TableCell>
-        <Badge className={getRoleBadgeClass()}>
-          {member.role}
-        </Badge>
+        <RoleBadge role={member.role} />
       </TableCell>
       <TableCell>
-        <Badge className={getStatusBadgeClass(member.status)}>
-          {member.status}
-        </Badge>
+        <StatusBadge status={member.status} />
       </TableCell>
-      <TableCell className="text-muted-foreground">
-        {member.last_login ? format(new Date(member.last_login), 'MMM d, yyyy') : 'Never'}
-      </TableCell>
+      <TableCellDate date={member.last_login} />
       <TableCell className="text-muted-foreground">
         {member.inviter?.first_name || ''} {member.inviter?.last_name || ''}
       </TableCell>
-      <TableCell className="text-muted-foreground">
-        {format(new Date(member.created_at), 'MMM d, yyyy')}
-      </TableCell>
+      <TableCellDate date={member.created_at} />
       <TableCell className="text-right p-0 pr-4">
         <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto" />
       </TableCell>
