@@ -13,14 +13,28 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { session, isLoading, error } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !session) {
-      toast({
-        title: "Authentication required",
-        description: "Please sign in to access this page",
-        variant: "destructive",
-      });
-      navigate("/signin");
-    }
+    const checkAuth = async () => {
+      try {
+        if (!isLoading && !session) {
+          toast({
+            title: "Authentication required",
+            description: "Please sign in to access this page",
+            variant: "destructive",
+          });
+          navigate("/signin");
+        }
+      } catch (error) {
+        console.error("Auth check error:", error);
+        toast({
+          title: "Authentication Error",
+          description: "Please try signing in again",
+          variant: "destructive",
+        });
+        navigate("/signin");
+      }
+    };
+
+    checkAuth();
   }, [session, isLoading, navigate, toast]);
 
   if (isLoading) {
