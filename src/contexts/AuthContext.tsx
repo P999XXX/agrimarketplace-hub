@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 interface AuthContextType {
   session: Session | null;
@@ -13,16 +12,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const PUBLIC_ROUTES = ['/signin', '/signup', '/reset-password'];
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { toast } = useToast();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     let mounted = true;
@@ -32,36 +27,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsLoading(true);
         const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
         
+        if (!mounted) return;
+        
         if (sessionError) {
-          if (sessionError.message.includes('session_not_found')) {
-            if (!PUBLIC_ROUTES.includes(location.pathname)) {
-              navigate('/signin');
-            }
-            return;
+          // Nur einen Toast anzeigen, wenn es sich nicht um einen "session_not_found" Fehler handelt
+          if (!sessionError.message.includes('session_not_found')) {
+            toast({
+              title: "Session Error",
+              description: "There was a problem with your session",
+              variant: "destructive",
+            });
           }
-          throw sessionError;
+          return;
         }
 
-        if (mounted) {
-          if (initialSession) {
-            setSession(initialSession);
-            setUser(initialSession.user);
-          } else if (!PUBLIC_ROUTES.includes(location.pathname)) {
-            navigate('/signin');
-          }
+        if (initialSession) {
+          setSession(initialSession);
+          setUser(initialSession.user);
         }
       } catch (error) {
         console.error('Initial session error:', error);
         if (mounted) {
           setError(error as Error);
-          toast({
-            title: "Authentication Error",
-            description: "Please sign in again",
-            variant: "destructive",
-          });
-          if (!PUBLIC_ROUTES.includes(location.pathname)) {
-            navigate('/signin');
-          }
         }
       } finally {
         if (mounted) {
@@ -73,6 +60,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     getInitialSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+      console.log('Auth state changed:', event);
+      
       if (mounted) {
         if (currentSession) {
           setSession(currentSession);
@@ -81,9 +70,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setSession(null);
           setUser(null);
-          if (!PUBLIC_ROUTES.includes(location.pathname)) {
-            navigate('/signin');
-          }
         }
         setIsLoading(false);
       }
@@ -93,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [navigate, toast, location.pathname]);
+  }, [toast]);
 
   return (
     <AuthContext.Provider value={{ session, user, isLoading, error }}>
