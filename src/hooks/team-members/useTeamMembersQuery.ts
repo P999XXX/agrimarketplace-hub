@@ -1,56 +1,54 @@
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { TeamMember } from "../useTeamMembers";
 
-export const fetchTeamMembers = async (searchQuery: string, roleFilter: string, statusFilter: string, sortBy: string) => {
-  console.log('Fetching team members with filters:', { searchQuery, roleFilter, statusFilter, sortBy });
-
-  // 1. Get authenticated user
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError) {
-    console.error('Auth error:', authError);
-    throw new Error("Authentication required");
-  }
-  if (!user) throw new Error("Not authenticated");
-
-  // 2. Get user's company
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('company_id')
-    .eq('id', user.id)
-    .maybeSingle();
-
-  if (profileError) {
-    console.error('Profile error:', profileError);
-    throw new Error("Failed to fetch user profile");
-  }
-  if (!profile?.company_id) {
-    console.log('No company found for user');
+export const fetchTeamMembers = async (
+  searchQuery: string, 
+  roleFilter: string, 
+  statusFilter: string, 
+  sortBy: string,
+  companyId?: string
+): Promise<TeamMember[]> => {
+  if (!companyId) {
+    console.log('No company ID provided, skipping fetch');
     return [];
   }
 
-  // 3. Get invitations
+  console.log('Fetching team members with filters:', { searchQuery, roleFilter, statusFilter, sortBy });
+
   let invitationsQuery = supabase
     .from('invitations')
-    .select('id, email, name, role, status, created_at, last_login, invited_by')
-    .eq('company_id', profile.company_id);
+    .select(`
+      id, 
+      email, 
+      name, 
+      role, 
+      status, 
+      created_at, 
+      last_login, 
+      invited_by,
+      inviter:profiles!invitations_invited_by_fkey (
+        first_name,
+        last_name
+      )
+    `)
+    .eq('company_id', companyId);
 
   if (searchQuery) {
-    console.log('Applying search filter:', searchQuery);
     invitationsQuery = invitationsQuery.ilike('email', `%${searchQuery}%`);
   }
 
   if (roleFilter && roleFilter !== 'all') {
-    console.log('Applying role filter:', roleFilter);
     invitationsQuery = invitationsQuery.eq('role', roleFilter);
   }
 
   if (statusFilter && statusFilter !== 'all') {
-    console.log('Applying status filter:', statusFilter);
     invitationsQuery = invitationsQuery.eq('status', statusFilter);
   }
 
   if (sortBy) {
     const [field, direction] = sortBy.split('-');
-    console.log('Applying sort:', { field, direction });
     invitationsQuery = invitationsQuery.order(field, { ascending: direction === 'asc' });
   } else {
     invitationsQuery = invitationsQuery.order('created_at', { ascending: false });
@@ -63,36 +61,36 @@ export const fetchTeamMembers = async (searchQuery: string, roleFilter: string, 
     throw invitationsError;
   }
 
-  if (!invitations?.length) {
-    console.log('No invitations found');
-    return [];
-  }
+  return invitations as TeamMember[];
+};
 
-  // 4. Get unique inviter IDs
-  const inviterIds = [...new Set(invitations.map(inv => inv.invited_by))];
+export const useTeamMembers = (
+  searchQuery: string, 
+  roleFilter: string, 
+  statusFilter: string, 
+  sortBy: string
+) => {
+  const { user, isLoading: isAuthLoading } = useAuth();
 
-  // 5. Get profiles for inviters
-  const { data: profiles, error: profilesError } = await supabase
-    .from('profiles')
-    .select('id, first_name, last_name')
-    .in('id', inviterIds);
+  const { data: profile } = useQuery({
+    queryKey: ['profile', user?.id],
+    queryFn: async () => {
+      if (!user?.id) return null;
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .eq('id', user.id)
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!user?.id,
+  });
 
-  if (profilesError) {
-    console.error('Profiles error:', profilesError);
-    throw profilesError;
-  }
-
-  // 6. Create a map of profiles for easy lookup
-  const profilesMap = new Map(
-    profiles?.map(profile => [profile.id, profile]) || []
-  );
-
-  // 7. Combine the data
-  const teamMembers = invitations.map(invitation => ({
-    ...invitation,
-    inviter: profilesMap.get(invitation.invited_by) || null
-  }));
-
-  console.log(`Found ${teamMembers.length} team members`);
-  return teamMembers;
+  return useQuery({
+    queryKey: ['team-members', searchQuery, roleFilter, statusFilter, sortBy, profile?.company_id],
+    queryFn: () => fetchTeamMembers(searchQuery, roleFilter, statusFilter, sortBy, profile?.company_id),
+    enabled: !!profile?.company_id && !isAuthLoading,
+  });
 };

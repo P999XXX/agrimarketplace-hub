@@ -9,7 +9,7 @@ export const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="p-0 hover:bg-transparent w-fit md:hidden">
+        <Button variant="ghost" size="icon" className="p-1.25 hover:bg-transparent w-fit md:hidden -ml-2.5">
           <EllipsisVertical className="h-5 w-5 text-muted-foreground" />
         </Button>
       </SheetTrigger>
