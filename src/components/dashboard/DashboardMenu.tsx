@@ -72,7 +72,7 @@ export const DashboardMenu = () => {
                     </Button>
                   </TooltipTrigger>
                   {!isMobile && state === "collapsed" && (
-                    <TooltipContent side="right" sideOffset={10}>
+                    <TooltipContent side="right" sideOffset={10} className="z-[60]">
                       {item.title}
                     </TooltipContent>
                   )}
