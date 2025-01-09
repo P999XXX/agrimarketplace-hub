@@ -1,9 +1,10 @@
-import { Table, TableBody } from "@/components/ui/table";
+import { TableBody } from "@/components/ui/table";
 import { useCertificatesQuery } from "@/hooks/certificates/useCertificatesQuery";
 import { CertificatesTableHeader } from "./table/CertificatesTableHeader";
 import { CertificatesTableRow } from "./table/CertificatesTableRow";
 import { CertificatesTableLoading } from "./table/CertificatesTableLoading";
 import { CertificatesTableEmpty } from "./table/CertificatesTableEmpty";
+import { CommonTable } from "@/components/common/table/CommonTable";
 
 export const CertificatesTable = ({
   searchQuery,
@@ -47,18 +48,16 @@ export const CertificatesTable = ({
   }
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <CertificatesTableHeader />
-        <TableBody>
-          {filteredCertificates.map((certificate) => (
-            <CertificatesTableRow 
-              key={certificate.id} 
-              certificate={certificate} 
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <CommonTable>
+      <CertificatesTableHeader />
+      <TableBody>
+        {filteredCertificates.map((certificate) => (
+          <CertificatesTableRow 
+            key={certificate.id} 
+            certificate={certificate} 
+          />
+        ))}
+      </TableBody>
+    </CommonTable>
   );
 };

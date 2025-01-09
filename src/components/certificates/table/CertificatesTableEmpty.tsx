@@ -1,24 +1,18 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table";
-import { CertificatesTableHeader } from "./CertificatesTableHeader";
+import { CommonTableEmpty } from "@/components/common/table/CommonTableEmpty";
 
 export const CertificatesTableEmpty = () => {
+  const columns = [
+    { label: "Name" },
+    { label: "Category" },
+    { label: "Status" },
+    { label: "Expiry Date" },
+    { label: "Actions", className: "w-[100px]" }
+  ];
+
   return (
-    <div className="rounded-md border">
-      <Table>
-        <CertificatesTableHeader />
-        <TableBody>
-          <TableRow>
-            <TableCell colSpan={5} className="text-center py-4">
-              No certificates found
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
+    <CommonTableEmpty 
+      columns={columns}
+      message="No certificates found"
+    />
   );
 };
