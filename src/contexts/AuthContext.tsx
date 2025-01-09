@@ -1,17 +1,27 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useState } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  isAuthenticated: false
+  isAuthenticated: false,
+  login: () => {},
+  logout: () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // Vereinfachte Version ohne Supabase
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = () => setIsAuthenticated(true);
+  const logout = () => setIsAuthenticated(false);
+
   const value = {
-    isAuthenticated: false
+    isAuthenticated,
+    login,
+    logout,
   };
 
   return (

@@ -3,7 +3,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
 import { AuthCard } from "./AuthCard";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -18,28 +17,15 @@ export const ResetPasswordForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
-
-      if (error) throw error;
-
+    // Temporäre Mock-Funktion für Entwicklung
+    setTimeout(() => {
       setIsSuccess(true);
       toast({
-        title: "Reset link sent",
-        description: "Check your email for the password reset link",
+        title: "Development Mode",
+        description: "Password reset functionality is disabled during development",
       });
-    } catch (error: any) {
-      console.error('Password reset error:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Could not send reset link",
-        variant: "destructive",
-      });
-    } finally {
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   if (isSuccess) {
@@ -83,7 +69,7 @@ export const ResetPasswordForm = () => {
         </div>
 
         <Button 
-          type="submit" 
+          type="button" 
           className="w-full py-6"
           disabled={isLoading}
         >

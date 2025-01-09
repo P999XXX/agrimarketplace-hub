@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 
 interface GoogleSignInButtonProps {
@@ -10,31 +9,11 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
   const { toast } = useToast();
 
   const handleGoogleSignIn = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          queryParams: {
-            prompt: 'select_account',
-            access_type: 'offline',
-          },
-        },
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Success",
-        description: "Successfully authenticated with Google",
-      });
-    } catch (error: any) {
-      console.error('Google Sign In Error:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Could not sign in with Google",
-        variant: "destructive",
-      });
-    }
+    // Temporäre Mock-Funktion für Entwicklung
+    toast({
+      title: "Development Mode",
+      description: "Google Sign In is currently disabled during development",
+    });
   };
 
   return (
