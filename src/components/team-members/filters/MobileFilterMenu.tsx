@@ -11,6 +11,7 @@ import { RoleFilter } from "./RoleFilter";
 import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
+import { useState } from "react";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
@@ -40,9 +41,35 @@ export const MobileFilterMenu = ({
 }: MobileFilterMenuProps) => {
   const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleRoleChange = (value: string) => {
+    setRoleFilter(value);
+    setIsOpen(false);
+  };
+
+  const handleStatusChange = (value: string) => {
+    setStatusFilter(value);
+    setIsOpen(false);
+  };
+
+  const handleSortChange = (value: string) => {
+    setSortBy(value);
+    setIsOpen(false);
+  };
+
+  const handleViewChange = () => {
+    setViewMode(viewMode === "grid" ? "table" : "grid");
+    setIsOpen(false);
+  };
+
+  const handleExport = () => {
+    exportToExcel(teamMembers, isLoading);
+    setIsOpen(false);
+  };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
@@ -53,13 +80,13 @@ export const MobileFilterMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
-        <RoleFilter value={roleFilter} onChange={setRoleFilter} />
-        <StatusFilter value={statusFilter} onChange={setStatusFilter} />
-        <SortFilter value={sortBy} onChange={setSortBy} />
+        <RoleFilter value={roleFilter} onChange={handleRoleChange} />
+        <StatusFilter value={statusFilter} onChange={handleStatusChange} />
+        <SortFilter value={sortBy} onChange={handleSortChange} />
 
         {showViewToggle && (
           <DropdownMenuItem 
-            onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+            onClick={handleViewChange}
             className="cursor-pointer p-2"
           >
             <div className="flex items-center gap-2">
@@ -70,7 +97,7 @@ export const MobileFilterMenu = ({
         )}
 
         <DropdownMenuItem 
-          onClick={() => exportToExcel(teamMembers, isLoading)}
+          onClick={handleExport}
           className="cursor-pointer p-2"
         >
           <div className="flex items-center gap-2">
