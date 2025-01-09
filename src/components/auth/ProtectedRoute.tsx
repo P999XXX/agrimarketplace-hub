@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProtectedRouteProps {
@@ -10,54 +10,32 @@ interface ProtectedRouteProps {
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [isChecking, setIsChecking] = useState(true);
+  const { session, isLoading, error } = useAuth();
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error) {
-          console.error('Session error:', error);
-          throw error;
-        }
-        
-        if (!session) {
-          toast({
-            title: "Authentication required",
-            description: "Please sign in to access this page",
-            variant: "destructive",
-          });
-          navigate("/signin");
-          return;
-        }
+    if (!isLoading && !session) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to access this page",
+        variant: "destructive",
+      });
+      navigate("/signin");
+    }
+  }, [session, isLoading, navigate, toast]);
 
-        setIsChecking(false);
-      } catch (error) {
-        console.error('Auth error:', error);
-        toast({
-          title: "Authentication Error",
-          description: "Please try signing in again",
-          variant: "destructive",
-        });
-        navigate("/signin");
-      }
-    };
-
-    checkAuth();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
-        navigate("/signin");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate, toast]);
-
-  if (isChecking) {
-    return null; // oder einen Loading-Indikator
+  if (isLoading) {
+    return null;
   }
 
-  return <>{children}</>;
+  if (error) {
+    toast({
+      title: "Authentication Error",
+      description: "Please try signing in again",
+      variant: "destructive",
+    });
+    navigate("/signin");
+    return null;
+  }
+
+  return session ? <>{children}</> : null;
 };
