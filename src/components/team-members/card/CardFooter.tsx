@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
 interface CardFooterProps {
@@ -24,7 +25,9 @@ export const CardFooter = ({
           {role}
         </Badge>
       </div>
-      <ChevronRight size={20} className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+      <Button variant="ghost" size="icon" className="h-8 w-8">
+        <ChevronRight className="h-4 w-4" />
+      </Button>
     </div>
   );
 };
