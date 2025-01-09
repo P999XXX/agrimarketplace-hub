@@ -62,7 +62,7 @@ export const UserAvatar = ({ size = "default" }: { size?: "default" | "large" })
   return (
     <Avatar className={`cursor-pointer ${avatarSize} transition-all duration-200 hover:scale-105`}>
       <AvatarFallback 
-        className={`${textSize} bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] text-white hover:from-[#9B69FF] hover:to-[#E95FFF] transition-colors`}
+        className={`${textSize} bg-gradient-to-br from-[#E5DEFF] to-[#FFDEE2] text-gray-700 hover:from-[#D3E4FD] hover:to-[#FDE1D3] transition-colors`}
       >
         {initials || 'NN'}
       </AvatarFallback>
