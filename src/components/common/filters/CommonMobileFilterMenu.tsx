@@ -78,29 +78,33 @@ export const CommonMobileFilterMenu = ({
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <CommonMobileFilterButtons onClick={() => setIsOpen(true)} />
+        <CommonMobileFilterButtons />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px] bg-background" sideOffset={8}>
-        {showRoleFilter && roleFilter && setRoleFilter && (
-          <div className="p-0">
+      <DropdownMenuContent 
+        align="end" 
+        className="w-[200px] bg-background border border-border shadow-md" 
+        sideOffset={8}
+      >
+        {showRoleFilter && roleFilter !== undefined && setRoleFilter && (
+          <div className="px-1 py-1">
             <RoleFilter value={roleFilter} onChange={handleRoleChange} />
           </div>
         )}
         
-        {showStatusFilter && statusFilter && setStatusFilter && (
-          <div className="p-0">
+        {showStatusFilter && statusFilter !== undefined && setStatusFilter && (
+          <div className="px-1 py-1">
             <StatusFilter value={statusFilter} onChange={handleStatusChange} />
           </div>
         )}
         
-        <div className="p-0">
+        <div className="px-1 py-1">
           <SortFilter value={sortBy} onChange={handleSortChange} />
         </div>
 
         {showViewToggle && (
           <DropdownMenuItem 
             onClick={handleViewChange}
-            className="cursor-pointer px-2 py-1.5 hover:bg-accent"
+            className="cursor-pointer px-2 py-1.5 hover:bg-accent focus:bg-accent"
           >
             <div className="flex items-center gap-2 w-full pl-2">
               {viewMode === "grid" ? <TableIcon className="h-4 w-4" /> : <Grid className="h-4 w-4" />}
@@ -111,7 +115,7 @@ export const CommonMobileFilterMenu = ({
 
         <DropdownMenuItem 
           onClick={handleExport}
-          className="cursor-pointer px-2 py-1.5 hover:bg-accent"
+          className="cursor-pointer px-2 py-1.5 hover:bg-accent focus:bg-accent"
         >
           <div className="flex items-center gap-2 w-full pl-2">
             <Download className="h-4 w-4" />
