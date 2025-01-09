@@ -49,7 +49,7 @@ export const TeamMembersHeader = ({
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
-              <div className="pb-0">
+              <div className="pb-0 px-2">
                 <SheetHeader className="text-left">
                   <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
                 </SheetHeader>
