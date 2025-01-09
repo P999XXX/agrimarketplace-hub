@@ -119,9 +119,13 @@ export const FilterButtons = ({
         </Button>
       )}
 
-      <Button variant="outline" onClick={onExportCSV} className="h-10 shadow-sm">
-        <Download className="mr-2 h-4 w-4" />
-        Export
+      <Button 
+        variant="outline" 
+        size="icon"
+        onClick={onExportCSV} 
+        className="h-10 w-10 shadow-sm"
+      >
+        <Download className="h-4 w-4" />
       </Button>
     </div>
   );
