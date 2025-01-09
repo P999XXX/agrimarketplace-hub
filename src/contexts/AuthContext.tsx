@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   session: Session | null;
@@ -18,18 +19,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
 
     async function getInitialSession() {
       try {
+        setIsLoading(true);
         const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
+        
+        if (sessionError) {
+          console.error('Session error:', sessionError);
+          throw sessionError;
+        }
         
         if (mounted) {
-          setSession(initialSession);
-          setUser(initialSession?.user ?? null);
+          if (initialSession) {
+            setSession(initialSession);
+            setUser(initialSession.user);
+          } else {
+            // Wenn keine Sitzung gefunden wurde und wir auf einer geschützten Route sind,
+            // leiten wir zum Login um
+            const protectedRoutes = ['/dashboard', '/dashboard/team-members', '/dashboard/certificates'];
+            if (protectedRoutes.some(route => window.location.pathname.startsWith(route))) {
+              navigate('/signin');
+              toast({
+                title: "Session expired",
+                description: "Please sign in again",
+                variant: "destructive",
+              });
+            }
+          }
         }
       } catch (error) {
         console.error('Initial session error:', error);
@@ -57,6 +78,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setSession(currentSession);
         setUser(currentSession?.user ?? null);
         setIsLoading(false);
+
+        if (event === 'SIGNED_OUT') {
+          navigate('/signin');
+        } else if (event === 'SIGNED_IN' && currentSession) {
+          // Optional: Navigiere zur Dashboard-Seite nach erfolgreichem Login
+          navigate('/dashboard');
+        }
       }
     });
 
@@ -64,7 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [toast]);
+  }, [navigate, toast]);
 
   return (
     <AuthContext.Provider value={{ session, user, isLoading, error }}>
