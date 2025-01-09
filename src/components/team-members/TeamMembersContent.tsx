@@ -30,7 +30,7 @@ const TeamMembersContentView = () => {
   return (
     <DashboardContent>
       <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-        <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-3.6 dark:bg-black/10 bg-white/70 backdrop-blur-md z-[85] transition-shadow duration-200">
+        <div className="sticky top-16 flex-none space-y-4 px-4 pt-4 pb-3.6 dark:bg-black/10 bg-white/70 backdrop-blur-md z-10 transition-shadow duration-200">
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
@@ -64,7 +64,7 @@ const TeamMembersContentView = () => {
         </div>
 
         <ScrollArea 
-          className="flex-1 relative md:pb-0 pb-20 z-[82]" 
+          className="flex-1 relative md:pb-0 pb-20" 
           onScroll={handleScroll}
         >
           <div className="p-4">
