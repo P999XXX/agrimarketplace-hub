@@ -34,6 +34,9 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
     return `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`;
   };
 
+  // Get timezone abbreviation
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <div className="text-sm text-muted-foreground space-y-3">
       <div className="flex justify-between items-center">
@@ -67,7 +70,7 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       </div>
       <div className="flex justify-between items-center">
         <span>Time:</span>
-        <span>{format(time, 'h:mm:ss a')}</span>
+        <span>{timeZone} {format(time, 'h:mm:ss a')}</span>
       </div>
     </div>
   );
