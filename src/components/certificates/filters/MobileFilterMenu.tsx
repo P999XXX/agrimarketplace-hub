@@ -1,6 +1,7 @@
 import { FilterDropdown } from "@/components/common/filters/FilterDropdown";
 import { Grid, Download, Table as TableIcon, Filter } from "lucide-react";
 import { CommonMobileFilterButtons } from "@/components/common/filters/CommonMobileFilterButtons";
+import { useCertificateCategoriesQuery } from "@/hooks/certificates/useCertificateCategoriesQuery";
 
 interface MobileFilterMenuProps {
   categoryFilter: string;
@@ -28,14 +29,17 @@ export const MobileFilterMenu = ({
   onExportCSV,
   showViewToggle,
 }: MobileFilterMenuProps) => {
+  const { data: categories } = useCertificateCategoriesQuery();
+
   const categoryGroups = [
     {
       label: "Certificate Types",
       options: [
         { label: "All Categories", value: "all" },
-        { label: "Organic", value: "organic" },
-        { label: "Quality", value: "quality" },
-        { label: "Safety", value: "safety" },
+        ...(categories?.map((category) => ({
+          label: category.category_type,
+          value: category.category_type.toLowerCase(),
+        })) ?? []),
       ],
     },
   ];
