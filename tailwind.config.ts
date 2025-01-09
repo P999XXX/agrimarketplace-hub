@@ -91,10 +91,16 @@ export default {
         },
         "highlight": {
           "0%": {
-            backgroundColor: "rgb(134 239 172 / 0.25)", // green-200 mit Transparenz
+            backgroundColor: "rgb(134 239 172 / 0.25)",
+            transform: "scale(0.98)",
+          },
+          "50%": {
+            backgroundColor: "rgb(134 239 172 / 0.25)",
+            transform: "scale(1.02)",
           },
           "100%": {
             backgroundColor: "transparent",
+            transform: "scale(1)",
           }
         }
       },
