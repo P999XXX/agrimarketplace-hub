@@ -1,18 +1,6 @@
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { SheetClose } from "@/components/ui/sheet";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { format } from "date-fns";
-import { CalendarIcon, Upload } from "lucide-react";
-import { useCertificateCategoriesQuery } from "@/hooks/certificates/useCertificateCategoriesQuery";
-import { CommonAvatar } from "@/components/common/avatar/CommonAvatar";
-import { getInitials, getColorScheme } from "@/utils/colorSchemes";
-import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { CertificateFormFields } from "./CertificateFormFields";
 import { CertificateFormFooter } from "./CertificateFormFooter";
 
@@ -21,8 +9,7 @@ export const CertificateForm = () => {
   const [issueDate, setIssueDate] = useState<Date>();
   const [expiryDate, setExpiryDate] = useState<Date>();
   const [categoryId, setCategoryId] = useState<string>("");
-  const { data: categories, isLoading } = useCertificateCategoriesQuery();
-
+  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -50,7 +37,6 @@ export const CertificateForm = () => {
           <CertificateFormFields
             categoryId={categoryId}
             setCategoryId={setCategoryId}
-            categories={categories}
             issueDate={issueDate}
             setIssueDate={setIssueDate}
             expiryDate={expiryDate}
@@ -60,7 +46,10 @@ export const CertificateForm = () => {
           />
         </div>
       </ScrollArea>
-      <CertificateFormFooter isLoading={false} />
+      <div className="sticky bottom-0 mt-6 bg-background pt-4 border-t px-2">
+        <CertificateFormFooter isLoading={false} />
+      </div>
+      <SheetClose className="hidden" />
     </form>
   );
 };
