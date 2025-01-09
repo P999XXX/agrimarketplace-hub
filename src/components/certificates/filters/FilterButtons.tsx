@@ -37,7 +37,7 @@ export const FilterButtons = ({
     <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="shadow-sm">
+          <Button variant="outline" size="sm" className="h-9 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Category
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -61,7 +61,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="shadow-sm">
+          <Button variant="outline" size="sm" className="h-9 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Status
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -82,7 +82,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="shadow-sm">
+          <Button variant="outline" size="sm" className="h-9 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Sort
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -110,7 +110,7 @@ export const FilterButtons = ({
             variant={viewMode === "grid" ? "secondary" : "ghost"}
             size="icon"
             onClick={() => setViewMode("grid")}
-            className="shadow-sm"
+            className="h-9 shadow-sm"
           >
             <LayoutGrid className="h-4 w-4" />
           </Button>
@@ -118,14 +118,14 @@ export const FilterButtons = ({
             variant={viewMode === "table" ? "secondary" : "ghost"}
             size="icon"
             onClick={() => setViewMode("table")}
-            className="shadow-sm"
+            className="h-9 shadow-sm"
           >
             <LayoutList className="h-4 w-4" />
           </Button>
         </div>
       )}
 
-      <Button variant="outline" size="sm" onClick={onExportCSV} className="shadow-sm">
+      <Button variant="outline" size="sm" onClick={onExportCSV} className="h-9 shadow-sm">
         <Download className="mr-2 h-4 w-4" />
         Export
       </Button>

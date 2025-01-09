@@ -14,7 +14,7 @@ export const SearchInput = ({ searchQuery, setSearchQuery }: SearchInputProps) =
         placeholder="Search certificates..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="pl-8 h-10 shadow-sm"
+        className="pl-8 h-9 shadow-sm"
       />
     </div>
   );
