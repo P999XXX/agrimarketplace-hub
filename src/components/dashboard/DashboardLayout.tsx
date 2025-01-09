@@ -72,7 +72,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </SidebarContent>
         </Sidebar>
 
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col z-0">
           <HeaderActions />
           <main className="flex-1 min-h-[calc(100vh-4rem)]">
             {children}
