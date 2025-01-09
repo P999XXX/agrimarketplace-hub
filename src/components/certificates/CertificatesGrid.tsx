@@ -144,22 +144,22 @@ const CertificateCard = ({ certificate }: { certificate: Certificate }) => {
       <Separator className="w-full bg-border" />
       
       <CardFooter className="p-3 sm:p-4">
-        <div className="flex items-center justify-between w-full gap-2">
+        <div className="flex items-center justify-end w-full gap-2">
           <Button 
-            variant="outline" 
-            size="sm" 
-            className="flex-1 h-9"
+            variant="ghost" 
+            size="icon"
+            className="h-8 w-8"
           >
-            <Download className="h-4 w-4 mr-2" />
-            Download
+            <Download className="h-4 w-4" />
+            <span className="sr-only">Download certificate</span>
           </Button>
           <Button 
-            variant="outline" 
-            size="sm"
-            className="flex-1 h-9"
+            variant="ghost" 
+            size="icon"
+            className="h-8 w-8"
           >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
+            <Trash2 className="h-4 w-4" />
+            <span className="sr-only">Delete certificate</span>
           </Button>
         </div>
       </CardFooter>
