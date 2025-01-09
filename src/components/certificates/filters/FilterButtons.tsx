@@ -37,7 +37,7 @@ export const FilterButtons = ({
     <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
             <Filter className="h-4 w-4 mr-2" />
             Category
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -61,7 +61,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
             <Filter className="h-4 w-4 mr-2" />
             Status
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -82,7 +82,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
             <Filter className="h-4 w-4 mr-2" />
             Sort
             <ChevronDown className="ml-2 h-4 w-4" />
