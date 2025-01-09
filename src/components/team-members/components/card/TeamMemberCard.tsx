@@ -1,12 +1,13 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { EmailCell } from "../EmailCell";
+import { EmailCell } from "../../EmailCell";
 import { UserAvatar } from "./UserAvatar";
 import { CardStats } from "./CardStats";
 import { CardFooter as CustomCardFooter } from "./CardFooter";
 import { useState, useEffect } from "react";
 import { getColorScheme, getInitials } from "../../utils/colorSchemes";
 import { TeamMember } from "../../types";
+import { getStatusBadgeClass, getRoleBadgeClass } from "../../utils/statusHelpers";
 
 interface TeamMemberCardProps {
   member: TeamMember;
@@ -65,6 +66,8 @@ export const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
         <CustomCardFooter
           status={member.status}
           role={member.role}
+          getStatusBadgeClass={getStatusBadgeClass}
+          getRoleBadgeClass={getRoleBadgeClass}
         />
       </CardFooter>
     </Card>
