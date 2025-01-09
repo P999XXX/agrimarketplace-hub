@@ -24,11 +24,11 @@ const Index = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto min-h-screen px-6 py-4 relative z-1">
+      <div className="container mx-auto min-h-screen px-4 py-4 relative z-1">
         <Logo />
         
-        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-16 lg:gap-8 pt-8 lg:pt-0">
-          <div className="w-full lg:w-1/2 md:pl-[15px] lg:pl-16">
+        <div className="min-h-[calc(100vh-theme(space.16))] flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-8 pt-8 lg:pt-0">
+          <div className="w-full lg:w-1/2 md:pl-0 lg:pl-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-[700] mb-6 animate-fade">
               Transform your 
               <br />
@@ -48,7 +48,7 @@ const Index = () => {
           </div>
 
           <div className="w-full lg:w-1/2">
-            <div className="grid gap-6">
+            <div className="grid gap-6 max-w-xl mx-auto lg:mx-0">
               <FeatureCard 
                 title="Verified Partners"
                 description="Connect with pre-vetted buyers and sellers in the agricultural sector."
@@ -84,7 +84,7 @@ const FeatureCard = ({
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 animate-fade">
       <div className="flex gap-4 items-start">
-        <div className="text-secondary">
+        <div className="text-secondary flex-shrink-0">
           {icon}
         </div>
         <div>
