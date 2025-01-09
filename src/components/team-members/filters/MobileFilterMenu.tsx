@@ -11,7 +11,8 @@ import { RoleFilter } from "./RoleFilter";
 import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface MobileFilterMenuProps {
   roleFilter: string;
@@ -42,6 +43,14 @@ export const MobileFilterMenu = ({
   const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
   const { exportToExcel } = useExportTeamMembers();
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  // Close dropdown when screen size changes
+  useEffect(() => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  }, [isMobile]);
 
   const handleRoleChange = (value: string) => {
     setRoleFilter(value);
