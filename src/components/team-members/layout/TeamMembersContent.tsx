@@ -69,31 +69,52 @@ const TeamMembersContent = () => {
     },
   ];
 
-  const filterGroups = [
+  const mobileFilters = [
     {
-      label: "Team Member Roles",
-      options: [
-        { label: "All roles", value: "all" },
-        { label: "Member", value: "member" },
-        { label: "Viewer", value: "viewer" },
+      label: "Role",
+      value: filters.role,
+      onChange: (value: string) => updateFilter("role", value),
+      groups: [
+        {
+          label: "Team Member Roles",
+          options: [
+            { label: "All roles", value: "all" },
+            { label: "Member", value: "member" },
+            { label: "Viewer", value: "viewer" },
+          ],
+        },
       ],
     },
     {
-      label: "Member Status",
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Pending", value: "pending" },
-        { label: "Accepted", value: "accepted" },
-        { label: "Declined", value: "declined" },
+      label: "Status",
+      value: filters.status,
+      onChange: (value: string) => updateFilter("status", value),
+      groups: [
+        {
+          label: "Member Status",
+          options: [
+            { label: "All Status", value: "all" },
+            { label: "Pending", value: "pending" },
+            { label: "Accepted", value: "accepted" },
+            { label: "Declined", value: "declined" },
+          ],
+        },
       ],
     },
     {
-      label: "Sort by",
-      options: [
-        { label: "Newest first", value: "created_at-desc" },
-        { label: "Oldest first", value: "created_at-asc" },
-        { label: "Name A-Z", value: "name-asc" },
-        { label: "Name Z-A", value: "name-desc" },
+      label: "Sort",
+      value: sortBy,
+      onChange: setSortBy,
+      groups: [
+        {
+          label: "Sort by",
+          options: [
+            { label: "Newest first", value: "created_at-desc" },
+            { label: "Oldest first", value: "created_at-asc" },
+            { label: "Name A-Z", value: "name-asc" },
+            { label: "Name Z-A", value: "name-desc" },
+          ],
+        },
       ],
     },
   ];
@@ -183,7 +204,10 @@ const TeamMembersContent = () => {
             </div>
 
             <div className="md:hidden">
-              <CommonMobileFilter filters={filterGroups} />
+              <CommonMobileFilter 
+                filters={mobileFilters}
+                title="Filter Team Members" 
+              />
             </div>
           </div>
 
