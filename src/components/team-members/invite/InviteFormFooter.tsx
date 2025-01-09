@@ -7,7 +7,7 @@ interface InviteFormFooterProps {
 
 export const InviteFormFooter = ({ isLoading }: InviteFormFooterProps) => {
   return (
-    <SheetFooter className="flex flex-col-reverse sm:flex-row sm:space-x-2 space-y-2 space-y-reverse sm:space-y-0 px-2">
+    <SheetFooter className="flex flex-col-reverse sm:flex-row sm:space-x-2 space-y-2 space-y-reverse sm:space-y-0">
       <SheetClose asChild>
         <Button type="button" variant="outline" className="w-full sm:w-auto">
           Cancel
