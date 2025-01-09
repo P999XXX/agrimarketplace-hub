@@ -8,21 +8,20 @@ export interface FilterGroup {
   options: FilterOption[];
 }
 
-export interface CommonFilterProps {
-  value: string;
-  onChange: (value: string) => void;
+export interface FilterState {
+  searchQuery: string;
+  categoryFilter: string;
+  statusFilter: string;
+  sortBy: string;
+  roleFilter?: string;
 }
 
-export interface FilterButtonsProps extends CommonFilterProps {
-  roleFilter: string;
-  setRoleFilter: (role: string) => void;
-  statusFilter: string;
+export interface FilterActions {
+  setSearchQuery: (query: string) => void;
+  setCategoryFilter: (category: string) => void;
   setStatusFilter: (status: string) => void;
-  sortBy: string;
   setSortBy: (sort: string) => void;
-  viewMode: "grid" | "table";
-  setViewMode: (mode: "grid" | "table") => void;
-  onExportCSV: () => void;
-  searchQuery: string;
-  showViewToggle?: boolean;
+  setRoleFilter?: (role: string) => void;
 }
+
+export interface FilterContextType extends FilterState, FilterActions {}
