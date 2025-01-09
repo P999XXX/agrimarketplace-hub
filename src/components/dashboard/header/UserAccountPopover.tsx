@@ -18,7 +18,6 @@ interface UserAccountPopoverProps {
 
 export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
   const [userProfile, setUserProfile] = useState<any>(null);
-  const [ipInfo, setIpInfo] = useState<{ country: string } | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -56,9 +55,6 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           email: session.user.email
         });
 
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        setIpInfo(data);
       } catch (error) {
         console.error("Error in getProfile:", error);
       }
@@ -108,7 +104,6 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
         <div className="p-4">
           <UserAccountContent 
             userProfile={userProfile}
-            ipInfo={ipInfo}
             currentTime={currentTime}
           />
         </div>
