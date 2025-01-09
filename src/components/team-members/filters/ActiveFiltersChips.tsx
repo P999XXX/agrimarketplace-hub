@@ -59,7 +59,7 @@ export const ActiveFiltersChips = ({
   };
 
   return (
-    <div className="py-1.8">
+    <div className="py-0 mt-2.5 -mb-[15px]">
       <ScrollArea className="w-full whitespace-nowrap">
         <div className="flex gap-1.8 px-4">
           {roleFilter !== "all" && (
