@@ -7,9 +7,9 @@ export const Logo = () => {
   return (
     <div className="flex items-center">
       <Leaf 
-        className={`${isAuthPage ? 'text-white' : 'text-primary/40'} h-7 w-7 -translate-y-0.5 -rotate-12 hover:text-primary transition-colors ml-0.8`}
+        className={`${isAuthPage ? 'text-white' : 'text-primary'} h-7 w-7 -translate-y-0.5 -rotate-12 hover:text-primary transition-colors mr-1.6`}
       />
-      <span className="flex items-center text-[1.45rem] -ml-0.8">
+      <span className="flex items-center text-[1.45rem]">
         <span className={`${isAuthPage ? 'text-white' : 'text-foreground dark:text-foreground'} font-[700] leading-[1] -mt-[4px]`}>
           crop<span className="text-foreground dark:text-foreground">i</span>o
         </span>
