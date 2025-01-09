@@ -15,7 +15,7 @@ export const HeaderActions = () => {
       </div>
       <div className="flex items-center gap-4">
         <button className="text-muted-foreground hover:text-foreground transition-colors">
-          <Bot className="h-5 w-5" />
+          <Bot className="h-6 w-6" />
         </button>
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <MessageSquare className="h-5 w-5" />
