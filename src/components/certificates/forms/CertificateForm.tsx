@@ -41,38 +41,28 @@ export const CertificateForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate all fields only on form submission
+    const validationErrors = [];
+
     if (!categoryId) {
-      toast({
-        title: "Category required",
-        description: "Please select a certificate category",
-        variant: "destructive",
-      });
-      return;
+      validationErrors.push("Please select a certificate category");
     }
 
     if (!issueDate) {
-      toast({
-        title: "Issue date required",
-        description: "Please select an issue date",
-        variant: "destructive",
-      });
-      return;
+      validationErrors.push("Please select an issue date");
     }
 
     if (!expiryDate) {
-      toast({
-        title: "Expiry date required",
-        description: "Please select an expiry date",
-        variant: "destructive",
-      });
-      return;
+      validationErrors.push("Please select an expiry date");
     }
 
     if (!selectedFile) {
+      validationErrors.push("Please upload a certificate file");
+    }
+
+    if (validationErrors.length > 0) {
       toast({
-        title: "File required",
-        description: "Please upload a certificate file",
+        title: "Form validation failed",
+        description: validationErrors[0],
         variant: "destructive",
       });
       return;

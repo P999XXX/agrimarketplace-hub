@@ -67,6 +67,7 @@ export const CertificateFormFields = ({
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              id="issueDate"
               type="button"
               variant="outline"
               className={cn(
@@ -94,6 +95,7 @@ export const CertificateFormFields = ({
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              id="expiryDate"
               type="button"
               variant="outline"
               className={cn(
