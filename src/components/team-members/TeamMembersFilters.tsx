@@ -31,46 +31,6 @@ export const TeamMembersFilters = ({
   onExportCSV,
   isMobile,
 }: TeamMembersFiltersProps) => {
-  const roleGroups = [
-    {
-      label: "Team Member Roles",
-      options: [
-        { label: "All roles", value: "all" },
-        { label: "Member", value: "member" },
-        { label: "Viewer", value: "viewer" },
-      ],
-    },
-  ];
-
-  const statusGroups = [
-    {
-      label: "Member Status",
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Pending", value: "pending" },
-        { label: "Accepted", value: "accepted" },
-        { label: "Declined", value: "declined" },
-      ],
-    },
-  ];
-
-  const sortGroups = [
-    {
-      label: "Sort by Date",
-      options: [
-        { label: "Newest first", value: "created_at-desc" },
-        { label: "Oldest first", value: "created_at-asc" },
-      ],
-    },
-    {
-      label: "Sort by Name",
-      options: [
-        { label: "Name A-Z", value: "name-asc" },
-        { label: "Name Z-A", value: "name-desc" },
-      ],
-    },
-  ];
-
   return (
     <div className="flex flex-wrap items-center gap-4">
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -101,9 +61,7 @@ export const TeamMembersFilters = ({
           setStatusFilter={setStatusFilter}
           sortBy={sortBy}
           setSortBy={setSortBy}
-          roleGroups={roleGroups}
-          statusGroups={statusGroups}
-          sortGroups={sortGroups}
+          onExportCSV={onExportCSV}
         />
       </div>
     </div>
