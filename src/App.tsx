@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index";
@@ -20,8 +20,10 @@ import { useToast } from "@/hooks/use-toast";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
+      retry: 2,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: true,
     },
   },
 });
@@ -31,41 +33,64 @@ const App = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Initial session check
-    const checkSession = async () => {
+    const initializeAuth = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        if (error) throw error;
+        // Get initial session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        
         setIsAuthenticated(!!session);
-      } catch (error) {
-        console.error("Session check error:", error);
-        setIsAuthenticated(false);
-      }
-    };
 
-    checkSession();
+        // Set up auth state change listener
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+          console.log("Auth state changed:", event, !!session);
+          
+          switch (event) {
+            case 'SIGNED_IN':
+              setIsAuthenticated(true);
+              toast({
+                title: "Signed in successfully",
+                description: "Welcome back!",
+              });
+              break;
+            
+            case 'SIGNED_OUT':
+              setIsAuthenticated(false);
+              queryClient.clear();
+              toast({
+                title: "Signed out",
+                description: "You have been signed out of your account",
+              });
+              break;
+            
+            case 'TOKEN_REFRESHED':
+              setIsAuthenticated(true);
+              break;
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state changed:", event, !!session);
-      
-      if (event === 'SIGNED_OUT') {
-        setIsAuthenticated(false);
-        queryClient.clear();
-        toast({
-          title: "Signed out",
-          description: "You have been signed out of your account",
+            case 'INITIAL_SESSION':
+              setIsAuthenticated(!!session);
+              break;
+          }
         });
-      } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        setIsAuthenticated(true);
-      }
-    });
 
-    return () => {
-      subscription.unsubscribe();
+        return () => {
+          subscription.unsubscribe();
+        };
+      } catch (error) {
+        console.error("Auth initialization error:", error);
+        setIsAuthenticated(false);
+        toast({
+          title: "Authentication Error",
+          description: "There was a problem with authentication. Please try signing in again.",
+          variant: "destructive",
+        });
+      }
     };
+
+    initializeAuth();
   }, [toast]);
 
+  // Show loading state while checking authentication
   if (isAuthenticated === null) {
     return null;
   }
