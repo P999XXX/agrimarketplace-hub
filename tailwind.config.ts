@@ -5,6 +5,7 @@ import { typography } from "./src/config/tailwind/typography";
 import { keyframes, animations } from "./src/config/tailwind/animations";
 
 export default {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
