@@ -10,7 +10,10 @@ export const MobileAddButton = () => {
         title="Add New Certificate"
         triggerButtonText="Add Certificate"
       >
-        {/* Certificate form will be added here */}
+        <div>
+          {/* Temporärer Platzhalter bis das Formular implementiert ist */}
+          <p className="p-4 text-muted-foreground">Certificate form will be added here</p>
+        </div>
       </CommonFormSheet>
     </div>
   );
