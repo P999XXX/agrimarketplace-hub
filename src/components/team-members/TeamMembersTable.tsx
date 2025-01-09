@@ -1,11 +1,23 @@
-import { Table, TableBody } from "@/components/ui/table";
+import { TableBody } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
+import { CommonTable } from "@/components/common/table/CommonTable";
+import { CommonTableEmpty } from "@/components/common/table/CommonTableEmpty";
+import { CommonTableLoading } from "@/components/common/table/CommonTableLoading";
+import { CommonTableHeader } from "@/components/common/table/CommonTableHeader";
+import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { TeamMembersTableHeader } from "./table/TeamMembersTableHeader";
-import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
-import { TeamMembersTableLoading } from "./table/TeamMembersTableLoading";
-import { TeamMembersTableEmpty } from "./table/TeamMembersTableEmpty";
+
+const columns = [
+  { label: "Name" },
+  { label: "Email" },
+  { label: "Role" },
+  { label: "Status" },
+  { label: "Last Login" },
+  { label: "Invited By" },
+  { label: "Joined" },
+  { label: "" }
+];
 
 interface TeamMembersTableProps {
   searchQuery: string;
@@ -34,26 +46,24 @@ export const TeamMembersTable = ({
   }
 
   if (isLoading) {
-    return <TeamMembersTableLoading />;
+    return <CommonTableLoading columns={columns} />;
   }
 
   if (!teamMembers || teamMembers.length === 0) {
-    return <TeamMembersTableEmpty />;
+    return <CommonTableEmpty columns={columns} message="No team members found" />;
   }
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TeamMembersTableHeader />
-        <TableBody>
-          {teamMembers.map((member) => (
-            <TeamMembersTableRow
-              key={member.id}
-              member={member}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <CommonTable>
+      <CommonTableHeader columns={columns} />
+      <TableBody>
+        {teamMembers.map((member) => (
+          <TeamMembersTableRow
+            key={member.id}
+            member={member}
+          />
+        ))}
+      </TableBody>
+    </CommonTable>
   );
 };
