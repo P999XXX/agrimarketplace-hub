@@ -34,8 +34,8 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
     return `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`;
   };
 
-  // Get timezone abbreviation
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // Feste Zeitzone
+  const timeZone = "UTC";
 
   return (
     <div className="text-sm text-muted-foreground space-y-3">
