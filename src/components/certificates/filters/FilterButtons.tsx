@@ -152,7 +152,7 @@ export const FilterButtons = ({
         <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
       )}
 
-      <ExportButton onClick={onExportCSV} />
+      <ExportButton onExport={onExportCSV} />
     </div>
   );
 };
