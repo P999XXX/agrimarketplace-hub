@@ -11,18 +11,25 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
 
   const handleGoogleSignIn = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/dashboard`,
           queryParams: {
-            prompt: 'select_account',
             access_type: 'offline',
+            prompt: 'consent',
           },
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Google Sign In Error:', error);
+        throw error;
+      }
+
+      if (!data) {
+        throw new Error('No data returned from authentication');
+      }
 
       toast({
         title: "Redirecting",
@@ -30,9 +37,22 @@ export const GoogleSignInButton = ({ isSignUp = true }: GoogleSignInButtonProps)
       });
     } catch (error: any) {
       console.error('Google Sign In Error:', error);
+      
+      // Verbesserte Fehlerbehandlung
+      let errorMessage = "Could not sign in with Google";
+      if (error.message) {
+        if (error.message.includes('refresh_token_not_found')) {
+          errorMessage = "Session expired. Please try signing in again.";
+        } else if (error.message.includes('invalid_grant')) {
+          errorMessage = "Invalid authentication request. Please try again.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+
       toast({
         title: "Error",
-        description: error.message || "Could not sign in with Google",
+        description: errorMessage,
         variant: "destructive",
       });
     }
