@@ -7,7 +7,7 @@ export const MobileAddButton = () => {
     <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="w-full bg-[#00875A] hover:bg-[#006644]">
+          <Button className="w-full">
             <Plus className="h-4 w-4 mr-2" />
             Add Certificate
           </Button>

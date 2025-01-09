@@ -47,14 +47,11 @@ export const FilterButtons = ({
           <DropdownMenuItem onClick={() => setCategoryFilter("all")}>
             All Categories
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("compliance")}>
-            Compliance
+          <DropdownMenuItem onClick={() => setCategoryFilter("organic")}>
+            Organic
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCategoryFilter("quality")}>
             Quality
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("sustainability")}>
-            Sustainability
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCategoryFilter("safety")}>
             Safety
