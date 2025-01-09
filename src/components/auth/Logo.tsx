@@ -11,7 +11,7 @@ export const Logo = () => {
       />
       <span className="flex items-center text-[1.45rem]">
         <span className={`${isAuthPage ? 'text-white' : 'text-foreground dark:text-foreground'} font-[700] leading-[1] -mt-[4px]`}>
-          crop<span className="text-primary/40 hover:text-primary transition-colors">i</span>o
+          crop<span className="text-foreground dark:text-foreground">i</span>o
         </span>
       </span>
     </div>
