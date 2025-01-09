@@ -14,7 +14,7 @@ export const HeaderActions = () => {
         <DashboardBreadcrumb />
       </div>
       <div className="flex items-center gap-4">
-        <button className="text-muted-foreground hover:text-foreground transition-colors">
+        <button className="text-muted-foreground hover:text-foreground transition-colors -mt-0.5">
           <Bot className="h-6 w-6" />
         </button>
         <button className="text-muted-foreground hover:text-foreground transition-colors">
