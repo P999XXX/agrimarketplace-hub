@@ -32,17 +32,21 @@ export const CertificateForm = () => {
   };
 
   return (
-    <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
-      <form className="space-y-6 py-4">
+    <ScrollArea className="h-[calc(100vh-10rem)] md:h-[calc(100vh-8rem)] px-1">
+      <form className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="name">Certificate Name</Label>
-          <Input id="name" placeholder="Enter certificate name" className="h-10" />
+          <Input 
+            id="name" 
+            placeholder="Enter certificate name" 
+            className="h-10"
+          />
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="category">Category</Label>
           <Select>
-            <SelectTrigger className="h-10">
+            <SelectTrigger id="category" className="h-10">
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
             <SelectContent>
@@ -114,7 +118,7 @@ export const CertificateForm = () => {
           <Button variant="outline" type="button" className="h-10">
             Cancel
           </Button>
-          <Button type="submit" className="h-10">
+          <Button type="submit" className="h-10 bg-[#00875A] hover:bg-[#006644]">
             Add Certificate
           </Button>
         </div>
