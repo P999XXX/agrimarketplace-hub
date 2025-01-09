@@ -61,7 +61,9 @@ export const UserAvatar = ({ size = "default" }: { size?: "default" | "large" })
 
   return (
     <Avatar className={`cursor-pointer ${avatarSize}`}>
-      <AvatarFallback className={`bg-primary text-primary-foreground ${textSize}`}>
+      <AvatarFallback 
+        className={`bg-gradient-to-br from-primary/40 to-primary ${textSize} text-primary-foreground font-medium`}
+      >
         {initials || 'NN'}
       </AvatarFallback>
     </Avatar>
