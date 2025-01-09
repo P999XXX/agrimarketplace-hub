@@ -2,9 +2,9 @@ import { TableBody } from "@/components/ui/table";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { CommonTable } from "@/components/common/table/CommonTable";
 import { CommonTableEmpty } from "@/components/common/table/CommonTableEmpty";
-import { CommonTableLoading } from "@/components/common/table/CommonTableLoading";
+import { CommonSkeletonTable } from "@/components/common/loading/CommonSkeletonTable";
 import { CommonTableHeader } from "@/components/common/table/CommonTableHeader";
-import { TeamMembersTableRow } from "./table/TeamMembersTableRow";
+import { TeamMembersTableRow } from "./TeamMembersTableRow";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
@@ -46,7 +46,7 @@ export const TeamMembersTable = ({
   }
 
   if (isLoading) {
-    return <CommonTableLoading columns={columns} />;
+    return <CommonSkeletonTable columns={columns} />;
   }
 
   if (!teamMembers || teamMembers.length === 0) {

@@ -1,6 +1,10 @@
 import { TeamMemberCard } from "./TeamMemberCard";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import { TeamMembersGridLoading } from "./TeamMembersGridLoading";
+import { CommonSkeletonGrid } from "@/components/common/loading/CommonSkeletonGrid";
+import { CommonEmptyState } from "@/components/common/empty/CommonEmptyState";
+import { Users } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 interface TeamMembersGridProps {
   searchQuery: string;
@@ -15,37 +19,30 @@ export const TeamMembersGrid = ({
   statusFilter, 
   sortBy,
 }: TeamMembersGridProps) => {
-  const { data: teamMembers = [], isLoading } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
+  const { data: teamMembers = [], isLoading, error } = useTeamMembers(searchQuery, roleFilter, statusFilter, sortBy);
 
-  const getRoleBadgeClass = () => {
-    return "bg-gray-100 text-gray-700 hover:bg-gray-200";
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active':
-      case 'accepted':
-        return 'bg-green-100 text-green-700 hover:bg-green-200';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
-      case 'declined':
-      case 'inactive':
-        return 'bg-red-100 text-red-700 hover:bg-red-200';
-      default:
-        return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-    }
-  };
+  if (error) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          {error instanceof Error ? error.message : 'Failed to load team members'}
+        </AlertDescription>
+      </Alert>
+    );
+  }
 
   if (isLoading) {
-    return <TeamMembersGridLoading />;
+    return <CommonSkeletonGrid />;
   }
 
   if (!teamMembers || teamMembers.length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-gray-500 text-lg">No team members found</p>
-        <p className="text-gray-400 text-sm mt-2">Try adjusting your filters or search criteria</p>
-      </div>
+      <CommonEmptyState
+        icon={<Users className="h-8 w-8 text-muted-foreground" />}
+        title="No team members found"
+        description="Try adjusting your filters or search criteria"
+      />
     );
   }
 
@@ -55,8 +52,21 @@ export const TeamMembersGrid = ({
         <TeamMemberCard
           key={member.id}
           member={member}
-          getRoleBadgeClass={getRoleBadgeClass}
-          getStatusBadgeClass={getStatusBadgeClass}
+          getRoleBadgeClass={() => "bg-gray-100 text-gray-700 hover:bg-gray-200"}
+          getStatusBadgeClass={(status) => {
+            switch (status.toLowerCase()) {
+              case 'active':
+              case 'accepted':
+                return 'bg-green-100 text-green-700 hover:bg-green-200';
+              case 'pending':
+                return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200';
+              case 'declined':
+              case 'inactive':
+                return 'bg-red-100 text-red-700 hover:bg-red-200';
+              default:
+                return 'bg-gray-100 text-gray-700 hover:bg-gray-200';
+            }
+          }}
         />
       ))}
     </div>
