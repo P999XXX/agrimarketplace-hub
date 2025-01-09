@@ -93,7 +93,7 @@ export const InviteMemberForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full max-h-[calc(100vh-4.5rem)] pt-6">
+    <form onSubmit={handleSubmit} className="flex flex-col h-full max-h-[calc(100vh-8rem)] pt-6">
       <ScrollArea className="flex-1">
         <div className="space-y-4 px-2">
           <InviteFormFields
