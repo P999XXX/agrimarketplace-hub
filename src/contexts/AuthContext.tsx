@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface AuthContextType {
   session: Session | null;
@@ -13,6 +13,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const PUBLIC_ROUTES = ['/signin', '/signup', '/reset-password'];
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
@@ -20,6 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<Error | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     let mounted = true;
@@ -31,8 +34,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         
         if (sessionError) {
           if (sessionError.message.includes('session_not_found')) {
-            // Sitzung ist abgelaufen oder ungültig - zur Anmeldung umleiten
-            navigate('/signin');
+            if (!PUBLIC_ROUTES.includes(location.pathname)) {
+              navigate('/signin');
+            }
             return;
           }
           throw sessionError;
@@ -42,8 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (initialSession) {
             setSession(initialSession);
             setUser(initialSession.user);
-          } else {
-            // Keine aktive Sitzung gefunden
+          } else if (!PUBLIC_ROUTES.includes(location.pathname)) {
             navigate('/signin');
           }
         }
@@ -56,7 +59,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             description: "Please sign in again",
             variant: "destructive",
           });
-          navigate('/signin');
+          if (!PUBLIC_ROUTES.includes(location.pathname)) {
+            navigate('/signin');
+          }
         }
       } finally {
         if (mounted) {
@@ -72,10 +77,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (currentSession) {
           setSession(currentSession);
           setUser(currentSession.user);
+          setError(null);
         } else {
           setSession(null);
           setUser(null);
-          navigate('/signin');
+          if (!PUBLIC_ROUTES.includes(location.pathname)) {
+            navigate('/signin');
+          }
         }
         setIsLoading(false);
       }
@@ -85,7 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [navigate, toast]);
+  }, [navigate, toast, location.pathname]);
 
   return (
     <AuthContext.Provider value={{ session, user, isLoading, error }}>
