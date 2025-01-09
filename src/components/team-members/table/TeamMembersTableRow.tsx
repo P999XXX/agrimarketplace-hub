@@ -4,6 +4,7 @@ import { EmailCell } from "../EmailCell";
 import { format } from "date-fns";
 import { TeamMember } from "@/hooks/useTeamMembers";
 import { ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface TeamMembersTableRowProps {
   member: TeamMember;
@@ -57,9 +58,19 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
 
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
+  const [showHighlight, setShowHighlight] = useState(false);
+
+  useEffect(() => {
+    if (isNew) {
+      const timer = setTimeout(() => {
+        setShowHighlight(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isNew]);
 
   return (
-    <TableRow className={`hover:bg-muted/50 ${isNew ? 'animate-highlight' : ''}`}>
+    <TableRow className={`hover:bg-muted/50 ${showHighlight ? 'animate-highlight' : ''}`}>
       <TableCell>
         <div className="flex items-center gap-3">
           <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>

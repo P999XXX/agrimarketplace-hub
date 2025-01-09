@@ -4,6 +4,7 @@ import { EmailCell } from "./EmailCell";
 import { UserAvatar } from "./card/UserAvatar";
 import { CardStats } from "./card/CardStats";
 import { CardFooter as CustomCardFooter } from "./card/CardFooter";
+import { useState, useEffect } from "react";
 
 const colorSchemes = [
   { bg: 'bg-[hsl(var(--chart-1))]', text: 'text-white' },
@@ -43,11 +44,21 @@ export const TeamMemberCard = ({
   const initials = getInitials(member.name || '', member.email);
   const colorScheme = getColorScheme(initials);
   const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
+  const [showHighlight, setShowHighlight] = useState(false);
+
+  useEffect(() => {
+    if (isNew) {
+      const timer = setTimeout(() => {
+        setShowHighlight(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isNew]);
 
   return (
     <Card
       className={`transition-all duration-500 hover:shadow-md bg-card border-border ${
-        isNew ? 'animate-highlight' : ''
+        showHighlight ? 'animate-highlight' : ''
       }`}
     >
       <CardHeader className="p-3 sm:p-4">
