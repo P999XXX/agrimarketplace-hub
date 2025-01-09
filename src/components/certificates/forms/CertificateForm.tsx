@@ -3,12 +3,14 @@ import { SheetClose } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CertificateFormFields } from "./CertificateFormFields";
 import { CertificateFormFooter } from "./CertificateFormFooter";
+import { useCertificateCategoriesQuery } from "@/hooks/certificates/useCertificateCategoriesQuery";
 
 export const CertificateForm = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [issueDate, setIssueDate] = useState<Date>();
   const [expiryDate, setExpiryDate] = useState<Date>();
   const [categoryId, setCategoryId] = useState<string>("");
+  const { data: categories } = useCertificateCategoriesQuery();
   
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -37,6 +39,7 @@ export const CertificateForm = () => {
           <CertificateFormFields
             categoryId={categoryId}
             setCategoryId={setCategoryId}
+            categories={categories}
             issueDate={issueDate}
             setIssueDate={setIssueDate}
             expiryDate={expiryDate}
