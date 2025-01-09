@@ -37,7 +37,7 @@ export const TeamMembersTable = ({
     return <TeamMembersTableLoading />;
   }
 
-  if (teamMembers.length === 0) {
+  if (!teamMembers || teamMembers.length === 0) {
     return <TeamMembersTableEmpty />;
   }
 

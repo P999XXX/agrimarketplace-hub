@@ -40,7 +40,7 @@ export const TeamMembersGrid = ({
     return <TeamMembersGridLoading />;
   }
 
-  if (teamMembers.length === 0) {
+  if (!teamMembers || teamMembers.length === 0) {
     return (
       <div className="text-center py-8">
         <p className="text-gray-500 text-lg">No team members found</p>
