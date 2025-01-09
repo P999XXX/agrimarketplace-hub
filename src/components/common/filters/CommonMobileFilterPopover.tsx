@@ -8,14 +8,6 @@ import {
 import { FilterSection } from "@/components/team-members/filters/components/FilterSection";
 import { getRoleFilterGroups, getStatusFilterGroups, getSortGroups } from "@/components/team-members/filters/components/FilterGroups";
 
-interface FilterGroup {
-  label: string;
-  options: {
-    label: string;
-    value: string;
-  }[];
-}
-
 interface CommonMobileFilterPopoverProps {
   categoryFilter?: string;
   setCategoryFilter?: (category: string) => void;
@@ -26,9 +18,6 @@ interface CommonMobileFilterPopoverProps {
   sortBy: string;
   setSortBy: (sort: string) => void;
   onExportCSV?: () => void;
-  categoryGroups?: FilterGroup[];
-  statusGroups?: FilterGroup[];
-  sortGroups?: FilterGroup[];
 }
 
 export const CommonMobileFilterPopover = ({
@@ -41,9 +30,6 @@ export const CommonMobileFilterPopover = ({
   sortBy,
   setSortBy,
   onExportCSV,
-  categoryGroups,
-  statusGroups,
-  sortGroups,
 }: CommonMobileFilterPopoverProps) => {
   return (
     <Popover>
@@ -54,24 +40,6 @@ export const CommonMobileFilterPopover = ({
       </PopoverTrigger>
       <PopoverContent className="w-72" align="end">
         <div className="space-y-4">
-          {categoryFilter !== undefined && setCategoryFilter && categoryGroups && (
-            <FilterSection
-              label="Category"
-              value={categoryFilter}
-              groups={categoryGroups}
-              onChange={setCategoryFilter}
-            />
-          )}
-
-          {statusFilter !== undefined && setStatusFilter && statusGroups && (
-            <FilterSection
-              label="Status"
-              value={statusFilter}
-              groups={statusGroups}
-              onChange={setStatusFilter}
-            />
-          )}
-
           {roleFilter !== undefined && setRoleFilter && (
             <FilterSection
               label="Role"
@@ -81,14 +49,21 @@ export const CommonMobileFilterPopover = ({
             />
           )}
 
-          {sortGroups && (
+          {statusFilter !== undefined && setStatusFilter && (
             <FilterSection
-              label="Sort"
-              value={sortBy}
-              groups={sortGroups}
-              onChange={setSortBy}
+              label="Status"
+              value={statusFilter}
+              groups={getStatusFilterGroups()}
+              onChange={setStatusFilter}
             />
           )}
+
+          <FilterSection
+            label="Sort"
+            value={sortBy}
+            groups={getSortGroups()}
+            onChange={setSortBy}
+          />
 
           {onExportCSV && (
             <div className="pt-2">
