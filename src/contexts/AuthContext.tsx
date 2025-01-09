@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   session: Session | null;
@@ -18,18 +19,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
 
     async function getInitialSession() {
       try {
+        setIsLoading(true);
         const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
         
+        if (sessionError) {
+          if (sessionError.message.includes('session_not_found')) {
+            // Sitzung ist abgelaufen oder ungültig - zur Anmeldung umleiten
+            navigate('/signin');
+            return;
+          }
+          throw sessionError;
+        }
+
         if (mounted) {
-          setSession(initialSession);
-          setUser(initialSession?.user ?? null);
+          if (initialSession) {
+            setSession(initialSession);
+            setUser(initialSession.user);
+          } else {
+            // Keine aktive Sitzung gefunden
+            navigate('/signin');
+          }
         }
       } catch (error) {
         console.error('Initial session error:', error);
@@ -37,9 +53,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setError(error as Error);
           toast({
             title: "Authentication Error",
-            description: "Failed to initialize session",
+            description: "Please sign in again",
             variant: "destructive",
           });
+          navigate('/signin');
         }
       } finally {
         if (mounted) {
@@ -51,11 +68,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     getInitialSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
-      console.log('Auth state changed:', event, !!currentSession);
-      
       if (mounted) {
-        setSession(currentSession);
-        setUser(currentSession?.user ?? null);
+        if (currentSession) {
+          setSession(currentSession);
+          setUser(currentSession.user);
+        } else {
+          setSession(null);
+          setUser(null);
+          navigate('/signin');
+        }
         setIsLoading(false);
       }
     });
@@ -64,7 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [toast]);
+  }, [navigate, toast]);
 
   return (
     <AuthContext.Provider value={{ session, user, isLoading, error }}>
