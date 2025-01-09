@@ -8,7 +8,7 @@ export const useCertificatesState = () => {
   const [view, setView] = useState<ViewMode>(() => {
     if (isMobile) return "grid";
     
-    const savedView = localStorage.getItem('certificatesViewMode');
+    const savedView = localStorage.getItem('viewMode');
     if (savedView === 'grid' || savedView === 'table') {
       return savedView;
     }
@@ -20,22 +20,24 @@ export const useCertificatesState = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [sortBy, setSortBy] = useState("created_at-desc");
 
+  // Wenn sich die View ändert, speichern wir sie im localStorage
+  useEffect(() => {
+    if (!isMobile) {
+      localStorage.setItem('viewMode', view);
+    }
+  }, [view, isMobile]);
+
+  // Wenn sich Mobile/Desktop ändert, passen wir die View an
   useEffect(() => {
     if (isMobile) {
       setView("grid");
     } else {
-      const savedView = localStorage.getItem('certificatesViewMode');
+      const savedView = localStorage.getItem('viewMode');
       if (savedView === 'grid' || savedView === 'table') {
         setView(savedView as ViewMode);
       }
     }
   }, [isMobile]);
-
-  useEffect(() => {
-    if (!isMobile) {
-      localStorage.setItem('certificatesViewMode', view);
-    }
-  }, [view, isMobile]);
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const scrollTop = event.currentTarget.scrollTop;
