@@ -1,11 +1,10 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { CertificatesFilters } from "../filters/CertificatesFilters";
 import { Dispatch, SetStateAction } from "react";
 import { ActiveFiltersChips } from "../filters/ActiveFiltersChips";
 import { ViewMode } from "../types";
-import { CommonFormSheet } from "@/components/common/sheet/CommonFormSheet";
-import { CertificateForm } from "../forms/CertificateForm";
 
 interface CertificatesHeaderProps {
   view: ViewMode;
@@ -45,12 +44,20 @@ export const CertificatesHeader = ({
           Certificates
         </h1>
         <div className="hidden md:block">
-          <CommonFormSheet
-            title="Add New Certificate"
-            triggerButtonText="Add Certificate"
-          >
-            <CertificateForm />
-          </CommonFormSheet>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button className="bg-[#00875A] hover:bg-[#006644]">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Certificate
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="w-full sm:max-w-lg">
+              <SheetHeader className="text-left">
+                <SheetTitle className="text-2xl">Add New Certificate</SheetTitle>
+              </SheetHeader>
+              {/* Certificate form will be added here */}
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
 

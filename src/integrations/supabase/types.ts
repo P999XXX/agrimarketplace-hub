@@ -42,7 +42,6 @@ export type Database = {
       certificates: {
         Row: {
           category: string
-          category_id: string | null
           company_id: string
           created_at: string
           deleted_at: string | null
@@ -60,7 +59,6 @@ export type Database = {
         }
         Insert: {
           category: string
-          category_id?: string | null
           company_id: string
           created_at?: string
           deleted_at?: string | null
@@ -78,7 +76,6 @@ export type Database = {
         }
         Update: {
           category?: string
-          category_id?: string | null
           company_id?: string
           created_at?: string
           deleted_at?: string | null
@@ -95,13 +92,6 @@ export type Database = {
           version?: number
         }
         Relationships: [
-          {
-            foreignKeyName: "certificates_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "certificate_categories"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "certificates_company_id_fkey"
             columns: ["company_id"]
