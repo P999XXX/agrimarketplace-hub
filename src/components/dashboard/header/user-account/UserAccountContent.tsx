@@ -7,11 +7,10 @@ countries.registerLocale(en);
 
 interface UserAccountContentProps {
   userProfile: any;
-  ipInfo: { country: string } | null;
   currentTime: Date;
 }
 
-export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAccountContentProps) => {
+export const UserAccountContent = ({ userProfile, currentTime }: UserAccountContentProps) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -22,6 +21,9 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
     return () => clearInterval(timer);
   }, []);
 
+  // Default to United States if no country is specified
+  const defaultCountry = 'US';
+  
   const getCountryName = (countryCode: string) => {
     try {
       return countries.getName(countryCode, 'en') || countryCode;
@@ -50,18 +52,14 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       <div className="flex justify-between items-center">
         <span>Location:</span>
         <div className="flex items-center gap-2">
-          {ipInfo?.country && (
-            <>
-              <span>{getCountryName(ipInfo.country)}</span>
-              <img 
-                src={getFlagUrl(ipInfo.country)}
-                width="20"
-                height="15"
-                alt={getCountryName(ipInfo.country)}
-                className="inline-block rounded-full object-cover"
-              />
-            </>
-          )}
+          <span>{getCountryName(defaultCountry)}</span>
+          <img 
+            src={getFlagUrl(defaultCountry)}
+            width="20"
+            height="15"
+            alt={getCountryName(defaultCountry)}
+            className="inline-block rounded-full object-cover"
+          />
         </div>
       </div>
       <div className="flex justify-between items-center">
