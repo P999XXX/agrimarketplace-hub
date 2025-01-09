@@ -2,6 +2,7 @@ import { MessageSquare, Bell } from "lucide-react";
 import { HeaderLogo } from "./HeaderLogo";
 import { UserAccountPopover } from "./UserAccountPopover";
 import { DashboardBreadcrumb } from "../DashboardBreadcrumb";
+import { UserAvatar } from "../UserAvatar";
 
 export const HeaderActions = () => {
   return (
@@ -17,7 +18,9 @@ export const HeaderActions = () => {
         <button className="text-muted-foreground hover:text-foreground transition-colors">
           <Bell className="h-5 w-5" />
         </button>
-        <UserAccountPopover />
+        <UserAccountPopover>
+          <UserAvatar />
+        </UserAccountPopover>
       </div>
     </div>
   );
