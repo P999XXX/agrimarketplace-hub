@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { CommonFormSheet } from "@/components/common/sheet/CommonFormSheet";
+import { CertificateForm } from "./forms/CertificateForm";
 
 export const MobileAddButton = () => {
   return (
@@ -10,10 +11,7 @@ export const MobileAddButton = () => {
         title="Add New Certificate"
         triggerButtonText="Add Certificate"
       >
-        <div>
-          {/* Temporärer Platzhalter bis das Formular implementiert ist */}
-          <p className="p-4 text-muted-foreground">Certificate form will be added here</p>
-        </div>
+        <CertificateForm />
       </CommonFormSheet>
     </div>
   );
