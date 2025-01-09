@@ -37,7 +37,7 @@ export const FilterButtons = ({
     <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="h-9 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Category
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -61,7 +61,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="h-9 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Status
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -82,7 +82,7 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="h-9 shadow-sm">
+          <Button variant="outline" className="h-10 shadow-sm">
             <Filter className="h-4 w-4 mr-2" />
             Sort
             <ChevronDown className="ml-2 h-4 w-4" />
@@ -109,7 +109,7 @@ export const FilterButtons = ({
           variant="outline"
           size="icon"
           onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-          className="h-9 shadow-sm"
+          className="h-10 w-10 shadow-sm"
         >
           {viewMode === "grid" ? (
             <LayoutList className="h-4 w-4" />
@@ -119,7 +119,7 @@ export const FilterButtons = ({
         </Button>
       )}
 
-      <Button variant="outline" size="sm" onClick={onExportCSV} className="h-9 shadow-sm">
+      <Button variant="outline" onClick={onExportCSV} className="h-10 shadow-sm">
         <Download className="mr-2 h-4 w-4" />
         Export
       </Button>

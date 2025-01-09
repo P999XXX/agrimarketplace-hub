@@ -38,8 +38,7 @@ export const MobileFilterMenu = ({
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          size="sm"
-          className="h-9 shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
+          className="h-10 shadow-sm focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none"
         >
           <ListFilter className="h-4 w-4" />
         </Button>
