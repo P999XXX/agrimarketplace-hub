@@ -1,7 +1,6 @@
-import { CommonSearchInput } from "@/components/common/filters/CommonSearchInput";
-import { CommonFilterButtons } from "@/components/common/filters/CommonFilterButtons";
-import { CommonMobileFilterDropdown } from "@/components/common/filters/CommonMobileFilterDropdown";
-import { Filter } from "lucide-react";
+import { SearchInput } from "./SearchInput";
+import { FilterButtons } from "./FilterButtons";
+import { MobileFilterMenu } from "./MobileFilterMenu";
 
 interface CertificatesFiltersProps {
   viewMode: "grid" | "table";
@@ -32,70 +31,41 @@ export const CertificatesFilters = ({
   onExportCSV,
   isMobile,
 }: CertificatesFiltersProps) => {
-  const filterGroups = [
-    {
-      label: "Category",
-      value: categoryFilter,
-      onChange: setCategoryFilter,
-      options: [
-        { label: "All Categories", value: "all" },
-        { label: "Organic", value: "organic" },
-        { label: "Quality", value: "quality" },
-        { label: "Safety", value: "safety" },
-      ],
-    },
-    {
-      label: "Status",
-      value: statusFilter,
-      onChange: setStatusFilter,
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Valid", value: "valid" },
-        { label: "Expired", value: "expired" },
-      ],
-    },
-    {
-      label: "Sort",
-      value: sortBy,
-      onChange: setSortBy,
-      options: [
-        { label: "Name (A-Z)", value: "name-asc" },
-        { label: "Name (Z-A)", value: "name-desc" },
-        { label: "Date (Newest)", value: "date-desc" },
-        { label: "Date (Oldest)", value: "date-asc" },
-      ],
-    },
-  ];
-
-  const filters = filterGroups.map(group => ({
-    icon: <Filter className="h-4 w-4" />,
-    label: group.label,
-    value: group.value,
-    onChange: group.onChange,
-    options: group.options,
-  }));
-
   return (
-    <div className="flex items-center gap-4">
-      <CommonSearchInput
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        placeholder="Search certificates..."
-      />
+    <div className="flex flex-wrap items-center gap-4">
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
+      {/* Desktop View */}
       <div className="hidden md:flex items-center gap-2">
-        <CommonFilterButtons
-          filters={filters}
+        <FilterButtons
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           viewMode={viewMode}
           setViewMode={setViewMode}
-          onExport={onExportCSV}
+          onExportCSV={onExportCSV}
+          searchQuery={searchQuery}
+          showViewToggle={!isMobile}
         />
       </div>
+
+      {/* Mobile View */}
       <div className="md:hidden">
-        <CommonMobileFilterDropdown
-          groups={filterGroups}
+        <MobileFilterMenu
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           viewMode={viewMode}
           setViewMode={setViewMode}
-          onExport={onExportCSV}
+          onExportCSV={onExportCSV}
+          searchQuery={searchQuery}
+          showViewToggle={false}
         />
       </div>
     </div>
