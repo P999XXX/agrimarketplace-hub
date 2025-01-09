@@ -31,46 +31,6 @@ export const CertificatesFilters = ({
   onExportCSV,
   isMobile,
 }: CertificatesFiltersProps) => {
-  const categoryGroups = [
-    {
-      label: "Certificate Types",
-      options: [
-        { label: "All Categories", value: "all" },
-        { label: "Organic", value: "organic" },
-        { label: "Quality", value: "quality" },
-        { label: "Safety", value: "safety" },
-      ],
-    },
-  ];
-
-  const statusGroups = [
-    {
-      label: "Certificate Status",
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Valid", value: "valid" },
-        { label: "Expired", value: "expired" },
-      ],
-    },
-  ];
-
-  const sortGroups = [
-    {
-      label: "Sort by Name",
-      options: [
-        { label: "Name (A-Z)", value: "name-asc" },
-        { label: "Name (Z-A)", value: "name-desc" },
-      ],
-    },
-    {
-      label: "Sort by Date",
-      options: [
-        { label: "Date (Newest)", value: "date-desc" },
-        { label: "Date (Oldest)", value: "date-asc" },
-      ],
-    },
-  ];
-
   return (
     <div className="flex flex-wrap items-center gap-4">
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -101,9 +61,6 @@ export const CertificatesFilters = ({
           setStatusFilter={setStatusFilter}
           sortBy={sortBy}
           setSortBy={setSortBy}
-          categoryGroups={categoryGroups}
-          statusGroups={statusGroups}
-          sortGroups={sortGroups}
         />
       </div>
     </div>

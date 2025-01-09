@@ -6,7 +6,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { FilterSection } from "@/components/team-members/filters/components/FilterSection";
-import { getRoleFilterGroups, getStatusFilterGroups, getSortGroups } from "@/components/team-members/filters/components/FilterGroups";
 
 interface CommonMobileFilterPopoverProps {
   categoryFilter?: string;
@@ -31,6 +30,46 @@ export const CommonMobileFilterPopover = ({
   setSortBy,
   onExportCSV,
 }: CommonMobileFilterPopoverProps) => {
+  const categoryGroups = [
+    {
+      label: "Certificate Types",
+      options: [
+        { label: "All Categories", value: "all" },
+        { label: "Organic", value: "organic" },
+        { label: "Quality", value: "quality" },
+        { label: "Safety", value: "safety" },
+      ],
+    },
+  ];
+
+  const statusGroups = [
+    {
+      label: "Certificate Status",
+      options: [
+        { label: "All Status", value: "all" },
+        { label: "Valid", value: "valid" },
+        { label: "Expired", value: "expired" },
+      ],
+    },
+  ];
+
+  const sortGroups = [
+    {
+      label: "Sort by Name",
+      options: [
+        { label: "Name (A-Z)", value: "name-asc" },
+        { label: "Name (Z-A)", value: "name-desc" },
+      ],
+    },
+    {
+      label: "Sort by Date",
+      options: [
+        { label: "Date (Newest)", value: "date-desc" },
+        { label: "Date (Oldest)", value: "date-asc" },
+      ],
+    },
+  ];
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,12 +79,12 @@ export const CommonMobileFilterPopover = ({
       </PopoverTrigger>
       <PopoverContent className="w-72" align="end">
         <div className="space-y-4">
-          {roleFilter !== undefined && setRoleFilter && (
+          {categoryFilter !== undefined && setCategoryFilter && (
             <FilterSection
-              label="Role"
-              value={roleFilter}
-              groups={getRoleFilterGroups()}
-              onChange={setRoleFilter}
+              label="Category"
+              value={categoryFilter}
+              groups={categoryGroups}
+              onChange={setCategoryFilter}
             />
           )}
 
@@ -53,7 +92,7 @@ export const CommonMobileFilterPopover = ({
             <FilterSection
               label="Status"
               value={statusFilter}
-              groups={getStatusFilterGroups()}
+              groups={statusGroups}
               onChange={setStatusFilter}
             />
           )}
@@ -61,7 +100,7 @@ export const CommonMobileFilterPopover = ({
           <FilterSection
             label="Sort"
             value={sortBy}
-            groups={getSortGroups()}
+            groups={sortGroups}
             onChange={setSortBy}
           />
 
