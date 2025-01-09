@@ -1,6 +1,5 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface ActiveFiltersChipsProps {
   roleFilter: string;
@@ -59,47 +58,42 @@ export const ActiveFiltersChips = ({
   };
 
   return (
-    <div className="py-1.8">
-      <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex gap-1.8 px-4">
-          {roleFilter !== "all" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setRoleFilter("all")}
-            >
-              Role: {getRoleLabel(roleFilter)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-          
-          {statusFilter !== "all" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setStatusFilter("all")}
-            >
-              Status: {getStatusLabel(statusFilter)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-          
-          {sortBy !== "created_at-desc" && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="h-6 text-[11px] font-normal bg-gray-100 hover:bg-gray-200 text-gray-600"
-              onClick={() => setSortBy("created_at-desc")}
-            >
-              Sort: {getSortLabel(sortBy)}
-              <X className="ml-1 h-2.5 w-2.5" />
-            </Button>
-          )}
-        </div>
-        <ScrollBar orientation="horizontal" className="h-0.5" />
-      </ScrollArea>
+    <div className="flex flex-wrap gap-2 px-4 pb-2">
+      {roleFilter !== "all" && (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="h-7 text-xs font-normal"
+          onClick={() => setRoleFilter("all")}
+        >
+          Role: {getRoleLabel(roleFilter)}
+          <X className="ml-1 h-3 w-3" />
+        </Button>
+      )}
+      
+      {statusFilter !== "all" && (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="h-7 text-xs font-normal"
+          onClick={() => setStatusFilter("all")}
+        >
+          Status: {getStatusLabel(statusFilter)}
+          <X className="ml-1 h-3 w-3" />
+        </Button>
+      )}
+      
+      {sortBy !== "created_at-desc" && (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="h-7 text-xs font-normal"
+          onClick={() => setSortBy("created_at-desc")}
+        >
+          Sort: {getSortLabel(sortBy)}
+          <X className="ml-1 h-3 w-3" />
+        </Button>
+      )}
     </div>
   );
 };
