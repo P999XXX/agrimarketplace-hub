@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Filter, ChevronRight } from "lucide-react";
+import { Filter, ChevronRight, Download } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -36,6 +36,7 @@ interface CommonMobileFilterPopoverProps {
   statusGroups?: FilterGroup[];
   roleGroups?: FilterGroup[];
   sortGroups: FilterGroup[];
+  onExportCSV?: () => void;
 }
 
 export const CommonMobileFilterPopover = ({
@@ -51,6 +52,7 @@ export const CommonMobileFilterPopover = ({
   statusGroups,
   roleGroups,
   sortGroups,
+  onExportCSV,
 }: CommonMobileFilterPopoverProps) => {
   return (
     <Popover>
@@ -171,6 +173,19 @@ export const CommonMobileFilterPopover = ({
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+
+          {onExportCSV && (
+            <div className="pt-2">
+              <Button 
+                variant="outline" 
+                className="w-full justify-between"
+                onClick={onExportCSV}
+              >
+                Export as CSV
+                <Download className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
         </div>
       </PopoverContent>
     </Popover>
