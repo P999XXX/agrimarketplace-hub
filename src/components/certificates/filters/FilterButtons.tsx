@@ -1,11 +1,6 @@
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown, Download, LayoutGrid, LayoutList, Filter } from "lucide-react";
+import { Filter, LayoutGrid, Table as TableIcon, Download } from "lucide-react";
+import { FilterDropdownButton } from "@/components/common/filters/FilterDropdownButton";
 
 interface FilterButtonsProps {
   categoryFilter: string;
@@ -18,7 +13,7 @@ interface FilterButtonsProps {
   setViewMode: (mode: "grid" | "table") => void;
   onExportCSV: () => void;
   searchQuery: string;
-  showViewToggle: boolean;
+  showViewToggle?: boolean;
 }
 
 export const FilterButtons = ({
@@ -31,84 +26,47 @@ export const FilterButtons = ({
   viewMode,
   setViewMode,
   onExportCSV,
-  showViewToggle,
+  showViewToggle = true,
 }: FilterButtonsProps) => {
   return (
     <div className="flex items-center gap-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
-            <div className="flex items-center">
-              <Filter className="h-4 w-4 mr-2" />
-              <span>Category</span>
-            </div>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[180px]">
-          <DropdownMenuItem onClick={() => setCategoryFilter("all")}>
-            All Categories
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("organic")}>
-            Organic
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("quality")}>
-            Quality
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("safety")}>
-            Safety
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <FilterDropdownButton
+        icon={<Filter className="h-4 w-4 mr-2" />}
+        label="Category"
+        value={categoryFilter}
+        onChange={setCategoryFilter}
+        options={[
+          { value: "all", label: "All Categories" },
+          { value: "organic", label: "Organic" },
+          { value: "quality", label: "Quality" },
+          { value: "safety", label: "Safety" },
+        ]}
+      />
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
-            <div className="flex items-center">
-              <Filter className="h-4 w-4 mr-2" />
-              <span>Status</span>
-            </div>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[180px]">
-          <DropdownMenuItem onClick={() => setStatusFilter("all")}>
-            All Status
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setStatusFilter("valid")}>
-            Valid
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setStatusFilter("expired")}>
-            Expired
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <FilterDropdownButton
+        icon={<Filter className="h-4 w-4 mr-2" />}
+        label="Status"
+        value={statusFilter}
+        onChange={setStatusFilter}
+        options={[
+          { value: "all", label: "All Status" },
+          { value: "valid", label: "Valid" },
+          { value: "expired", label: "Expired" },
+        ]}
+      />
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
-            <div className="flex items-center">
-              <Filter className="h-4 w-4 mr-2" />
-              <span>Sort</span>
-            </div>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[180px]">
-          <DropdownMenuItem onClick={() => setSortBy("name-asc")}>
-            Name (A-Z)
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSortBy("name-desc")}>
-            Name (Z-A)
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSortBy("date-asc")}>
-            Date (Oldest)
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSortBy("date-desc")}>
-            Date (Newest)
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <FilterDropdownButton
+        icon={<Filter className="h-4 w-4 mr-2" />}
+        label="Sort"
+        value={sortBy}
+        onChange={setSortBy}
+        options={[
+          { value: "name-asc", label: "Name (A-Z)" },
+          { value: "name-desc", label: "Name (Z-A)" },
+          { value: "date-asc", label: "Date (Oldest)" },
+          { value: "date-desc", label: "Date (Newest)" },
+        ]}
+      />
 
       {showViewToggle && (
         <Button
@@ -118,7 +76,7 @@ export const FilterButtons = ({
           className="h-10 w-10 shadow-sm"
         >
           {viewMode === "grid" ? (
-            <LayoutList className="h-4 w-4" />
+            <TableIcon className="h-4 w-4" />
           ) : (
             <LayoutGrid className="h-4 w-4" />
           )}
