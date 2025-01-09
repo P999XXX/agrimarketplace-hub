@@ -1,6 +1,6 @@
 import { SearchInput } from "./SearchInput";
 import { FilterButtons } from "./FilterButtons";
-import { MobileFilterMenu } from "./MobileFilterMenu";
+import { CommonMobileFilterPopover } from "@/components/common/filters/CommonMobileFilterPopover";
 
 interface CertificatesFiltersProps {
   viewMode: "grid" | "table";
@@ -31,6 +31,46 @@ export const CertificatesFilters = ({
   onExportCSV,
   isMobile,
 }: CertificatesFiltersProps) => {
+  const categoryGroups = [
+    {
+      label: "Certificate Types",
+      options: [
+        { label: "All Categories", value: "all" },
+        { label: "Organic", value: "organic" },
+        { label: "Quality", value: "quality" },
+        { label: "Safety", value: "safety" },
+      ],
+    },
+  ];
+
+  const statusGroups = [
+    {
+      label: "Certificate Status",
+      options: [
+        { label: "All Status", value: "all" },
+        { label: "Valid", value: "valid" },
+        { label: "Expired", value: "expired" },
+      ],
+    },
+  ];
+
+  const sortGroups = [
+    {
+      label: "Sort by Name",
+      options: [
+        { label: "Name (A-Z)", value: "name-asc" },
+        { label: "Name (Z-A)", value: "name-desc" },
+      ],
+    },
+    {
+      label: "Sort by Date",
+      options: [
+        { label: "Date (Newest)", value: "date-desc" },
+        { label: "Date (Oldest)", value: "date-asc" },
+      ],
+    },
+  ];
+
   return (
     <div className="flex flex-wrap items-center gap-4">
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -54,18 +94,16 @@ export const CertificatesFilters = ({
 
       {/* Mobile View */}
       <div className="md:hidden">
-        <MobileFilterMenu
+        <CommonMobileFilterPopover
           categoryFilter={categoryFilter}
           setCategoryFilter={setCategoryFilter}
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
           sortBy={sortBy}
           setSortBy={setSortBy}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-          onExportCSV={onExportCSV}
-          searchQuery={searchQuery}
-          showViewToggle={false}
+          categoryGroups={categoryGroups}
+          statusGroups={statusGroups}
+          sortGroups={sortGroups}
         />
       </div>
     </div>
