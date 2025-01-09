@@ -70,7 +70,10 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       </div>
       <div className="flex justify-between items-center">
         <span>Time:</span>
-        <span className="w-[200px] text-right">{timeZone} {format(time, 'h:mm:ss a')}</span>
+        <div className="flex justify-end w-[200px] space-x-2">
+          <span className="w-[100px] text-right">{timeZone}</span>
+          <span className="w-[100px] text-right">{format(time, 'h:mm:ss a')}</span>
+        </div>
       </div>
     </div>
   );
