@@ -81,9 +81,7 @@ export const CertificateFormFields = ({
             <Calendar
               mode="single"
               selected={issueDate}
-              onSelect={(date) => {
-                setIssueDate(date);
-              }}
+              onSelect={setIssueDate}
               initialFocus
             />
           </PopoverContent>
@@ -109,9 +107,7 @@ export const CertificateFormFields = ({
             <Calendar
               mode="single"
               selected={expiryDate}
-              onSelect={(date) => {
-                setExpiryDate(date);
-              }}
+              onSelect={setExpiryDate}
               initialFocus
             />
           </PopoverContent>
