@@ -8,13 +8,13 @@ interface SearchInputProps {
 
 export const SearchInput = ({ searchQuery, setSearchQuery }: SearchInputProps) => {
   return (
-    <div className="relative flex-1 md:max-w-lg">
+    <div className="relative w-full md:max-w-lg">
       <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
       <Input
         placeholder="Search certificates..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="pl-8 h-9 shadow-sm"
+        className="pl-8 h-9 shadow-sm w-full"
       />
     </div>
   );
