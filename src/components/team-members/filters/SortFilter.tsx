@@ -18,7 +18,7 @@ export const SortFilter = ({ value, onChange }: SortFilterProps) => {
           <SelectValue placeholder="Sort by" />
         </div>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="z-[100]">
         <SelectItem value="created_at-desc">Newest first</SelectItem>
         <SelectItem value="created_at-asc">Oldest first</SelectItem>
         <SelectItem value="name-asc">Name A-Z</SelectItem>

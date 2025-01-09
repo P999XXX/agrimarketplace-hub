@@ -36,34 +36,36 @@ export const FilterButtons = ({
   const { exportToExcel } = useExportTeamMembers();
 
   return (
-    <>
+    <div className="flex items-center gap-2">
       <RoleFilter value={roleFilter} onChange={setRoleFilter} />
       <StatusFilter value={statusFilter} onChange={setStatusFilter} />
       <SortFilter value={sortBy} onChange={setSortBy} />
       
-      {showViewToggle && (
+      <div className="flex items-center gap-2">
+        {showViewToggle && (
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+            className="rounded-md"
+          >
+            {viewMode === "grid" ? (
+              <Table className="h-4 w-4" />
+            ) : (
+              <LayoutGrid className="h-4 w-4" />
+            )}
+          </Button>
+        )}
+
         <Button
           variant="outline"
           size="icon"
-          onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
+          onClick={() => exportToExcel(teamMembers, isLoading)}
           className="rounded-md"
         >
-          {viewMode === "grid" ? (
-            <Table className="h-4 w-4" />
-          ) : (
-            <LayoutGrid className="h-4 w-4" />
-          )}
+          <Download className="h-4 w-4" />
         </Button>
-      )}
-
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => exportToExcel(teamMembers, isLoading)}
-        className="rounded-md"
-      >
-        <Download className="h-4 w-4" />
-      </Button>
-    </>
+      </div>
+    </div>
   );
 };
