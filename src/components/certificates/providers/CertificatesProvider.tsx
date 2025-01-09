@@ -1,6 +1,5 @@
 import { createContext, useContext, ReactNode } from 'react';
-import { useCertificatesState } from '../hooks/useCertificatesState';
-import { ViewMode } from '../types';
+import { useViewPreference, ViewMode } from '@/hooks/use-view-preference';
 
 interface CertificatesContextType {
   view: ViewMode;
@@ -21,10 +20,27 @@ interface CertificatesContextType {
 const CertificatesContext = createContext<CertificatesContextType | undefined>(undefined);
 
 export const CertificatesProvider = ({ children }: { children: ReactNode }) => {
+  const { view, setView, isMobile } = useViewPreference('certificates');
   const state = useCertificatesState();
 
+  const value = {
+    view,
+    setView,
+    searchQuery: state.searchQuery,
+    setSearchQuery: state.setSearchQuery,
+    categoryFilter: state.categoryFilter,
+    setCategoryFilter: state.setCategoryFilter,
+    statusFilter: state.statusFilter,
+    setStatusFilter: state.setStatusFilter,
+    sortBy: state.sortBy,
+    setSortBy: state.setSortBy,
+    isScrolled: state.isScrolled,
+    handleScroll: state.handleScroll,
+    isMobile
+  };
+
   return (
-    <CertificatesContext.Provider value={state}>
+    <CertificatesContext.Provider value={value}>
       {children}
     </CertificatesContext.Provider>
   );

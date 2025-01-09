@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode } from 'react';
+import { useViewPreference, ViewMode } from '@/hooks/use-view-preference';
 import { useTeamMembersState } from '../hooks/useTeamMembersState';
-import { ViewMode } from '../types';
 
 interface TeamMembersContextType {
   view: ViewMode;
@@ -21,10 +21,27 @@ interface TeamMembersContextType {
 const TeamMembersContext = createContext<TeamMembersContextType | undefined>(undefined);
 
 export const TeamMembersProvider = ({ children }: { children: ReactNode }) => {
+  const { view, setView, isMobile } = useViewPreference('team-members');
   const state = useTeamMembersState();
 
+  const value = {
+    view,
+    setView,
+    searchQuery: state.searchQuery,
+    setSearchQuery: state.setSearchQuery,
+    roleFilter: state.roleFilter,
+    setRoleFilter: state.setRoleFilter,
+    statusFilter: state.statusFilter,
+    setStatusFilter: state.setStatusFilter,
+    sortBy: state.sortBy,
+    setSortBy: state.setSortBy,
+    isScrolled: state.isScrolled,
+    handleScroll: state.handleScroll,
+    isMobile
+  };
+
   return (
-    <TeamMembersContext.Provider value={state}>
+    <TeamMembersContext.Provider value={value}>
       {children}
     </TeamMembersContext.Provider>
   );
