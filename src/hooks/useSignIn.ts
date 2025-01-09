@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "./use-toast";
 
-interface SignInFormData {
+interface FormData {
   email: string;
   password: string;
 }
 
 export const useSignIn = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<SignInFormData>({
+  const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,24 +26,14 @@ export const useSignIn = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (error) throw error;
-
-      navigate("/dashboard");
-    } catch (error: any) {
+    // Simuliere einen Login-Versuch
+    setTimeout(() => {
       toast({
-        title: "Error",
-        description: error.message || "Could not sign in",
-        variant: "destructive",
+        title: "Demo Mode",
+        description: "This is a demo version without backend functionality",
       });
-    } finally {
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   return {
