@@ -1,13 +1,10 @@
-import { TeamMembersHeader } from "./TeamMembersHeader";
-import { TeamMembersGrid } from "./TeamMembersGrid";
-import { TeamMembersTable } from "./TeamMembersTable";
-import { TeamMembersFilters } from "./TeamMembersFilters";
-import { MobileInviteButton } from "./MobileInviteButton";
-import { ActiveFiltersChips } from "./filters/ActiveFiltersChips";
+import { TeamMembersGrid } from "../TeamMembersGrid";
+import { TeamMembersTable } from "../TeamMembersTable";
+import { MobileInviteButton } from "../MobileInviteButton";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { TeamMembersProvider } from "./providers/TeamMembersProvider";
-import { useTeamMembersContext } from "./providers/TeamMembersProvider";
+import { TeamMembersProvider, useTeamMembersContext } from "../providers/TeamMembersProvider";
+import { TeamMembersHeader } from "./TeamMembersHeader";
 
 const TeamMembersContentView = () => {
   const {
@@ -34,11 +31,6 @@ const TeamMembersContentView = () => {
           <TeamMembersHeader 
             view={view} 
             onViewChange={setView}
-          />
-
-          <TeamMembersFilters
-            viewMode={view}
-            setViewMode={setView}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             roleFilter={roleFilter}
@@ -49,18 +41,8 @@ const TeamMembersContentView = () => {
             setSortBy={setSortBy}
             onExportCSV={() => {}}
             isMobile={isMobile}
+            hasActiveFilters={hasActiveFilters}
           />
-          
-          {isMobile && hasActiveFilters && (
-            <ActiveFiltersChips
-              roleFilter={roleFilter}
-              statusFilter={statusFilter}
-              sortBy={sortBy}
-              setRoleFilter={setRoleFilter}
-              setStatusFilter={setStatusFilter}
-              setSortBy={setSortBy}
-            />
-          )}
         </div>
 
         <ScrollArea 

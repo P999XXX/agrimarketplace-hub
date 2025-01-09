@@ -1,10 +1,10 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { InviteMemberForm } from "../InviteMemberForm";
 import { TeamMembersFilters } from "../TeamMembersFilters";
 import { Dispatch, SetStateAction } from "react";
-import { InviteSheetHeader } from "../invite/InviteSheetHeader";
+import { ActiveFiltersChips } from "../filters/ActiveFiltersChips";
 
 interface TeamMembersHeaderProps {
   view: "grid" | "table";
@@ -19,6 +19,7 @@ interface TeamMembersHeaderProps {
   setSortBy: (sort: string) => void;
   onExportCSV: () => void;
   isMobile: boolean;
+  hasActiveFilters: boolean;
 }
 
 export const TeamMembersHeader = ({ 
@@ -33,7 +34,8 @@ export const TeamMembersHeader = ({
   sortBy,
   setSortBy,
   onExportCSV,
-  isMobile
+  isMobile,
+  hasActiveFilters
 }: TeamMembersHeaderProps) => {
   return (
     <div className="space-y-4">
@@ -50,10 +52,10 @@ export const TeamMembersHeader = ({
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
-              <InviteSheetHeader />
-              <div className="flex-1">
-                <InviteMemberForm />
-              </div>
+              <SheetHeader className="text-left">
+                <SheetTitle className="text-2xl">Invite Team Member</SheetTitle>
+              </SheetHeader>
+              <InviteMemberForm />
             </SheetContent>
           </Sheet>
         </div>
@@ -73,6 +75,17 @@ export const TeamMembersHeader = ({
         onExportCSV={onExportCSV}
         isMobile={isMobile}
       />
+
+      {isMobile && hasActiveFilters && (
+        <ActiveFiltersChips
+          roleFilter={roleFilter}
+          statusFilter={statusFilter}
+          sortBy={sortBy}
+          setRoleFilter={setRoleFilter}
+          setStatusFilter={setStatusFilter}
+          setSortBy={setSortBy}
+        />
+      )}
     </div>
   );
 };
