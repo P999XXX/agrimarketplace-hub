@@ -16,6 +16,7 @@ import {
 import { useSidebar } from "./context"
 import { sidebarMenuButtonVariants } from "./variants"
 import type { SidebarMenuButtonProps } from "./types"
+import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_MOBILE, SIDEBAR_WIDTH_ICON } from "./context"
 
 const Sidebar = React.forwardRef<
   HTMLDivElement,
@@ -118,7 +119,7 @@ const Sidebar = React.forwardRef<
 )
 Sidebar.displayName = "Sidebar"
 
-export const SidebarMenuButton = React.forwardRef<
+const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
   SidebarMenuButtonProps
 >(
@@ -174,7 +175,4 @@ export const SidebarMenuButton = React.forwardRef<
 )
 SidebarMenuButton.displayName = "SidebarMenuButton"
 
-export {
-  Sidebar,
-  SidebarMenuButton,
-}
+export { Sidebar, SidebarMenuButton }
