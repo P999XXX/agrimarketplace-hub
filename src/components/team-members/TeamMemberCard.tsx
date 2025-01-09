@@ -42,13 +42,12 @@ export const TeamMemberCard = ({
 }: TeamMemberCardProps) => {
   const initials = getInitials(member.name || '', member.email);
   const colorScheme = getColorScheme(initials);
+  const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
 
   return (
     <Card
       className={`transition-all duration-500 hover:shadow-md bg-card border-border ${
-        Date.now() - new Date(member.created_at).getTime() < 3000
-          ? 'animate-[highlight_1s_ease-in-out]'
-          : ''
+        isNew ? 'animate-highlight' : ''
       }`}
     >
       <CardHeader className="p-3 sm:p-4">

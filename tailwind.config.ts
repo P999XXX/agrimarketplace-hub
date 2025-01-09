@@ -89,6 +89,14 @@ export default {
             "background-position": "100% 50%",
           },
         },
+        "highlight": {
+          "0%": {
+            backgroundColor: "rgb(134 239 172 / 0.25)", // green-200 mit Transparenz
+          },
+          "100%": {
+            backgroundColor: "transparent",
+          }
+        }
       },
       animation: {
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
@@ -96,6 +104,7 @@ export default {
         "fade-in-left": "fade-in-left 0.6s ease-out forwards",
         "fade": "fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
         "gradient-shift": "gradient-shift 15s ease infinite",
+        "highlight": "highlight 1s ease-in-out",
       },
       colors: {
         primary: {

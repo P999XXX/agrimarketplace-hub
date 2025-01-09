@@ -56,9 +56,10 @@ export const TeamMembersTableRow = ({ member }: TeamMembersTableRowProps) => {
   };
 
   const colorScheme = getColorScheme(initials);
+  const isNew = Date.now() - new Date(member.created_at).getTime() < 3000;
 
   return (
-    <TableRow className="hover:bg-muted/50">
+    <TableRow className={`hover:bg-muted/50 ${isNew ? 'animate-highlight' : ''}`}>
       <TableCell>
         <div className="flex items-center gap-3">
           <div className={`w-8 h-8 rounded-full ${colorScheme.bg} flex items-center justify-center flex-shrink-0 ${colorScheme.text} text-xs font-medium`}>
