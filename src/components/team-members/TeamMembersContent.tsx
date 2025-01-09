@@ -76,14 +76,16 @@ export const TeamMembersContent = () => {
           />
           
           {isMobile && hasActiveFilters && (
-            <ActiveFiltersChips
-              roleFilter={roleFilter}
-              statusFilter={statusFilter}
-              sortBy={sortBy}
-              setRoleFilter={setRoleFilter}
-              setStatusFilter={setStatusFilter}
-              setSortBy={setSortBy}
-            />
+            <div className="pb-1">
+              <ActiveFiltersChips
+                roleFilter={roleFilter}
+                statusFilter={statusFilter}
+                sortBy={sortBy}
+                setRoleFilter={setRoleFilter}
+                setStatusFilter={setStatusFilter}
+                setSortBy={setSortBy}
+              />
+            </div>
           )}
         </div>
 
@@ -91,7 +93,7 @@ export const TeamMembersContent = () => {
           className="flex-1 relative md:pb-0 pb-20" 
           onScroll={handleScroll}
         >
-          <div className="p-4">
+          <div className="p-4 md:pt-4 pt-2">
             {view === "grid" ? (
               <TeamMembersGrid
                 searchQuery={searchQuery}
