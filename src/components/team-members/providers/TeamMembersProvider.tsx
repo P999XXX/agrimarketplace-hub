@@ -21,7 +21,7 @@ interface TeamMembersContextType {
 const TeamMembersContext = createContext<TeamMembersContextType | undefined>(undefined);
 
 export const TeamMembersProvider = ({ children }: { children: ReactNode }) => {
-  const { view, setView, isMobile } = useViewPreference('team-members');
+  const { view, setView, isMobile } = useViewPreference();
   const state = useTeamMembersState();
 
   const value = {

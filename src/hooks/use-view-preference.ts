@@ -3,9 +3,9 @@ import { useMediaQuery } from './use-media-query';
 
 export type ViewMode = 'grid' | 'table';
 
-export const useViewPreference = (pageKey: string) => {
+export const useViewPreference = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const storageKey = `view-mode-${pageKey}`;
+  const storageKey = 'global-view-mode';
   
   const [view, setView] = useState<ViewMode>(() => {
     if (isMobile) return "grid";
@@ -26,13 +26,13 @@ export const useViewPreference = (pageKey: string) => {
         setView(savedView as ViewMode);
       }
     }
-  }, [isMobile, storageKey]);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isMobile) {
       localStorage.setItem(storageKey, view);
     }
-  }, [view, isMobile, storageKey]);
+  }, [view, isMobile]);
 
   return {
     view,

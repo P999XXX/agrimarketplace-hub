@@ -21,7 +21,7 @@ interface CertificatesContextType {
 const CertificatesContext = createContext<CertificatesContextType | undefined>(undefined);
 
 export const CertificatesProvider = ({ children }: { children: ReactNode }) => {
-  const { view, setView, isMobile } = useViewPreference('certificates');
+  const { view, setView, isMobile } = useViewPreference();
   const state = useCertificatesState();
 
   const value = {
