@@ -37,7 +37,7 @@ export const FilterButtons = ({
 
   return (
     <div className="flex items-center gap-2">
-      <div className="flex items-center gap-2 flex-1">
+      <div className="flex items-center gap-2">
         <RoleFilter value={roleFilter} onChange={setRoleFilter} />
         <StatusFilter value={statusFilter} onChange={setStatusFilter} />
         <SortFilter value={sortBy} onChange={setSortBy} />
@@ -49,7 +49,7 @@ export const FilterButtons = ({
             variant="outline"
             size="icon"
             onClick={() => setViewMode(viewMode === "grid" ? "table" : "grid")}
-            className="rounded-md"
+            className="rounded-md shadow-sm"
           >
             {viewMode === "grid" ? (
               <TableIcon className="h-4 w-4" />
@@ -63,7 +63,7 @@ export const FilterButtons = ({
           variant="outline"
           size="icon"
           onClick={() => exportToExcel(teamMembers, isLoading)}
-          className="rounded-md"
+          className="rounded-md shadow-sm"
         >
           <Download className="h-4 w-4" />
         </Button>

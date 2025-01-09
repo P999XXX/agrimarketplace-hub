@@ -12,13 +12,24 @@ export const SortFilter = ({ value, onChange }: SortFilterProps) => {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${isMobile ? 'w-full' : 'w-[180px]'} ${!isMobile ? 'shadow-sm border' : 'border-0'} focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none`}>
+      <SelectTrigger 
+        className={`
+          ${isMobile ? 'w-full' : 'w-[180px]'} 
+          ${!isMobile ? 'shadow-sm border' : 'border-0'} 
+          focus:ring-0 focus-visible:ring-0 
+          focus:outline-none focus-visible:outline-none
+          bg-background
+        `}
+      >
         <div className="flex items-center gap-2">
           <ArrowUpDown className="h-4 w-4" />
           <SelectValue placeholder="Sort by" />
         </div>
       </SelectTrigger>
-      <SelectContent className="z-[100]" sideOffset={8}>
+      <SelectContent 
+        className="z-[100] bg-popover" 
+        sideOffset={8}
+      >
         <SelectItem value="created_at-desc">Newest first</SelectItem>
         <SelectItem value="created_at-asc">Oldest first</SelectItem>
         <SelectItem value="name-asc">Name A-Z</SelectItem>
