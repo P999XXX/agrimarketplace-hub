@@ -16,7 +16,7 @@ export const CardFooter = ({
   getRoleBadgeClass 
 }: CardFooterProps) => {
   return (
-    <div className="flex items-center justify-between w-full min-h-[60px]">
+    <div className="flex items-center justify-between w-full">
       <div className="flex gap-2">
         <Badge className={getStatusBadgeClass(status)}>
           {status}
