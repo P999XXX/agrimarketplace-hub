@@ -67,6 +67,7 @@ export const CertificateFormFields = ({
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              type="button"
               variant="outline"
               className={cn(
                 "w-full h-12 justify-start text-left font-normal",
@@ -93,6 +94,7 @@ export const CertificateFormFields = ({
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              type="button"
               variant="outline"
               className={cn(
                 "w-full h-12 justify-start text-left font-normal",
