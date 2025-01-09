@@ -1,5 +1,15 @@
 export type ViewMode = "grid" | "table";
 
+export interface CertificateCategory {
+  id: string;
+  name: string;
+  icon_path: string;
+  category_type: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string;
+}
+
 export interface Certificate {
   id: string;
   company_id: string;
@@ -16,12 +26,12 @@ export interface Certificate {
   status: string;
   version: number;
   deleted_at?: string;
+  category_id: string;
 }
 
 export interface CertificateFormData {
-  name: string;
-  category: string;
-  description?: string;
+  category_id: string;
+  issue_date: Date;
   expiry_date: Date;
-  file?: File;
+  file: File;
 }
