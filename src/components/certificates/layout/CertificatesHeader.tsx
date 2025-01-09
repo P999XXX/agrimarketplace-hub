@@ -39,14 +39,14 @@ export const CertificatesHeader = ({
 }: CertificatesHeaderProps) => {
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">
           Certificates
         </h1>
         <div className="hidden md:block">
           <Sheet>
             <SheetTrigger asChild>
-              <Button>
+              <Button className="bg-[#00875A] hover:bg-[#006644]">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Certificate
               </Button>

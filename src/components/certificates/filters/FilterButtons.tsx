@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Download, LayoutGrid, LayoutList } from "lucide-react";
+import { ChevronDown, Download, LayoutGrid, LayoutList, Filter } from "lucide-react";
 
 interface FilterButtonsProps {
   categoryFilter: string;
@@ -38,6 +38,7 @@ export const FilterButtons = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="shadow-sm">
+            <Filter className="h-4 w-4 mr-2" />
             Category
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
@@ -46,11 +47,14 @@ export const FilterButtons = ({
           <DropdownMenuItem onClick={() => setCategoryFilter("all")}>
             All Categories
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCategoryFilter("organic")}>
-            Organic
+          <DropdownMenuItem onClick={() => setCategoryFilter("compliance")}>
+            Compliance
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCategoryFilter("quality")}>
             Quality
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCategoryFilter("sustainability")}>
+            Sustainability
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCategoryFilter("safety")}>
             Safety
@@ -61,6 +65,7 @@ export const FilterButtons = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="shadow-sm">
+            <Filter className="h-4 w-4 mr-2" />
             Status
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
@@ -81,6 +86,7 @@ export const FilterButtons = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="shadow-sm">
+            <Filter className="h-4 w-4 mr-2" />
             Sort
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
