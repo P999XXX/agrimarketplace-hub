@@ -36,6 +36,19 @@ export const CertificatesTable = ({
     const matchesCategory = categoryFilter === "all" || cert.category === categoryFilter;
     const matchesStatus = statusFilter === "all" || cert.status === statusFilter;
     return matchesSearch && matchesCategory && matchesStatus;
+  }).sort((a, b) => {
+    switch (sortBy) {
+      case "name-asc":
+        return a.name.localeCompare(b.name);
+      case "name-desc":
+        return b.name.localeCompare(a.name);
+      case "date-asc":
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      case "date-desc":
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      default:
+        return 0;
+    }
   });
 
   if (isLoading) {
