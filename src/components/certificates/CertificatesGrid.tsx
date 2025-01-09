@@ -143,7 +143,7 @@ const CertificateCard = ({ certificate }: { certificate: Certificate }) => {
 
       <Separator className="w-full bg-border" />
       
-      <CardFooter className="p-3 sm:p-4">
+      <CardFooter className="p-3 sm:p-4 min-h-[60px]">
         <div className="flex items-center justify-end w-full gap-2">
           <Button 
             variant="ghost" 
