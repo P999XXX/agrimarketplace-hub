@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { RoleFilter } from "./RoleFilter";
 import { StatusFilter } from "./StatusFilter";
 import { SortFilter } from "./SortFilter";
-import { LayoutGrid, Table, Download } from "lucide-react";
+import { LayoutGrid, Table as TableIcon, Download } from "lucide-react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
 import { useExportTeamMembers } from "@/utils/exportTeamMembers";
 
@@ -37,11 +37,13 @@ export const FilterButtons = ({
 
   return (
     <div className="flex items-center gap-2">
-      <RoleFilter value={roleFilter} onChange={setRoleFilter} />
-      <StatusFilter value={statusFilter} onChange={setStatusFilter} />
-      <SortFilter value={sortBy} onChange={setSortBy} />
+      <div className="flex items-center gap-2 flex-1">
+        <RoleFilter value={roleFilter} onChange={setRoleFilter} />
+        <StatusFilter value={statusFilter} onChange={setStatusFilter} />
+        <SortFilter value={sortBy} onChange={setSortBy} />
+      </div>
       
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ml-auto">
         {showViewToggle && (
           <Button
             variant="outline"
@@ -50,7 +52,7 @@ export const FilterButtons = ({
             className="rounded-md"
           >
             {viewMode === "grid" ? (
-              <Table className="h-4 w-4" />
+              <TableIcon className="h-4 w-4" />
             ) : (
               <LayoutGrid className="h-4 w-4" />
             )}
