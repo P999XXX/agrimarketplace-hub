@@ -1,5 +1,5 @@
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-import { TeamMembersContent } from "@/components/team-members/layout/TeamMembersContent";
+import { TeamMembersContent } from "@/components/team-members/components/TeamMembersContent";
 
 const TeamMembers = () => {
   return (
