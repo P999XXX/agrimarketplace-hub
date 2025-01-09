@@ -91,7 +91,11 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
       <PopoverTrigger asChild>
         <button className="outline-none">{children}</button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-0" align="end" sideOffset={8}>
+      <PopoverContent 
+        className="w-80 p-0 bg-background border border-border shadow-lg rounded-lg" 
+        align="end" 
+        sideOffset={8}
+      >
         <div className="p-4">
           <UserAccountHeader 
             userName={userName}
@@ -99,7 +103,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           />
         </div>
 
-        <Separator />
+        <Separator className="bg-border/50" />
 
         <div className="p-4">
           <UserAccountContent 
@@ -109,7 +113,7 @@ export const UserAccountPopover = ({ children }: UserAccountPopoverProps) => {
           />
         </div>
 
-        <Separator />
+        <Separator className="bg-border/50" />
 
         <div className="p-2.5">
           <UserAccountFooter onLogout={handleLogout} />
