@@ -37,10 +37,12 @@ export const FilterButtons = ({
     <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
-            <Filter className="h-4 w-4 mr-2" />
-            Category
-            <ChevronDown className="ml-2 h-4 w-4" />
+          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
+            <div className="flex items-center">
+              <Filter className="h-4 w-4 mr-2" />
+              <span>Category</span>
+            </div>
+            <ChevronDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[180px]">
@@ -61,10 +63,12 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
-            <Filter className="h-4 w-4 mr-2" />
-            Status
-            <ChevronDown className="ml-2 h-4 w-4" />
+          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
+            <div className="flex items-center">
+              <Filter className="h-4 w-4 mr-2" />
+              <span>Status</span>
+            </div>
+            <ChevronDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[180px]">
@@ -82,10 +86,12 @@ export const FilterButtons = ({
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="h-10 shadow-sm w-[180px]">
-            <Filter className="h-4 w-4 mr-2" />
-            Sort
-            <ChevronDown className="ml-2 h-4 w-4" />
+          <Button variant="outline" className="h-10 shadow-sm w-[180px] flex justify-between items-center">
+            <div className="flex items-center">
+              <Filter className="h-4 w-4 mr-2" />
+              <span>Sort</span>
+            </div>
+            <ChevronDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[180px]">
