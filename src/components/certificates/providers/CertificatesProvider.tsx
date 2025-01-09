@@ -1,5 +1,6 @@
 import { createContext, useContext, ReactNode } from 'react';
 import { useViewPreference, ViewMode } from '@/hooks/use-view-preference';
+import { useCertificatesState } from '../hooks/useCertificatesState';
 
 interface CertificatesContextType {
   view: ViewMode;
