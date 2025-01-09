@@ -7,12 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuLabel,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Menu, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -42,7 +40,6 @@ export const CommonMobileFilterDropdown = ({
   onExport,
 }: CommonMobileFilterDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeGroup, setActiveGroup] = useState<FilterGroup | null>(null);
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -60,51 +57,37 @@ export const CommonMobileFilterDropdown = ({
         className="w-[280px] bg-background border border-border"
       >
         {groups.map((group) => (
-          <div key={group.label}>
-            <Popover>
-              <PopoverTrigger asChild>
+          <DropdownMenuSub key={group.label}>
+            <DropdownMenuSubTrigger className="px-2 py-1.5">
+              <div className="flex items-center justify-between w-full pl-2">
+                <span>{group.label}</span>
+                <ChevronRight className="h-4 w-4 ml-auto" />
+              </div>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className="w-[200px] bg-background border border-border">
+              <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
+                {group.label} Options
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {group.options.map((option) => (
                 <DropdownMenuItem
+                  key={option.value}
                   className="cursor-pointer px-2 py-1.5"
-                  onSelect={(e) => {
-                    e.preventDefault();
-                    setActiveGroup(group);
+                  onSelect={() => {
+                    group.onChange(option.value);
+                    setIsOpen(false);
                   }}
                 >
-                  <div className="flex items-center justify-between w-full pl-2">
-                    <span>{group.label}</span>
-                    <ChevronRight className="h-4 w-4 ml-auto" />
+                  <div className="flex items-center gap-2 w-full pl-2">
+                    <span>{option.label}</span>
+                    {group.value === option.value && (
+                      <span className="ml-auto">✓</span>
+                    )}
                   </div>
                 </DropdownMenuItem>
-              </PopoverTrigger>
-              <PopoverContent
-                side="right"
-                align="start"
-                className="w-[200px] p-0 bg-background border border-border"
-              >
-                <DropdownMenuLabel className="text-xs font-medium text-muted-foreground px-2 py-1.5">
-                  {group.label} Options
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {group.options.map((option) => (
-                  <DropdownMenuItem
-                    key={option.value}
-                    className="cursor-pointer px-2 py-1.5"
-                    onSelect={() => {
-                      group.onChange(option.value);
-                      setIsOpen(false);
-                    }}
-                  >
-                    <div className="flex items-center gap-2 w-full pl-2">
-                      <span>{option.label}</span>
-                      {group.value === option.value && (
-                        <span className="ml-auto">✓</span>
-                      )}
-                    </div>
-                  </DropdownMenuItem>
-                ))}
-              </PopoverContent>
-            </Popover>
-          </div>
+              ))}
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
         ))}
 
         {(viewMode || onExport) && (
