@@ -1,7 +1,5 @@
-import { Filter, ChevronDown } from "lucide-react";
-import { ViewToggle } from "@/components/common/views/ViewToggle";
-import { ExportButton } from "@/components/common/actions/ExportButton";
-import { FilterDropdown } from "@/components/common/filters/FilterDropdown";
+import { Filter } from "lucide-react";
+import { CommonFilterButtons } from "@/components/common/filters/CommonFilterButtons";
 
 interface FilterButtonsProps {
   categoryFilter: string;
@@ -29,77 +27,51 @@ export const FilterButtons = ({
   onExportCSV,
   showViewToggle = true,
 }: FilterButtonsProps) => {
-  const categoryGroups = [
+  const filters = [
     {
-      label: "Certificate Types",
+      icon: <Filter className="h-4 w-4" />,
+      label: "Category",
+      value: categoryFilter,
+      onChange: setCategoryFilter,
       options: [
-        { label: "All Categories", value: "all" },
-        { label: "Organic", value: "organic" },
-        { label: "Quality", value: "quality" },
-        { label: "Safety", value: "safety" },
-      ],
-    },
-  ];
-
-  const statusGroups = [
-    {
-      label: "Certificate Status",
-      options: [
-        { label: "All Status", value: "all" },
-        { label: "Valid", value: "valid" },
-        { label: "Expired", value: "expired" },
-      ],
-    },
-  ];
-
-  const sortGroups = [
-    {
-      label: "Sort by Name",
-      options: [
-        { label: "Name (A-Z)", value: "name-asc" },
-        { label: "Name (Z-A)", value: "name-desc" },
+        { value: "all", label: "All Categories" },
+        { value: "organic", label: "Organic" },
+        { value: "quality", label: "Quality" },
+        { value: "safety", label: "Safety" },
       ],
     },
     {
-      label: "Sort by Date",
+      icon: <Filter className="h-4 w-4" />,
+      label: "Status",
+      value: statusFilter,
+      onChange: setStatusFilter,
       options: [
-        { label: "Date (Newest)", value: "date-desc" },
-        { label: "Date (Oldest)", value: "date-asc" },
+        { value: "all", label: "All Status" },
+        { value: "valid", label: "Valid" },
+        { value: "expired", label: "Expired" },
+      ],
+    },
+    {
+      icon: <Filter className="h-4 w-4" />,
+      label: "Sort",
+      value: sortBy,
+      onChange: setSortBy,
+      options: [
+        { value: "name-asc", label: "Name (A-Z)" },
+        { value: "name-desc", label: "Name (Z-A)" },
+        { value: "date-desc", label: "Date (Newest)" },
+        { value: "date-asc", label: "Date (Oldest)" },
       ],
     },
   ];
 
   return (
-    <div className="flex items-center gap-2">
-      <FilterDropdown
-        label="Category"
-        icon={<Filter className="h-4 w-4" />}
-        value={categoryFilter}
-        groups={categoryGroups}
-        onChange={setCategoryFilter}
-      />
-
-      <FilterDropdown
-        label="Status"
-        icon={<Filter className="h-4 w-4" />}
-        value={statusFilter}
-        groups={statusGroups}
-        onChange={setStatusFilter}
-      />
-
-      <FilterDropdown
-        label="Sort"
-        icon={<Filter className="h-4 w-4" />}
-        value={sortBy}
-        groups={sortGroups}
-        onChange={setSortBy}
-      />
-
-      {showViewToggle && (
-        <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
-      )}
-
-      <ExportButton onExport={onExportCSV} />
-    </div>
+    <CommonFilterButtons
+      filters={filters}
+      viewMode={viewMode}
+      setViewMode={setViewMode}
+      onExport={onExportCSV}
+      showViewToggle={showViewToggle}
+    />
   );
 };

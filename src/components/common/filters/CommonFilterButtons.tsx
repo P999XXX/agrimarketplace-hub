@@ -1,4 +1,4 @@
-import { FilterDropdownButton } from "./FilterDropdownButton";
+import { FilterDropdown } from "./FilterDropdown";
 import { ViewToggle } from "../views/ViewToggle";
 import { ExportButton } from "../actions/ExportButton";
 
@@ -29,13 +29,18 @@ export const CommonFilterButtons = ({
   return (
     <div className="flex items-center gap-2">
       {filters.map((filter, index) => (
-        <FilterDropdownButton
+        <FilterDropdown
           key={index}
           icon={filter.icon}
           label={filter.label}
           value={filter.value}
           onChange={filter.onChange}
-          options={filter.options}
+          groups={[
+            {
+              label: filter.label,
+              options: filter.options,
+            },
+          ]}
         />
       ))}
 
