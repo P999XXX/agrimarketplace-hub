@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Building2, ShoppingCart, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Building2, ShoppingCart, Settings, File } from "lucide-react";
 import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -10,6 +10,11 @@ const menuItems = [
     title: "Dashboard",
     icon: LayoutDashboard,
     href: "/dashboard"
+  },
+  {
+    title: "Certificates",
+    icon: File,
+    href: "/dashboard/certificates"
   },
   {
     title: "Team Members",

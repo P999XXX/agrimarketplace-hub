@@ -9,6 +9,75 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      certificates: {
+        Row: {
+          category: string
+          company_id: string
+          created_at: string
+          deleted_at: string | null
+          description: string | null
+          expiry_date: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id: string
+          name: string
+          status: string
+          updated_at: string
+          uploaded_by: string
+          version: number
+        }
+        Insert: {
+          category: string
+          company_id: string
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          expiry_date: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id?: string
+          name: string
+          status?: string
+          updated_at?: string
+          uploaded_by: string
+          version?: number
+        }
+        Update: {
+          category?: string
+          company_id?: string
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          expiry_date?: string
+          file_path?: string
+          file_size?: number
+          file_type?: string
+          id?: string
+          name?: string
+          status?: string
+          updated_at?: string
+          uploaded_by?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificates_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificates_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       companies: {
         Row: {
           created_at: string

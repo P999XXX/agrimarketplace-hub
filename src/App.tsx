@@ -12,6 +12,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
 import TeamMembers from "./pages/TeamMembers";
+import Certificates from "./pages/Certificates";
 import { useEffect, useState } from "react";
 import { supabase } from "./integrations/supabase/client";
 
@@ -60,6 +61,14 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <TeamMembers />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/dashboard/certificates" 
+                element={
+                  <ProtectedRoute>
+                    <Certificates />
                   </ProtectedRoute>
                 } 
               />
