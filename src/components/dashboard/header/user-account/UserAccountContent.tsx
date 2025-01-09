@@ -67,7 +67,7 @@ export const UserAccountContent = ({ userProfile, ipInfo, currentTime }: UserAcc
       </div>
       <div className="flex justify-between items-center">
         <span>Time:</span>
-        <span>{format(time, 'p:ss')}</span>
+        <span>{format(time, 'h:mm:ss a')}</span>
       </div>
     </div>
   );
